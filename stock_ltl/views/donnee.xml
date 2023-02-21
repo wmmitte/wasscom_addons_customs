@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record model="ir.ui.view" id="personnel_view_form">
+            <field name="name">personnel.view.form</field>
+            <field name="model">stock.personnel</field>
+            <field name="arch" type="xml">
+                <form string="Personnel">
+                    <sheet>
+                        <div class="oe_button_box" name="button_box">
+                            <button name="toggle_active" type="object" class="oe_stat_button" icon="fa-archive">
+                                <field name="active" widget="boolean_button" options='{"terminology": "archive"}'/>
+                            </button>
+                        </div>
+                        <group>
+                            <field name = "name" style = "width:50%"/>
+                            <field name = "cnib" style = "width:50%"/>
+                            <field name = "montant" style = "width:50%" invisible="1"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+
+        <record model="ir.ui.view" id="personnel_tree">
+            <field name="name">personnel.view.tree</field>
+            <field name="model">stock.personnel</field>
+            <field name="arch" type="xml">
+                <tree string="Type de magasin">
+                    <field name = "name"/>
+                    <field name = "cnib"/>
+                    <field name = "active"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="act_list_personnel" model="ir.actions.act_window">
+            <field name="name">Liste des personnels</field>
+            <field name="res_model">stock.personnel</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <record model="ir.ui.view" id="article_view_form">
+            <field name="name">article.view.form</field>
+            <field name="model">stock.article</field>
+            <field name="arch" type="xml">
+                <form string="Magasin">
+                    <sheet>
+                        <div class="oe_button_box" name="button_box">
+                            <button name="toggle_active" type="object" class="oe_stat_button" icon="fa-archive">
+                                <field name="active" widget="boolean_button" options='{"terminology": "archive"}'/>
+                            </button>
+                        </div>
+                        <group>
+                            <field name = "name" style = "width:50%"/>
+                            <field name = "unite_id" style = "width:50%"/>
+                            <field name = "description" style = "width:50%"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+
+        <record model="ir.ui.view" id="article_tree">
+            <field name="name">article.view.tree</field>
+            <field name="model">stock.article</field>
+            <field name="arch" type="xml">
+                <tree string="Type de magasin">
+                    <field name = "name"/>
+                    <field name = "unite_id"/>
+                    <field name = "description"/>
+                    <field name = "active"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="act_list_article" model="ir.actions.act_window">
+            <field name="name">Liste des articles</field>
+            <field name="res_model">stock.article</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+
+        <record model="ir.ui.view" id="mode_view_form">
+            <field name="name">mode.view.form</field>
+            <field name="model">stock.mode</field>
+            <field name="arch" type="xml">
+                <form string="Mode">
+                    <sheet>
+                        <div class="oe_button_box" name="button_box">
+                            <button name="toggle_active" type="object" class="oe_stat_button" icon="fa-archive">
+                                <field name="active" widget="boolean_button" options='{"terminology": "archive"}'/>
+                            </button>
+                        </div>
+                        <group>
+                            <field name = "name" style = "width:50%"/>
+                            <field name = "description" style = "width:50%"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+
+        <record model="ir.ui.view" id="mode_tree">
+            <field name="name">mode.view.tree</field>
+            <field name="model">stock.mode</field>
+            <field name="arch" type="xml">
+                <tree string="Type de mode">
+                    <field name = "name"/>
+                    <field name = "description"/>
+                    <field name = "active"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="act_list_mode" model="ir.actions.act_window">
+            <field name="name">Liste des modes de règlement</field>
+            <field name="res_model">stock.mode</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+
+
+        <record model="ir.ui.view" id="magasin_view_form">
+            <field name="name">magasin.view.form</field>
+            <field name="model">stock.magasin</field>
+            <field name="arch" type="xml">
+                <form string="Magasin">
+                    <sheet>
+                        <div class="oe_button_box" name="button_box">
+                            <button name="toggle_active" type="object" class="oe_stat_button" icon="fa-archive">
+                                <field name="active" widget="boolean_button" options='{"terminology": "archive"}'/>
+                            </button>
+                        </div>
+                        <group>
+                            <field name = "name" style = "width:50%"/>
+                            <field name = "responsable" style = "width:50%"/>
+                            <field name = "central" style = "width:10%"/>
+                            <field name = "description" style = "width:50%"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+
+        <record model="ir.ui.view" id="magasin_tree">
+            <field name="name">magasin.view.tree</field>
+            <field name="model">stock.magasin</field>
+            <field name="arch" type="xml">
+                <tree string="Type de magasin">
+                    <field name = "name"/>
+                    <field name = "responsable"/>
+                    <field name = "central"/>
+                    <field name = "active"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="act_list_magasin" model="ir.actions.act_window">
+            <field name="name">Liste des magasins</field>
+            <field name="res_model">stock.magasin</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+
+        <record model="ir.ui.view" id="unite_view_form">
+            <field name="name">unite.view.form</field>
+            <field name="model">stock.unite</field>
+            <field name="arch" type="xml">
+                <form string="Magasin">
+                    <sheet>
+                        <div class="oe_button_box" name="button_box">
+                            <button name="toggle_active" type="object" class="oe_stat_button" icon="fa-archive">
+                                <field name="active" widget="boolean_button" options='{"terminology": "archive"}'/>
+                            </button>
+                        </div>
+                        <group>
+                            <field name = "name" style = "width:50%"/>
+                            <field name = "description" style = "width:50%"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+
+        <record model="ir.ui.view" id="unite_tree">
+            <field name="name">unite.view.tree</field>
+            <field name="model">stock.unite</field>
+            <field name="arch" type="xml">
+                <tree string="Liste des unités">
+                    <field name = "name"/>
+                    <field name = "description"/>
+                    <field name = "active"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="act_list_unite" model="ir.actions.act_window">
+            <field name="name">Liste des unités</field>
+            <field name="res_model">stock.unite</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+
+        <menuitem id="main_menu" name ="Stock chantier" sequence="1" web_icon="stock_ltl,static/description/icon.png"/>
+        <menuitem id="main_menu_db" name ="Données de base" sequence="2" parent="main_menu"/>
+        <menuitem id="menu_unite" name = "Saisie/MàJ des Unités" sequence="1" parent="main_menu_db" action="act_list_unite"/>
+        <menuitem id="menu_article" name ="Saisie/MàJ des Articles" sequence="2" parent="main_menu_db" action="act_list_article"/>
+        <menuitem id="menu_personnel" name ="Saisie/MàJ des Responsables magasin" sequence="3" parent="main_menu_db" action="act_list_personnel"/>
+        <menuitem id="menu_magasin" name ="Saisie/MàJ des Magasins" sequence="4" parent="main_menu_db" action="act_list_magasin"/>
+        <menuitem id="menu_mode" name ="Saisie/MàJ des Modes de règlement" sequence="5" parent="main_menu_db" action="act_list_mode"/>
+
+
+    </data>
+</odoo>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+<!--        <record id ="stock.all_picking" model="ir.ui.menu">
+            <field name ="name">Opérations de stock</field>
+        </record>
+-->
+    </data>
+</odoo>

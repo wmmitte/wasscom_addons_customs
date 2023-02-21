@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record model="ir.ui.view" id="view_stock_envoi_form">
+            <field name="name">view.envoi.form</field>
+            <field name="model">stock.envoi</field>
+            <field name="priority" eval="16"/>
+            <field name="arch" type="xml">
+                <form string="Marches" delete="false">
+                    <header>
+                        <button name="valider_envoi" string="Confirmer" type="object" class="oe_highlight"
+                                attrs="{'invisible' : [('state', 'not in', ['draft'])]}"
+                                style="background-color: #28a745; border-color: #28a745;"/>
+                        <button name="act_annuler_envoi" string="Annuler envoi" type="object" class="oe_highlight"
+                                attrs="{'invisible' : [('state', 'not in', ['V'])]}"
+                                style="background-color: red; border-color: red;"/>
+                        <field name="state" widget="statusbar"/>
+                    </header>
+                    <sheet>
+                        <div>
+                            <h1 style="text-align:center; text-decoration:underline;">
+                                <field name="name" nolabel="1"/>
+                            </h1>
+                        </div>
+                        <group col="2">
+                            <group>
+                                <field name="dte" style = "width:75%"
+                                       attrs="{'readonly' : [('state', 'in', ['V', 'A'])]}"/>
+                                <field name="type_operation" style = "width:75%"
+                                       attrs="{'readonly' : [('state', 'in', ['V', 'A'])]}"/>
+                                <field name="marche_id" style = "width:75%" options="{'no_create': True}"
+                                       attrs="{'readonly' : [('state', 'in', ['V', 'A'])]}"/>
+                                <field name="personnel_id" style = "width:75%"
+                                       attrs="{'invisible' : [('type_operation', 'not in', ['1',])]}"/>
+                                <field name="en_cours" style = "width:75%" force_save="1"
+                                       attrs="{'invisible' : [('type_operation', 'not in', ['1',])]}"/>
+                            </group>
+                            <group>
+                                <field name="mode_id" style = "width:75%" options="{'no_create': True}"/>
+                                <field name="reference" style = "width:75%"
+                                       attrs="{'readonly' : [('state', 'in', ['V', 'A'])]}"/>
+                                <field name="montant_envoi" style = "width:75%"
+                                       attrs="{'readonly' : [('state', 'in', ['V', 'A'])]}"/>
+                                <field name="objet" style = "width:75%"
+                                       attrs="{'readonly' : [('state', 'in', ['V', 'A'])]}"/>
+                            </group>
+                        </group>
+                    </sheet>
+
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers" groups="base.group_user"/>
+                        <field name="message_ids" widget="mail_thread"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+
+
+        <record model="ir.ui.view" id="view_envoi_tree">
+            <field name="name">envoi.view.tree</field>
+            <field name="model">stock.envoi</field>
+            <field name="arch" type="xml">
+                <tree string="Liste des marchés" delete="false">
+                    <field name = "dte"/>
+                    <field name = "type_operation"/>
+                    <field name = "marche_id"/>
+                    <field name = "objet"/>
+                    <field name = "montant_envoi"/>
+                    <field name = "state"/>
+                </tree>
+            </field>
+        </record>
+
+
+        <record id="act_list_envoi" model="ir.actions.act_window">
+            <field name="name">Liste des opérations</field>
+            <field name="res_model">stock.envoi</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+
+        <record model="ir.ui.view" id="view_stock_suivi_form">
+            <field name="name">view.suivi.form</field>
+            <field name="model">suivi.depense</field>
+            <field name="priority" eval="16"/>
+            <field name="arch" type="xml">
+                <form string="Marches" delete="false">
+                    <header>
+                        <button name="valider" string="Valider" type="object" class="oe_highlight"
+                                attrs="{'invisible' : [('state', 'not in', ['draft'])]}"
+                                style="background-color: #28a745; border-color: #28a745;"/>
+                        <field name="state" widget="statusbar"/>
+                    </header>
+                    <sheet>
+                        <group col="2">
+                            <group>
+                                <field name="dte" style = "width:75%"
+                                       attrs="{'readonly' : [('state', 'in', ['V'])]}"/>
+                                <field name="marche_id" style = "width:75%" options="{'no_create': True}"
+                                       attrs="{'readonly' : [('state', 'in', ['V'])]}"/>
+                                <field name="personnel_id" style = "width:75%"
+                                       attrs="{'readonly' : [('state', 'in', ['V'])]}"/>
+                            </group>
+                            <group>
+                                <field name="en_cours" style = "width:75%" force_save="1"/>
+                                <field name="montant_depense" style = "width:75%"/>
+                                <field name="nouveau_dispo" style = "width:75%"/>
+                            </group>
+                        </group>
+                        <field name="depense_ids" nolabel = "1" attrs="{'readonly' : [('state', 'in', ['V'])]}">
+                            <tree string="Lignes demande" editable = "bottom">
+                                <field name="libelle"/>
+                                <field name="montant"/>
+                            </tree>
+                        </field>
+                    </sheet>
+
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers" groups="base.group_user"/>
+                        <field name="message_ids" widget="mail_thread"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+
+
+        <record model="ir.ui.view" id="view_suivi_tree">
+            <field name="name">suivi.view.tree</field>
+            <field name="model">suivi.depense</field>
+            <field name="arch" type="xml">
+                <tree string="Liste des marchés" delete="false">
+                    <field name = "dte"/>
+                    <field name = "marche_id"/>
+                    <field name = "personnel_id"/>
+                    <field name = "montant_depense"/>
+                    <field name = "state"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="act_list_suivi" model="ir.actions.act_window">
+            <field name="name">Suivi des dépense</field>
+            <field name="res_model">suivi.depense</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+
+        <menuitem id="menu_depense" name ="Caisse menu dépense" sequence="4" parent="main_menu"/>
+        <menuitem id="menu_envoi" name ="Enregistrer une opération" sequence="1" parent="menu_depense" action="act_list_envoi"/>
+        <menuitem id="menu_suivi" name ="Suivi des dépenses" sequence="2" parent="menu_depense" action="act_list_suivi"/>
+
+    </data>
+</odoo>

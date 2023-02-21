@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+
+        <!--Uinté de mesure-->
+
+        <record id="u" model="stock.unite">
+            <field name="name">Unité</field>
+            <field name="active">True</field>
+        </record>
+
+        <record id="m" model="stock.unite">
+            <field name="name">Mètre</field>
+            <field name="active">True</field>
+        </record>
+
+        <record id="l" model="stock.unite">
+            <field name="name">Litre</field>
+            <field name="active">True</field>
+        </record>
+
+        <record id="v" model="stock.unite">
+            <field name="name">mètre cube</field>
+            <field name="active">True</field>
+        </record>
+
+        <!--mode de paiement-->
+        <record id="om" model="stock.mode">
+            <field name="name">Orange Money</field>
+            <field name="active">True</field>
+        </record>
+
+        <record id="mm" model="stock.mode">
+            <field name="name">Moov Money</field>
+            <field name="active">True</field>
+        </record>
+
+        <record id="nu" model="stock.mode">
+            <field name="name">Numéraire (espèces)</field>
+            <field name="active">True</field>
+        </record>
+
+        <record id="ce" model="stock.mode">
+            <field name="name">Chèques</field>
+            <field name="active">True</field>
+        </record>
+
+        <record id="vi" model="stock.mode">
+            <field name="name">Virement bancaire</field>
+            <field name="active">True</field>
+        </record>
+
+        <!--articles-->
+        <record id="cim" model="stock.article">
+            <field name="name">Ciment</field>
+            <field name="unite_id" ref ='u'/>
+            <field name="active">True</field>
+        </record>
+
+        <record id="f6" model="stock.article">
+            <field name="name">Fer de 6</field>
+            <field name="unite_id" ref ='u'/>
+            <field name="active">True</field>
+        </record>
+
+        <record id="f8" model="stock.article">
+            <field name="name">Fer de 8</field>
+            <field name="unite_id" ref ='u'/>
+            <field name="active">True</field>
+        </record>
+
+        <record id="f10" model="stock.article">
+            <field name="name">Fer de 10</field>
+            <field name="unite_id" ref ='u'/>
+            <field name="active">True</field>
+        </record>
+
+        <record id="f12" model="stock.article">
+            <field name="name">Fer de 12</field>
+            <field name="unite_id" ref ='u'/>
+            <field name="active">True</field>
+        </record>
+
+        <record id="f14" model="stock.article">
+            <field name="name">Fer de 14</field>
+            <field name="unite_id" ref ='u'/>
+            <field name="active">True</field>
+        </record>
+
+        <record id="f16" model="stock.article">
+            <field name="name">Fer de 16</field>
+            <field name="unite_id" ref ='u'/>
+            <field name="active">True</field>
+        </record>
+
+        <record id="fm" model="stock.article">
+            <field name="name">Fer mou</field>
+            <field name="unite_id" ref ='u'/>
+            <field name="active">True</field>
+        </record>
+
+        <record id="bro" model="stock.article">
+            <field name="name">Brouette</field>
+            <field name="unite_id" ref ='u'/>
+            <field name="active">True</field>
+        </record>
+
+        <record id="pel" model="stock.article">
+            <field name="name">Pèle</field>
+            <field name="unite_id" ref ='u'/>
+            <field name="active">True</field>
+        </record>
+
+        <record id="pla" model="stock.article">
+            <field name="name">Planche</field>
+            <field name="unite_id" ref ='u'/>
+            <field name="active">True</field>
+        </record>
+
+        <record id="che" model="stock.article">
+            <field name="name">Chevron</field>
+            <field name="unite_id" ref ='u'/>
+            <field name="active">True</field>
+        </record>
+
+        <record id="tol" model="stock.article">
+            <field name="name">Tôles</field>
+            <field name="unite_id" ref ='u'/>
+            <field name="active">True</field>
+        </record>
+
+        <record id="ftol" model="stock.article">
+            <field name="name">Feuille deTôles</field>
+            <field name="unite_id" ref ='u'/>
+            <field name="active">True</field>
+        </record>
+
+        <record id="lam6" model="stock.article">
+            <field name="name">Lampes 0.60</field>
+            <field name="unite_id" ref ='u'/>
+            <field name="active">True</field>
+        </record>
+
+        <record id="lam12" model="stock.article">
+            <field name="name">Lampes 120</field>
+            <field name="unite_id" ref ='u'/>
+            <field name="active">True</field>
+        </record>
+
+        <record id="cab" model="stock.article">
+            <field name="name">Câbles électriques</field>
+            <field name="unite_id" ref ='u'/>
+            <field name="active">True</field>
+        </record>
+
+        <record id="prm" model="stock.article">
+            <field name="name">Prise électrique</field>
+            <field name="unite_id" ref ='u'/>
+            <field name="active">True</field>
+        </record>
+
+        <record id="int" model="stock.article">
+            <field name="name">Intérrupteur</field>
+            <field name="unite_id" ref ='u'/>
+            <field name="active">True</field>
+        </record>
+
+        <record id="bra" model="stock.article">
+            <field name="name">Brasseurs</field>
+            <field name="unite_id" ref ='u'/>
+            <field name="active">True</field>
+        </record>
+
+        <record id="pen" model="stock.article">
+            <field name="name">Boîte de peinture</field>
+            <field name="unite_id" ref ='u'/>
+            <field name="active">True</field>
+        </record>
+
+        <record id="car1" model="stock.article">
+            <field name="name">Carreaux 10*10</field>
+            <field name="unite_id" ref ='u'/>
+            <field name="active">True</field>
+        </record>
+
+        <record id="car15" model="stock.article">
+            <field name="name">Carreaux 15*15</field>
+            <field name="unite_id" ref ='u'/>
+            <field name="active">True</field>
+        </record>
+
+        <record id="car2" model="stock.article">
+            <field name="name">Carreaux 30*15</field>
+            <field name="unite_id" ref ='u'/>
+            <field name="active">True</field>
+        </record>
+
+        <record id="car3" model="stock.article">
+            <field name="name">Carreaux 30*30</field>
+            <field name="unite_id" ref ='u'/>
+            <field name="active">True</field>
+        </record>
+
+        <record id="car4" model="stock.article">
+            <field name="name">Carreaux 40*40</field>
+            <field name="unite_id" ref ='u'/>
+            <field name="active">True</field>
+        </record>
+
+        <record id="car6" model="stock.article">
+            <field name="name">Carreaux 60*60</field>
+            <field name="unite_id" ref ='u'/>
+            <field name="active">True</field>
+        </record>
+
+    </data>
+</odoo>

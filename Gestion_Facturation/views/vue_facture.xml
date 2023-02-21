@@ -1,0 +1,1001 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+<!--Definition de la vue-->
+
+
+<!-- vue facture_produit tree-->
+<record model="ir.ui.view" id="view_id_facture_produit">
+	<field name="name">view.facture_produit.tree</field>
+	<field name="model">facture_produit</field>
+	<field name="priority" eval="16"/>
+	<field name="arch" type="xml">
+		<tree string="Liste des produits">
+			<field name="sequence" widget="handle"/>
+			<field name="name"/>
+			<field name="description"/>
+			<field name="x_struct_id" invisible = '1'/>
+		</tree>
+	</field>
+</record>
+
+<!-- vue facture_produit form-->
+<record model="ir.ui.view" id="view_id_form_facture_produit">
+	<field name="name">view.facture_produit.form</field>
+	<field name="model">facture_produit</field>
+	<field name="priority" eval="16"/>
+	<field name="arch" type="xml">
+		<form string="Liste des produits">
+		<sheet>
+				<div class="oe_button_box" name="button_box">
+					<button name="toggle_active" type="object" class="oe_stat_button" icon="fa-archive">
+						<field name="active" widget="boolean_button" options='{"terminology":"archive"}'/>
+					</button>
+				</div>
+				<group>
+						<field name="name" style="width:50%" options="{'no_quick_create':True,'no_create_edit':True,'no_open':True,}" invisible = '1'/>
+						<field name="libelle" style="width:50%" options="{'no_quick_create':True,'no_create_edit':True,'no_open':True,}"/>
+						<field name="description" style="width:50%"/>
+						<field name="x_struct_id" style="width:50%" invisible = '1' options="{'no_quick_create':True,'no_create_edit':True,'no_open':True,}"/>
+				</group>
+		</sheet>
+			
+		</form>
+	</field>
+</record>
+
+<!-- Action  facture_produit-->
+<record model="ir.actions.act_window" id="act_list_produit">
+		<field name="name">Liste des produits</field>
+		<field name="res_model">facture_produit</field>
+		<field name="view_mode">tree,form</field>
+	
+</record>
+
+
+
+<!-- vue facture_localite tree-->
+<record model="ir.ui.view" id="view_id_facture_localite">
+	<field name="name">view.facture_localite.tree</field>
+	<field name="model">facture_localite</field>
+	<field name="priority" eval="16"/>
+	<field name="arch" type="xml">
+		<tree string="Liste des localités">
+			<field name="sequence" widget="handle"/>
+			<field name="name"/>
+			<field name="description"/>
+			<field name="x_struct_id" invisible = '1'/>
+		</tree>
+	</field>
+</record>
+
+<!-- vue facture_localite form-->
+<record model="ir.ui.view" id="view_id_form_facture_localite">
+	<field name="name">view.facture_localite.form</field>
+	<field name="model">facture_localite</field>
+	<field name="priority" eval="16"/>
+	<field name="arch" type="xml">
+		<form string="Liste des localités">
+		<sheet>
+				<div class="oe_button_box" name="button_box">
+					<button name="toggle_active" type="object" class="oe_stat_button" icon="fa-archive">
+						<field name="active" widget="boolean_button" options='{"terminology":"archive"}'/>
+					</button>
+				</div>
+				<group>
+						<field name="name" style="width:50%" options="{'no_quick_create':True,'no_create_edit':True,'no_open':True,}" invisible = '1'/>
+						<field name="libelle" style="width:50%" options="{'no_quick_create':True,'no_create_edit':True,'no_open':True,}"/>
+						<field name="description" style="width:50%"/>
+						<field name="x_struct_id" style="width:50%" invisible = '1' options="{'no_quick_create':True,'no_create_edit':True,'no_open':True,}"/>
+				</group>
+		</sheet>
+
+		</form>
+	</field>
+</record>
+
+<!-- Action  facture_localite-->
+<record model="ir.actions.act_window" id="act_list_localite">
+		<field name="name">Liste des localités</field>
+		<field name="res_model">facture_localite</field>
+		<field name="view_mode">tree,form</field>
+</record>
+
+
+<!-- vue facture_trajet tree-->
+<record model="ir.ui.view" id="view_id_facture_trajet">
+	<field name="name">view.facture_trajet.tree</field>
+	<field name="model">facture_trajet</field>
+	<field name="priority" eval="16"/>
+	<field name="arch" type="xml">
+		<tree string="Liste des trajets">
+			<field name="sequence" widget="handle"/>
+			<field name="name"/>
+			<field name="localite_a"/>
+			<field name="localite_b"/>
+			<field name="x_distance"/>
+			<field name="description"/>
+			<field name="x_struct_id" invisible = '1'/>
+		</tree>
+	</field>
+</record>
+
+<!-- vue facture_trajet form-->
+<record model="ir.ui.view" id="view_id_form_facture_trajet">
+	<field name="name">view.facture_trajet.form</field>
+	<field name="model">facture_trajet</field>
+	<field name="priority" eval="16"/>
+	<field name="arch" type="xml">
+		<form string="Liste des trajets">
+		<sheet>
+				<div class="oe_button_box" name="button_box">
+					<button name="toggle_active" type="object" class="oe_stat_button" icon="fa-archive">
+						<field name="active" widget="boolean_button" options='{"terminology":"archive"}'/>
+					</button>
+				</div>
+				<group>
+						<field name="name" style="width:50%" options="{'no_quick_create':True,'no_create_edit':True,'no_open':True,}" invisible = '1' force_save = '1'/>
+						<field name="localite_a" style="width:50%" options="{'no_quick_create':True,'no_create_edit':True,'no_open':True,}"/>
+						<field name="localite_b" style="width:50%" options="{'no_quick_create':True,'no_create_edit':True,'no_open':True,}"/>
+						<field name="x_distance" style="width:20%"/>
+						<field name="description" style="width:50%"/>
+						<field name="x_struct_id" style="width:50%" invisible = '1' options="{'no_quick_create':True,'no_create_edit':True,'no_open':True,}"/>
+				</group>
+		</sheet>
+
+		</form>
+	</field>
+</record>
+
+<!-- Action  facture_trajet-->
+<record model="ir.actions.act_window" id="act_list_trajet">
+		<field name="name">Liste des trajets</field>
+		<field name="res_model">facture_trajet</field>
+		<field name="view_mode">tree,form</field>
+</record>
+
+
+
+
+
+<!-- vue facture_client tree-->
+<record model="ir.ui.view" id="view_id_facture_client">
+	<field name="name">view.facture_client.tree</field>
+	<field name="model">facture_client</field>
+	<field name="priority" eval="16"/>
+	<field name="arch" type="xml">
+		<tree string="Liste des localités">
+			<field name="sequence" widget="handle"/>
+			<field name="name"/>
+			<field name="x_designation_client"/>
+			<field name="x_adress"/>
+			<field name="x_tel"/>
+			<field name="x_struct_id" invisible = '1'/>
+		</tree>
+	</field>
+</record>
+
+<!-- vue facture_client form-->
+<record model="ir.ui.view" id="view_id_form_facture_client">
+	<field name="name">view.facture_client.form</field>
+	<field name="model">facture_client</field>
+	<field name="priority" eval="16"/>
+	<field name="arch" type="xml">
+		<form string="Liste des clients">
+		<sheet>
+				<div class="oe_button_box" name="button_box">
+					<button name="toggle_active" type="object" class="oe_stat_button" icon="fa-archive">
+						<field name="active" widget="boolean_button" options='{"terminology":"archive"}'/>
+					</button>
+				</div>
+				<group>
+						<field name="name" style="width:20%" options="{'no_quick_create':True,'no_create_edit':True,'no_open':True,}" invisible = '0'/>
+						<field name="x_designation_client" style="width:50%" options="{'no_quick_create':True,'no_create_edit':True,'no_open':True,}"/>
+						<field name="x_designation_" style="width:50%" force_save="1" invisible = '1'/>
+						<field name="x_adress" style="width:50%"/>
+						<field name="x_tel" style="width:50%"/>
+						<field name="x_struct_id" style="width:50%" invisible = '1' options="{'no_quick_create':True,'no_create_edit':True,'no_open':True,}"/>
+				</group>
+		</sheet>
+
+		</form>
+	</field>
+</record>
+
+<!-- Action  facture_client-->
+<record model="ir.actions.act_window" id="act_list_client">
+		<field name="name">Liste des clients</field>
+		<field name="res_model">facture_client</field>
+		<field name="view_mode">tree,form</field>
+</record>
+
+
+<!-- vue facture_conducteur_camion tree-->
+<record model="ir.ui.view" id="view_id_facture_conducteur_camion">
+	<field name="name">view.facture_conducteur_camion.tree</field>
+	<field name="model">facture_conducteur_camion</field>
+	<field name="priority" eval="16"/>
+	<field name="arch" type="xml">
+		<tree string="Liste des conducteurs">
+			<field name="sequence" widget="handle"/>
+			<field name="name"/>
+			<field name="description"/>
+			<field name="x_struct_id" invisible = '1'/>
+		</tree>
+	</field>
+</record>
+
+<!-- vue facture_conducteur_camion form-->
+<record model="ir.ui.view" id="view_id_form_facture_conducteur_camion">
+	<field name="name">view.facture_conducteur_camion.form</field>
+	<field name="model">facture_conducteur_camion</field>
+	<field name="priority" eval="16"/>
+	<field name="arch" type="xml">
+		<form string="Liste des conducteurs">
+		<sheet>
+				<div class="oe_button_box" name="button_box">
+					<button name="toggle_active" type="object" class="oe_stat_button" icon="fa-archive">
+						<field name="active" widget="boolean_button" options='{"terminology":"archive"}'/>
+					</button>
+				</div>
+				<group>
+						<field name="name" style="width:50%" options="{'no_quick_create':True,'no_create_edit':True,'no_open':True,}"/>
+						<field name="x_tel" style="width:50%"/>
+						<field name="description" style="width:50%"/>
+						<field name="x_struct_id" style="width:50%" invisible = '1' options="{'no_quick_create':True,'no_create_edit':True,'no_open':True,}"/>
+				</group>
+		</sheet>
+
+		</form>
+	</field>
+</record>
+
+<!-- Action  facture_conducteur_camion-->
+<record model="ir.actions.act_window" id="act_list_conducteur">
+		<field name="name">Liste des conducteurs</field>
+		<field name="res_model">facture_conducteur_camion</field>
+		<field name="view_mode">tree,form</field>
+</record>
+
+
+	<!-- vue facture_camion tree-->
+<record model="ir.ui.view" id="view_id_facture_camion">
+	<field name="name">view.facture_camion.tree</field>
+	<field name="model">facture_camion</field>
+	<field name="priority" eval="16"/>
+	<field name="arch" type="xml">
+		<tree string="Liste des camions">
+			<field name="sequence" widget="handle"/>
+			<field name="name"/>
+			<field name="x_conducteur_id"/>
+			<field name="description"/>
+			<field name="x_struct_id" invisible = '1'/>
+		</tree>
+	</field>
+</record>
+
+<!-- vue facture_camion form-->
+<record model="ir.ui.view" id="view_id_form_facture_camion">
+	<field name="name">view.facture_camion.form</field>
+	<field name="model">facture_camion</field>
+	<field name="priority" eval="16"/>
+	<field name="arch" type="xml">
+		<form string="Liste des camions">
+		<sheet>
+				<div class="oe_button_box" name="button_box">
+					<button name="toggle_active" type="object" class="oe_stat_button" icon="fa-archive">
+						<field name="active" widget="boolean_button" options='{"terminology":"archive"}'/>
+					</button>
+				</div>
+				<group>
+						<field name="name" style="width:50%" options="{'no_quick_create':True,'no_create_edit':True,'no_open':True,}"/>
+						<field name="x_conducteur_id" style="width:50%" options="{'no_quick_create':True,'no_create_edit':True,'no_open':True,}"/>
+						<field name="description" style="width:50%"/>
+						<field name="x_struct_id" style="width:50%" invisible = '1' options="{'no_quick_create':True,'no_create_edit':True,'no_open':True,}"/>
+				</group>
+		</sheet>
+
+		</form>
+	</field>
+</record>
+
+<!-- Action  facture_camion-->
+<record model="ir.actions.act_window" id="act_list_camion">
+		<field name="name">Liste des camions</field>
+		<field name="res_model">facture_camion</field>
+		<field name="view_mode">tree,form</field>
+</record>
+
+<!-- vue facture_facture tree-->
+<record model="ir.ui.view" id="view_id_facture_facture">
+	<field name="name">view.facture_facture.tree</field>
+	<field name="model">facture_facture</field>
+	<field name="priority" eval="16"/>
+	<field name="arch" type="xml">
+		<tree decoration-it ="state == 'Nouvelle facture' " decoration-success ="state == 'Liquidation totale' "  decoration-warning ="state == 'Liquidation partielle' " decoration-info ="state == 'Approuvée' " string="Liste des factures">
+			<field name="sequence" widget="handle"/>
+			<field name="name"/>
+			<field name="x_client"/>
+			<field name="x_adress"/>
+			<field name="x_objet"/>
+			<field name="date_operation"/>
+			<field name="x_total_facture" sum = "Total facture"/>
+			<field name="x_total_encaisse" sum = "Total encaissé"/>
+			<field name="x_total_reste" sum = "Total reste"/>
+			<field name="x_total_perte" sum = "Total perte"/>
+			<field name="current_users"/>
+			<field name="state"/>
+			<field name="company_id" invisible = '1'/>
+		</tree>
+	</field>
+</record>
+
+<!-- vue facture_facture form-->
+<record model="ir.ui.view" id="view_id_form_facture_facture">
+	<field name="name">view.facture_facture.form</field>
+	<field name="model">facture_facture</field>
+	<field name="priority" eval="16"/>
+	<field name="arch" type="xml">
+		<form string="Liste des factures">
+		<header>
+			   <button string="Approuver" name="action_approuver" type="object" class="oe_highlight"
+				confirm="Vous êtes sur le point d'approuver cette facture ?"
+				attrs="{'invisible' : [('state', 'not in', ['Nouvelle facture'])]}"
+				groups="Gestion_Facturation.Gestion_Facturation_admin_donnees,Gestion_Facturation.Gestion_Facturation_cptable"
+			   />
+
+
+			   <field name="state" widget = "statusbar"/>
+        </header>
+				<div class="oe_button_box" name="button_box">
+					<button name="toggle_active" type="object" class="oe_stat_button" icon="fa-archive">
+						<field name="active" widget="boolean_button" options='{"terminology":"archive"}'/>
+					</button>
+				</div>
+				<group>
+					<group>
+						<field name="x_client" style="width:100%" options="{'no_quick_create':True,'no_create_edit':True,'no_open':True,}" attrs="{'readonly' : [('state', 'in', ['Approuvée','Liquidation partielle','Liquidation totale'])]}"/>
+						<field name="x_adress" style="width:100%" invisible = '0' force_save="1"/>
+						<field name="x_annee_en_cours" style="width:100%" invisible = '1' force_save="1"/>
+					</group>
+					<group>
+					    <field name="x_objet" style="width:100%" invisible = '0' force_save="1" attrs="{'readonly' : [('state', 'in', ['Approuvée','Liquidation partielle','Liquidation totale'])]}"/>
+						<field name="name" style="width:50%"/>
+						<field name="x_concat_fields" style="width:100%" invisible = '1'/>
+					</group>
+				</group>
+				<group>
+						<field name="x_line_ids" nolabel = "1" attrs="{'readonly' : [('state', 'in', ['Liquidation partielle','Liquidation totale'])]}">
+						  <tree string="Ligne facture" editable = "bottom">
+							   <field name="x_date_be" force_save = "1" />
+							  <field name="x_num_be" force_save = "1" />
+							   <field name="x_date_bl" force_save = "1" />
+							  <field name="x_num_bl" force_save = "1" />
+							  <field name="x_immatricul_id" force_save = "1" options="{'no_quick_create':True,'no_create_edit':True,'no_open':True,}"/>
+							  <field name="x_trajet_id" force_save = "1" invisible = '0' options="{'no_quick_create':True,'no_create_edit':True,'no_open':True,}"/>
+							  <field name="x_distance" force_save = "1" invisible = '0'/>
+							  <field name="x_produit_id" force_save = "1" invisible = '0' options="{'no_quick_create':True,'no_create_edit':True,'no_open':True,}"/>
+							  <field name="x_capacite" force_save = "1" invisible = '0'/>
+							  <field name="x_manquant" force_save = "1" invisible = '0'/>
+							  <field name="x_capacite_net" force_save = "1" invisible = '0'/>
+							  <field name="x_taux" force_save = "1" invisible = '0'/>
+							  <field name="x_mt_ligne_reel" force_save = "1" invisible = '0'/>
+							  <field name="x_mnt_perte" force_save = "1" invisible = '0'/>
+							  <field name="x_mt_ligne" force_save = "1" invisible = '0'/>
+							  <field name="x_echeance_facture" force_save = "1" invisible = '0'/>
+							  <field name="x_concat" force_save = "1" invisible = '1'/>
+
+						  </tree>
+						</field>
+         		</group>
+			    <group col = '4'>
+					    <group><field name="x_total_facture_reel" style="width:100%" invisible = '0' force_save="1"/></group>
+						<group><field name="x_total_perte" style="width:100%" force_save="1"/></group>
+					    <group><field name="x_total_facture" style="width:100%" invisible = '0' force_save="1"/></group>
+						<group><field name="x_total_encaisse" style="width:100%" force_save="1"/></group>
+					    <group><field name="x_total_reste" style="width:100%" force_save="1"/></group>
+					 	<group><field name="x_mnt_lettre" style="width:100%" force_save="1" invisible="1"/></group>
+				</group>
+				<group><field name="x_signataire_id" style="width:30%" force_save="1" options="{'no_quick_create':True,'no_create_edit':True,'no_open':True,}" attrs="{'readonly' : [('state', 'in', ['Liquidation partielle','Liquidation totale'])]}"/></group>
+			    <group col = '3' invisible = '1'>
+					    <group><field name="current_users" style="width:100%" invisible = '0' force_save="1"/></group>
+						<group><field name="date_operation" style="width:50%"/></group>
+					    <group><field name="company_id" style="width:50%"/></group>
+				</group>
+
+		</form>
+	</field>
+</record>
+
+<!-- Action  facture_facture-->
+<record model="ir.actions.act_window" id="act_list_facture">
+		<field name="name">Liste des factures</field>
+		<field name="res_model">facture_facture</field>
+		<field name="view_mode">tree,form</field>
+</record>
+
+
+<!-- Action  facture partiellement liquidée-->
+<record model="ir.actions.act_window" id="act_list_fact_partiel">
+	<field name="name">Factures en cours de paiement</field>
+	<field name="res_model">facture_facture</field>
+	<field name="view_mode">tree,form</field>
+	<field name="domain">['|',('state','=','Approuvée'),('state','=','Liquidation partielle')]</field>
+    <field name="context">{
+		'create': False,
+		'write': False,
+		'delete': False,
+		}
+	</field>
+	<field name="help" type="html">
+		<p class="o_view_nocontent_empty_folder">
+			Pas de factures en attente de paiement
+		</p>
+	</field>
+</record>
+
+<!-- Action  facture totalement liquidée-->
+<record model="ir.actions.act_window" id="act_list_fact_solde">
+	<field name="name">Factures Soldées</field>
+	<field name="res_model">facture_facture</field>
+	<field name="view_mode">tree,form</field>
+	<field name="domain">[('state','=','Liquidation totale')]</field>
+    <field name="context">{
+		'create': False,
+		'write': False,
+		'delete': False,
+		}
+	</field>
+	<field name="help" type="html">
+		<p class="o_view_nocontent_empty_folder">
+			Pas de factures soldées
+		</p>
+	</field>
+</record>
+
+<!-- vue facture_facture_paiement tree-->
+<record model="ir.ui.view" id="view_id_facture_facture_paiemnt">
+	<field name="name">view.facture_facture_paiement.tree</field>
+	<field name="model">facture_facture_paiement</field>
+	<field name="priority" eval="16"/>
+	<field name="arch" type="xml">
+		<tree string="Liste des paiements factures">
+			<field name="sequence" widget="handle"/>
+			<field name="date_operation"/>
+			<field name="name"/>
+			<field name="x_client"/>
+			<field name="x_adress"/>
+			<field name="x_objet"/>
+			<field name="x_total_facture" sum = "Total facture"/>
+			<field name="x_total_encaisse" sum = "Total encaiséé"/>
+			<field name="x_total_reste" sum = "Total reste"/>
+			<field name="x_mt_encaisse"/>
+			<field name="x_total_reste_apr"/>
+			<field name="current_users"/>
+			<field name="company_id" invisible = '1'/>
+		</tree>
+	</field>
+</record>
+
+<!-- vue facture_facture_paiement form-->
+<record model="ir.ui.view" id="view_id_form_facture_facture_paiement">
+	<field name="name">view.facture_facture_paiement.form</field>
+	<field name="model">facture_facture_paiement</field>
+	<field name="priority" eval="16"/>
+	<field name="arch" type="xml">
+		<form string="Liste des paiements factures">
+		<header>
+			   <button string="Valider le paiement" name="action_valider" type="object" class="oe_highlight"
+				confirm="Vous êtes sur le point de valider un paiement ?"
+				attrs="{'invisible' : [('state', 'not in', ['Nouveau paiement'])]}"
+			   />
+
+
+			   <field name="state" widget = "statusbar"/>
+        </header>
+		<sheet>
+				<div class="oe_button_box" name="button_box">
+					<button name="toggle_active" type="object" class="oe_stat_button" icon="fa-archive">
+						<field name="active" widget="boolean_button" options='{"terminology":"archive"}'/>
+					</button>
+				</div>
+				<group>
+					<group>
+						<field name="name"  style="width:100%" options="{'no_quick_create':True,'no_create_edit':True,'no_open':True,}" attrs="{'readonly' : [('state', 'in', ['Paiement effectuée'])]}"/>
+						<field name="x_client" style="width:100%" options="{'no_quick_create':True,'no_create_edit':True,'no_open':True,}"/>
+						<field name="x_adress" style="width:100%" invisible = '0' force_save="1"/>
+					    <field name="x_objet" style="width:100%" invisible = '0' force_save="1" />
+					</group>
+					<group>
+							<field name="x_total_facture" style="width:100%" invisible = '0' force_save="1"/>
+							<field name="x_total_encaisse" style="width:50%" force_save="1"/>
+							<field name="x_total_reste" style="width:50%" force_save="1"/>
+					</group>
+				</group>
+				<group col = '2' invisible = '0'>
+						<group><field name="x_mt_encaisse" style="width:50%" attrs="{'readonly' : [('state', 'in', ['Paiement effectuée'])]}"/></group>
+						<group><field name="x_total_reste_apr" style="width:50%" force_save="1"/></group>
+				</group>
+			    <group col = '3' invisible = '1'>
+					    <group><field name="current_users" style="width:100%" invisible = '0' force_save="1"/></group>
+						<group><field name="date_operation" style="width:50%"/></group>
+					    <group><field name="company_id" style="width:50%"/></group>
+				</group>
+			<div class="oe_chatter">
+	                <field name="message_follower_ids" widget="mail_followers" groups="base.group_user"/>
+	                <field name="activity_ids" widget="mail_activity"/>
+	                <field name="message_ids" widget="mail_thread"/>
+	            </div>
+		</sheet>
+
+		</form>
+	</field>
+</record>
+
+<!-- Action  facture_facture_paiement-->
+<record model="ir.actions.act_window" id="act_list_paiement">
+		<field name="name">Liste des paiements factures</field>
+		<field name="res_model">facture_facture_paiement</field>
+		<field name="view_mode">tree,form</field>
+</record>
+
+
+
+<!-- Vue depense form -->
+<record model="ir.ui.view" id="view_id_depense_form">
+	<field name="name">view.gest_depense.form</field>
+	<field name="model">gest_depense</field>
+	<field name="priority" eval="16"/>
+	<field name="arch" type="xml">
+		<form string="Dépense">
+		<header>
+				<button string="Valider" name="action_valider" type="object" class="oe_highlight"
+                 attrs="{'invisible' : [('state', 'not in', ['draft'])]}"
+                 confirm="Voulez vous vraiment effectuer cette opération ?"/>
+
+                 <field name="state" widget = "statusbar"/>
+         </header>
+            <sheet>
+	        	<div class="oe_button_box" name="button_box">
+					<button name="toggle_active" type="object" class="oe_stat_button" icon="fa-archive">
+						<field name="active" widget="boolean_button" options='{"terminology":"archive"}'/>
+					</button>
+				</div>
+				<!--  <label for="name" class="oe_edit_only"/>
+	                <h1>
+	                    <field name="name" style="width:50%" options="{'no_quick_create':True,'no_create_edit':True,'no_open':True,}"/>
+	                </h1>-->
+	            <group col='2'>
+	            		<group><field name="name" force_save = "1" style="width:100%" options="{'no_quick_create':True,'no_create_edit':True,'no_open':True,}"/></group>
+	            		<group><field name="x_type_depense" force_save = "1" style="width:100%" options="{'no_quick_create':True,'no_create_edit':True,'no_open':True,}"/></group>
+	            </group>
+             	<group>
+                      <field name="objet_dep" force_save = "1" style="width:30%"/>
+                      <field name="mt"  force_save = "1" style="width:30%"/>
+                      <field name="x_immatricul_id"  force_save = "1" style="width:30%" options="{'no_quick_create':True,'no_create_edit':True,'no_open':True,}"/>
+                       <field name="x_trajet_id"  force_save = "1" style="width:30%" options="{'no_quick_create':True,'no_create_edit':True,'no_open':True,}"/>
+                      <field name="x_distance" force_save = "1" style="width:30%"/>
+                      <field name="x_produit_id" force_save = "1" style="width:30%" invisible = '1' options="{'no_quick_create':True,'no_create_edit':True,'no_open':True,}"/>
+					  <field name="x_capacite" style="width:80%" force_save = '1'/>
+					  <field name="date_op" style="width:80%" force_save = '1'/>
+         		</group>
+         		<group col = "2">
+		                <group><field name="company_id" style="width:30%" force_save = '1' invisible = '1' /></group>
+		                <group><field name="currents_users" style="width:50%" force_save = '1' invisible = '1'/></group>
+                </group>
+         </sheet>
+         <div class="oe_chatter">
+                <field name="message_follower_ids" widget="mail_followers" groups="base.group_user"/>
+                <field name="activity_ids" widget="mail_activity"/>
+                <field name="message_ids" widget="mail_thread"/>
+            </div>
+		</form>
+	</field>
+</record>
+
+
+<!-- Vue depense tree -->
+<record model="ir.ui.view" id="view_id_depense_tree">
+	<field name="name">view.gest_depense.tree</field>
+	<field name="model">gest_depense</field>
+	<field name="priority" eval="16"/>
+	<field name="arch" type="xml">
+		<tree decoration-it ="state == 'Validé' " editable="top" string = "Depense">
+		    <field name="sequence" widget="handle" />
+			<field name="x_num_facture" force_save="1" />
+			<field name="name" force_save="1" options="{'no_quick_create':True,'no_create_edit':True,'no_open':True,}" attrs="{'readonly' : [('state', 'in', ['Validé'])]}"/>
+			<field name="x_personnel_id" force_save="1" options="{'no_quick_create':True,'no_create_edit':True,'no_open':True,}" attrs="{'readonly' : [('state', 'in', ['Validé'])]}"/>
+			<field name="objet_dep" force_save="1" attrs="{'readonly' : [('state', 'in', ['Validé'])]}"/>
+			<field name="mt" force_save="1" attrs="{'readonly' : [('state', 'in', ['Validé'])]}" sum="Total depensé"/>
+			<field name="currents_users" options="{'no_quick_create':True,'no_create_edit':True,'no_open':True,}"/>
+			<field name="company_id" invisible = '1'/>
+			<field name="state" invisible = '0'/>
+		</tree>
+	</field>
+</record>
+
+
+<!-- Action  depense-->
+<record model="ir.actions.act_window" id="act_list_depense">
+		<field name="name">Dépense</field>
+		<field name="res_model">gest_depense</field>
+		<field name="context">{
+				'search_default_camion' :0,
+				'search_default_personnel' :0 ,
+				'create': True,
+				'write': True,
+				'delete': True,
+				}
+			</field>
+		<field name="view_mode">search,tree</field>
+</record>
+
+
+<!-- Vue group by pour les depenses-->
+<record id="depense_search" model="ir.ui.view">
+    <field name="name">gest_depense</field>
+    <field name="model">gest_depense</field>
+    <field name="arch" type="xml">
+        <search>
+            <group expand="0" string="Group By">
+                <filter string="Camion" name="camion" context="{'group_by':'name'}"/>
+                <filter string="Personnel" name="personnel" context="{'group_by':'x_personnel_id'}"/>
+            </group>
+        </search>
+    </field>
+</record>
+
+
+<!-- vue facture_transit tree-->
+<record model="ir.ui.view" id="view_id_facture_transit">
+	<field name="name">view.facture_transit.tree</field>
+	<field name="model">facture_transit</field>
+	<field name="priority" eval="16"/>
+	<field name="arch" type="xml">
+		<tree decoration-it ="state == 'Nouvelle' " decoration-success ="state == 'Liquidée' "  decoration-warning ="state == 'En cours Liquidation' " decoration-info ="state == 'Approuvée' " string="Liste des factures">
+			<field name="sequence" widget="handle"/>
+			<field name="x_num_fact"/>
+			<field name="name"/>
+			<field name="x_adress"/>
+			<field name="date_operation"/>
+			<field name="x_total_facture" sum = "Total facture"/>
+			<field name="x_total_encaisse" sum = "Total encaissé"/>
+			<field name="x_total_reste" sum = "Total reste"/>
+			<field name="current_users"/>
+			<field name="state"/>
+			<field name="company_id" invisible = '1'/>
+		</tree>
+	</field>
+</record>
+
+<!-- vue facture_transit form-->
+<record model="ir.ui.view" id="view_id_form_facture_facture_transit">
+	<field name="name">view.facture_transit.form</field>
+	<field name="model">facture_transit</field>
+	<field name="priority" eval="16"/>
+	<field name="arch" type="xml">
+		<form string="Liste des factures Transit">
+		<header>
+			   <button string="Approuver" name="action_approuver_facture" type="object" class="oe_highlight"
+				confirm="Vous êtes sur le point d'approuver cette facture ?"
+				attrs="{'invisible' : [('state', 'not in', ['Nouvelle'])]}"
+				groups="Gestion_Facturation.Gestion_Facturation_admin_donnees,Gestion_Facturation.Gestion_Facturation_cptable"
+			   />
+
+
+			   <field name="state" widget = "statusbar"/>
+        </header>
+		<sheet>
+				<div class="oe_button_box" name="button_box">
+					<button name="toggle_active" type="object" class="oe_stat_button" icon="fa-archive">
+						<field name="active" widget="boolean_button" options='{"terminology":"archive"}'/>
+					</button>
+				</div>
+				<group>
+					<group>
+						<field name="name" style="width:100%" options="{'no_quick_create':True,'no_create_edit':True,'no_open':True,}" attrs="{'readonly' : [('state', 'in', ['Approuvée','Liquidation partielle','Liquidation totale'])]}"/>
+						<field name="x_adress" style="width:100%" invisible = '0' force_save="1"/>
+					</group>
+					<group>
+					    <field name="x_echeance_facture" style="width:100%" invisible = '0' force_save="1" />
+					    <field name="x_num_fact" style="width:100%" invisible = '0' force_save="1" />
+					</group>
+				</group>
+				<group>
+						<field name="x_line_ids" nolabel = "1" attrs="{'readonly' : [('state', 'in', ['Liquidation partielle','Liquidation totale'])]}">
+						  <tree string="Ligne facture" editable = "bottom">
+							   <field name="x_date_be" force_save = "1" />
+							  <field name="x_num_be" force_save = "1" />
+							  <field name="x_date_bl" force_save = "1" />
+							  <field name="x_num_bl" force_save = "1"/>
+							  <field name="x_immatricul_id" force_save = "1" />
+							  <field name="x_trajet_id" force_save = "1" invisible = '0' />
+							  <field name="x_produit_id" force_save = "1" invisible = '0'/>
+							  <field name="x_mt_ligne" force_save = "1" invisible = '0' />
+							  <field name="x_annee_en_cours" style="width:100%" invisible = '0' force_save="1"/>
+						  </tree>
+						</field>
+         		</group>
+			 	<group col = '3'>
+					    <group><field name="x_total_facture" style="width:100%" invisible = '0' force_save="1"/></group>
+						<group><field name="x_total_encaisse" style="width:50%" force_save="1"/></group>
+					    <group><field name="x_total_reste" style="width:50%" force_save="1"/></group>
+					 	<group><field name="x_mnt_lettre" style="width:100%" force_save="1" invisible="1"/></group>
+				</group>
+				<group><field name="x_signataire_id" style="width:40%" force_save="1" options="{'no_quick_create':True,'no_create_edit':True,'no_open':True,}" attrs="{'readonly' : [('state', 'in', ['Liquidation partielle','Liquidation totale'])]}"/></group>
+			    <group col = '3' invisible = '1'>
+					    <group><field name="current_users" style="width:100%" invisible = '0' force_save="1"/></group>
+						<group><field name="date_operation" style="width:50%"/></group>
+					    <group><field name="company_id" style="width:50%"/></group>
+				</group>
+				<div class="oe_chatter">
+	                <field name="message_follower_ids" widget="mail_followers" groups="base.group_user"/>
+	                <field name="activity_ids" widget="mail_activity"/>
+	                <field name="message_ids" widget="mail_thread"/>
+	            </div>
+		</sheet>
+
+		</form>
+	</field>
+</record>
+
+<!-- Action  facture_transit-->
+<record model="ir.actions.act_window" id="act_list_facture_transit">
+		<field name="name">Liste des factures Transit</field>
+		<field name="res_model">facture_transit</field>
+		<field name="view_mode">tree,form</field>
+</record>
+
+
+<!-- vue facture_facture_paiement_transit tree-->
+<record model="ir.ui.view" id="view_id_facture_facture_paiemnt_transit">
+	<field name="name">view.facture_facture_paiement_transit.tree</field>
+	<field name="model">facture_facture_paiement_transit</field>
+	<field name="priority" eval="16"/>
+	<field name="arch" type="xml">
+		<tree string="Liste des paiements factures transit">
+			<field name="sequence" widget="handle"/>
+			<field name="date_operation"/>
+			<field name="name"/>
+			<field name="x_client"/>
+			<field name="x_adress"/>
+			<field name="x_objet"/>
+			<field name="x_total_facture"/>
+			<field name="x_total_encaisse"/>
+			<field name="x_total_reste"/>
+			<field name="x_mt_encaisse"/>
+			<field name="x_total_reste_apr"/>
+			<field name="current_users"/>
+			<field name="company_id" invisible = '1'/>
+		</tree>
+	</field>
+</record>
+
+<!-- vue facture_facture_paiement_transit form-->
+<record model="ir.ui.view" id="view_id_form_facture_facture_paiement_transit">
+	<field name="name">view.facture_facture_paiement_transit.form</field>
+	<field name="model">facture_facture_paiement_transit</field>
+	<field name="priority" eval="16"/>
+	<field name="arch" type="xml">
+		<form string="Liste des paiements factures transit">
+		<header>
+			   <button string="Valider le paiement" name="action_valider" type="object" class="oe_highlight"
+				confirm="Vous êtes sur le point de valider un paiement ?"
+				attrs="{'invisible' : [('state', 'not in', ['Nouveau paiement'])]}"
+			   />
+
+
+			   <field name="state" widget = "statusbar"/>
+        </header>
+		<sheet>
+				<div class="oe_button_box" name="button_box">
+					<button name="toggle_active" type="object" class="oe_stat_button" icon="fa-archive">
+						<field name="active" widget="boolean_button" options='{"terminology":"archive"}'/>
+					</button>
+				</div>
+				<group>
+					<group>
+						<field name="name"  style="width:100%" options="{'no_quick_create':True,'no_create_edit':True,'no_open':True,}" attrs="{'readonly' : [('state', 'in', ['Paiement effectuée'])]}"/>
+						<field name="x_client" style="width:100%" options="{'no_quick_create':True,'no_create_edit':True,'no_open':True,}"/>
+						<field name="x_adress" style="width:100%" invisible = '0' force_save="1"/>
+					</group>
+					<group>
+							<field name="x_total_facture" style="width:100%" invisible = '0' force_save="1"/>
+							<field name="x_total_encaisse" style="width:50%" force_save="1"/>
+							<field name="x_total_reste" style="width:50%" force_save="1"/>
+					</group>
+				</group>
+				<group col = '2' invisible = '0'>
+						<group><field name="x_mt_encaisse" style="width:50%" attrs="{'readonly' : [('state', 'in', ['Paiement effectuée'])]}"/></group>
+						<group><field name="x_total_reste_apr" style="width:50%" force_save="1"/></group>
+				</group>
+			    <group col = '3' invisible = '1'>
+					    <group><field name="current_users" style="width:100%" invisible = '0' force_save="1"/></group>
+						<group><field name="date_operation" style="width:50%"/></group>
+					    <group><field name="company_id" style="width:50%"/></group>
+				</group>
+			<div class="oe_chatter">
+	                <field name="message_follower_ids" widget="mail_followers" groups="base.group_user"/>
+	                <field name="activity_ids" widget="mail_activity"/>
+	                <field name="message_ids" widget="mail_thread"/>
+	            </div>
+		</sheet>
+
+		</form>
+	</field>
+</record>
+
+<!-- Action  facture_facture_paiement_transit-->
+<record model="ir.actions.act_window" id="act_list_paiement_transit">
+		<field name="name">Liste des paiements factures transit</field>
+		<field name="res_model">facture_facture_paiement_transit</field>
+		<field name="view_mode">tree,form</field>
+</record>
+
+
+<!-- Action  facture transit partiellement liquidée-->
+<record model="ir.actions.act_window" id="act_list_fact_transit_partiel">
+	<field name="name">Factures en cours de paiement</field>
+	<field name="res_model">facture_transit</field>
+	<field name="view_mode">tree,form</field>
+	<field name="domain">['|',('state','=','Approuvée'),('state','=','En cours Liquidation')]</field>
+    <field name="context">{
+		'create': False,
+		'write': False,
+		'delete': False,
+		}
+	</field>
+	<field name="help" type="html">
+		<p class="o_view_nocontent_empty_folder">
+			Pas de factures en cours de paiement
+		</p>
+	</field>
+</record>
+
+<!-- Action  facture transit totalement liquidée-->
+<record model="ir.actions.act_window" id="act_list_fact_transit_solde">
+	<field name="name">Factures Soldées</field>
+	<field name="res_model">facture_transit</field>
+	<field name="view_mode">tree,form</field>
+	<field name="domain">[('state','=','Liquidée')]</field>
+    <field name="context">{
+		'create': False,
+		'write': False,
+		'delete': False,
+		}
+	</field>
+	<field name="help" type="html">
+		<p class="o_view_nocontent_empty_folder">
+			Pas de factures soldées
+		</p>
+	</field>
+</record>
+
+
+
+
+<!-- vue facture_facture_stats tree-->
+<record model="ir.ui.view" id="view_id_facture_facture_stats">
+	<field name="name">view.facture_facture_stats.tree</field>
+	<field name="model">facture_facture_stats</field>
+	<field name="priority" eval="16"/>
+	<field name="arch" type="xml">
+		<tree string="Stats">
+			<field name="name"/>
+			<field name="x_ca_annuel"/>
+			<field name="x_dep_annuel"/>
+			<field name="x_ma_annuel" force_save="1"/>
+			<field name="company_id" invisible = '1'/>
+		</tree>
+	</field>
+</record>
+
+<!-- Action  facture_facture_stats
+<record model="ir.actions.act_window" id="act_list_fact_stat">
+	<field name="name">Stats Factures</field>
+	<field name="res_model">facture_facture_stats</field>
+	<field name="view_mode">tree</field>
+    <field name="context">{
+		'create': False,
+		'write': False,
+		'delete': False,
+		}
+	</field>
+	<field name="help" type="html">
+		<p class="o_view_nocontent_empty_folder">
+			Pas de stats factures
+		</p>
+	</field>
+</record>-->
+
+
+	<!-- vue facture_stats_ca form-->
+<record model="ir.ui.view" id="view_id_form_facture_facture_stats_ca">
+	<field name="name">view.facture_stats_ca.form</field>
+	<field name="model">facture_stats_ca</field>
+	<field name="priority" eval="16"/>
+	<field name="arch" type="xml">
+		<form string="CA">
+		<header>
+			   <button string="Afficher" name="action_afficher" type="object" class="oe_highlight"
+			   />
+
+        </header>
+		<sheet>
+				<div class="oe_button_box" name="button_box">
+					<button name="toggle_active" type="object" class="oe_stat_button" icon="fa-archive">
+						<field name="active" widget="boolean_button" options='{"terminology":"archive"}'/>
+					</button>
+				</div>
+				<group>
+						<field name="name" force_save="1"/>
+				</group>
+				<group>
+						<field name="x_line_ids" nolabel = "1" >
+						  <tree string="Ligne ca" editable = "bottom">
+							   <field name="name" force_save = "1" />
+							  <field name="x_ca_annuel" force_save = "1" />
+							  <field name="x_dep_annuel" force_save = "1" />
+							  <field name="x_ma_annuel" force_save = "1"/>
+						  </tree>
+						</field>
+         		</group>
+			    <group col = '3' invisible = '1'>
+					    <group><field name="currents_users" style="width:100%" invisible = '0' force_save="1"/></group>
+					    <group><field name="company_id" style="width:50%"/></group>
+				</group>
+				<div class="oe_chatter">
+	                <field name="message_follower_ids" widget="mail_followers" groups="base.group_user"/>
+	                <field name="activity_ids" widget="mail_activity"/>
+	                <field name="message_ids" widget="mail_thread"/>
+	            </div>
+		</sheet>
+
+		</form>
+	</field>
+</record>
+
+<!-- Action  facture_stats_ca-->
+<record model="ir.actions.act_window" id="act_list_facture_stats_ca">
+		<field name="name">Stats CA</field>
+		<field name="res_model">facture_stats_ca</field>
+		<field name="view_mode">form</field>
+</record>
+
+
+<!-- Menu-->
+
+<menuitem id="main_menu" name="Gestion Transport"
+	web_icon="Gestion_Facture,static/description/tache3.jpg"
+	sequence = "1"/> 
+
+
+<menuitem id="menu_facture_facture" parent="main_menu" name="Facturation" sequence = "10" groups='Gestion_Facturation.Gestion_Facturation_admin_donnees,Gestion_Facturation.Gestion_Facturation_op,Gestion_Facturation.Gestion_Facturation_cptable'/>
+	<menuitem id="menu_facture_factur_voyage" parent="menu_facture_facture" name="FACTURE CONCERNANT LES TRANSPORTS" sequence = "102" />
+		<menuitem id="menu_facture_factur" parent="menu_facture_factur_voyage" name="Faire un nouvelle facture" sequence = "1021" action="act_list_facture" />
+		<menuitem id="menu_facture_factur_paiement" parent="menu_facture_factur_voyage" name="Effectuer paiement de facture" sequence = "1022" action="act_list_paiement" />
+		<menuitem id="menu_facture_factur_partielle" parent="menu_facture_factur_voyage" name="Liste de nos factures en cours de paiement" sequence = "1023" action="act_list_fact_partiel" />
+		<menuitem id="menu_facture_factur_totale" parent="menu_facture_factur_voyage" name="Liste de nos factures soldées" sequence = "1024" action="act_list_fact_solde" />
+
+	<menuitem id="menu_facture_factur_autres" parent="menu_facture_facture" name="FACTURE CONCERNANT LE TRANSIT" sequence = "103" />
+		<menuitem id="menu_facture_facturE" parent="menu_facture_factur_autres" name="Faire une nouvelle facture Transit" sequence = "1031" action="act_list_facture_transit" />
+		<menuitem id="menu_facture_factur_paiement_transit" parent="menu_facture_factur_autres" name="Effectuer paiement de facture Transit" sequence = "1032" action="act_list_paiement_transit" />
+		<menuitem id="menu_facture_factur_paiement_transit_cours" parent="menu_facture_factur_autres" name="Factures Transit en cours de paiement" sequence = "1033" action="act_list_fact_transit_partiel" />
+		<menuitem id="menu_facture_factur_paiement_transit_solde" parent="menu_facture_factur_autres" name="Factures Transit Soldées" sequence = "1034" action="act_list_fact_transit_solde" />
+
+<menuitem id="menu_facture_depense" parent="main_menu" name="Dépense" sequence = "20" groups='Gestion_Facturation.Gestion_Facturation_admin_donnees,Gestion_Facturation.Gestion_Facturation_op'/>
+	<menuitem id="menu_facture_new_depense" parent="menu_facture_depense" name="Nouvelle dépense" sequence = "201" action="act_list_depense" />
+
+<menuitem id="menu_stat_facture" parent="main_menu" name="Statistiques" sequence = "30" groups='Gestion_Facturation.Gestion_Facturation_admin_donnees,Gestion_Facturation.Gestion_Facturation_op,Gestion_Facturation.Gestion_Facturation_cptable'/>
+	<menuitem id="menu_facture_stat_dep_ca" parent="menu_stat_facture" name="Chiffre d'affaire" sequence = "301" action="act_list_facture_stats_ca" />
+
+<menuitem id="menu_facture_param" parent="main_menu" name="Paramétrage" sequence = "100" groups='Gestion_Facturation.Gestion_Facturation_admin_donnees,Gestion_Facturation.Gestion_Facturation_op'/>
+	<menuitem id="menu_facture_client" parent="menu_facture_param" name="Saisie/MàJ- Client" sequence = "1001" action="act_list_client" />
+	<menuitem id="menu_facture_param_prod" parent="menu_facture_param" name="Saisie/MàJ- Produit" sequence = "1002" action="act_list_produit" />
+	<menuitem id="menu_facture_param_localite" parent="menu_facture_param" name="Saisie/MàJ- Localité" sequence = "1003" action="act_list_localite" />
+	<menuitem id="menu_facture_param_trajet" parent="menu_facture_param" name="Saisie/MàJ- Trajet" sequence = "1004" action="act_list_trajet" />
+	<menuitem id="menu_facture_param_personnel_conducteur" parent="menu_facture_param" name="Saisie/MàJ- Personnel" sequence = "1005" action="act_list_conducteur" />
+	<menuitem id="menu_facture_param_camion" parent="menu_facture_param" name="Saisie/MàJ- Camion" sequence = "1006" action="act_list_camion" />
+
+</odoo>
+
+

@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record model="ir.ui.view" id="view_etat_depense_form">
+            <field name="name">view.etat.depense.form</field>
+            <field name="model">etat.depense</field>
+            <field name="priority" eval="16"/>
+            <field name="arch" type="xml">
+                <form string="Marches" create='false' delete="false">
+                    <sheet>
+                        <div>
+                            <h1 style="text-align:center; text-decoration:underline;">
+                                <field name="name" nolabel="1" readonly="1"/>
+                            </h1>
+                        </div>
+                        <group col="3">
+                            <group>
+                                <field name="marche_id" style = "width:75%" options="{'no_create': True}"/>
+                                <field name="montant_marche" style = "width:75%"/>
+                                <field name="dte_deb" style = "width:75%"/>
+                                <field name="dte_fin" style = "width:75%"/>
+                            </group>
+                            <group>
+                                <field name="total_rebut" style = "width:75%"/>
+                                <field name="total_materiel" style = "width:75%"/>
+                                <field name="total_depense" style = "width:75%"/>
+                                <field name="total" style = "width:75%"/>
+                                <field name="resultat" style = "width:75%;"/>
+                            </group>
+                            <footer>
+                                <div>
+                                    <button name="etat" string="Afficher" type="object" class="oe_highlight"
+                                            style="background-color: #28a745; border-color: #28a745; font-size:25px;
+                                        text-align:center;" icon="fa-search"/><br/><br/>
+
+                                    <button name="print_dep" string="Imprimer" type="object" class="oe_highlight"
+                                            style="background-color: #28a745; border-color: white; font-size:25px;
+                                        text-align:center;" icon="fa-print"/>
+                                </div>
+                            </footer>
+                        </group>
+                    </sheet>
+
+                </form>
+            </field>
+        </record>
+
+
+        <record id="action_etat_depense" model="ir.actions.act_window">
+            <field name="name">Etat de dépense</field>
+            <field name="res_model">etat.depense</field>
+            <field name="view_mode">form</field>
+            <field name="target">inline</field>
+        </record>
+
+
+        <record model="ir.ui.view" id="view_stock_etat_form">
+            <field name="name">view.etat.stock.form</field>
+            <field name="model">etat.stock</field>
+            <field name="priority" eval="16"/>
+            <field name="arch" type="xml">
+                <form string="Liste des sorties de stock">
+                    <sheet>
+                        <div>
+                            <h1 style="text-align:center; text-decoration:underline;">
+                                <field name="name" nolabel="1" readonly="1"/>
+                            </h1>
+                        </div>
+                        <group>
+                            <field name="magasin_id" style = "width:50%" options="{'no_create': True}"/>
+                        </group>
+                        <field name="etat_ids" nolabel = "1">
+                            <tree string="Lignes demande" create ="false" delete="false">
+                                <field name="article_id" force_save='1' options="{'no_create': True}"/>
+                                <field name="initial" invisible="1"/>
+                                <field name="en_stock" readonly="1" force_save='1'/>
+                                <field name="sortie"/>
+                            </tree>
+                        </field>
+                        <footer>
+                            <div>
+                                <div style="float:left">
+                                    <button name="etat" string="Afficher" type="object" class="oe_highlight"
+                                            style="background-color: #28a745; border-color: #28a745; font-size:25px;
+                                            text-align:center;" icon="fa-search"/>
+                                    <button name="print_stock" string="Imprimer" type="object" class="oe_highlight"
+                                            style="background-color: #28a745; border-color: white; font-size:25px;
+                                            text-align:center;" icon="fa-print"/>
+                                </div>
+                            </div>
+                        </footer>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_etat_stock" model="ir.actions.act_window">
+            <field name="name">Etat des stocks</field>
+            <field name="res_model">etat.stock</field>
+            <field name="view_mode">form</field>
+            <field name="target">inline</field>
+        </record>
+
+
+
+        <record model="ir.ui.view" id="view_etat_detaille_form">
+            <field name="name">view.etat.detaille.form</field>
+            <field name="model">etat.detaille</field>
+            <field name="priority" eval="16"/>
+            <field name="arch" type="xml">
+                <form string="Liste des etats detaillés de stock">
+                    <sheet>
+                        <group col="2">
+                            <group>
+                                <field name="par" style = "width:50%"/>
+                                <field name="marche_id" style = "width:75%" options="{'no_create': True}"
+                                       attrs="{'invisible' : [('par', 'not in', ['1'])]}"/>
+                            </group>
+                            <group>
+                                <field name="dte_deb" style = "width:50%"/>
+                                <field name="dte_fin" style = "width:50%"/>
+                            </group>
+                        </group>
+                                <field name="etat_ids" nolabel = "1">
+                                    <tree string="Lignes demande" create ="false" delete="false">
+                                        <field name="dte"/>
+                                        <field name="marche_id"/>
+                                        <field name="responsable_id"/>
+                                        <field name="objet"/>
+                                        <field name="mode_id"/>
+                                        <field name="reference"/>
+                                        <field name="en_cours" invisible="1"/>
+                                        <field name="montant"/>
+                                    </tree>
+                                </field>
+                        <footer>
+                            <div>
+                                <div style="float:left">
+                                    <button name="etat" string="Afficher" type="object" class="oe_highlight"
+                                            style="background-color: #28a745; border-color: #28a745; font-size:25px;
+                                            text-align:center;" icon="fa-search"/>
+
+                                    <button name="print_det" string="Imprimer" type="object" class="oe_highlight"
+                                            style="background-color: #28a745; border-color: white; font-size:25px;
+                                            text-align:center;" icon="fa-print"/>
+                                </div>
+                            </div>
+                        </footer>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_etat_detaille" model="ir.actions.act_window">
+            <field name="name">Etat détaillé des opérations</field>
+            <field name="res_model">etat.detaille</field>
+            <field name="view_mode">form</field>
+            <field name="target">inline</field>
+        </record>
+
+
+        <record model="ir.ui.view" id="view_etat_det_stock_form">
+            <field name="name">view.etat.det.stock.form</field>
+            <field name="model">etat.det.stock</field>
+            <field name="priority" eval="16"/>
+            <field name="arch" type="xml">
+                <form string="Liste des etats detaillés de stock">
+                    <sheet>
+                        <group col="3">
+                            <group>
+                                <field name="dte_deb" style = "width:100%"/>
+                                <field name="dte_fin" style = "width:100%"/>
+                            </group>
+                            <group>
+                                <button name="etat" string="Afficher" type="object" class="oe_highlight"
+                                        style="background-color: #28a745; border-color: #28a745; font-size:25px;
+                                            text-align:center;" icon="fa-search"/>
+                            </group>
+                            <group>
+                                <button name="print_entree_sortie" string="Imprimer" type="object" class="oe_highlight"
+                                        style="background-color: #28a745; border-color: white; font-size:25px;
+                                        text-align:center;" icon="fa-print"/>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page string="Entrées">
+                                <field name="etat_ids" nolabel = "1">
+                                    <tree string="Lignes demande" create ="false" delete="false">
+                                        <field name="dte_entree"/>
+                                        <field name="article_id"/>
+                                        <field name="unite_id"/>
+                                        <field name="qte"/>
+                                    </tree>
+                                </field>
+                            </page>
+                            <page string="Sorties">
+                                <field name="etat_sortie_ids" nolabel = "1">
+                                    <tree string="Lignes demande" create ="false" delete="false">
+                                        <field name="dte_sortie"/>
+                                        <field name="article_id"/>
+                                        <field name="unite_id"/>
+                                        <field name="qte"/>
+                                    </tree>
+                                </field>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_etat_mvt" model="ir.actions.act_window">
+            <field name="name">Etat mouvement de stocks</field>
+            <field name="res_model">etat.det.stock</field>
+            <field name="view_mode">form</field>
+            <field name="target">inline</field>
+        </record>
+
+
+
+
+        <menuitem id="menu_reporting" name ="Synthèse" sequence="5" parent="main_menu"/>
+        <menuitem id="menu_etat_stock" name ="Etat du stock" sequence="1" parent="menu_reporting" action="action_etat_stock"/>
+        <menuitem id="menu_etat_mvt" name ="Etat des mouvements de stock" sequence="2" parent="menu_reporting" action="action_etat_mvt"/>
+        <menuitem id="menu_etat_depen" name ="Etat des dépenses" sequence="3" parent="menu_reporting" action="action_etat_depense"/>
+        <menuitem id="menu_etat_det" name ="Etat détaillés des dépenses" sequence="4" parent="menu_reporting" action="action_etat_detaille"/>
+
+    </data>
+</odoo>

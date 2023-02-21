@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+	  <record id = 'Gestion_Facturation_category' model = 'ir.module.category'>
+	  			<field name = 'name'>GESTION TRANSPORT</field>
+	  </record>
+	  
+	  <record id = 'Gestion_Facturation_cptable' model = 'res.groups'>
+	  			<field name = 'name'>COMPTABLE</field>
+	  			<field name = 'category_id' ref ='Gestion_Facturation_category'/>
+	  </record>
+	  
+	  <record id = 'Gestion_Facturation_op' model = 'res.groups'>
+	  			<field name = 'name'>OPERATEUR</field>
+	  			<field name = 'category_id' ref ='Gestion_Facturation_category'/>
+	  </record>
+	 
+	  
+	  <record id = 'Gestion_Facturation_admin_donnees' model = 'res.groups'>
+	  			<field name = 'name'>ADMIN DONNEES</field>
+	  			<field name = 'category_id' ref ='Gestion_Facturation_category'/>
+	  </record>
+	  
+	  
+	  
+
+
+</odoo>

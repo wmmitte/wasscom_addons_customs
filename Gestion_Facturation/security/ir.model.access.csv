@@ -1,0 +1,17 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_facture_produit,access.facture_produit,model_facture_produit,base.group_user,1,1,1,0
+access_facture_localite,access.facture_localite,model_facture_localite,base.group_user,1,1,1,0
+access_facture_trajet,access.facture_trajet,model_facture_trajet,base.group_user,1,1,1,0
+access_facture_client,access.facture_client,model_facture_client,base.group_user,1,1,1,0
+access_facture_camion,access.facture_camion,model_facture_camion,base.group_user,1,1,1,0
+access_facture_facture,access.facture_facture,model_facture_facture,base.group_user,1,1,1,0
+access_facture_facture_line,access.facture_facture_line,model_facture_facture_line,base.group_user,1,1,1,1
+access_facture_facture_paiement,access.facture_facture_paiement,model_facture_facture_paiement,base.group_user,1,1,1,0
+access_gest_depense,access.gest_depense,model_gest_depense,base.group_user,1,1,1,0
+access_facture_transit,access.facture_transit,model_facture_transit,base.group_user,1,1,1,0
+access_facture_transit_line,access.facture_transit_line,model_facture_transit_line,base.group_user,1,1,1,0
+access_facture_facture_paiement_transit,access.facture_facture_paiement_transit,model_facture_facture_paiement_transit,base.group_user,1,1,1,0
+access_facture_facture_stats,access.facture_facture_stats,model_facture_facture_stats,base.group_user,1,1,1,0
+access_facture_stats_ca,access.facture_stats_ca,model_facture_stats_ca,base.group_user,1,1,1,0
+access_facture_stats_ca_line,access.facture_stats_ca_line,model_facture_stats_ca_line,base.group_user,1,1,1,0
+access_facture_facture_conducteur_camion,access.facture_conducteur_camion,model_facture_conducteur_camion,base.group_user,1,1,1,0

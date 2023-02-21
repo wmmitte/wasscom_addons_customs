@@ -1,0 +1,20 @@
+{
+    'name': 'Gestion Facturation',
+    'version': '1.0',
+    'website': '',
+    'category': 'Logiciel AM',
+    'summary': "Ce logiciel est conçu pour faciliter la gestion de la facturation",
+    'author': 'TONIO & OURNO',
+    'depends': ['base',"mail"],
+    'data': [
+        'security/ir.model.access.csv',
+        'security/security.xml',
+        'views/vue_facture.xml',
+        "Report/report_comm.xml",
+        "Report/report_approvisionnement.xml",
+        "Report/report_facture.xml",
+        "Report/report_facture_transit.xml",
+    ],
+    'installable': True,
+    'auto_install': False,
+}

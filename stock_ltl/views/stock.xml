@@ -1,0 +1,507 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+
+        <record model="ir.ui.view" id="view_stock_marche_form">
+            <field name="name">view.marche.form</field>
+            <field name="model">stock.marche</field>
+            <field name="priority" eval="16"/>
+            <field name="arch" type="xml">
+                <form string="Marches" delete="false">
+                    <header>
+                        <button name="act_confirmer" string="Confirmer marché" type="object" class="oe_highlight"
+                                attrs="{'invisible' : [('state', 'not in', ['N'])]}"
+                                style="background-color: #28a745; border-color: #28a745;"/>
+                        <button name="act_cloturer" string="Clôturer marché" type="object" class="oe_highlight"
+                                attrs="{'invisible' : [('state', 'not in', ['E'])]}"
+                                style="background-color: #28a745; border-color: #28a745;"/>
+                        <field name="state" widget="statusbar"/>
+                    </header>
+                    <sheet>
+                        <div class="oe_title">
+                            <h1>
+                                <field name="name" nolabel="1" placeholder="Saisir l'intitulé du marché ici..."/>
+                            </h1>
+                        </div>
+                        <group col="2">
+                            <group>
+                                <field name="dte" style = "width:50%"/>
+                                <field name="tva_existe" style = "width:50%"/>
+                            </group>
+                            <group>
+                                <field name="mnt_ht" style = "width:50%"/>
+                                <field name="mnt_ttc" style = "width:50%"/>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page string="Magasin">
+                                <field name="magasin_ids" nolabel = "1">
+                                    <tree string="Lignes magasins" editable = "bottom">
+                                        <field name="magasin_id"/>
+                                        <field name="responsable"/>
+                                        <field name="ouvert"/>
+                                    </tree>
+                                </field>
+                            </page>
+                            <page string="Liste des matériels">
+                                <field name="stock_ids" nolabel = "1">
+                                    <tree string="Lignes materiels" editable = "bottom">
+                                        <field name="article_id"/>
+                                        <field name="qte"/>
+                                        <field name="qte_conso" invisible="1"/>
+                                        <field name="ecart" invisible="1"/>
+                                    </tree>
+                                </field>
+                            </page>
+                        </notebook>
+                    </sheet>
+
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers" groups="base.group_user"/>
+                        <field name="message_ids" widget="mail_thread"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+
+
+        <record model="ir.ui.view" id="view_marche_tree">
+            <field name="name">marche.view.tree</field>
+            <field name="model">stock.marche</field>
+            <field name="arch" type="xml">
+                <tree string="Liste des marchés" delete="false">
+                    <field name = "dte"/>
+                    <field name = "name"/>
+                    <field name = "mnt_ht"/>
+                    <field name = "mnt_ttc"/>
+                    <field name = "state"/>
+                </tree>
+            </field>
+        </record>
+
+
+        <record id="act_list_marche" model="ir.actions.act_window">
+            <field name="name">Liste des marchés</field>
+            <field name="res_model">stock.marche</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+
+        <record model="ir.ui.view" id="view_stock_entree_form">
+            <field name="name">view.stock.entree.form</field>
+            <field name="model">stock.entree</field>
+            <field name="priority" eval="16"/>
+            <field name="arch" type="xml">
+                <form string="Entree de stock" delete="false">
+                    <header>
+                        <button name="act_valider" string="Valider entréé" type="object" class="oe_highlight"
+                                attrs="{'invisible' : [('state', 'not in', ['draft'])]}"
+                                style="background-color: #28a745; border-color: #28a745;"
+                                confirm="Etes-vous sûr de valider cette opération ?"/>
+                        <field name="state" widget="statusbar" />
+                    </header>
+                    <sheet>
+                        <div class="oe_title">
+                            <h1>
+                                <field name="name" nolabel="1"/>
+                            </h1>
+                        </div>
+                        <group col="2">
+                            <group>
+                                <field name="dte_entree" style = "width:50%"/>
+                            </group>
+                            <group>
+                                <field name="magasin_id" style = "width:100%" options="{'no_create': True}"/>
+                            </group>
+                        </group>
+                        <field name="stock_ids" nolabel = "1">
+                            <tree string="Lignes artices" editable = "bottom">
+                                <field name="article_id" force_save='1'/>
+                                <field name="unite_id"/>
+                                <field name="quantite"/>
+                                <field name="prix_unitaire"/>
+                                <field name="prix_total"/>
+                            </tree>
+                        </field>
+                        <group class="oe_subtotal_footer oe_right">
+                            <field name="total"/>
+                        </group>
+                    </sheet>
+
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers" groups="base.group_user"/>
+                        <field name="message_ids" widget="mail_thread"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+
+
+        <record model="ir.ui.view" id="view_okira_entree_stock_tree">
+            <field name="name">okira.entree.view.tree</field>
+            <field name="model">stock.entree</field>
+            <field name="arch" type="xml">
+                <tree string="Liste des entrées de stock" delete="false">
+                    <field name = "dte_entree"/>
+                    <field name = "name"/>
+                    <field name = "magasin_id"/>
+                    <field name = "state"/>
+                </tree>
+            </field>
+        </record>
+
+
+        <record id="act_list_entree_stock" model="ir.actions.act_window">
+            <field name="name">Entrée en stock</field>
+            <field name="res_model">stock.entree</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+
+        <record model="ir.ui.view" id="view_okira_suivi_stock_tree">
+            <field name="name">stock.suivi.view.tree</field>
+            <field name="model">stock.suivi</field>
+            <field name="arch" type="xml">
+                <tree string="Liste des entrées de stock" create="false" delete="false">
+                    <field name = "magasin_id"/>
+                    <field name = "article_id"/>
+                    <field name = "qte_stock"/>
+                    <field name = "qte_sortie"/>
+                    <field name = "qte_rebut"/>
+                    <field name = "qte_retour"/>
+                </tree>
+            </field>
+        </record>
+
+
+        <!--<record id="act_list_entree_stock" model="ir.actions.act_window">
+            <field name="name">Entrée en stock</field>
+            <field name="res_model">stock.entree</field>
+            <field name="view_mode">tree,form</field>
+        </record>-->
+
+
+        <record id="act_list_suivi_stock" model="ir.actions.act_window">
+            <field name="name">Suivi de stock</field>
+            <field name="res_model">stock.suivi</field>
+            <field name="view_mode">tree</field>
+            <field name= "context">{'group_by' : ['magasin_id']}</field>
+        </record>
+
+
+        <record model="ir.ui.view" id="view_rebut_stock_form">
+            <field name="name">stock.rebut</field>
+            <field name="model">stock.rebut</field>
+            <field name="priority" eval="16"/>
+            <field name="arch" type="xml">
+                <form string="Rebut de stock" delete="false">
+                    <header>
+                        <button name="act_rebut" string="Valider" type="object" class="oe_highlight"
+                                attrs="{'invisible' : [('state', 'not in', ['draft'])]}"/>
+                        <field name="state" widget="statusbar" />
+                    </header>
+                    <sheet>
+                        <div class="oe_title">
+                            <h1><field name="name" nolabel="1"/></h1>
+                        </div>
+                        <group col="2">
+                            <group>
+                                <field name="dte_op" style = "width:50%"/>
+                                <field name="marche_id" style = "width:100%" options="{'no_create': True}"/>
+                                <field name="magasin_id" style = "width:100%" options="{'no_create': True}"/>
+                                <field name="article_id" style = "width:100%" options="{'no_create': True}"/>
+                                <field name="unite_id" style = "width:100%"/>
+                                <field name="qte_dispo" force_save="1" style = "width:50%"/>
+                            </group>
+                            <group>
+                                <field name="quantite" force_save="1" style = "width:50%"/>
+                                <field name="prix_unitaire" force_save="1" style = "width:50%"/>
+                                <field name="total" force_save="1" style = "width:50%"/>
+                                <field name="commentaire" style = "width:100%"/>
+                            </group>
+                        </group>
+
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers" groups="base.group_user"/>
+                        <field name="message_ids" widget="mail_thread"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+
+
+        <record model="ir.ui.view" id="view_rebut_tree">
+            <field name="name">stock.rebut.view.tree</field>
+            <field name="model">stock.rebut</field>
+            <field name="arch" type="xml">
+                <tree string="Liste des rebuts de stock" delete="false">
+                    <field name = "dte_op"/>
+                    <field name = "name"/>
+                    <field name = "magasin_id"/>
+                    <field name = "article_id"/>
+                    <field name = "quantite"/>
+                    <field name = "state"/>
+                </tree>
+            </field>
+        </record>
+
+
+        <record id="act_list_rebut" model="ir.actions.act_window">
+            <field name="name">Ordre de Rébut</field>
+            <field name="res_model">stock.rebut</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+
+        <record model="ir.ui.view" id="view_stock_sortie_form">
+            <field name="name">view.stock.sortie.form</field>
+            <field name="model">stock.sortie</field>
+            <field name="priority" eval="16"/>
+            <field name="arch" type="xml">
+                <form string="Liste des sorties de stock" delete="false">
+                    <header>
+                        <button name="act_valider" string="Valider la sortie" type="object" class="oe_highlight"
+                                attrs="{'invisible' : [('state', 'not in', ['draft'])]}"
+                                style="background-color: #28a745; border-color: #28a745;"/>
+                        <button name="act_annuler" string="Annuler demande" type="object" class="oe_highlight"
+                                attrs="{'invisible' : [('state', 'not in', ['E'])]}"
+                                style="background-color: red; border-color: red;"/>
+                        <field name="state" widget="statusbar"/>
+                    </header>
+                    <sheet>
+                        <div class="oe_title">
+                            <h1>
+                                <field name="name" nolabel="1"/>
+                            </h1>
+                        </div>
+                        <group col="2">
+                            <group>
+                                <field name="total" readonly="1" force_save="1" invisible="1" style = "width:50%"/>
+                                <field name="marche_id" style = "width:100%" options="{'no_create': True}"/>
+                                <field name="magasin_id" style = "width:100%" options="{'no_create': True}"/>
+                                <field name="magasin_vers" domain="[('marche_id.id', '=', marche_id)]" style = "width:100%" options="{'no_create': True}"/>
+                            </group>
+                            <group>
+                                <field name="dte_sortie" readonly="1" style = "width:50%"/>
+                                <field name="objet" style = "width:100%"/>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page string="Liste demande">
+                                <field name="sortie_ids" nolabel = "1">
+                                    <tree string="Lignes demande" editable = "bottom">
+                                        <field name="article_id" force_save='1' options="{'no_create': True}"/>
+                                        <field name="unite_id"/>
+                                        <field name="qte_dispo" readonly="1" force_save='1'/>
+                                        <field name="qte_dmde"/>
+                                        <field name="prix_unitaire" invisible='0'/>
+                                        <field name="prix_total" invisible='0'/>
+                                    </tree>
+                                </field>
+                            </page>
+                        </notebook>
+                        <group class="oe_subtotal_footer oe_right">
+                            <field name="total"/>
+                        </group>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers" groups="base.group_user"/>
+                        <field name="message_ids" widget="mail_thread"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+
+
+        <record model="ir.ui.view" id="view_stock_sortie_tree">
+            <field name="name">stock.sortie.tree</field>
+            <field name="model">stock.sortie</field>
+            <field name="arch" type="xml">
+                <tree string="Liste des achats" delete="false">
+                    <field name = "dte_sortie"/>
+                    <field name = "name"/>
+                    <field name = "magasin_id"/>
+                    <field name = "objet"/>
+                    <field name = "state"/>
+                </tree>
+            </field>
+        </record>
+
+
+        <record id="act_list_sortie" model="ir.actions.act_window">
+            <field name="name">Liste des sorties de stock</field>
+            <field name="res_model">stock.sortie</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+
+        <record model="ir.ui.view" id="view_stock_retour_form">
+            <field name="name">view.stock.retour.form</field>
+            <field name="model">stock.retour</field>
+            <field name="priority" eval="16"/>
+            <field name="arch" type="xml">
+                <form string="Liste des retours de stock" delete="false">
+                    <header>
+                        <button name="act_valider" string="Valider le retour" type="object" class="oe_highlight"
+                                attrs="{'invisible' : [('state', 'not in', ['draft'])]}"
+                                style="background-color: #28a745; border-color: #28a745;"/>
+                        <field name="state" widget="statusbar"/>
+                    </header>
+                    <sheet>
+                        <div class="oe_title">
+                            <h1>
+                                <field name="name" nolabel="1"/>
+                            </h1>
+                        </div>
+                        <group col="2">
+                            <group>
+                                <field name="total" readonly="1" force_save="1" invisible="1" style = "width:50%"/>
+                                <field name="marche_id" style = "width:100%" options="{'no_create': True}"/>
+                                <field name="magasin_de" domain="[('marche_id.id', '=', marche_id)]"
+                                       style = "width:100%" options="{'no_create': True}" string="De"/>
+                                <field name="magasin_vers" style = "width:100%" options="{'no_create': True}"/>
+                            </group>
+                            <group>
+                                <field name="dte_retour" readonly="1" style = "width:50%"/>
+                                <field name="objet" style = "width:100%"/>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page string="Liste matériels">
+                                <field name="retour_ids" nolabel = "1">
+                                    <tree string="Lignes demande" editable = "bottom">
+                                        <field name="article_id" force_save='1' options="{'no_create': True}"/>
+                                        <field name="unite_id"/>
+                                        <field name="qte"/>
+                                        <field name="prix_unitaire" invisible='0'/>
+                                        <field name="prix_total" invisible='0'/>
+                                    </tree>
+                                </field>
+                            </page>
+                        </notebook>
+                        <group class="oe_subtotal_footer oe_right">
+                            <field name="total"/>
+                        </group>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers" groups="base.group_user"/>
+                        <field name="message_ids" widget="mail_thread"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+
+
+        <record model="ir.ui.view" id="view_stock_sortie_tree">
+            <field name="name">stock.retour.tree</field>
+            <field name="model">stock.retour</field>
+            <field name="arch" type="xml">
+                <tree string="Liste des achats" delete="false">
+                    <field name = "dte_retour"/>
+                    <field name = "name"/>
+                    <field name = "magasin_de"/>
+                    <field name = "magasin_vers"/>
+                    <field name = "objet"/>
+                    <field name = "state"/>
+                </tree>
+            </field>
+        </record>
+
+
+        <record id="act_list_retour" model="ir.actions.act_window">
+            <field name="name">Liste des retours de stock</field>
+            <field name="res_model">stock.retour</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+
+        <record model="ir.ui.view" id="view_bilan_form">
+            <field name="name">view.bilan.journee.form</field>
+            <field name="model">bilan.journee</field>
+            <field name="priority" eval="16"/>
+            <field name="arch" type="xml">
+                <form string="Liste des bilans des journées" delete="false">
+                    <header>
+                        <button name="act_sortie_mag" string="Valider bilan" type="object" class="oe_highlight"
+                                attrs="{'invisible' : [('state', 'not in', ['N'])]}"
+                                style="background-color: #28a745; border-color: #28a745;"
+                                confirm="Etes-vous sûr de valider cette action ?"/>
+                        <field name="state" widget="statusbar"/>
+                    </header>
+                    <sheet>
+                        <div class="oe_title">
+                            <h1>
+                                <field name="name" nolabel="1" readonly="1"/>
+                            </h1>
+                        </div>
+                        <group col="2">
+                            <group>
+                                <field name="dte" style = "width:50%" attrs="{'readonly' : [('state', 'in', ['V'])]}"/>
+                                <field name="marche_id" style = "width:100%" options="{'no_create': True}"
+                                       attrs="{'readonly' : [('state', 'in', ['V'])]}"/>
+                                <field name="magasin_id" domain="[('marche_id.id', '=', marche_id)]" attrs="{'readonly' : [('state', 'in', ['V'])]}"
+                                       style = "width:100%" options="{'no_create': True}"/>
+                            </group>
+                            <group>
+                                <field name="responsable" style = "width:100%" options="{'no_create': True}"/>
+                                <field name="objet" style = "width:100%" attrs="{'readonly' : [('state', 'in', ['V'])]}"/>
+                            </group>
+                        </group>
+                        <field name="bilan_ids" nolabel = "1" attrs="{'readonly' : [('state', 'in', ['V'])]}">
+                            <tree string="Lignes demande" editable = "bottom">
+                                <field name="article_id" force_save='1' options="{'no_create': True}"/>
+                                <field name="unite_id"/>
+                                <field name="qte_actuel" force_save="1"/>
+                                <field name="qte_conso"/>
+                                <field name="reste" force_save="1"/>
+                            </tree>
+                        </field>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers" groups="base.group_user"/>
+                        <field name="message_ids" widget="mail_thread"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+
+
+        <record model="ir.ui.view" id="view_bilan_tree">
+            <field name="name">bilan.journee.tree</field>
+            <field name="model">bilan.journee</field>
+            <field name="arch" type="xml">
+                <tree string="Liste des achats" delete="false">
+                    <field name = "dte"/>
+                    <field name = "marche_id"/>
+                    <field name = "magasin_id"/>
+                    <field name = "objet"/>
+                    <field name = "state"/>
+                </tree>
+            </field>
+        </record>
+
+
+        <record id="act_list_bilan" model="ir.actions.act_window">
+            <field name="name">Liste des bilans</field>
+            <field name="res_model">bilan.journee</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+
+
+        <menuitem id="menu_gestion_marche" name ="Marché" sequence="2" parent="main_menu"/>
+        <menuitem id="menu_marche" name ="Saisie Marché" sequence="1" parent="menu_gestion_marche" action="act_list_marche"/>
+
+        <menuitem id="menu_gestion_stock" name ="Gestion de Stock" sequence="3" parent="main_menu"/>
+        <menuitem id="menu_entree_stock" name ="Entrée en stock" sequence="1" parent="menu_gestion_stock" action="act_list_entree_stock"/>
+        <menuitem id="menu_sortie_stock" name ="Sortie de stock pour chantier" sequence="2" parent="menu_gestion_stock" action="act_list_sortie"/>
+        <menuitem id="menu_retour_stock" name ="Retour de materiel au magasin" sequence="3" parent="menu_gestion_stock" action="act_list_retour"/>
+
+        <menuitem id="menu_bilan" name ="Bilan journée d'un chantier" sequence="4" parent="menu_gestion_stock" action="act_list_bilan"/>
+        <menuitem id="menu_rebu_stock" name ="Ordre de Rébut" sequence="5" parent="menu_gestion_stock" action="act_list_rebut"/>
+        <menuitem id="menu_suivi_stock" name ="Suivi de stock" sequence="6" parent="menu_gestion_stock" action="act_list_suivi_stock"/>
+
+    </data>
+</odoo>
