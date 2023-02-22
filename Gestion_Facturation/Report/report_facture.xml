@@ -28,7 +28,7 @@
 				</div>
 				<br></br>
 				<div style="text-align:left;">
-					<b style="font-size:15px;">Objet </b>
+					<b style="font-size:15px;">Objet : </b>
 					<span style="font-size:15px;" t-field="o.x_objet" />
 				</div>
 				<br></br>
@@ -50,13 +50,13 @@
 								<td style="border:1px soild #000; text-align:center">
 									<span t-field="p.x_num_be" />
 								</td>
-								<td style="border:1px soild #000; text-align:justify">
+								<td style="border:1px soild #000; text-align:center">
 									<span t-field="p.x_num_bl" />
 								</td>
 								<td style="border:1px soild #000;text-align:justify">
 									<span t-field="p.x_immatricul_id" />
 								</td>
-								<td style="border:1px soild #000; text-align:center">
+								<td style="border:1px soild #000; text-align:justify">
 									<span t-field="p.x_trajet_id.name" />
 								</td>
 
@@ -78,7 +78,7 @@
 
 					<tr style="border:1px soild #000">
 						<th colspan="7">Montant Total</th>
-						<th style="background-color:#CCC">
+						<th style="background-color:#CCC; text-align:right">
 							<span t-field="o.x_total_facture_reel" />
 						</th>
 					</tr>
