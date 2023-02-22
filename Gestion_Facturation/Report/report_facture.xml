@@ -49,9 +49,16 @@
 							<tr style="border:1px soild #000">
 								<td style="border:1px soild #000; text-align:center">
 									<span t-field="p.x_num_be" />
+ Du 
+									<br/>
+									<span t-field="p.x_date_be" />
+
 								</td>
 								<td style="border:1px soild #000; text-align:center">
 									<span t-field="p.x_num_bl" />
+ Du 
+									<br/>
+									<span t-field="p.x_date_bl" />
 								</td>
 								<td style="border:1px soild #000;text-align:justify">
 									<span t-field="p.x_immatricul_id" />
