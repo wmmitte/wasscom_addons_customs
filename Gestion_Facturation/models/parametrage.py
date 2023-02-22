@@ -23,7 +23,7 @@ class Facturation_Produit(models.Model):
     @api.constrains('libelle')
     def action_convertir(self):
         for record in self:
-            record.name = record.libelle.capitalize()
+            record.name = record.libelle.upper()
 
 
 
