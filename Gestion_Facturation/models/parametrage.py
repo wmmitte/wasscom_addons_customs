@@ -42,7 +42,7 @@ class Facturation_Localite(models.Model):
     @api.constrains('libelle')
     def action_convertir_(self):
         for record in self:
-            record.name = record.libelle.capitalize()
+            record.name = record.libelle.upper()
 
 
 # class trajet
