@@ -17,19 +17,27 @@
 
 				</h5>
 				<br></br>
-				<div style="text-align:left;">
-					<b style="font-size:15px;">Doit : </b>
-					<span style="font-size:15px;" t-field="o.x_client.name" />
+				<div style="float:left">
+					<div style="text-align:left;">
+						<b style="font-size:15px;">Doit : </b>
+						<span style="font-size:15px;" t-field="o.x_client.name" />
+					</div>
+					<br></br>
+					<div style="text-align:left;">
+						<b style="font-size:15px;">Contact : </b>
+						<span style="font-size:15px;" t-field="o.x_adress" />
+					</div>
+					<br></br>
+					<div style="text-align:left;">
+						<b style="font-size:15px;">Objet : </b>
+						<span style="font-size:15px;" t-field="o.x_objet" />
+					</div>
 				</div>
-				<br></br>
-				<div style="text-align:left;">
-					<b style="font-size:15px;">Contact: </b>
-					<span style="font-size:15px;" t-field="o.x_adress" />
-				</div>
-				<br></br>
-				<div style="text-align:left;">
-					<b style="font-size:15px;">Objet : </b>
-					<span style="font-size:15px;" t-field="o.x_objet" />
+				<div style="float:right">
+					<div style="text-align:left;">
+						<b style="font-size:15px;">Date : </b>
+						<span style="font-size:15px;" t-field="o.date_operation" />
+					</div>
 				</div>
 				<br></br>
 				<table class="table table-bordered table-sm text-center border border-dark" border="1" style="border-collapse: collapse;width: 100%;">
@@ -91,13 +99,7 @@
 					</tr>
 				</table>
 				<div>
-					<p>Arrêté la présente facture à la somme de : </p>
-					<p>
-						<strong>
-							<span t-field="o.x_mnt_lettre" />
- (							<span t-field="o.x_total_facture_reel" />
-) Francs CFA </strong>
-					</p>
+					<p>Arrêté la présente facture à la somme de : <strong><span t-field="o.x_mnt_lettre" />(<span t-field="o.x_total_facture_reel" />) Francs CFA </strong></p>
 				</div>
 				<div></div>
 				<div></div>

@@ -29,7 +29,7 @@ class FactureFacture(models.Model):
 
     active = fields.Boolean(string="Etat", default=True)
     current_users = fields.Many2one('res.users', 'Agent', default=lambda self: self.env.user,readonly=True)
-    date_operation = fields.Date(string='Date facture', default=fields.Date.context_today, readonly=True)
+    date_operation = fields.Date(string='Date facture', default=fields.Date.context_today, required=True)
     company_id = fields.Many2one('res.company', string="Structure", default=lambda self: self.env.user.company_id.id,readonly=True)
     state = fields.Selection([
         ('Nouvelle facture', 'Nouvelle facture'),
