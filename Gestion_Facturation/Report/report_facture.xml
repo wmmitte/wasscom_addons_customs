@@ -23,7 +23,7 @@
 				</div>
 				<br></br>
 				<div style="text-align:left;">
-					<b style="font-size:15px;">Contact : </b>
+					<b style="font-size:15px;">Contact: </b>
 					<span style="font-size:15px;" t-field="o.x_adress" />
 				</div>
 				<br></br>
