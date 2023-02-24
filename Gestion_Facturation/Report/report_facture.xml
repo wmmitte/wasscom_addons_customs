@@ -12,7 +12,7 @@
 					</div>
 				</div>
 				<br></br>
-				<h5 style="text-align:center;">
+				<h3 style="text-align:center;">
 
 					<div style="clear:both;"></div>
 					<br></br>
@@ -22,7 +22,7 @@
 						</u>
 					</div>
 
-				</h5>
+				</h3>
 				<br></br>
 				<div style="float:left">
 					<div style="text-align:left;">
@@ -61,14 +61,18 @@
 									<span t-field="p.x_num_be" />
  Du 
 									<br/>
+									<t t-if="p.x_num_be != '-' ">
 									<span t-field="p.x_date_be" />
+									</t>
 
 								</td>
 								<td style="border:1px soild #000; text-align:center">
 									<span t-field="p.x_num_bl" />
  Du 
 									<br/>
+									<t t-if="p.x_num_bl != '-' ">
 									<span t-field="p.x_date_bl" />
+									</t>
 								</td>
 								<td style="border:1px soild #000;text-align:justify">
 									<span t-field="p.x_immatricul_id" />
@@ -87,7 +91,7 @@
 									<span t-field="p.x_taux" />
 								</td>
 								<td style="border:1px soild #000; text-align:right">
-									<span t-field="p.x_mt_ligne_reel" />
+									<span t-esc="'{:,}'.format(int(p.x_mt_ligne_reel)).replace(',', ' ')"/>
 								</td>
 							</tr>
 						</div>
@@ -96,14 +100,14 @@
 					<tr style="border:1px soild #000">
 						<th colspan="7">Montant Total</th>
 						<th style="background-color:#CCC; text-align:right">
-							<span t-field="o.x_total_facture_reel" />
+							<span t-esc="'{:,}'.format(int(o.x_total_facture_reel)).replace(',', ' ')"/>
 						</th>
 					</tr>
 				</table>
 				<div>
 					<p>Arrêté la présente facture à la somme de : <strong>
 						<span t-field="o.x_mnt_lettre" />
-(						<span t-field="o.x_total_facture_reel" />
+(						<span t-esc="'{:,}'.format(int(o.x_total_facture_reel)).replace(',', ' ')" />
 ) Francs CFA </strong>
 				</p>
 			</div>

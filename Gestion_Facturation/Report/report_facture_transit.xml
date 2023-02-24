@@ -6,15 +6,21 @@
 				<t t-set="o" t-value="o.with_context({'lang': lang})" />
 				<div class="page"
 					style="page-break-after:always;page-break-inside: avoid;">
-					<h5 style="text-align:center;">
-
+					<div style="float:right">
+					<div style="text-align:left;">
+						<b style="font-size:15px;">Date : </b>
+						<span style="font-size:15px;" t-field="o.date_operation" />
+					</div>
+				</div>
+				<br/></br>
+					<h3 style="text-align:center;">
 						<div style="clear:both;"></div>
 						<br></br>
 						<div style="text-align:center;font-weight:bold;">
 							<u><span style="font-size:15px;" t-field="o.x_num_fact" /></u>
 						</div>
 
-					</h5>
+					</h3>
 					<br></br>
 					<div style="text-align:left;">
 						<b style="font-size:15px;">Doit: </b>
@@ -59,7 +65,7 @@
 									</td>
 
 									<td style="border:1px soild #000">
-									    <span t-field="p.x_mt_ligne" />
+										<span t-esc="'{:,}'.format(int(p.x_mt_ligne)).replace(',', ' ')"/>
 									</td>
 								</tr>
 							</div>
@@ -68,13 +74,13 @@
 						<tr style="border:1px soild #000">
 							<th colspan="5">Montant Total</th>
 							<th style="background-color:#CCC">
-								<span t-field="o.x_total_facture" />
+								<span t-esc="'{:,}'.format(int(o.x_total_facture)).replace(',', ' ')"/>
 							</th>
 					</tr>
 					</table>
 					<div>
 						<p>Arrêté la présente facture à la somme de : </p>
-						<p><strong><span t-field="o.x_mnt_lettre" /> (<span t-field="o.x_total_facture" />) Francs CFA </strong></p>
+						<p><strong><span t-field="o.x_mnt_lettre" /> (<span t-esc="'{:,}'.format(int(o.x_total_facture)).replace(',', ' ')"/>) Francs CFA </strong></p>
 					</div>
 					<div></div>
 					<div></div>
