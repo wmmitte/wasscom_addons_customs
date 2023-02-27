@@ -65,8 +65,8 @@
 						</div>
 
 						<tr style="border:1px soild #000">
-							<th colspan="5">Montant Total</th>
-							<th style="background-color:#CCC">
+							<th colspan="4">Montant Total</th>
+							<th colspan="2" style="background-color:#CCC">
 								<span t-field="o.x_total_facture" />
 							</th>
 						</tr>
