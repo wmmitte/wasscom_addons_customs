@@ -62,7 +62,7 @@
  Du 
 									<br/>
 									<t t-if="p.x_num_be != '-' ">
-									<span t-field="p.x_date_be" />
+										<span t-field="p.x_date_be" />
 									</t>
 
 								</td>
@@ -71,7 +71,7 @@
  Du 
 									<br/>
 									<t t-if="p.x_num_bl != '-' ">
-									<span t-field="p.x_date_bl" />
+										<span t-field="p.x_date_bl" />
 									</t>
 								</td>
 								<td style="border:1px soild #000;text-align:justify">
@@ -98,8 +98,8 @@
 					</div>
 
 					<tr style="border:1px soild #000">
-						<th colspan="7">Montant Total</th>
-						<th style="background-color:#CCC; text-align:right">
+						<th colspan="5">Montant Total</th>
+						<th colspan="3" style="background-color:#CCC; text-align:right">
 							<span t-esc="'{:,}'.format(int(o.x_total_facture_reel)).replace(',', ' ')"/>
 						</th>
 					</tr>
