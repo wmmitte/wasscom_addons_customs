@@ -2,118 +2,114 @@
 <odoo>
 	<data>
 		<template id="report_fa_transit_document">
-			<!--<t t-call="web.external_layout">-->
-				<t t-set="o" t-value="o.with_context({'lang': lang})" />
-				<div class="page"
-					style="page-break-after:always;page-break-inside: avoid;">
-					<div style="float:right">
+			<t t-set="o" t-value="o.with_context({'lang': lang})" />
+			<div class="page" style="page-break-after:always;page-break-inside: avoid;">
+				<div style="float:right">
 					<div style="text-align:left;">
 						<b style="font-size:15px;">Date : </b>
 						<span style="font-size:15px;" t-field="o.date_operation" />
 					</div>
 				</div>
-				<br/></br>
-					<h3 style="text-align:center;">
-						<div style="clear:both;"></div>
-						<br></br>
-						<div style="text-align:center;font-weight:bold;">
-							<u><span style="font-size:15px;" t-field="o.x_num_fact" /></u>
-						</div>
-
-					</h3>
-					<br></br>
-					<div style="text-align:left;">
-						<b style="font-size:15px;">Doit: </b>
-						<span style="font-size:15px;" t-field="o.name.name" />
-					</div>
-					<br></br>
-					<div style="text-align:left;">
-						<b style="font-size:15px;">Contact.: </b>
-						<span style="font-size:15px;" t-field="o.x_adress" />
-					</div>
-					<br></br>
-					<table
-						class="table table-bordered table-sm text-center border border-dark"
-						border="1" style="border-collapse: collapse;width: 100%;">
-						<tr style="border:1px soild #000">
-						    <th  style="background-color:#CCC">N°BE</th>
-							<th  style="background-color:#CCC">N°BL</th>
-							<th  style="background-color:#CCC">Immatriculation</th>
-							<th  style="background-color:#CCC">Trajet</th>
-							<th  style="background-color:#CCC">Produit</th>
-							<th  style="background-color:#CCC">Mnt Ligne</th>
-						</tr>
-						<div>
-							<div t-foreach="o.x_line_ids" t-as="p">
-
-								<tr style="border:1px soild #000">
-									<td style="border:1px soild #000">
-									    <span t-field="p.x_num_be" />
-									</td>
-									<td style="border:1px soild #000">
-									    <span t-field="p.x_num_bl" />
-									</td>
-									<td style="border:1px soild #000">
-									    <span t-field="p.x_immatricul_id" />
-									</td>
-									<td style="border:1px soild #000">
-									    <span t-field="p.x_trajet_id.name" />
-									</td>
-
-									<td style="border:1px soild #000">
-									    <span t-field="p.x_produit_id.name" />
-									</td>
-
-									<td style="border:1px soild #000">
-										<span t-esc="'{:,}'.format(int(p.x_mt_ligne)).replace(',', ' ')"/>
-									</td>
-								</tr>
-							</div>
-						</div>
-
-						<tr style="border:1px soild #000">
-							<th colspan="5">Montant Total</th>
-							<th style="background-color:#CCC">
-								<span t-esc="'{:,}'.format(int(o.x_total_facture)).replace(',', ' ')"/>
-							</th>
-					</tr>
-					</table>
-					<div>
-						<p>Arrêté la présente facture à la somme de : </p>
-						<p><strong><span t-field="o.x_mnt_lettre" /> (<span t-esc="'{:,}'.format(int(o.x_total_facture)).replace(',', ' ')"/>) Francs CFA </strong></p>
-					</div>
-					<div></div>
-					<div></div>
-					<div></div>
-					<div></div>
-					<table style="width:100% " width="100%" border="1">
-						<tr>
-							<td width="33%"></td>
-							<td width="33%"></td>
-							<td width="34%">
-									<div class="text-center">
-										<p>Directeur Général</p>
-										<br></br>
-										<br></br>
-										<br></br>
-										<br></br>
-										<span t-field="o.x_signataire_id.name" />
-									</div>
-							</td>
-						</tr>
-					</table>
-
-					<div style="clear:both;"></div>
+			</div>
+			<br/>
+			<h3 style="text-align:center;">
+				<div style="clear:both;"></div>
+				<br></br>
+				<div style="text-align:center;font-weight:bold;">
+					<u>
+						<span style="font-size:15px;" t-field="o.x_num_fact" />
+					</u>
 				</div>
-			<!--</t>-->
+
+			</h3>
+			<br></br>
+			<div style="text-align:left;">
+				<b style="font-size:15px;">Doit: </b>
+				<span style="font-size:15px;" t-field="o.name.name" />
+			</div>
+			<br></br>
+			<div style="text-align:left;">
+				<b style="font-size:15px;">Contact.: </b>
+				<span style="font-size:15px;" t-field="o.x_adress" />
+			</div>
+			<br></br>
+			<table class="table table-bordered table-sm text-center border border-dark" border="1" style="border-collapse: collapse;width: 100%;">
+				<tr style="border:1px soild #000">
+					<th style="background-color:#CCC">N°BE</th>
+					<th style="background-color:#CCC">N°BL</th>
+					<th style="background-color:#CCC">Immatriculation</th>
+					<th style="background-color:#CCC">Trajet</th>
+					<th style="background-color:#CCC">Produit</th>
+					<th style="background-color:#CCC">Mnt Ligne</th>
+				</tr>
+				<t t-foreach="o.x_line_ids" t-as="p">
+
+					<tr style="border:1px soild #000">
+						<td style="border:1px soild #000">
+							<span t-field="p.x_num_be" />
+						</td>
+						<td style="border:1px soild #000">
+							<span t-field="p.x_num_bl" />
+						</td>
+						<td style="border:1px soild #000">
+							<span t-field="p.x_immatricul_id" />
+						</td>
+						<td style="border:1px soild #000">
+							<span t-field="p.x_trajet_id.name" />
+						</td>
+
+						<td style="border:1px soild #000">
+							<span t-field="p.x_produit_id.name" />
+						</td>
+
+						<td style="border:1px soild #000">
+							<span t-esc="'{:,}'.format(int(p.x_mt_ligne)).replace(',', ' ')"/>
+						</td>
+					</tr>
+				</t>
+				<tr style="border:1px soild #000">
+					<th colspan="5">Montant Total</th>
+					<th style="background-color:#CCC">
+						<span t-esc="'{:,}'.format(int(o.x_total_facture)).replace(',', ' ')"/>
+					</th>
+				</tr>
+			</table>
+			<div>
+				<p>Arrêté la présente facture à la somme de : </p>
+				<p>
+					<strong>
+						<span t-field="o.x_mnt_lettre" />
+ (						<span t-esc="'{:,}'.format(int(o.x_total_facture)).replace(',', ' ')"/>
+) Francs CFA </strong>
+				</p>
+			</div>
+			<div></div>
+			<div></div>
+			<div></div>
+			<div></div>
+			<table style="width:100% " width="100%" border="0">
+				<tr>
+					<td width="33%"></td>
+					<td width="33%"></td>
+					<td width="34%">
+						<div class="text-center">
+							<p>Directeur Général</p>
+							<br></br>
+							<br></br>
+							<br></br>
+							<br></br>
+							<span t-field="o.x_signataire_id.name" />
+						</div>
+					</td>
+				</tr>
+			</table>
 		</template>
 
 
 		<template id="report_facture_transit">
 			<t t-call="web.html_container">
 				<t t-foreach="docs" t-as="o">
-					<t t-call="Gestion_Facturation.report_fa_transit_document"
-						t-lang="lang" />
+					<t t-call="Gestion_Facturation.report_fa_transit_document" t-lang="lang" />
 				</t>
 			</t>
 		</template>
