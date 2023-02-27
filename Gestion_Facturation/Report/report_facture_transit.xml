@@ -2,10 +2,17 @@
 <odoo>
 	<data>
 		<template id="report_fa_transit_document">
-			<t t-call="web.external_layout">
+			<!--<t t-call="web.external_layout">-->
 				<t t-set="o" t-value="o.with_context({'lang': lang})" />
 				<div class="page" style="page-break-after:always;page-break-inside: avoid;">
-					<h5 style="text-align:center;">
+					<div style="float:right">
+						<div style="text-align:left;">
+							<b style="font-size:15px;">Date : </b>
+							<span style="font-size:15px;" t-field="o.date_operation" />
+						</div>
+					</div>
+					<br></br>
+					<h3 style="text-align:center;">
 
 						<div style="clear:both;"></div>
 						<br></br>
@@ -15,7 +22,7 @@
 							</u>
 						</div>
 
-					</h5>
+					</h3>
 					<br></br>
 					<div style="text-align:left;">
 						<b style="font-size:15px;">Doit: </b>
@@ -29,36 +36,36 @@
 					<br></br>
 					<table class="table table-bordered table-sm text-center border border-dark" border="1" style="border-collapse: collapse;width: 100%;">
 						<tr style="border:1px soild #000">
-							<th style="background-color:#CCC">N°BE</th>
-							<th style="background-color:#CCC">N°BL</th>
-							<th style="background-color:#CCC">Immatriculation</th>
-							<th style="background-color:#CCC">Trajet</th>
-							<th style="background-color:#CCC">Produit</th>
-							<th style="background-color:#CCC">Mnt Ligne</th>
+							<th style="background-color:#CCC; font-size:12px;">N°BE</th>
+							<th style="background-color:#CCC; font-size:12px;">N°BL</th>
+							<th style="background-color:#CCC; font-size:12px;">Immatriculation</th>
+							<th style="background-color:#CCC; font-size:12px;">Trajet</th>
+							<th style="background-color:#CCC; font-size:12px;">Produit</th>
+							<th style="background-color:#CCC; font-size:12px;">Montant Ligne</th>
 						</tr>
 						<div>
 							<div t-foreach="o.x_line_ids" t-as="p">
 
 								<tr style="border:1px soild #000">
-									<td style="border:1px soild #000">
+									<td style="border:1px soild #000; font-size:12px;">
 										<span t-field="p.x_num_be" />
 									</td>
-									<td style="border:1px soild #000">
+									<td style="border:1px soild #000; font-size:12px;">
 										<span t-field="p.x_num_bl" />
 									</td>
-									<td style="border:1px soild #000">
+									<td style="border:1px soild #000; font-size:12px;">
 										<span t-field="p.x_immatricul_id" />
 									</td>
-									<td style="border:1px soild #000">
+									<td style="border:1px soild #000; font-size:12px;">
 										<span t-field="p.x_trajet_id.name" />
 									</td>
 
-									<td style="border:1px soild #000">
+									<td style="border:1px soild #000; font-size:12px;">
 										<span t-field="p.x_produit_id.name" />
 									</td>
 
-									<td style="border:1px soild #000">
-										<span t-field="p.x_mt_ligne" />
+									<td style="border:1px soild #000; font-size:12px;">
+										<span t-esc="'{:,}'.format(int(p.x_mt_ligne)).replace(',', ' ')"/>
 									</td>
 								</tr>
 							</div>
@@ -67,16 +74,15 @@
 						<tr style="border:1px soild #000">
 							<th colspan="4">Montant Total</th>
 							<th colspan="2" style="background-color:#CCC">
-								<span t-field="o.x_total_facture" />
+								<span t-esc="'{:,}'.format(int(o.x_total_facture)).replace(',', ' ')"/>
 							</th>
 						</tr>
 					</table>
 					<div>
-						<p>Arrêté la présente facture à la somme de : </p>
-						<p>
+						<p>Arrêté la présente facture à la somme de :
 							<strong>
 								<span t-field="o.x_mnt_lettre" />
- (								<span t-field="o.x_total_facture" />
+ (								<span t-esc="'{:,}'.format(int(o.x_total_facture)).replace(',', ' ')"/>
 ) Francs CFA </strong>
 						</p>
 					</div>
@@ -103,7 +109,7 @@
 
 					<div style="clear:both;"></div>
 				</div>
-			</t>
+			<!--</t>-->
 		</template>
 
 

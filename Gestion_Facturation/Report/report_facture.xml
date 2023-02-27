@@ -44,20 +44,20 @@
 				<br/>
 				<table class="table table-bordered table-sm text-center border border-dark" border="1" style="border-collapse: collapse;width: 100%;">
 					<tr style="border:1px soild #000">
-						<th style="background-color:#CCC">N°BE</th>
-						<th style="background-color:#CCC">N°BL</th>
-						<th style="background-color:#CCC">Immatriculation</th>
-						<th style="background-color:#CCC">Trajet</th>
-						<th style="background-color:#CCC">Produit</th>
-						<th style="background-color:#CCC">Capacité</th>
-						<th style="background-color:#CCC">Taux</th>
-						<th style="background-color:#CCC">Mnt Ligne</th>
+						<th style="background-color:#CCC; font-size:12px;">N°BE</th>
+						<th style="background-color:#CCC; font-size:12px;">N°BL</th>
+						<th style="background-color:#CCC; font-size:12px;">Immatriculation</th>
+						<th style="background-color:#CCC; font-size:12px;">Trajet</th>
+						<th style="background-color:#CCC; font-size:12px;">Produit</th>
+						<th style="background-color:#CCC; font-size:12px;">Capacité</th>
+						<th style="background-color:#CCC; font-size:12px;">Taux</th>
+						<th style="background-color:#CCC; font-size:12px;">Montant Ligne</th>
 					</tr>
 					<div>
 						<div t-foreach="o.x_line_ids" t-as="p">
 
 							<tr style="border:1px soild #000">
-								<td style="border:1px soild #000; text-align:center">
+								<td style="border:1px soild #000; text-align:center; font-size:12px;">
 									<span t-field="p.x_num_be" />
  Du 
 									<br/>
@@ -66,7 +66,7 @@
 									</t>
 
 								</td>
-								<td style="border:1px soild #000; text-align:center">
+								<td style="border:1px soild #000; text-align:center; font-size:12px;">
 									<span t-field="p.x_num_bl" />
  Du 
 									<br/>
@@ -74,23 +74,23 @@
 										<span t-field="p.x_date_bl" />
 									</t>
 								</td>
-								<td style="border:1px soild #000;text-align:justify">
+								<td style="border:1px soild #000;text-align:justify; font-size:12px;">
 									<span t-field="p.x_immatricul_id" />
 								</td>
-								<td style="border:1px soild #000; text-align:justify">
+								<td style="border:1px soild #000; text-align:justify; font-size:12px;">
 									<span t-field="p.x_trajet_id.name" />
 								</td>
 
-								<td style="border:1px soild #000;text-align:justify">
+								<td style="border:1px soild #000;text-align:justify; font-size:12px;">
 									<span t-field="p.x_produit_id.name" />
 								</td>
-								<td style="border:1px soild #000;text-align:left">
+								<td style="border:1px soild #000;text-align:left; font-size:12px;">
 									<span t-field="p.x_capacite" />
 								</td>
-								<td style="border:1px soild #000; text-align:justify">
+								<td style="border:1px soild #000; text-align:justify; font-size:12px;">
 									<span t-field="p.x_taux" />
 								</td>
-								<td style="border:1px soild #000; text-align:right">
+								<td style="border:1px soild #000; text-align:right; font-size:12px;">
 									<span t-esc="'{:,}'.format(int(p.x_mt_ligne_reel)).replace(',', ' ')"/>
 								</td>
 							</tr>

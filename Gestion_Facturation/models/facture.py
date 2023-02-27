@@ -20,7 +20,7 @@ class FactureFacture(models.Model):
 
     _rec_name = 'x_concat_fields'
     x_concat_fields = fields.Char(compute = 'action_concat_code_fact',store = True,string = 'N° Facture')
-    name = fields.Char(string = 'N° Facture',readonly = True)
+    name = fields.Char(string = 'N° Facture',readonly = False)
     x_client = fields.Many2one('facture_client',string = 'Client',required = True)
     x_adress = fields.Char(string="Adresse", readonly=True)
     x_objet = fields.Char(string = 'Objet',required = True)

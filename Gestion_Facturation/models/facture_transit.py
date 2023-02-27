@@ -20,7 +20,7 @@ class FactureTransit(models.Model):
     sequence = fields.Integer(help="Gives the sequence when displaying a list of facture transit.", default=10)
 
     _rec_name = 'x_num_fact'
-    x_num_fact = fields.Char(string = "N° Facture Transit", readonly=True)
+    x_num_fact = fields.Char(string = "N° Facture Transit", readonly=False)
     name = fields.Many2one('facture_client',string = 'Client',required = True)
     x_adress = fields.Char(string="Adresse", readonly=True)
     x_echeance_facture = fields.Date(string = 'Echéance')
