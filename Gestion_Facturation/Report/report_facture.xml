@@ -46,7 +46,7 @@
 				</div>
 				<br></br>
 				<table class="table table-bordered table-sm text-center border border-dark" border="0" cellpading="5" style="border-collapse: collapse;width: 100%;">
-					<tr style="border-bottom:1px solid #000;background-color:#CCC; font-size:12px;">
+					<tr style="border:1px solid #000;background-color:#CCC; font-size:12px;">
 						<th style="text-align:center;">N°BE</th>
 						<th style="text-align:center;">N°BL</th>
 						<th style="text-align:left;">Immatriculation</th>
@@ -59,7 +59,7 @@
 					<div>
 						<div t-foreach="o.x_line_ids" t-as="p">
 
-							<tr style="border-bottom:1px solid #DDD;font:12px lucida-console,sans-serif !important">
+							<tr style="border:1px solid #DDD;font:12px lucida-console,sans-serif !important">
 								<td style="font:12px lucida-console,sans-serif !important; text-align:center; ">
 									<span t-field="p.x_num_be" />
  Du 

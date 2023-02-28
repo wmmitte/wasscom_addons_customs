@@ -94,7 +94,7 @@ class Facturation_Client(models.Model):
             if record.name and record.x_designation_client and record.x_tel:
                 record.x_designation_ = record.name + '/' + record.x_designation_client+ '/'+ record.x_tel
    
-    @api.depends('name','x_designation_client','x_tel')
+    @api.onchange('name','x_designation_client','x_tel')
     def action_client_fullname(self):
         for record in self:
             if record.name and record.x_designation_client:
