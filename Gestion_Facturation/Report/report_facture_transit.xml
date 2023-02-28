@@ -46,46 +46,59 @@
 				<br></br>
 				<table class="table table-bordered table-sm text-center border border-dark" border="1" cellpading="5" style="border-collapse: collapse;width: 100%;">
 					<tr style="border:1px solid #000;background-color:#CCC; font-size:12px;">
-						<th style="text-align:center;">N°BE</th>
-						<th style="text-align:center;">N°BL</th>
-						<th style="text-align:left;">Immatriculation</th>
-						<th style="text-align:left;">Trajet</th>
-						<th style="text-align:left;">Produit</th>
-						<th style="text-align:right;">Montant Ligne</th>
+						<th style="text-align:center;">
+							<span style="padding:2px">N°BE</span>
+						</th>
+						<th style="text-align:center;">
+							<span style="padding:2px">N°BL</span>
+						</th>
+						<th style="text-align:left;">
+							<span style="padding:2px">Immatriculation</span>
+						</th>
+						<th style="text-align:left;">
+							<span style="padding:2px">Trajet</span>
+						</th>
+						<th style="text-align:left;">
+							<span style="padding:2px">Produit</span>
+						</th>
+						<th style="text-align:right;">
+							<span style="padding:2px">Montant Ligne</span>
+						</th>
 					</tr>
 					<div>
 						<div t-foreach="o.x_line_ids" t-as="p">
 
 							<tr style="border:1px solid #000;font:12px lucida-console,sans-serif !important">
 								<td style="font:12px lucida-console,sans-serif !important; text-align:center; ">
-									<span t-field="p.x_num_be" />
- Du 
-									<br/>
+									<span style="padding:2px" t-field="p.x_num_be" />
 									<t t-if="p.x_num_be != '-' ">
-										<span t-field="p.x_date_be" />
+										<br/>
+										Du
+										<span style="padding:2px" t-field="p.x_date_be" />
 									</t>
 
 								</td>
 								<td style="font:12px lucida-console,sans-serif !important; text-align:center; ">
-									<span t-field="p.x_num_bl" />
- Du 
-									<br/>
+									<span style="padding:2px" t-field="p.x_num_bl" />
+ Du  
 									<t t-if="p.x_num_bl != '-' ">
-										<span t-field="p.x_date_bl" />
+										<br/>
+										Du
+										<span style="padding:2px" t-field="p.x_date_bl" />
 									</t>
 								</td>
 								<td style="font:12px lucida-console,sans-serif !important;text-align:justify; ">
-									<span t-field="p.x_immatricul_id" />
+									<span style="padding:2px" t-field="p.x_immatricul_id" />
 								</td>
 								<td style=" text-align:justify; ">
-									<span t-field="p.x_trajet_id.name" />
+									<span style="padding:2px" t-field="p.x_trajet_id.name" />
 								</td>
 
 								<td style="text-align:justify; ">
-									<span t-field="p.x_produit_id.name" />
+									<span style="padding:2px" t-field="p.x_produit_id.name" />
 								</td>
 								<td style="text-align:right; ">
-									<span t-esc="'{:,}'.format(int(p.x_mt_ligne)).replace(',', ' ')"/>
+									<span style="padding:2px" t-esc="'{:,}'.format(int(p.x_mt_ligne)).replace(',', ' ')"/>
 
 								</td>
 							</tr>
@@ -93,10 +106,12 @@
 					</div>
 					<tr style="font-size:12px;">
 						<th colspan="5" style="border-top:1px solid #000;text-align:center; ">
-							<strong>Montant Total</strong>
+							<strong>
+								<span style="padding:2px">Montant Total</span>
+							</strong>
 						</th>
 						<th colspan="1" style="border-top:1px solid #000; text-align:right; ">
-							<span t-esc="'{:,}'.format(int(o.x_total_facture)).replace(',', ' ')"/>
+							<span style="padding:2px" t-esc="'{:,}'.format(int(o.x_total_facture)).replace(',', ' ')"/>
 
 						</th>
 					</tr>

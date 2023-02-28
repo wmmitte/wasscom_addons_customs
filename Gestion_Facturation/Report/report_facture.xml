@@ -78,19 +78,18 @@
 							<tr style="border:1px solid #000;font:12px lucida-console,sans-serif !important">
 								<td style="font:12px lucida-console,sans-serif !important; text-align:center; ">
 									<span style="padding:2px" t-field="p.x_num_be" />
- Du 
-									<br/>
 									<t t-if="p.x_num_be != '-' ">
-										<span style="padding:2px" t-field="p.x_date_be" />
+										<br/>
+										Du <span style="padding:2px" t-field="p.x_date_be" />
 									</t>
 
 								</td>
 								<td style="font:12px lucida-console,sans-serif !important; text-align:center; ">
 									<span style="padding:2px" t-field="p.x_num_bl" />
- Du 
-									<br/>
 									<t t-if="p.x_num_bl != '-' ">
-										<span style="padding:2px" t-field="p.x_date_bl" />
+										<br/>
+ 
+										Du <span style="padding:2px" t-field="p.x_date_bl" />
 									</t>
 								</td>
 								<td style="font:12px lucida-console,sans-serif !important;text-align:justify; ">
