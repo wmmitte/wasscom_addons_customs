@@ -53,7 +53,7 @@
 						<th style="text-align:center;font:15px">
 							<span style="padding:0 2px 0 2px">N°BL</span>
 						</th>
-						<th style="text-align:left;font:15px;width:15px;">
+						<th style="text-align:left;font:15px;">
 							<span style="padding:0 2px 0 2px">Immatriculation</span>
 						</th>
 						<th style="text-align:left;font:15px">
@@ -92,7 +92,7 @@
 										Du <span style="padding:0 2px 0 2px" t-field="p.x_date_bl" />
 									</t>
 								</td>
-								<td style="font:15px lucida-console,sans-serif !important;text-align:justify;width:15px; ">
+								<td style="font:15px lucida-console,sans-serif !important;text-align:justify; ">
 									<span style="padding:0 2px 0 2px" t-field="p.x_immatricul_id" />
 								</td>
 								<td style=" text-align:justify; ">
@@ -109,7 +109,7 @@
 									<span t-field="p.x_taux" />
 								</td>
 								<td style="text-align:right; ">
-									<span style="padding:0 2px 0 2px" t-esc="'{:,}'.format(int(p.x_mt_ligne_reel)).replace(',', ' ')"/>
+									<span style="" t-esc="'{:,}'.format(int(p.x_mt_ligne_reel)).replace(',', ' ')"/>
 
 								</td>
 							</tr>
