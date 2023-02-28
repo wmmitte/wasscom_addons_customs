@@ -1,0 +1,13 @@
+div,
+table tr {
+    font-size: 15px;
+}
+
+table tr {
+    border: 1px solid #000;
+}
+
+.num_fact {
+    font-size: 45px;
+    color: dodgerblue;
+}

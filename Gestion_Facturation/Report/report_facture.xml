@@ -2,10 +2,10 @@
 <odoo>
 	<data>
 		<template id="report_fa_document">
-
-			<!--<t t-call="web.external_layout">-->
+			<!-- <t t-call="web.external_layout"> -->
 			<t t-set="o" t-value="o.with_context({'lang': lang})" />
 			<div class="page" style="page-break-after:always;page-break-inside: avoid;">
+
 				<div style="float:right">
 					<br></br>
 					<div style="text-align:left;">
@@ -21,7 +21,7 @@
 					<div style="text-align:center;font-weight:bold;">
 						<br></br>
 						<u>
-							<span style="font-size:25px;" t-field="o.name" />
+							<span class="num_fact" t-field="o.name" />
 						</u>
 					</div>
 
@@ -47,36 +47,36 @@
 				<br></br>
 				<table class="table table-bordered table-sm text-center border border-dark" border="1" cellpading="5" style="border-collapse: collapse;width: 100%;">
 					<tr style="border:1px solid #000;background-color:#CCC; font-size:15px;">
-						<th width="12%" style="text-align:center;font:15px">
+						<th width="12%" style="text-align:center;font-size:15px">
 							<span style="padding:0 2px 0 2px">N°BE</span>
 						</th>
-						<th width="12%" style="text-align:center;font:15px">
+						<th width="12%" style="text-align:center;font-size:15px">
 							<span style="padding:0 2px 0 2px">N°BL</span>
 						</th>
-						<th width="12%" style="text-align:left;font:15px;">
+						<th width="12%" style="text-align:center;font-size:15px;">
 							<span style="padding:0 2px 0 2px">Immatriculation</span>
 						</th>
-						<th width="16%" style="text-align:left;font:15px">
+						<th width="16%" style="text-align:center;font-size:15px">
 							<span style="padding:0 2px 0 2px">Trajet</span>
 						</th>
-						<th width="10%" style="text-align:center;font:15px">
+						<th width="10%" style="text-align:center;font-size:15px">
 							<span style="padding:0 2px 0 2px">Produit</span>
 						</th>
-						<th width="9%" style="text-align:center;font:15px">
+						<th width="9%" style="text-align:center;font-size:15px">
 							<span style="padding:0 2px 0 2px">Capacité</span>
 						</th>
-						<th width="8%" style="text-align:center;font:15px">
+						<th width="8%" style="text-align:center;font-size:15px">
 							<span style="padding:0 2px 0 2px">Taux</span>
 						</th>
-						<th width="17%" style="text-align:right;font:15px">
+						<th width="17%" style="text-align:right;font-size:15px">
 							<span style="padding:0 2px 0 2px">Montant Ligne</span>
 						</th>
 					</tr>
 					<div>
 						<div t-foreach="o.x_line_ids" t-as="p">
 
-							<tr style="border:1px solid #000;font:15px lucida-console,sans-serif !important">
-								<td style="font:15px lucida-console,sans-serif !important; text-align:center; ">
+							<tr style="border:1px solid #000;font-size:15px lucida-console,sans-serif !important">
+								<td style="font-size:15px lucida-console,sans-serif !important; text-align:center; ">
 									<span style="padding:0 2px 0 2px" t-field="p.x_num_be" />
 									<t t-if="p.x_num_be != '-' ">
 										<br/>
@@ -84,7 +84,7 @@
 									</t>
 
 								</td>
-								<td style="font:15px lucida-console,sans-serif !important; text-align:center; ">
+								<td style="font-size:15px lucida-console,sans-serif !important; text-align:center; ">
 									<span style="padding:0 2px 0 2px" t-field="p.x_num_bl" />
 									<t t-if="p.x_num_bl != '-' ">
 										<br/>
@@ -92,10 +92,10 @@
 										Du <span style="padding:0 2px 0 2px" t-field="p.x_date_bl" />
 									</t>
 								</td>
-								<td style="font:15px lucida-console,sans-serif !important;text-align:justify; ">
+								<td style="font-size:15px lucida-console,sans-serif !important;text-align:center; ">
 									<span style="padding:0 2px 0 2px" t-field="p.x_immatricul_id" />
 								</td>
-								<td style=" text-align:justify; ">
+								<td style=" text-align:center; ">
 									<span style="padding:0 2px 0 2px" t-field="p.x_trajet_id.name" />
 								</td>
 
@@ -160,7 +160,7 @@
 
 			<div style="clear:both;"></div>
 		</div>
-		<!--</t>-->
+		<!-- </t> -->
 	</template>
 
 
