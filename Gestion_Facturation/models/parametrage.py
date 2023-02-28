@@ -14,8 +14,8 @@ class Facturation_Produit(models.Model):
     _order = 'sequence, id'
     sequence = fields.Integer(help="Gives the sequence when displaying a list of produit.", default=10)
 
-    name = fields.Char(string = "Intitulé" ,required = False)
-    libelle = fields.Char(string = "Intitulé" ,required = True)
+    name = fields.Char(string = "Désignation" ,required = False)
+    libelle = fields.Char(string = "Désignation" ,required = True)
     description = fields.Text(string = "Description" ,required = False)
     x_struct_id = fields.Many2one('res.company' ,string = "Structure" ,default=lambda self: self.env.user.company_id.id, required = True)
     active = fields.Boolean(string = "Etat", default=True)
@@ -73,11 +73,12 @@ class Facturation_Client(models.Model):
     _order = 'sequence, id'
     sequence = fields.Integer(help="Gives the sequence when displaying a list of client.", default=10)
     _rec_name = 'x_designation_'
-    name = fields.Char(string = "Code" ,required = True)
-    x_designation_client = fields.Char(string = "Désignation" ,required = True)
-    x_designation_ = fields.Char(compute = 'action_concat_code_desig',store = True,string = "Désignation")
+    name = fields.Char(string = "Sigle" ,required = True)
+    x_designation_client = fields.Char(string = "Raison sociale/nom" ,required = True)
+    x_designation_ = fields.Char(compute = 'action_client_fullname',store = True,string = "Raison sociale/nom")
     x_adress = fields.Char(string = "Adresse" ,required = True)
     x_tel = fields.Char(string = "Télephone" ,required = True)
+    x_contact = fields.Char(compute = 'action_client_contact',store = True,string = "Contact")
     x_struct_id = fields.Many2one('res.company' ,string = "Structure" ,default=lambda self: self.env.user.company_id.id, required = True)
     active = fields.Boolean(string = "Etat", default=True)
 
@@ -92,6 +93,18 @@ class Facturation_Client(models.Model):
         for record in self:
             if record.name and record.x_designation_client and record.x_tel:
                 record.x_designation_ = record.name + '/' + record.x_designation_client+ '/'+ record.x_tel
+   
+    @api.depends('name','x_designation_client','x_tel')
+    def action_client_fullname(self):
+        for record in self:
+            if record.name and record.x_designation_client:
+                record.x_designation_ = record.x_designation_client+ ' (' + record.name + ')'
+    
+    @api.depends('x_adress','x_tel')
+    def action_client_contact(self):
+        for record in self:
+            if record.x_adress and record.x_tel:
+                record.x_contact = record.x_tel + ', ' + record.x_adress
 
 
 # class conducteur camion

@@ -2,21 +2,24 @@
 <odoo>
 	<data>
 		<template id="report_fa_document">
+
 			<!--<t t-call="web.external_layout">-->
 			<t t-set="o" t-value="o.with_context({'lang': lang})" />
 			<div class="page" style="page-break-after:always;page-break-inside: avoid;">
 				<div style="float:right">
+					<br></br>
 					<div style="text-align:left;">
-						<b style="font-size:15px;">Date : </b>
-						<span style="font-size:15px;" t-field="o.date_operation" />
+						<b style="font-size:12px;">Date : </b>
+						<span style="font-size:12px;" t-field="o.date_operation" />
 					</div>
 				</div>
 				<br></br>
 				<h3 style="text-align:center;">
 
 					<div style="clear:both;"></div>
-					<br></br>
+
 					<div style="text-align:center;font-weight:bold;">
+						<br></br>
 						<u>
 							<span style="font-size:15px;" t-field="o.name" />
 						</u>
@@ -26,38 +29,38 @@
 				<br></br>
 				<div style="float:left">
 					<div style="text-align:left;">
-						<b style="font-size:15px;">Doit : </b>
-						<span style="font-size:15px;" t-field="o.x_client.name" />
+						<b style="font-size:12px;">Doit : </b>
+						<span style="font-size:12px;" t-field="o.x_client.x_designation_" />
+					</div>
+
+					<div style="text-align:left;">
+						<b style="font-size:12px;">Contact : </b>
+						<span style="font-size:12px;" t-field="o.x_client.x_contact" />
+					</div>
+
+					<div style="text-align:left;">
+						<b style="font-size:12px;">Objet : </b>
+						<span style="font-size:12px;" t-field="o.x_objet" />
 					</div>
 					<br></br>
-					<div style="text-align:left;">
-						<b style="font-size:15px;">Contact : </b>
-						<span style="font-size:15px;" t-field="o.x_adress" />
-					</div>
-					<br></br>
-					<div style="text-align:left;">
-						<b style="font-size:15px;">Objet : </b>
-						<span style="font-size:15px;" t-field="o.x_objet" />
-					</div>
 				</div>
-				<br/>
-				<br/>
-				<table class="table table-bordered table-sm text-center border border-dark" border="1" style="border-collapse: collapse;width: 100%;">
-					<tr style="border:1px soild #000">
-						<th style="background-color:#CCC; font-size:12px;">N°BE</th>
-						<th style="background-color:#CCC; font-size:12px;">N°BL</th>
-						<th style="background-color:#CCC; font-size:12px;">Immatriculation</th>
-						<th style="background-color:#CCC; font-size:12px;">Trajet</th>
-						<th style="background-color:#CCC; font-size:12px;">Produit</th>
-						<th style="background-color:#CCC; font-size:12px;">Capacité</th>
-						<th style="background-color:#CCC; font-size:12px;">Taux</th>
-						<th style="background-color:#CCC; font-size:12px;">Montant Ligne</th>
+				<br></br>
+				<table class="table table-bordered table-sm text-center border border-dark" border="0" cellpading="5" style="border-collapse: collapse;width: 100%;">
+					<tr style="border-bottom:1px solid #000;background-color:#CCC; font-size:12px;">
+						<th style="text-align:center;">N°BE</th>
+						<th style="text-align:center;">N°BL</th>
+						<th style="text-align:left;">Immatriculation</th>
+						<th style="text-align:left;">Trajet</th>
+						<th style="text-align:left;">Produit</th>
+						<th style="text-align:left;">Capacité</th>
+						<th style="text-align:center;">Taux</th>
+						<th style="text-align:right;">Montant Ligne</th>
 					</tr>
 					<div>
 						<div t-foreach="o.x_line_ids" t-as="p">
 
-							<tr style="border:1px soild #000">
-								<td style="border:1px soild #000; text-align:center; font-size:12px;">
+							<tr style="border-bottom:1px solid #DDD;font:12px lucida-console,sans-serif !important">
+								<td style="font:12px lucida-console,sans-serif !important; text-align:center; ">
 									<span t-field="p.x_num_be" />
  Du 
 									<br/>
@@ -66,7 +69,7 @@
 									</t>
 
 								</td>
-								<td style="border:1px soild #000; text-align:center; font-size:12px;">
+								<td style="font:12px lucida-console,sans-serif !important; text-align:center; ">
 									<span t-field="p.x_num_bl" />
  Du 
 									<br/>
@@ -74,38 +77,47 @@
 										<span t-field="p.x_date_bl" />
 									</t>
 								</td>
-								<td style="border:1px soild #000;text-align:justify; font-size:12px;">
+								<td style="font:12px lucida-console,sans-serif !important;text-align:justify; ">
 									<span t-field="p.x_immatricul_id" />
 								</td>
-								<td style="border:1px soild #000; text-align:justify; font-size:12px;">
+								<td style=" text-align:justify; ">
 									<span t-field="p.x_trajet_id.name" />
 								</td>
 
-								<td style="border:1px soild #000;text-align:justify; font-size:12px;">
+								<td style="text-align:justify; ">
 									<span t-field="p.x_produit_id.name" />
 								</td>
-								<td style="border:1px soild #000;text-align:left; font-size:12px;">
+								<td style="text-align:justify; ">
 									<span t-field="p.x_capacite" />
 								</td>
-								<td style="border:1px soild #000; text-align:justify; font-size:12px;">
+								<td style="text-align:center; ">
 									<span t-field="p.x_taux" />
 								</td>
-								<td style="border:1px soild #000; text-align:right; font-size:12px;">
+								<td style="text-align:right; ">
 									<span t-esc="'{:,}'.format(int(p.x_mt_ligne_reel)).replace(',', ' ')"/>
+
 								</td>
 							</tr>
 						</div>
 					</div>
-
-					<tr style="border:1px soild #000">
-						<th colspan="5">Montant Total</th>
-						<th colspan="3" style="background-color:#CCC; text-align:right">
+					<tr>
+						<td colspan="8">
+							<br/>
+						</td>
+					</tr>
+					<tr style="font-size:12px;">
+						<th colspan="5" style="border:0;text-align:right; "></th>
+						<th colspan="1" style="border-top:1px solid #000;text-align:left; ">
+							<strong>Montant Total</strong>
+						</th>
+						<th colspan="2" style="border-top:1px solid #000; text-align:right; ">
 							<span t-esc="'{:,}'.format(int(o.x_total_facture_reel)).replace(',', ' ')"/>
+
 						</th>
 					</tr>
 				</table>
 				<div>
-					<p>Arrêté la présente facture à la somme de : <strong>
+					<p style="font-size:12px;">Arrêté la présente facture à la somme de : <strong>
 						<span t-field="o.x_mnt_lettre" />
 (						<span t-esc="'{:,}'.format(int(o.x_total_facture_reel)).replace(',', ' ')" />
 ) Francs CFA </strong>
@@ -120,8 +132,10 @@
 					<td width="33%"></td>
 					<td width="33%"></td>
 					<td width="34%" style="text-align:center">
-						<div class="text-center" style="text-align:center">
-							<p>Directeur Général</p>
+						<div class="text-center" style="text-align:center; font-size:12px;">
+							<p>
+								<strong>Directeur Général</strong>
+							</p>
 							<br></br>
 							<br></br>
 							<br></br>
