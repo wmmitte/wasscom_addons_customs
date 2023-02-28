@@ -47,28 +47,28 @@
 				<br></br>
 				<table class="table table-bordered table-sm text-center border border-dark" border="1" cellpading="5" style="border-collapse: collapse;width: 100%;">
 					<tr style="border:1px solid #000;background-color:#CCC; font-size:15px;">
-						<th style="text-align:center;font:15px">
+						<th width="12%" style="text-align:center;font:15px">
 							<span style="padding:0 2px 0 2px">N°BE</span>
 						</th>
-						<th style="text-align:center;font:15px">
+						<th width="12%" style="text-align:center;font:15px">
 							<span style="padding:0 2px 0 2px">N°BL</span>
 						</th>
-						<th style="text-align:left;font:15px;">
+						<th width="12%" style="text-align:left;font:15px;">
 							<span style="padding:0 2px 0 2px">Immatriculation</span>
 						</th>
-						<th style="text-align:left;font:15px">
+						<th width="16%" style="text-align:left;font:15px">
 							<span style="padding:0 2px 0 2px">Trajet</span>
 						</th>
-						<th style="text-align:center;font:15px">
+						<th width="10%" style="text-align:center;font:15px">
 							<span style="padding:0 2px 0 2px">Produit</span>
 						</th>
-						<th style="text-align:center;font:15px">
+						<th width="9%" style="text-align:center;font:15px">
 							<span style="padding:0 2px 0 2px">Capacité</span>
 						</th>
-						<th style="text-align:center;font:15px">
+						<th width="8%" style="text-align:center;font:15px">
 							<span style="padding:0 2px 0 2px">Taux</span>
 						</th>
-						<th style="text-align:right;font:15px">
+						<th width="17%" style="text-align:right;font:15px">
 							<span style="padding:0 2px 0 2px">Montant Ligne</span>
 						</th>
 					</tr>
@@ -143,7 +143,9 @@
 					<td width="34%" style="text-align:center">
 						<div class="text-center" style="text-align:center; font-size:15px;">
 							<p>
-								<strong>Directeur Général</strong>
+								<strong>
+									<u>Directeur Général</u>
+								</strong>
 							</p>
 							<br></br>
 							<br></br>
