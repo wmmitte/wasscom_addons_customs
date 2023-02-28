@@ -9,8 +9,8 @@
 				<div style="float:right">
 					<br></br>
 					<div style="text-align:left;">
-						<b style="font-size:16px;">Date : </b>
-						<span style="font-size:16px;" t-field="o.date_operation" />
+						<b style="font-size:15px;">Date : </b>
+						<span style="font-size:15px;" t-field="o.date_operation" />
 					</div>
 				</div>
 				<br></br>
@@ -29,54 +29,54 @@
 				<br></br>
 				<div style="float:left">
 					<div style="text-align:left;">
-						<b style="font-size:16px;">Doit : </b>
-						<span style="font-size:16px;" t-field="o.x_client.x_designation_" />
+						<b style="font-size:15px;">Doit : </b>
+						<span style="font-size:15px;" t-field="o.x_client.x_designation_" />
 					</div>
 
 					<div style="text-align:left;">
-						<b style="font-size:16px;">Contact : </b>
-						<span style="font-size:16px;" t-field="o.x_client.x_contact" />
+						<b style="font-size:15px;">Contact : </b>
+						<span style="font-size:15px;" t-field="o.x_client.x_contact" />
 					</div>
 
 					<div style="text-align:left;">
-						<b style="font-size:16px;">Objet : </b>
-						<span style="font-size:16px;" t-field="o.x_objet" />
+						<b style="font-size:15px;">Objet : </b>
+						<span style="font-size:15px;" t-field="o.x_objet" />
 					</div>
 					<br></br>
 				</div>
 				<br></br>
 				<table class="table table-bordered table-sm text-center border border-dark" border="1" cellpading="5" style="border-collapse: collapse;width: 100%;">
-					<tr style="border:1px solid #000;background-color:#CCC; font-size:16px;">
-						<th style="text-align:center;font:16px">
+					<tr style="border:1px solid #000;background-color:#CCC; font-size:15px;">
+						<th style="text-align:center;font:15px">
 							<span style="padding:0 2px 0 2px">N°BE</span>
 						</th>
-						<th style="text-align:center;font:16px">
+						<th style="text-align:center;font:15px">
 							<span style="padding:0 2px 0 2px">N°BL</span>
 						</th>
-						<th style="text-align:left;font:16px">
+						<th style="text-align:left;font:15px;width:15px;">
 							<span style="padding:0 2px 0 2px">Immatriculation</span>
 						</th>
-						<th style="text-align:left;font:16px">
+						<th style="text-align:left;font:15px">
 							<span style="padding:0 2px 0 2px">Trajet</span>
 						</th>
-						<th style="text-align:left;font:16px">
+						<th style="text-align:center;font:15px">
 							<span style="padding:0 2px 0 2px">Produit</span>
 						</th>
-						<th style="text-align:left;font:16px">
+						<th style="text-align:center;font:15px">
 							<span style="padding:0 2px 0 2px">Capacité</span>
 						</th>
-						<th style="text-align:center;font:16px">
+						<th style="text-align:center;font:15px">
 							<span style="padding:0 2px 0 2px">Taux</span>
 						</th>
-						<th style="text-align:right;font:16px">
+						<th style="text-align:right;font:15px">
 							<span style="padding:0 2px 0 2px">Montant Ligne</span>
 						</th>
 					</tr>
 					<div>
 						<div t-foreach="o.x_line_ids" t-as="p">
 
-							<tr style="border:1px solid #000;font:16px lucida-console,sans-serif !important">
-								<td style="font:16px lucida-console,sans-serif !important; text-align:center; ">
+							<tr style="border:1px solid #000;font:15px lucida-console,sans-serif !important">
+								<td style="font:15px lucida-console,sans-serif !important; text-align:center; ">
 									<span style="padding:0 2px 0 2px" t-field="p.x_num_be" />
 									<t t-if="p.x_num_be != '-' ">
 										<br/>
@@ -84,7 +84,7 @@
 									</t>
 
 								</td>
-								<td style="font:16px lucida-console,sans-serif !important; text-align:center; ">
+								<td style="font:15px lucida-console,sans-serif !important; text-align:center; ">
 									<span style="padding:0 2px 0 2px" t-field="p.x_num_bl" />
 									<t t-if="p.x_num_bl != '-' ">
 										<br/>
@@ -92,17 +92,17 @@
 										Du <span style="padding:0 2px 0 2px" t-field="p.x_date_bl" />
 									</t>
 								</td>
-								<td style="font:16px lucida-console,sans-serif !important;text-align:justify; ">
+								<td style="font:15px lucida-console,sans-serif !important;text-align:justify;width:15px; ">
 									<span style="padding:0 2px 0 2px" t-field="p.x_immatricul_id" />
 								</td>
 								<td style=" text-align:justify; ">
 									<span style="padding:0 2px 0 2px" t-field="p.x_trajet_id.name" />
 								</td>
 
-								<td style="text-align:justify; ">
+								<td style="text-align:center; ">
 									<span style="padding:0 2px 0 2px" t-field="p.x_produit_id.name" />
 								</td>
-								<td style="text-align:justify; ">
+								<td style="text-align:center; ">
 									<span style="padding:0 2px 0 2px" t-field="p.x_capacite" />
 								</td>
 								<td style="text-align:center; ">
@@ -115,7 +115,7 @@
 							</tr>
 						</div>
 					</div>
-					<tr style="font-size:16px;">
+					<tr style="font-size:15px;">
 						<th colspan="6" style="border:1px solid #000;text-align:center; ">
 							<strong style="padding:0 2px 0 2px">Montant Total</strong>
 						</th>
@@ -126,7 +126,7 @@
 					</tr>
 				</table>
 				<div>
-					<p style="font-size:16px;">Arrêté la présente facture à la somme de : <strong>
+					<p style="font-size:15px;">Arrêté la présente facture à la somme de : <strong>
 						<span t-field="o.x_mnt_lettre" />
 (						<span t-esc="'{:,}'.format(int(o.x_total_facture_reel)).replace(',', ' ')" />
 ) Francs CFA </strong>
@@ -141,7 +141,7 @@
 					<td width="33%"></td>
 					<td width="33%"></td>
 					<td width="34%" style="text-align:center">
-						<div class="text-center" style="text-align:center; font-size:16px;">
+						<div class="text-center" style="text-align:center; font-size:15px;">
 							<p>
 								<strong>Directeur Général</strong>
 							</p>

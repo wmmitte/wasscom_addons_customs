@@ -63,7 +63,7 @@ class Facturation_Trajet(models.Model):
     def action_concat(self):
         for record in self:
             if record.localite_a.name and record.localite_b.name:
-                record.name = record.localite_a.name + ' -- ' + record.localite_b.name
+                record.name = record.localite_a.name + ' - ' + record.localite_b.name
 
 
 
