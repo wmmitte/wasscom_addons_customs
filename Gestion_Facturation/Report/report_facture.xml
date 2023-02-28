@@ -9,8 +9,8 @@
 				<div style="float:right">
 					<br></br>
 					<div style="text-align:left;">
-						<b style="font-size:12px;">Date : </b>
-						<span style="font-size:12px;" t-field="o.date_operation" />
+						<b style="font-size:14px;">Date : </b>
+						<span style="font-size:14px;" t-field="o.date_operation" />
 					</div>
 				</div>
 				<br></br>
@@ -21,7 +21,7 @@
 					<div style="text-align:center;font-weight:bold;">
 						<br></br>
 						<u>
-							<span style="font-size:15px;" t-field="o.name" />
+							<span style="font-size:22px;" t-field="o.name" />
 						</u>
 					</div>
 
@@ -29,24 +29,24 @@
 				<br></br>
 				<div style="float:left">
 					<div style="text-align:left;">
-						<b style="font-size:12px;">Doit : </b>
-						<span style="font-size:12px;" t-field="o.x_client.x_designation_" />
+						<b style="font-size:14px;">Doit : </b>
+						<span style="font-size:14px;" t-field="o.x_client.x_designation_" />
 					</div>
 
 					<div style="text-align:left;">
-						<b style="font-size:12px;">Contact : </b>
-						<span style="font-size:12px;" t-field="o.x_client.x_contact" />
+						<b style="font-size:14px;">Contact : </b>
+						<span style="font-size:14px;" t-field="o.x_client.x_contact" />
 					</div>
 
 					<div style="text-align:left;">
-						<b style="font-size:12px;">Objet : </b>
-						<span style="font-size:12px;" t-field="o.x_objet" />
+						<b style="font-size:14px;">Objet : </b>
+						<span style="font-size:14px;" t-field="o.x_objet" />
 					</div>
 					<br></br>
 				</div>
 				<br></br>
 				<table class="table table-bordered table-sm text-center border border-dark" border="1" cellpading="5" style="border-collapse: collapse;width: 100%;">
-					<tr style="border:1px solid #000;background-color:#CCC; font-size:12px;">
+					<tr style="border:1px solid #000;background-color:#CCC; font-size:14px;">
 						<th style="text-align:center;">
 							<span style="padding:2px">N°BE</span>
 						</th>
@@ -75,8 +75,8 @@
 					<div>
 						<div t-foreach="o.x_line_ids" t-as="p">
 
-							<tr style="border:1px solid #000;font:12px lucida-console,sans-serif !important">
-								<td style="font:12px lucida-console,sans-serif !important; text-align:center; ">
+							<tr style="border:1px solid #000;font:14px lucida-console,sans-serif !important">
+								<td style="font:14px lucida-console,sans-serif !important; text-align:center; ">
 									<span style="padding:2px" t-field="p.x_num_be" />
 									<t t-if="p.x_num_be != '-' ">
 										<br/>
@@ -84,7 +84,7 @@
 									</t>
 
 								</td>
-								<td style="font:12px lucida-console,sans-serif !important; text-align:center; ">
+								<td style="font:14px lucida-console,sans-serif !important; text-align:center; ">
 									<span style="padding:2px" t-field="p.x_num_bl" />
 									<t t-if="p.x_num_bl != '-' ">
 										<br/>
@@ -92,7 +92,7 @@
 										Du <span style="padding:2px" t-field="p.x_date_bl" />
 									</t>
 								</td>
-								<td style="font:12px lucida-console,sans-serif !important;text-align:justify; ">
+								<td style="font:14px lucida-console,sans-serif !important;text-align:justify; ">
 									<span style="padding:2px" t-field="p.x_immatricul_id" />
 								</td>
 								<td style=" text-align:justify; ">
@@ -115,7 +115,7 @@
 							</tr>
 						</div>
 					</div>
-					<tr style="font-size:12px;">
+					<tr style="font-size:14px;">
 						<th colspan="6" style="border:1px solid #000;text-align:center; ">
 							<strong style="padding:2px">Montant Total</strong>
 						</th>
@@ -126,7 +126,7 @@
 					</tr>
 				</table>
 				<div>
-					<p style="font-size:12px;">Arrêté la présente facture à la somme de : <strong>
+					<p style="font-size:14px;">Arrêté la présente facture à la somme de : <strong>
 						<span t-field="o.x_mnt_lettre" />
 (						<span t-esc="'{:,}'.format(int(o.x_total_facture_reel)).replace(',', ' ')" />
 ) Francs CFA </strong>
@@ -141,7 +141,7 @@
 					<td width="33%"></td>
 					<td width="33%"></td>
 					<td width="34%" style="text-align:center">
-						<div class="text-center" style="text-align:center; font-size:12px;">
+						<div class="text-center" style="text-align:center; font-size:14px;">
 							<p>
 								<strong>Directeur Général</strong>
 							</p>
