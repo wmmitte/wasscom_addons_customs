@@ -95,7 +95,7 @@
 								<td style="font-size:15px lucida-console,sans-serif !important;text-align:center; ">
 									<span style="padding:0 2px 0 2px" t-field="p.x_immatricul_id" />
 								</td>
-								<td style=" text-align:center; ">
+								<td style="text-align:center;">
 									<span style="padding:0 2px 0 2px" t-field="p.x_trajet_id.name" />
 								</td>
 
