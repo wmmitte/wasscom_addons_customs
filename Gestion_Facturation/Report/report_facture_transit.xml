@@ -91,13 +91,8 @@
 							</tr>
 						</div>
 					</div>
-					<tr style="border:0">
-						<td colspan="6" style="border:0">
-							<br/>
-						</td>
-					</tr>
 					<tr style="font-size:12px;">
-						<th colspan="5" style="border-top:1px solid #000;text-align:left; ">
+						<th colspan="5" style="border-top:1px solid #000;text-align:center; ">
 							<strong>Montant Total</strong>
 						</th>
 						<th colspan="1" style="border-top:1px solid #000; text-align:right; ">
