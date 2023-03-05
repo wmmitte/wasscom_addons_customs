@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data noupdate="0">
+		
+         <report
+            id="facture_pro"
+            model="sngc.facture.sonagess"
+            string="Facture proforma"
+            report_type="qweb-html"
+            name="sngc_facture.report_facture_pro"
+            file="sngc_facture.report_facture_pro"
+            print_report_name="'Facture Proforma SONAGESS %s' %(object.name)"
+            menu="True"/>
+
+        <report
+            id="facture_def"
+            model="sngc.facture.sonagess"
+            string="Facture définitive"
+            report_type="qweb-html"
+            name="sngc_facture.report_facture_def"
+            file="sngc_facture.report_facture_def"
+            print_report_name="'Facture définitive SONAGESS %s' %(object.namef)"
+            menu="True"/>
+
+         <report
+            id="facture_manut"
+            model="sngc.manutention"
+            string="Facture manutention"
+            report_type="qweb-html"
+            name="sngc_facture.report_facture_manut"
+            file="sngc_facture.report_facture_manut"
+            print_report_name="'Facture Manutention %s' %(object.name)"
+            menu="True"/>
+
+        <report
+            id="facture_prop"
+            model="sngc.facture.pam"
+            string="Facture proforma"
+            report_type="qweb-html"
+            name="sngc_facture.report_facture_prop"
+            file="sngc_facture.report_facture_prop"
+            print_report_name="'Facture Proforma PAM %s' %(object.name)"
+            menu="True"/>
+
+        <report
+            id="facture_defp"
+            model="sngc.facture.pam"
+            string="Facture définitive"
+            report_type="qweb-html"
+            name="sngc_facture.report_facture_defp"
+            file="sngc_facture.report_facture_defp"
+            print_report_name="'Facture définitive PAM %s' %(object.namef)"
+            menu="True"/>
+
+    </data>
+</odoo>

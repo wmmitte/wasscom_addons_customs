@@ -1,0 +1,56 @@
+*, ::before, ::after {
+	box-sizing: border-box;
+	margin:0;
+	padding:0;
+}
+
+body {
+	height : 100vh;
+	font-family : "Times New Roman", Times, serif;
+}
+
+.tableau-style {
+	border-collapse : collapse;
+	width : 100%;
+	cursor : pointer;
+	margin : 100px auto;
+	border : 1px solid #ddd;
+	margin-top:10px;
+}
+
+thead tr {
+	background-color : #159dd9;
+	color : #fff;
+	text-align : left;
+	font-family:"Times New Roman", Times, serif;
+}
+
+th, td {
+	padding : 5px 5px 5px 5px;
+}
+
+h3, h4 {
+	text-align : center;
+	color : black;
+	border : 2px solid;
+	background-color: #F4F6F6;
+	font-family:"Times New Roman", Times, serif;
+}
+
+tbody tr, td, th {
+	border : 1px solid midnightblue;
+}
+
+thead th {
+	border : 1px solid midnightblue;
+}
+
+tbody tr:nth-child(even){
+	background-color : #f3f3f3;
+}
+
+tbody tr:last-of-type{
+	border : 2px solid midnightblue;
+}
+	
+

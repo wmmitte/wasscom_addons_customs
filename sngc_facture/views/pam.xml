@@ -1,0 +1,293 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record model="ir.ui.view" id="view_sngc_pam_form">
+            <field name="name">view.sngc.facture.pam.form</field>
+            <field name="model">sngc.facture.pam</field>
+            <field name="priority" eval="16"/>
+            <field name="arch" type="xml">
+                <form string="Marches" delete="false">
+                    <header>
+                        <button name="confirmer" string="Confirmer" type="object" class="oe_highlight"
+                                attrs="{'invisible' : [('state', 'not in', ['draft'])]}"
+                                style="background-color: #28a745; border-color: #28a745;"/>
+                        <field name="state" widget="statusbar"/>
+                    </header>
+                    <sheet>
+                        <div class="oe_title">
+                            <h1>
+                                <field name="name" nolabel="1"/>
+                            </h1>
+                        </div>
+                        <group col="2">
+                            <group>
+                                <field name="dte" style = "width:50%"/>
+                                <field name="vendor" style = "width:50%"/>
+                                <field name="total" style = "width:50%"/>
+                            </group>
+                            <group>
+                                <field name="doit" style = "width:100%"/>
+                                <field name="objet" style = "width:100%"/>
+                                <field name="company_id" style = "width:100%" invisible="1"/>
+                                <field name="mnt_lettre" style = "width:100%" invisible="1"/>
+                            </group>
+                        </group>
+                        <field name="facture_ids" nolabel = "1">
+                            <tree string="Lignes facture" editable = "bottom">
+                                <field name="designation"/>
+                                <field name="tpo"/>
+                                <field name="sto"/>
+                                <field name="qte"/>
+                                <field name="prix"/>
+                                <field name="montant"/>
+                            </tree>
+                        </field>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers" groups="base.group_user"/>
+                        <field name="message_ids" widget="mail_thread"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+
+
+        <record model="ir.ui.view" id="view_sngc_pam_tree">
+            <field name="name">sngc.facture.pam.view.tree</field>
+            <field name="model">sngc.facture.pam</field>
+            <field name="arch" type="xml">
+                <tree string="Liste des pam" delete="false" decoration-info="state == 'FP'" decoration-danger="state == 'A'" decoration-success="state == 'V'">
+                    <field name = "dte"/>
+                    <field name = "name"/>
+                    <field name = "vendor"/>
+                    <field name = "objet"/>
+                    <field name = "total"/>
+                    <field name = "state"/>
+                </tree>
+            </field>
+        </record>
+
+
+        <record id="act_list_facture_pam" model="ir.actions.act_window">
+            <field name="name">Liste des factures proforma</field>
+            <field name="res_model">sngc.facture.pam</field>
+            <field name="view_mode">tree,form,kanban</field>
+            <field name="context">{
+                'delete': False,
+                }
+            </field>
+            <field name="view_ids"
+                   eval="[(5, 0, 0),
+                          (0, 0, {'view_mode': 'tree', 'view_id': ref('view_sngc_pam_tree')}),
+                          (0, 0, {'view_mode': 'form', 'view_id': ref('view_sngc_pam_form')})]"/>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_empty_folder">
+                </p>
+            </field>
+        </record>
+
+
+        <record model="ir.actions.act_window" id="act_listpam">
+            <field name="name">Liste des factures</field>
+            <field name="res_model">sngc.facture.pam</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">['|', '|', '|',('state','=','FP'), ('state','=','V'), ('state','=','A'), ('state','=','draft')]</field>
+            <field name="context">{
+                'create': False,
+                'write': False,
+                'delete': False,
+                }
+            </field>
+        </record>
+
+
+        <record model="ir.ui.view" id="view_sngc_manut_form">
+            <field name="name">view.sngc.manut.pam.form</field>
+            <field name="model">sngc.manutention</field>
+            <field name="priority" eval="16"/>
+            <field name="arch" type="xml">
+                <form string="Marches" delete="false">
+                    <header>
+                        <button name="valider" string="Valider" type="object" class="oe_highlight"
+                                attrs="{'invisible' : [('state', 'not in', ['draft'])]}"
+                                style="background-color: #28a745; border-color: #28a745;"/>
+                        <field name="state" widget="statusbar"/>
+                    </header>
+                    <sheet>
+                        <div class="oe_title">
+                            <h1>
+                                <field name="name" nolabel="1"/>
+                            </h1>
+                        </div>
+                        <group col="2">
+                            <group>
+                                <field name="dte" style = "width:50%" force_save="1"/>
+                                <field name="facture_id" style = "width:50%"/>
+                                <field name="vendor" style = "width:50%"/>
+                                <field name="total" style = "width:50%"/>
+                            </group>
+                            <group>
+                                <field name="doit" style = "width:100%"/>
+                                <field name="objet" style = "width:100%"/>
+                                <field name="company_id" style = "width:100%" invisible="1"/>
+                                <field name="mnt_lettre" style = "width:100%" invisible="1"/>
+                            </group>
+                        </group>
+                        <field name="manutention_ids" nolabel = "1" delete="false">
+                            <tree string="Lignes facture" editable = "bottom">
+                                <field name="designation" readonly="1"/>
+                                <field name="tpo" readonly="1"/>
+                                <field name="sto" readonly="1"/>
+                                <field name="qte" readonly="1"/>
+                                <field name="prix_manut"/>
+                                <field name="manut_total"/>
+                            </tree>
+                        </field>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+
+        <record model="ir.ui.view" id="view_sngc_manutention_tree">
+            <field name="name">sngc.facture.manutention.view.tree</field>
+            <field name="model">sngc.manutention</field>
+            <field name="arch" type="xml">
+                <tree string="Liste des pam" delete="false" decoration-info="state == 'draft'" decoration-success="state == 'V'">
+                    <field name = "dte"/>
+                    <field name = "name"/>
+                    <field name = "vendor"/>
+                    <field name = "objet"/>
+                    <field name = "total"/>
+                    <field name = "state"/>
+                </tree>
+            </field>
+        </record>
+
+
+        <record id="act_list_facture_manut" model="ir.actions.act_window">
+            <field name="name">Valider facture de manutentions</field>
+            <field name="res_model">sngc.manutention</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+
+        <record model="ir.actions.act_window" id="act_listpamm">
+            <field name="name">Liste des factures de manutentions</field>
+            <field name="res_model">sngc.manutention</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">['|', ('state','=','draft'), ('state','=','V')]</field>
+            <field name="context">{
+                'create': False,
+                'write': False,
+                'delete': False,
+                }
+            </field>
+        </record>
+
+
+
+        <record model="ir.ui.view" id="view_pam_form">
+            <field name="name">view.facture.pam.form</field>
+            <field name="model">sngc.facture.pam</field>
+            <field name="priority" eval="16"/>
+            <field name="arch" type="xml">
+                <form string="Marches" delete="false">
+                    <header>
+                        <button name="valider" string="Valider facture" type="object" class="oe_highlight"
+                                attrs="{'invisible' : [('state', 'not in', ['FP'])]}"
+                                style="background-color: #28a745; border-color: #28a745;"/>
+                        <field name="state" widget="statusbar"/>
+                    </header>
+                    <sheet>
+                        <div class="oe_title">
+                            <h1>
+                                <field name="namef" nolabel="1"/>
+                            </h1>
+                        </div>
+                        <group col="2">
+                            <group>
+                                <field name="dte" style = "width:50%"/>
+                                <field name="vendor" style = "width:50%"/>
+                                <field name="total" style = "width:50%"/>
+                            </group>
+                            <group>
+                                <field name="doit" style = "width:100%"/>
+                                <field name="objet" style = "width:100%"/>
+                                <field name="company_id" style = "width:100%" invisible="1"/>
+                                <field name="mnt_lettre" style = "width:100%" invisible="0"/>
+                            </group>
+                        </group>
+                        <field name="facture_ids" nolabel = "1">
+                            <tree string="Lignes facture" editable = "bottom">
+                                <field name="designation"/>
+                                <field name="tpo"/>
+                                <field name="sto"/>
+                                <field name="qte"/>
+                                <field name="prix"/>
+                                <field name="montant"/>
+                            </tree>
+                        </field>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers" groups="base.group_user"/>
+                        <field name="message_ids" widget="mail_thread"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+
+
+        <record model="ir.ui.view" id="view_pam_tree">
+            <field name="name">sngc.facture.pam.tree</field>
+            <field name="model">sngc.facture.pam</field>
+            <field name="arch" type="xml">
+                <tree string="Liste des pam" delete="false">
+                    <field name = "dte"/>
+                    <field name = "namef"/>
+                    <field name = "name"/>
+                    <field name = "vendor"/>
+                    <field name = "objet"/>
+                    <field name = "total"/>
+                    <field name = "state"/>
+                </tree>
+            </field>
+        </record>
+
+
+        <record id="act_list_pamvalide" model="ir.actions.act_window">
+            <field name="name">Validation d'une facture</field>
+            <field name="res_model">sngc.facture.pam</field>
+            <field name="view_mode">tree,form,kanban</field>
+            <field name="domain">[('state','=','FP')]</field>
+            <field name="context">{
+                'create': False,
+                'write': False,
+                'delete': False,
+                }
+            </field>
+            <field name="view_ids"
+                   eval="[(5, 0, 0),
+                          (0, 0, {'view_mode': 'tree', 'view_id': ref('view_pam_tree')}),
+                          (0, 0, {'view_mode': 'form', 'view_id': ref('view_pam_form')})]"/>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    Pas de factures à valider
+                </p>
+            </field>
+        </record>
+
+
+        <menuitem id="menu_pam" name ="Facturation PAM" sequence="5" parent="main_menu"/>
+        <menuitem id="menu_emettre_facture_pam" name ="Emettre une facture proforma" sequence="1" parent="menu_pam" action="act_list_facture_pam"
+        groups="sngc_facture.sngc_secretaire"/>
+        <menuitem id="menu_valider_facture_pam" name ="Valider facture définitive" sequence="2" parent="menu_pam" action="act_list_pamvalide"
+        groups="sngc_facture.sngc_directeur"/>
+        <menuitem id="menu_valider_facturem_pam" name ="Valider facture manutention" sequence="3" parent="menu_pam" action="act_list_facture_manut"
+        groups="sngc_facture.sngc_secretaire"/>
+        <menuitem id="menu_liste_facture_pam" name ="Liste des factures" sequence="4" parent="menu_pam" action="act_listpam"/>
+        <menuitem id="menu_liste_facturem_pam" name ="Liste des factures de manutentions" sequence="5" parent="menu_pam" action="act_listpamm"/>
+
+    </data>
+</odoo>

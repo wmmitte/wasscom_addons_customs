@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record model="ir.ui.view" id="article_view_form">
+            <field name="name">sngc.article.view.form</field>
+            <field name="model">sngc.article</field>
+            <field name="arch" type="xml">
+                <form string="Article">
+                    <sheet>
+                        <div class="oe_button_box" name="button_box">
+                            <button name="toggle_active" type="object" class="oe_stat_button" icon="fa-archive">
+                                <field name="active" widget="boolean_button" options='{"terminology": "archive"}'/>
+                            </button>
+                        </div>
+                        <group>
+                            <field name = "name" style = "width:50%"/>
+                            <field name = "description" style = "width:50%" invisible="1"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+
+        <record model="ir.ui.view" id="article_view_tree">
+            <field name="name">article.view.tree</field>
+            <field name="model">sngc.article</field>
+            <field name="arch" type="xml">
+                <tree string="Article">
+                    <field name = "name"/>
+                    <field name = "description"/>
+                    <field name = "active"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="act_list_article" model="ir.actions.act_window">
+            <field name="name">Liste des articles</field>
+            <field name="res_model">sngc.article</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+
+        <record model="ir.ui.view" id="type_article_view_form">
+            <field name="name">sngc.type.article.view.form</field>
+            <field name="model">sngc.type.article</field>
+            <field name="arch" type="xml">
+                <form string="Magasin">
+                    <sheet>
+                        <div class="oe_button_box" name="button_box">
+                            <button name="toggle_active" type="object" class="oe_stat_button" icon="fa-archive">
+                                <field name="active" widget="boolean_button" options='{"terminology": "archive"}'/>
+                            </button>
+                        </div>
+                        <group>
+                            <field name = "name" style = "width:50%"/>
+                            <field name = "description" style = "width:50%"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+
+        <record model="ir.ui.view" id="type_article_tree">
+            <field name="name">type.article.view.tree</field>
+            <field name="model">sngc.type.article</field>
+            <field name="arch" type="xml">
+                <tree string="Type de magasin">
+                    <field name = "name"/>
+                    <field name = "description"/>
+                    <field name = "active"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="act_list_type_article" model="ir.actions.act_window">
+            <field name="name">Liste des types articles</field>
+            <field name="res_model">sngc.type.article</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+
+        <record model="ir.ui.view" id="region_view_form">
+            <field name="name">sngc.region.view.form</field>
+            <field name="model">sngc.region</field>
+            <field name="arch" type="xml">
+                <form string="Magasin">
+                    <sheet>
+                        <div class="oe_button_box" name="button_box">
+                            <button name="toggle_active" type="object" class="oe_stat_button" icon="fa-archive">
+                                <field name="active" widget="boolean_button" options='{"terminology": "archive"}'/>
+                            </button>
+                        </div>
+                        <group>
+                            <field name = "name" style = "width:50%"/>
+                        </group>
+                        <notebook>
+                            <page string="Provinces">
+                                <field name="province_ids">
+                                    <tree editable="bottom">
+                                        <field name = "name" style = "width:50%"/>
+                                        <field name = "active" readonly="1"/>
+                                    </tree>
+                                </field>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+
+        <record model="ir.ui.view" id="region_tree">
+            <field name="name">region.view.tree</field>
+            <field name="model">sngc.region</field>
+            <field name="arch" type="xml">
+                <tree string="Liste des régions">
+                    <field name = "name"/>
+                    <field name = "active"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="act_list_region" model="ir.actions.act_window">
+            <field name="name">Régions/Provinces</field>
+            <field name="res_model">sngc.region</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <record model="ir.ui.view" id="province_view_form">
+            <field name="name">province.view.form</field>
+            <field name="model">sngc.province</field>
+            <field name="arch" type="xml">
+                <form string="Magasin" create="false">
+                    <sheet>
+                        <div class="oe_button_box" name="button_box">
+                            <button name="toggle_active" type="object" class="oe_stat_button" icon="fa-archive">
+                                <field name="active" widget="boolean_button" options='{"terminology": "archive"}'/>
+                            </button>
+                        </div>
+                        <group>
+                            <field name = "name" style = "width:50%" readonly="1"/>
+                        </group>
+                        <notebook>
+                            <page string="Départements/Villes">
+                                <field name="commune_ids">
+                                    <tree editable="bottom">
+                                        <field name = "name" style = "width:50%"/>
+                                        <field name = "active" readonly="1"/>
+                                    </tree>
+                                </field>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+
+        <record model="ir.ui.view" id="province_tree">
+            <field name="name">province.view.tree</field>
+            <field name="model">sngc.province</field>
+            <field name="arch" type="xml">
+                <tree string="Liste des provinces" create="false">
+                    <field name = "name"/>
+                    <field name = "active"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="act_list_province" model="ir.actions.act_window">
+            <field name="name">Provinces/Villes</field>
+            <field name="res_model">sngc.province</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+
+        <record model="ir.ui.view" id="ville_tree">
+            <field name="name">ville.view.tree</field>
+            <field name="model">sngc.ville</field>
+            <field name="arch" type="xml">
+                <tree string="Liste des provinces" create="false">
+                    <field name = "province_id"/>
+                    <field name = "name"/>
+                    <field name = "active"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="act_list_ville" model="ir.actions.act_window">
+            <field name="name">Liste des Villes</field>
+            <field name="res_model">sngc.ville</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+
+
+        <menuitem id="main_menu" name ="PAM-SONAGESS" sequence="1" web_icon="sngc_facture,static/description/icon.png" groups="sngc_facture.sngc_acces"/>
+        <menuitem id="main_menu_db" name ="Données de base" sequence="2" parent="main_menu"/>
+        <!--<menuitem id="menu_type_article" name = "Saisie/MàJ des Types d'articles" sequence="1" parent="main_menu_db" action="act_list_type_article"/>-->
+        <menuitem id="menu_article" name ="Saisie/MàJ des Articles" sequence="2" parent="main_menu_db" action="act_list_article"/>
+        <menuitem id="menu_region" name ="Saisie/MàJ des Régions" sequence="3" parent="main_menu_db" action="act_list_region"/>
+        <menuitem id="menu_province" name ="Saisie/MàJ des Provinces" sequence="4" parent="main_menu_db" action="act_list_province"/>
+        <menuitem id="menu_ville" name ="Saisie/MàJ des Villes" sequence="5" parent="main_menu_db" action="act_list_ville"/>
+
+
+    </data>
+</odoo>

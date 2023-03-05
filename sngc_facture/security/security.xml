@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+    <record id="sngc_category" model="ir.module.category">
+        <field name="name">GESTION MARCHANDISES</field>
+    </record>
+
+	<record id="sngc_acces" model="res.groups">
+        <field name="name">Accès appli</field>
+        <field name="category_id" ref="sngc_category"/>
+    </record>
+
+    <record id="sngc_secretaire" model="res.groups">
+        <field name="name">Sécrétaire</field>
+        <field name="category_id" ref="sngc_category"/>
+        <field name="implied_ids" eval="[(4, ref('sngc_facture.sngc_acces'))]"/>
+    </record>
+
+	<record id="sngc_directeur" model="res.groups">
+        <field name="name">Directeur</field>
+        <field name="category_id" ref="sngc_category"/>
+        <field name="implied_ids" eval="[(4, ref('sngc_facture.sngc_secretaire'))]"/>
+    </record>
+
+</odoo>

@@ -1,0 +1,593 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+		<template id="proforma">
+			<t t-set="o" t-value="o.with_context({'lang': lang})" />
+			<div class="page"
+				 style="page-break-after:always;page-break-inside: avoid;">
+				<br/>
+				<div style="text-align:right;">
+					<b style="font-size:15px;">Ouagadougou, le  </b>
+					<span style="font-size:15px;" t-field="o.dte" />
+				</div>
+				<br></br>
+				<h3 style="text-align:center;">
+					<div style="clear:both;"></div>
+					<br></br>
+					<div style="text-align:center;font-weight:bold;">
+						<u>FACTURE PROFORMA <span t-field="o.name" /></u>
+					</div>
+				</h3>
+				<br></br>
+				<div>
+					<div style="float:left;">
+						<b style="font-size:15px;">Doit: </b>
+						<span style="font-size:15px;" t-field="o.doit"/>
+						<br></br>
+						<b style="font-size:15px;">Objet: </b>
+						<span style="font-size:15px;" t-field="o.objet"/>
+					</div>
+
+					<div style="float:right;">
+						<b style="font-size:15px;">Région: </b>
+						<span style="font-size:15px;" t-field="o.region_id"/>
+						<br></br>
+						<b style="font-size:15px;">Départ: </b>
+						<span style="font-size:15px;" t-field="o.province_id"/>
+					</div>
+				</div>
+				<table
+						class="table table-bordered table-sm text-center border border-dark"
+						border="1" style="border-collapse: collapse;width: 100%;">
+					<tr>
+						<th style="background-color:#CCC" colspan="2">DESTINATION</th>
+						<th style="background-color:#CCC" colspan="1">NATURE</th>
+						<th style="background-color:#CCC" colspan="1">QUANTITE</th>
+						<th style="background-color:#CCC" colspan="1">DISTANCE</th>
+						<th style="background-color:#CCC" colspan="1">PRIX/TK</th>
+						<th style="background-color:#CCC" rowspan="2">Montant HTVA</th>
+						<th style="background-color:#CCC" rowspan="2">Montant TTC</th>
+					</tr>
+					<tr style="border:1px soild #000">
+						<th style="background-color:#CCC">Ville</th>
+						<th style="background-color:#CCC">Boutique</th>
+						<th style="background-color:#CCC">Céréale</th>
+						<th style="background-color:#CCC">Tonnes</th>
+						<th style="background-color:#CCC">Km</th>
+						<th style="background-color:#CCC">HTVA</th>
+					</tr>
+					<div>
+						<div t-foreach="o.facture_ids" t-as="p">
+							<tr style="border:1px soild #000">
+								<td style="border:1px soild #000">
+									<span t-field="p.ville_id"/>
+								</td>
+								<td style="border:1px soild #000">
+									<span t-field="p.boutique"/>
+								</td>
+								<td style="border:1px soild #000">
+									<span t-field="p.designation_id"/>
+								</td>
+								<td style="border:1px soild #000">
+									<span t-field="p.qte"/>
+								</td>
+								<td style="border:1px soild #000">
+									<span t-field="p.distance"/>
+								</td>
+								<td style="border:1px soild #000">
+									<span t-field="p.prix" />
+								</td>
+								<td style="border:1px soild #000">
+									<span t-esc="'{:,}'.format(int(p.montant_ht)).replace(',', ' ')"/>
+								</td>
+								<td style="border:1px soild #000; text-align:right">
+									<span t-esc="'{:,}'.format(int(p.montant_ttc)).replace(',', ' ')"/>
+								</td>
+							</tr>
+						</div>
+					</div>
+					<tr>
+						<td colspan ="7" style ="border : 2px solid #000000;">Totaux</td>
+						<td style = "border:2px solid; text-align:right;"><span t-esc="'{:,}'.format(int(sum([p.montant_ttc for p in o.facture_ids]))).replace(',', ' ')"/></td>
+					</tr>
+				</table>
+				<div>
+					<p>Arrêté la présente facture proforma à la somme de : <strong><span t-field="o.mnt_lettre" /> (<span t-field="o.total" />) Francs CFA </strong></p>
+				</div>
+				<div></div>
+				<div></div>
+				<div></div>
+				<div></div>
+				<table style="width:100% " width="100%" border="0">
+					<tr>
+						<td width="33%"></td>
+						<td width="33%"></td>
+						<td width="34%">
+							<div class="text-center">
+								<p>Le Directeur Général</p>
+								<br></br>
+								<br></br>
+								<br></br>
+								<br></br>
+								<span>M. Lassané COMPAORE</span>
+							</div>
+						</td>
+					</tr>
+				</table>
+				<div style="clear:both;"></div>
+			</div>
+		</template>
+
+
+		<template id="report_facture_pro">
+			<t t-call="web.html_container">
+				<t t-foreach="docs" t-as="o">
+					<t t-call="sngc_facture.proforma"
+					   t-lang="lang" />
+				</t>
+			</t>
+		</template>
+
+
+
+
+		<template id="definitive">
+			<t t-set="o" t-value="o.with_context({'lang': lang})" />
+			<div class="page"
+				 style="page-break-after:always;page-break-inside: avoid;">
+				<br/>
+				<div style="text-align:right;">
+					<b style="font-size:15px;">Ouagadougou, le  </b>
+					<span style="font-size:15px;" t-field="o.dte"/>
+				</div>
+				<br></br>
+				<h3 style="text-align:center;">
+					<div style="clear:both;"></div>
+					<br></br>
+					<div style="text-align:center;font-weight:bold;">
+						<u>FACTURE <span t-field="o.namef" /></u>
+					</div>
+				</h3>
+				<br></br>
+				<div>
+					<div style="float:left;">
+						<b style="font-size:15px;">Doit: </b>
+						<span style="font-size:15px;" t-field="o.doit"/>
+						<br></br>
+						<b style="font-size:15px;">Objet: </b>
+						<span style="font-size:15px;" t-field="o.objet"/>
+					</div>
+
+					<div style="float:right;">
+						<b style="font-size:15px;">Région: </b>
+						<span style="font-size:15px;" t-field="o.region_id"/>
+						<br></br>
+						<b style="font-size:15px;">Départ: </b>
+						<span style="font-size:15px;" t-field="o.province_id"/>
+					</div>
+				</div>
+				<table
+						class="table table-bordered table-sm text-center border border-dark"
+						border="1" style="border-collapse: collapse;width: 100%;">
+					<tr>
+						<th style="background-color:#CCC" colspan="2">DESTINATION</th>
+						<th style="background-color:#CCC" colspan="1">NATURE</th>
+						<th style="background-color:#CCC" colspan="1">QUANTITE</th>
+						<th style="background-color:#CCC" colspan="1">DISTANCE</th>
+						<th style="background-color:#CCC" colspan="1">PRIX/TK</th>
+						<th style="background-color:#CCC" rowspan="2">Montant HTVA</th>
+						<th style="background-color:#CCC" rowspan="2">Montant TTC</th>
+					</tr>
+					<tr style="border:1px soild #000">
+						<th style="background-color:#CCC">Ville</th>
+						<th style="background-color:#CCC">Boutique</th>
+						<th style="background-color:#CCC">Céréale</th>
+						<th style="background-color:#CCC">Tonnes</th>
+						<th style="background-color:#CCC">Km</th>
+						<th style="background-color:#CCC">HTVA</th>
+					</tr>
+					<div>
+						<div t-foreach="o.facture_ids" t-as="p">
+							<tr style="border:1px soild #000">
+								<td style="border:1px soild #000">
+									<span t-field="p.ville_id"/>
+								</td>
+								<td style="border:1px soild #000">
+									<span t-field="p.boutique"/>
+								</td>
+								<td style="border:1px soild #000">
+									<span t-field="p.designation_id"/>
+								</td>
+								<td style="border:1px soild #000">
+									<span t-field="p.qte"/>
+								</td>
+								<td style="border:1px soild #000">
+									<span t-field="p.distance"/>
+								</td>
+								<td style="border:1px soild #000">
+									<span t-field="p.prix" />
+								</td>
+								<td style="border:1px soild #000">
+									<span t-esc="'{:,}'.format(int(p.montant_ht)).replace(',', ' ')"/>
+								</td>
+								<td style="border:1px soild #000; text-align:right">
+									<span t-esc="'{:,}'.format(int(p.montant_ttc)).replace(',', ' ')"/>
+								</td>
+							</tr>
+						</div>
+					</div>
+					<tr>
+						<td colspan ="7" style ="border : 2px solid #000000;">Totaux</td>
+						<td style = "border:2px solid; text-align:right;"><span t-esc="'{:,}'.format(int(sum([p.montant_ttc for p in o.facture_ids]))).replace(',', ' ')"/></td>
+					</tr>
+				</table>
+				<div>
+					<p>Arrêté la présente facture à la somme de : <strong><span t-field="o.mnt_lettre" /> (<span t-field="o.total" />) Francs CFA </strong></p>
+				</div>
+				<div></div>
+				<div></div>
+				<div></div>
+				<div></div>
+				<table style="width:100% " width="100%" border="0">
+					<tr>
+						<td width="33%"></td>
+						<td width="33%"></td>
+						<td width="34%">
+							<div class="text-center">
+								<p>Le Directeur Général</p>
+								<br></br>
+								<br></br>
+								<br></br>
+								<br></br>
+								<span>M. Lassané COMPAORE</span>
+							</div>
+						</td>
+					</tr>
+				</table>
+				<div style="clear:both;"></div>
+			</div>
+		</template>
+
+
+		<template id="report_facture_def">
+			<t t-call="web.html_container">
+				<t t-foreach="docs" t-as="o">
+					<t t-call="sngc_facture.definitive"
+					   t-lang="lang" />
+				</t>
+			</t>
+		</template>
+
+
+		<template id="proforma_pam">
+			<t t-set="o" t-value="o.with_context({'lang': lang})" />
+			<div class="page"
+				 style="page-break-after:always;page-break-inside: avoid;">
+				<br/>
+				<div style="text-align:right;">
+					<b style="font-size:15px;">Ouagadougou, le  </b>
+					<span style="font-size:15px;" t-field="o.dte"/>
+				</div>
+				<br></br>
+				<h3 style="text-align:center;">
+					<div style="clear:both;"></div>
+					<br></br>
+					<div style="text-align:center;font-weight:bold;">
+						<u>FACTURE PROFORMA <span t-field="o.name" /></u><br/>
+						<b style="font-size:15px;">Vendor: </b> <span style="font-size:15px;" t-field="o.vendor"/>
+					</div>
+				</h3>
+				<br></br>
+				<div>
+					<div style="float:left;">
+						<b style="font-size:15px;">Doit: </b>
+						<span style="font-size:15px;" t-field="o.doit"/>
+						<br></br>
+						<b style="font-size:15px;">Objet: </b>
+						<span style="font-size:15px;" t-field="o.objet"/>
+					</div>
+				</div>
+				<table
+						class="table table-bordered table-sm text-center border border-dark"
+						border="1" style="border-collapse: collapse;width: 100%;">
+					<tr>
+						<th style="background-color:#CCC">N°</th>
+						<th style="background-color:#CCC">Destination</th>
+						<th style="background-color:#CCC">N° TPO</th>
+						<th style="background-color:#CCC">N° STO</th>
+						<th style="background-color:#CCC">Quantité</th>
+						<th style="background-color:#CCC">Prix unitaire en FCFA</th>
+						<th style="background-color:#CCC">Prix total en FCFA</th>
+					</tr>
+					<div>
+						<div t-foreach="o.facture_ids" t-as="p">
+							<tr style="border:1px soild #000">
+								<td style="border:1px soild #000">
+								</td>
+								<td style="border:1px soild #000">
+									<span t-field="p.designation"/>
+								</td>
+								<td style="border:1px soild #000">
+									<span t-field="p.tpo"/>
+								</td>
+								<td style="border:1px soild #000">
+									<span t-field="p.sto"/>
+								</td>
+								<td style="border:1px soild #000">
+									<span t-field="p.qte"/>
+								</td>
+								<td style="border:1px soild #000">
+									<span t-esc="'{:,}'.format(int(p.prix)).replace(',', ' ')"/>
+								</td>
+								<td style="border:1px soild #000">
+									<span t-esc="'{:,}'.format(int(p.montant)).replace(',', ' ')"/>
+								</td>
+							</tr>
+						</div>
+					</div>
+					<tr>
+						<td colspan ="6" style ="border : 2px solid #000000;">Montant total</td>
+						<td style = "border:2px solid; text-align:right;"><span t-esc="'{:,}'.format(int(sum([p.montant for p in o.facture_ids]))).replace(',', ' ')"/></td>
+					</tr>
+				</table>
+				<div>
+					<p>Arrêté la présente facture proforma à la somme de : <strong><span t-field="o.mnt_lettre" /> (<span t-field="o.total" />) Francs CFA </strong></p>
+				</div>
+				<div></div>
+				<div></div>
+				<div></div>
+				<div></div>
+				<table style="width:100% " width="100%" border="0">
+					<tr>
+						<td width="33%"></td>
+						<td width="33%"></td>
+						<td width="34%">
+							<div class="text-center">
+								<p>Le Directeur Général</p>
+								<br></br>
+								<br></br>
+								<br></br>
+								<br></br>
+								<span>M. Lassané COMPAORE</span>
+							</div>
+						</td>
+					</tr>
+				</table>
+				<div style="clear:both;"></div>
+			</div>
+		</template>
+
+
+		<template id="report_facture_prop">
+			<t t-call="web.html_container">
+				<t t-foreach="docs" t-as="o">
+					<t t-call="sngc_facture.proforma_pam"
+					   t-lang="lang" />
+				</t>
+			</t>
+		</template>
+
+
+
+		<template id="definitive_pam">
+			<t t-set="o" t-value="o.with_context({'lang': lang})" />
+			<div class="page"
+				 style="page-break-after:always;page-break-inside: avoid;">
+				<br/>
+				<div style="text-align:right;">
+					<b style="font-size:15px;">Ouagadougou, le  </b>
+					<span style="font-size:15px;" t-field="o.dte"/>
+				</div>
+				<br></br>
+				<h3 style="text-align:center;">
+					<div style="clear:both;"></div>
+					<br></br>
+					<div style="text-align:center;font-weight:bold;">
+						<u>FACTURE <span t-field="o.namef" /></u><br/>
+						<b style="font-size:15px;">Vendor: </b> <span style="font-size:15px;" t-field="o.vendor"/>
+					</div>
+				</h3>
+				<br></br>
+				<div>
+					<div style="float:left;">
+						<b style="font-size:15px;">Doit: </b>
+						<span style="font-size:15px;" t-field="o.doit"/>
+						<br></br>
+						<b style="font-size:15px;">Objet: </b>
+						<span style="font-size:15px;" t-field="o.objet"/>
+					</div>
+				</div>
+				<table
+						class="table table-bordered table-sm text-center border border-dark"
+						border="1" style="border-collapse: collapse;width: 100%;">
+					<tr>
+						<th style="background-color:#CCC">N°</th>
+						<th style="background-color:#CCC">Destination</th>
+						<th style="background-color:#CCC">N° TPO</th>
+						<th style="background-color:#CCC">N° STO</th>
+						<th style="background-color:#CCC">Quantité</th>
+						<th style="background-color:#CCC">Prix unitaire en FCFA</th>
+						<th style="background-color:#CCC">Prix total en FCFA</th>
+					</tr>
+					<div>
+						<div t-foreach="o.facture_ids" t-as="p">
+							<tr style="border:1px soild #000">
+								<td style="border:1px soild #000">
+								</td>
+								<td style="border:1px soild #000">
+									<span t-field="p.designation"/>
+								</td>
+								<td style="border:1px soild #000">
+									<span t-field="p.tpo"/>
+								</td>
+								<td style="border:1px soild #000">
+									<span t-field="p.sto"/>
+								</td>
+								<td style="border:1px soild #000">
+									<span t-field="p.qte"/>
+								</td>
+								<td style="border:1px soild #000">
+									<span t-esc="'{:,}'.format(int(p.prix)).replace(',', ' ')"/>
+								</td>
+								<td style="border:1px soild #000">
+									<span t-esc="'{:,}'.format(int(p.montant)).replace(',', ' ')"/>
+								</td>
+							</tr>
+						</div>
+					</div>
+					<tr>
+						<td colspan ="6" style ="border : 2px solid #000000;">Montant total</td>
+						<td style = "border:2px solid; text-align:right;"><span t-esc="'{:,}'.format(int(sum([p.montant for p in o.facture_ids]))).replace(',', ' ')"/></td>
+					</tr>
+				</table>
+				<div>
+					<p>Arrêté la présente facture à la somme de : <strong><span t-field="o.mnt_lettre" /> (<span t-field="o.total" />) Francs CFA </strong></p>
+				</div>
+				<div></div>
+				<div></div>
+				<div></div>
+				<div></div>
+				<table style="width:100% " width="100%" border="0">
+					<tr>
+						<td width="33%"></td>
+						<td width="33%"></td>
+						<td width="34%">
+							<div class="text-center">
+								<p>Le Directeur Général</p>
+								<br></br>
+								<br></br>
+								<br></br>
+								<br></br>
+								<span>M. Lassané COMPAORE</span>
+							</div>
+						</td>
+					</tr>
+				</table>
+				<div style="clear:both;"></div>
+			</div>
+		</template>
+
+
+		<template id="report_facture_defp">
+			<t t-call="web.html_container">
+				<t t-foreach="docs" t-as="o">
+					<t t-call="sngc_facture.definitive_pam"
+					   t-lang="lang" />
+				</t>
+			</t>
+		</template>
+
+
+
+		<template id="manut">
+			<t t-set="o" t-value="o.with_context({'lang': lang})" />
+			<div class="page"
+				 style="page-break-after:always;page-break-inside: avoid;">
+				<br/>
+				<div style="text-align:right;">
+					<b style="font-size:15px;">Ouagadougou, le  </b>
+					<span style="font-size:15px;" t-field="o.dte"/>
+				</div>
+				<br></br>
+				<h3 style="text-align:center;">
+					<div style="clear:both;"></div>
+					<br></br>
+					<div style="text-align:center;font-weight:bold;">
+						<u>FACTURE PROFORMA <span t-field="o.name" /></u><br/>
+						<b style="font-size:15px;">Vendor: </b> <span style="font-size:15px;" t-field="o.vendor"/>
+					</div>
+				</h3>
+				<br></br>
+				<div>
+					<div style="float:left;">
+						<b style="font-size:15px;">Doit: </b>
+						<span style="font-size:15px;" t-field="o.doit"/>
+						<br></br>
+						<b style="font-size:15px;">Objet: </b>
+						<span style="font-size:15px;" t-field="o.objet"/>
+					</div>
+				</div>
+				<table
+						class="table table-bordered table-sm text-center border border-dark"
+						border="1" style="border-collapse: collapse;width: 100%;">
+					<tr>
+						<th style="background-color:#CCC">N°</th>
+						<th style="background-color:#CCC">Destination</th>
+						<th style="background-color:#CCC">N° TPO</th>
+						<th style="background-color:#CCC">N° STO</th>
+						<th style="background-color:#CCC">Quantité</th>
+						<th style="background-color:#CCC">Prix unitaire en FCFA</th>
+						<th style="background-color:#CCC">Prix total en FCFA</th>
+					</tr>
+					<div>
+						<div t-foreach="o.manutention_ids" t-as="p">
+							<tr style="border:1px soild #000">
+								<td style="border:1px soild #000">
+								</td>
+								<td style="border:1px soild #000">
+									<span t-field="p.designation"/>
+								</td>
+								<td style="border:1px soild #000">
+									<span t-field="p.tpo"/>
+								</td>
+								<td style="border:1px soild #000">
+									<span t-field="p.sto"/>
+								</td>
+								<td style="border:1px soild #000">
+									<span t-field="p.qte"/>
+								</td>
+								<td style="border:1px soild #000">
+									<span t-field="p.prix_manut"/>
+									<span t-esc="'{:,}'.format(int(p.prix_manut)).replace(',', ' ')"/>
+								</td>
+								<td style="border:1px soild #000">
+									<span t-esc="'{:,}'.format(int(p.manut_total)).replace(',', ' ')"/>
+								</td>
+							</tr>
+						</div>
+					</div>
+					<tr>
+						<td colspan ="6" style ="border : 2px solid #000000;">Montant total</td>
+						<td style = "border:2px solid; text-align:right;"><span t-esc="'{:,}'.format(int(sum([p.montant for p in o.manutention_ids]))).replace(',', ' ')"/></td>
+					</tr>
+				</table>
+				<div>
+					<p>Arrêté la présente facture à la somme de : <strong><span t-field="o.mnt_lettre" /> (<span t-field="o.total" />) Francs CFA </strong></p>
+				</div>
+				<div></div>
+				<div></div>
+				<div></div>
+				<div></div>
+				<table style="width:100% " width="100%" border="0">
+					<tr>
+						<td width="33%"></td>
+						<td width="33%"></td>
+						<td width="34%">
+							<div class="text-center">
+								<p>Le Directeur Général</p>
+								<br></br>
+								<br></br>
+								<br></br>
+								<br></br>
+								<span>M. Lassané COMPAORE</span>
+							</div>
+						</td>
+					</tr>
+				</table>
+				<div style="clear:both;"></div>
+			</div>
+		</template>
+
+
+		<template id="report_facture_manut">
+			<t t-call="web.html_container">
+				<t t-foreach="docs" t-as="o">
+					<t t-call="sngc_facture.manut"
+					   t-lang="lang" />
+				</t>
+			</t>
+		</template>
+
+
+	</data>
+</odoo>
