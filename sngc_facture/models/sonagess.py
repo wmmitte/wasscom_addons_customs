@@ -85,11 +85,11 @@ class SngcFactureSonagess(models.Model):
             facture.total_tonne = sum(item.qte for item in facture.facture_ids)
             if facture.manut_existe is False:
                 facture.total = sum(item.montant_ttc for item in facture.facture_ids)
-                text += num2words(self.x_total_facture, lang='fr')
+                text += num2words(self.total, lang='fr')
                 self.mnt_lettre = text
             else:
                 facture.total = sum(item.montant_ttc for item in facture.facture_ids) + (facture.frais_manut * facture.total_tonne)
-                text += num2words(self.x_total_facture, lang='fr')
+                text += num2words(self.total, lang='fr')
                 self.mnt_lettre = text
 
 

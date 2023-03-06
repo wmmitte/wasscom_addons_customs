@@ -143,7 +143,7 @@ class SngcManutention(models.Model):
         for facture in self:
             text = ''
             facture.total = sum(item.manut_total for item in facture.manutention_ids)
-            text += num2words(self.x_total_facture, lang='fr')
+            text += num2words(self.total, lang='fr')
             self.mnt_lettre = text
 
 
