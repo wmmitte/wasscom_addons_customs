@@ -9,9 +9,7 @@
             <field name="arch" type="xml">
                 <form string="Marches" delete="false">
                     <header>
-                        <button name="confirmer" string="Confirmer" type="object" class="oe_highlight"
-                                attrs="{'invisible' : [('state', 'not in', ['draft'])]}"
-                                style="background-color: #28a745; border-color: #28a745;"/>
+                        <button name="confirmer" string="Confirmer" type="object" class="oe_highlight" attrs="{'invisible' : [('state', 'not in', ['draft'])]}" style="background-color: #28a745; border-color: #28a745;"/>
                         <field name="state" widget="statusbar"/>
                     </header>
                     <sheet>
@@ -77,8 +75,7 @@
                 'delete': False,
                 }
             </field>
-            <field name="view_ids"
-                   eval="[(5, 0, 0),
+            <field name="view_ids" eval="[(5, 0, 0),
                           (0, 0, {'view_mode': 'tree', 'view_id': ref('view_sngc_pam_tree')}),
                           (0, 0, {'view_mode': 'form', 'view_id': ref('view_sngc_pam_form')})]"/>
             <field name="help" type="html">
@@ -109,9 +106,7 @@
             <field name="arch" type="xml">
                 <form string="Marches" delete="false">
                     <header>
-                        <button name="valider" string="Valider" type="object" class="oe_highlight"
-                                attrs="{'invisible' : [('state', 'not in', ['draft'])]}"
-                                style="background-color: #28a745; border-color: #28a745;"/>
+                        <button name="valider" string="Valider" type="object" class="oe_highlight" attrs="{'invisible' : [('state', 'not in', ['draft'])]}" style="background-color: #28a745; border-color: #28a745;"/>
                         <field name="state" widget="statusbar"/>
                     </header>
                     <sheet>
@@ -195,9 +190,7 @@
             <field name="arch" type="xml">
                 <form string="Marches" delete="false">
                     <header>
-                        <button name="valider" string="Valider facture" type="object" class="oe_highlight"
-                                attrs="{'invisible' : [('state', 'not in', ['FP'])]}"
-                                style="background-color: #28a745; border-color: #28a745;"/>
+                        <button name="valider" string="Valider facture" type="object" class="oe_highlight" attrs="{'invisible' : [('state', 'not in', ['FP'])]}" style="background-color: #28a745; border-color: #28a745;"/>
                         <field name="state" widget="statusbar"/>
                     </header>
                     <sheet>
@@ -267,8 +260,7 @@
                 'delete': False,
                 }
             </field>
-            <field name="view_ids"
-                   eval="[(5, 0, 0),
+            <field name="view_ids" eval="[(5, 0, 0),
                           (0, 0, {'view_mode': 'tree', 'view_id': ref('view_pam_tree')}),
                           (0, 0, {'view_mode': 'form', 'view_id': ref('view_pam_form')})]"/>
             <field name="help" type="html">
@@ -279,13 +271,10 @@
         </record>
 
 
-        <menuitem id="menu_pam" name ="Facturation PAM" sequence="5" parent="main_menu"/>
-        <menuitem id="menu_emettre_facture_pam" name ="Emettre une facture proforma" sequence="1" parent="menu_pam" action="act_list_facture_pam"
-        groups="sngc_facture.sngc_secretaire"/>
-        <menuitem id="menu_valider_facture_pam" name ="Valider facture définitive" sequence="2" parent="menu_pam" action="act_list_pamvalide"
-        groups="sngc_facture.sngc_directeur"/>
-        <menuitem id="menu_valider_facturem_pam" name ="Valider facture manutention" sequence="3" parent="menu_pam" action="act_list_facture_manut"
-        groups="sngc_facture.sngc_secretaire"/>
+        <menuitem id="menu_pam" name ="PAM" sequence="3" parent="main_menu"/>
+        <menuitem id="menu_emettre_facture_pam" name ="Emettre une facture proforma" sequence="1" parent="menu_pam" action="act_list_facture_pam" groups="sngc_facture.sngc_secretaire"/>
+        <menuitem id="menu_valider_facture_pam" name ="Valider facture définitive" sequence="2" parent="menu_pam" action="act_list_pamvalide" groups="sngc_facture.sngc_directeur"/>
+        <menuitem id="menu_valider_facturem_pam" name ="Valider facture manutention" sequence="3" parent="menu_pam" action="act_list_facture_manut" groups="sngc_facture.sngc_secretaire"/>
         <menuitem id="menu_liste_facture_pam" name ="Liste des factures" sequence="4" parent="menu_pam" action="act_listpam"/>
         <menuitem id="menu_liste_facturem_pam" name ="Liste des factures de manutentions" sequence="5" parent="menu_pam" action="act_listpamm"/>
 

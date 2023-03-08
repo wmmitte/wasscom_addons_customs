@@ -10,9 +10,7 @@
             <field name="arch" type="xml">
                 <form string="Marches" delete="false">
                     <header>
-                        <button name="confirmer" string="Confirmer" type="object" class="oe_highlight"
-                                attrs="{'invisible' : [('state', 'not in', ['draft'])]}"
-                                style="background-color: #28a745; border-color: #28a745;"/>
+                        <button name="confirmer" string="Confirmer" type="object" class="oe_highlight" attrs="{'invisible' : [('state', 'not in', ['draft'])]}" style="background-color: #28a745; border-color: #28a745;"/>
                         <field name="state" widget="statusbar"/>
                     </header>
                     <sheet>
@@ -31,8 +29,7 @@
                                 <field name="region_id" style = "width:100%"/>
                                 <field name="province_id" style = "width:100%" domain = "[('region_id.id', '=', region_id)]"/>
                                 <field name="manut_existe" style = "width:50%"/>
-                                <field name="frais_manut" style = "width:50%"
-                                       attrs="{'invisible' : [('manut_existe', 'in', False)]}"/>
+                                <field name="frais_manut" style = "width:50%" attrs="{'invisible' : [('manut_existe', 'in', False)]}"/>
                                 <field name="total" style = "width:50%"/>
                                 <field name="total_tonne" style = "width:50%" invisible="1"/>
                                 <field name="company_id" style = "width:50%" invisible="1"/>
@@ -85,8 +82,7 @@
                 'delete': False,
                 }
             </field>
-            <field name="view_ids"
-                   eval="[(5, 0, 0),
+            <field name="view_ids" eval="[(5, 0, 0),
                           (0, 0, {'view_mode': 'tree', 'view_id': ref('view_sngc_sonagess_tree')}),
                           (0, 0, {'view_mode': 'form', 'view_id': ref('view_sngc_sonagess_form')})]"/>
             <field name="help" type="html">
@@ -118,9 +114,7 @@
             <field name="arch" type="xml">
                 <form string="Marches" delete="false">
                     <header>
-                        <button name="valider" string="Valider facture" type="object" class="oe_highlight"
-                                attrs="{'invisible' : [('state', 'not in', ['FP'])]}"
-                                style="background-color: #28a745; border-color: #28a745;"/>
+                        <button name="valider" string="Valider facture" type="object" class="oe_highlight" attrs="{'invisible' : [('state', 'not in', ['FP'])]}" style="background-color: #28a745; border-color: #28a745;"/>
                         <field name="state" widget="statusbar"/>
                     </header>
                     <sheet>
@@ -139,8 +133,7 @@
                                 <field name="region_id" style = "width:100%"/>
                                 <field name="province_id" style = "width:100%" domain = "[('region_id.id', '=', region_id)]"/>
                                 <field name="manut_existe" style = "width:50%"/>
-                                <field name="frais_manut" style = "width:50%"
-                                       attrs="{'invisible' : [('manut_existe', 'in', False)]}"/>
+                                <field name="frais_manut" style = "width:50%" attrs="{'invisible' : [('manut_existe', 'in', False)]}"/>
                                 <field name="total" style = "width:50%"/>
                                 <field name="total_tonne" style = "width:50%" invisible="1"/>
                                 <field name="company_id" style = "width:50%" invisible="1"/>
@@ -173,7 +166,7 @@
             <field name="name">sngc.facture.sonagess.tree</field>
             <field name="model">sngc.facture.sonagess</field>
             <field name="arch" type="xml">
-                <tree string="Liste des sonagess" delete="false" decoration-info="state == 'FP'" decoration-success="state == 'V'" >
+                <tree string="Liste des sonagess" delete="false" decoration-info="state == 'FP'" decoration-success="state == 'V'">
                     <field name = "dte"/>
                     <field name = "namef"/>
                     <field name = "name"/>
@@ -198,8 +191,7 @@
                 'delete': False,
                 }
             </field>
-            <field name="view_ids"
-                   eval="[(5, 0, 0),
+            <field name="view_ids" eval="[(5, 0, 0),
                           (0, 0, {'view_mode': 'tree', 'view_id': ref('view_sonagess_tree')}),
                           (0, 0, {'view_mode': 'form', 'view_id': ref('view_sonagess_form')})]"/>
             <field name="help" type="html">
@@ -211,12 +203,10 @@
 
 
 
-        <menuitem id="menu_sonagess" name ="Facturation SONAGESS" sequence="3" parent="main_menu"/>
-        <menuitem id="menu_emettre_facture" name ="Emettre une facture proforma" sequence="1" parent="menu_sonagess" action="act_list_sonagess"
-        groups="sngc_facture.sngc_secretaire"/>
-        <menuitem id="menu_valider_facture" name ="Valider facture définitive" sequence="2" parent="menu_sonagess" action="act_list_facture_avalider"
-        groups="sngc_facture.sngc_directeur"/>
-        <menuitem id="menu_liste_facture" name ="Liste des factures" sequence="3" parent="menu_sonagess" action="act_list"/>
+        <menuitem id="menu_sonagess" name ="SONAGESS" sequence="2" parent="main_menu"/>
+        <menuitem id="menu_emettre_facture" name ="Nouv. facture proforma - sonagess" sequence="1" parent="menu_sonagess" action="act_list_sonagess" groups="sngc_facture.sngc_secretaire"/>
+        <menuitem id="menu_valider_facture" name ="Valider facture définitive - sonagess" sequence="2" parent="menu_sonagess" action="act_list_facture_avalider" groups="sngc_facture.sngc_directeur"/>
+        <menuitem id="menu_liste_facture" name ="Liste factures - sonagess" sequence="3" parent="menu_sonagess" action="act_list"/>
 
     </data>
 </odoo>

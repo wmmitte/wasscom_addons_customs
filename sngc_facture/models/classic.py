@@ -42,7 +42,7 @@ class SngcFactureClassicLine(models.Model):
     _name = "sngc.facture.classic.line"
 
     facture_id = fields.Many2one("sngc.facture.classic", ondelete="cascade")
-    designation_id = fields.Many2one("sngc.article", "Désignation", required=True)
+    designation_id = fields.Many2one("sngc.article", "Article", required=True)
     qte = fields.Float("Qté(Tonnes)", required=True)
     prix = fields.Float("Prix (HTVA)", required=True)
     montant_ht = fields.Float("Montant HTVA", store=True, compute='_calcul')

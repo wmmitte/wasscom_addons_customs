@@ -198,12 +198,12 @@
 
 
         <menuitem id="main_menu" name ="PAM-SONAGESS" sequence="5" web_icon="sngc_facture,static/description/icon.png" groups="sngc_facture.sngc_acces"/>
-        <menuitem id="main_menu_db" name ="Données de base" sequence="2" parent="main_menu"/>
+        <menuitem id="main_menu_db" name ="Paramètres" sequence="4" parent="main_menu"/>
         <!--<menuitem id="menu_type_article" name = "Saisie/MàJ des Types d'articles" sequence="1" parent="main_menu_db" action="act_list_type_article"/>-->
         <menuitem id="menu_article" name ="Saisie/MàJ des Articles" sequence="2" parent="main_menu_db" action="act_list_article"/>
         <menuitem id="menu_region" name ="Saisie/MàJ des Régions" sequence="3" parent="main_menu_db" action="act_list_region"/>
         <menuitem id="menu_province" name ="Saisie/MàJ des Provinces" sequence="4" parent="main_menu_db" action="act_list_province"/>
-        <menuitem id="menu_ville" name ="Saisie/MàJ des Villes" sequence="5" parent="main_menu_db" action="act_list_ville"/>
+        <menuitem id="menu_ville" name ="Saisie/MàJ des Villes/Localités" sequence="5" parent="main_menu_db" action="act_list_ville"/>
 
 
     </data>

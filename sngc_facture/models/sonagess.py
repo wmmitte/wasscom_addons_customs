@@ -14,11 +14,11 @@ class SngcFactureSonagess(models.Model):
     dte = fields.Date("Date", default=date.today(), required=True, states={'V': [('readonly', True)]})
     region_id = fields.Many2one("sngc.region", "Région", required=True, states={'V': [('readonly', True)]})
     province_id = fields.Many2one("sngc.province", "Départ", required=True, states={'V': [('readonly', True)]})
-    doit = fields.Char("Doit :", default='Société Nationale de Gestion de Stock et de Sécurité Alimentaire')
-    total = fields.Float("Total", store=True, compute="_total")
-    total_tonne = fields.Float("Total tonnes", store=True, compute="_total")
+    doit = fields.Char("Doit :", default='Société Nationale de Gestion de Stock et de Sécurité Alimentaire (SONAGESS)')
+    total = fields.Float("Total",digits=(12,3), store=True, compute="_total")
+    total_tonne = fields.Float("Total tonnes",digits=(12,3), store=True, compute="_total")
     manut_existe = fields.Boolean("Manutention ?", default=False, states={'V': [('readonly', True)]})
-    frais_manut = fields.Float('Montant/Tonne', states={'V': [('readonly', True)]})
+    frais_manut = fields.Float('Montant/Tonne',digits=(12,3), states={'V': [('readonly', True)]})
     objet = fields.Text("Objet", required=True, states={'V': [('readonly', True)]})
     company_id = fields.Many2one('res.company', readonly=True,
                                  default=lambda self: self.env.user.company_id.id)
@@ -97,14 +97,14 @@ class SngcFactureSonagessLine(models.Model):
     _name = "sngc.facture.sonagess.line"
 
     facture_id = fields.Many2one("sngc.facture.sonagess", ondelete="cascade")
-    ville_id = fields.Many2one("sngc.ville", "Ville", required=True)
+    ville_id = fields.Many2one("sngc.ville", "Ville/Localité", required=True)
     boutique = fields.Integer("Boutique", required=True)
-    designation_id = fields.Many2one("sngc.article", "Désignation", required=True)
-    qte = fields.Float("Qté(Tonnes)", required=True)
-    prix = fields.Float("Prix/TK (HTVA)", required=True)
-    montant_ht = fields.Float("Montant HTVA", store=True, compute='_calcul')
-    montant_ttc = fields.Float("Montant TTC", store=True, compute='_calcul')
-    distance = fields.Float("Distance(Km)")
+    designation_id = fields.Many2one("sngc.article", "Article", required=True)
+    qte = fields.Float("Qté (Tonnes)",digits=(12,3), required=True)
+    prix = fields.Float("Prix/TK (HTVA)",digits=(12,3), required=True)
+    montant_ht = fields.Float("Montant HTVA",digits=(12,3), store=True, compute='_calcul')
+    montant_ttc = fields.Float("Montant TTC",digits=(12,3), store=True, compute='_calcul')
+    distance = fields.Float("Distance (Km)")
 
     @api.depends('qte', 'distance', 'prix')
     def _calcul(self):
