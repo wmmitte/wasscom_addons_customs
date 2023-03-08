@@ -174,7 +174,7 @@ class SngcManutention(models.Model):
                 numero = str(numero).zfill(3)
             else:
                 self.env['sngc.compteur.pam'].create({
-                    'nombref': 1,
+                    'nombre': 1,
                     'annee': val_annee,
                     'company_id': val.company_id.id})
                 numero = str(numero).zfill(3)
