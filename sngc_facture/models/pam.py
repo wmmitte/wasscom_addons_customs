@@ -169,8 +169,8 @@ class SngcManutention(models.Model):
                 [('annee', '=', val_annee), ('company_id', '=', val.company_id.id)])
             numero = 1
             if resultat:
-                numero = resultat.nombrep + 1
-                resultat.nombrep = numero
+                numero = resultat.nombre + 1
+                resultat.nombre = numero
                 numero = str(numero).zfill(3)
             else:
                 self.env['sngc.compteur.pam'].create({
