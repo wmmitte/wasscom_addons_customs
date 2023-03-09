@@ -18,7 +18,7 @@ class SngcFacturePam(models.Model):
     total = fields.Float("Total", store=True, compute="_total")
     objet = fields.Text("Objet", required=True, states={'V': [('readonly', True)]})
     mnt_lettre = fields.Char(string='Montant en lettre')
-    state = fields.Selection([('draft', 'Brouillon'), ('FP', 'Facture Proforma'), ('V', 'Validé'), ('A', 'Annulé')],
+    state = fields.Selection([('draft', 'Brouillon'), ('FP', 'Facture Proforma'), ('V', 'Validée'),('C', 'Cloturée'), ('A', 'Annulée')],
                              default='draft', string="Etat")
     company_id = fields.Many2one('res.company', readonly=True,
                                  default=lambda self: self.env.user.company_id.id)
@@ -128,7 +128,7 @@ class SngcManutention(models.Model):
     dte = fields.Date("Date", readonly=True)
     name = fields.Char("N° Facture", readonly=True)
     vendor = fields.Integer("N° Vendor", readonly=True, default=50085944)
-    doit = fields.Char("Doit :", default='Programme Alimentaire Mondial (PAAM)', readonly=True)
+    doit = fields.Char("Doit :", default='Programme Alimentaire Mondial (PAM)', readonly=True)
     total = fields.Float("Total", digits=(12,3), store=True, compute='_sum_total')
     objet = fields.Text("Objet", required=True, states={'V': [('readonly', True)]})
     state = fields.Selection([('draft', 'Brouillon'), ('V', 'Validé')],
@@ -159,6 +159,8 @@ class SngcManutention(models.Model):
     def valider(self):
         self.act_numerop()
         self.state = 'V'
+        factpam = self.env['sngc.facture.pam'].search([('id','=',self.facture_id.id)])
+        factpam.update({'state': 'C'})
 
     def act_numerop(self):
         annee = date.today()

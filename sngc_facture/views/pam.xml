@@ -164,19 +164,20 @@
         <record id="act_list_facture_manut" model="ir.actions.act_window">
             <field name="name">Valider facture de manutentions</field>
             <field name="res_model">sngc.manutention</field>
-            <field name="view_mode">tree,form</field>
+            <field name="view_mode">form</field>
         </record>
 
 
         <record model="ir.actions.act_window" id="act_listpamm">
             <field name="name">Liste des factures de manutentions</field>
             <field name="res_model">sngc.manutention</field>
-            <field name="view_mode">tree,form</field>
+            <field name="view_mode">tree</field>
             <field name="domain">['|', ('state','=','draft'), ('state','=','V')]</field>
             <field name="context">{
                 'create': False,
                 'write': False,
                 'delete': False,
+                'edit': False,
                 }
             </field>
         </record>
