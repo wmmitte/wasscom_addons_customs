@@ -29,7 +29,7 @@
     'summary': """
 The new configurable Odoo Web Login Screen
 """,
-    'author': "Xao Xao Digital CO.,LTD",
+    'author': "Songo Technonogies (SOTEC)",
     'website': "https://www.xaoxao.vn",
     'license': 'AGPL-3',
     'depends': [

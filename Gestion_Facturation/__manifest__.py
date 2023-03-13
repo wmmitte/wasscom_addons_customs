@@ -1,11 +1,12 @@
 {
-    'name': 'Gestion Facturation',
+    'name': 'TRANSPORT SONABHY - SOTEC',
     'version': '1.0',
     'website': '',
     'category': 'Logiciel AM',
-    'summary': "Ce logiciel est conçu pour faciliter la gestion de la facturation",
-    'author': 'TONIO & OURNO',
+    'summary': "Ce logiciel est conçu pour faciliter la gestion de la facturation SONABHY",
+    'author': 'Songo Technonogies (SOTEC)',
     'depends': ['base',"mail"],
+    'images': ['static/description/facturation.jpg'],
     'data': [
         'security/ir.model.access.csv',
         'security/security.xml',

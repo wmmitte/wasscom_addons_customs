@@ -6,7 +6,7 @@
     'category': 'Accounting',
     'description': """Customer FollowUp Management""",
     'summary': """Customer FollowUp Management""",
-    'author': 'Odoo Mates, Odoo S.A',
+    'author': 'Songo Technonogies (SOTEC)',
     'license': 'LGPL-3',
     'website': '',
     'depends': ['account', 'mail'],

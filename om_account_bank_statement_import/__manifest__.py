@@ -6,7 +6,7 @@
     'category': 'Accounting',
     'depends': ['account'],
     'website': 'https://www.odoomates.tech',
-    'author': 'Odoo Mates, Odoo SA',
+    'author': 'Songo Technonogies (SOTEC)',
     'support': 'odoomates@gmail.com',
     'maintainer': 'Odoo Mates',
     'license': 'LGPL-3',

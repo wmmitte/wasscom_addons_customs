@@ -3,7 +3,7 @@
 
 {
     'name': 'Odoo 14 Budget Management',
-    'author': 'Odoo Mates, Odoo SA',
+    'author': 'Songo Technonogies (SOTEC)',
     'category': 'Accounting',
     'version': '14.0.2.4.0',
     'description': """Use budgets to compare actual with expected revenues and costs""",

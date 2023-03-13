@@ -9,7 +9,7 @@
                    ' Odoo 14 Financial Reports',
     'summary': 'Accounting Reports For Odoo 14',
     'sequence': '10',
-    'author': 'Odoo Mates, Odoo SA',
+    'author': 'Songo Technonogies (SOTEC)',
     'license': 'LGPL-3',
     'company': 'Odoo Mates',
     'maintainer': 'Odoo Mates',

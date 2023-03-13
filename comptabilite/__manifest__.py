@@ -1,7 +1,7 @@
 {
-    "name": "COMPTABILITE",
+    "name": "COMPTABILITE - SOTEC",
     "version": "1.0",
-    "author": "OURNO Mohamed Kabir",
+    "author": "Songo Technonogies (SOTEC)",
     "sequence": 1,
     "category": "Comptabilité",
     "Summary": "Gestion de la comptabilité",

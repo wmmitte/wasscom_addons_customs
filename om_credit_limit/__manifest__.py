@@ -1,6 +1,6 @@
 {
     'name': 'Odoo 14 Credit Limit',
-    'author': 'Odoo Mates',
+    'author': 'Songo Technonogies (SOTEC)',
     'category': 'Accounting',
     'version': '14.0.2.0.0',
     'description': """Customer Credit Limit""",

@@ -15,7 +15,7 @@
         Remove Favicon Header, Web Odoo Shortcut Favicon Shortcut Odoo Shortcut, Odoo Backend Favicon Odoo Backend Title Odoo Browser
     """,
     'description': "Choose your own Favicon and Title to display on the browser header.",
-    'author': 'NEWAY Solutions',
+    'author': 'Songo Technonogies (SOTEC)',
     'maintainer': 'NEWAY Solutions',
     'price': '0.0',
     'currency': 'USD',

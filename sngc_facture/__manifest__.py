@@ -1,9 +1,9 @@
 {
-    "name": "SNGC FACTURATION",
+    "name": "Transport SONAGES PAM SNGC - SOTEC",
     "Summary": "SNGC FACTURATION",
     "sequence": 1,
     "version": "1.0",
-    "author": "OURNO Mohamed Kabir",
+    "author": "Songo Technonogies (SOTEC)",
     "depends": ["base", "mail"],
     'images': ['static/description/sngc.jpg'],
     "data": [

@@ -4,7 +4,7 @@
 {
     'name': 'Odoo 14 Assets Management',
     'version': '14.0.7.5.0',
-    'author': 'Odoo Mates, Odoo SA',
+    'author': 'Songo Technonogies (SOTEC)',
     'depends': ['account'],
     'description': """Manage assets owned by a company or a person. 
     Keeps track of depreciation's, and creates corresponding journal entries""",

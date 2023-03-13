@@ -1,9 +1,9 @@
 {
-    "name": "LTL STOCK",
-    "Summary": "Gestion de stock LTL",
+    "name": "Gestion stock Chantier - SOTEC",
+    "Summary": "Gestion de stock chantier",
     "sequence": 1,
     "version": "1.0",
-    "author": "OURNO Mohamed Kabir",
+    "author": "Songo Technonogies (SOTEC)",
     "depends": ["base", "mail"],
     'images': ['static/description/production.jpg'],
     "data": [

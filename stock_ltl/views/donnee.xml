@@ -208,7 +208,7 @@
         </record>
 
 
-        <menuitem id="main_menu" name ="Stock chantier" sequence="1" web_icon="stock_ltl,static/description/icon.png"/>
+        <menuitem id="main_menu" name ="STOCK CHANTIER" sequence="1" web_icon="stock_ltl,static/description/icon.png"/>
         <menuitem id="main_menu_db" name ="Données de base" sequence="2" parent="main_menu"/>
         <menuitem id="menu_unite" name = "Saisie/MàJ des Unités" sequence="1" parent="main_menu_db" action="act_list_unite"/>
         <menuitem id="menu_article" name ="Saisie/MàJ des Articles" sequence="2" parent="main_menu_db" action="act_list_article"/>

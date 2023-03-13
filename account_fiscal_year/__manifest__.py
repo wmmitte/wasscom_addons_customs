@@ -10,7 +10,7 @@
     "category": "Accounting",
     "website": "https://github.com/OCA/account-financial-tools"
     "14.0/account_fiscal_year",
-    "author": "Agile Business Group, Camptocamp SA, "
+    "author": "Songo Technonogies (SOTEC)"
     "Odoo Community Association (OCA)",
     "maintainers": ["eLBati"],
     "license": "AGPL-3",
