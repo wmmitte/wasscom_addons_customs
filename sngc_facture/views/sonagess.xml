@@ -75,7 +75,7 @@
         </record>
 
         <record id="act_list_sonagess" model="ir.actions.act_window">
-            <field name="name">Liste des factures proforma</field>
+            <field name="name">Factures proforma</field>
             <field name="res_model">sngc.facture.sonagess</field>
             <field name="view_mode">tree,form,kanban</field>
             <field name="context">{
@@ -93,7 +93,7 @@
 
 
         <record model="ir.actions.act_window" id="act_list">
-            <field name="name">Liste des factures</field>
+            <field name="name">Factures ordinaires</field>
             <field name="res_model">sngc.facture.sonagess</field>
             <field name="view_mode">tree,form</field>
             <field name="domain">['|', '|', '|',('state','=','FP'), ('state','=','V'), ('state','=','A'), ('state','=','draft')]</field>
@@ -181,7 +181,7 @@
 
 
         <record id="act_list_facture_avalider" model="ir.actions.act_window">
-            <field name="name">Validation d'une facture</field>
+            <field name="name">Validation facture</field>
             <field name="res_model">sngc.facture.sonagess</field>
             <field name="view_mode">tree,form,kanban</field>
             <field name="domain">[('state','=','FP')]</field>
@@ -196,7 +196,7 @@
                           (0, 0, {'view_mode': 'form', 'view_id': ref('view_sonagess_form')})]"/>
             <field name="help" type="html">
                 <p class="o_view_nocontent_smiling_face">
-                    Pas de factures à valider
+                    Aucune facture à valider
                 </p>
             </field>
         </record>
@@ -204,9 +204,9 @@
 
 
         <menuitem id="menu_sonagess" name ="SONAGESS" sequence="2" parent="main_menu"/>
-        <menuitem id="menu_emettre_facture" name ="Nouv. facture proforma - sonagess" sequence="1" parent="menu_sonagess" action="act_list_sonagess" groups="sngc_facture.sngc_secretaire"/>
-        <menuitem id="menu_valider_facture" name ="Valider facture définitive - sonagess" sequence="2" parent="menu_sonagess" action="act_list_facture_avalider" groups="sngc_facture.sngc_directeur"/>
-        <menuitem id="menu_liste_facture" name ="Liste factures - sonagess" sequence="3" parent="menu_sonagess" action="act_list"/>
+        <menuitem id="menu_emettre_facture" name ="Nouv. facture proforma" sequence="1" parent="menu_sonagess" action="act_list_sonagess" groups="sngc_facture.sngc_secretaire"/>
+        <menuitem id="menu_valider_facture" name ="Valider facture ordinaire/définitive" sequence="2" parent="menu_sonagess" action="act_list_facture_avalider" groups="sngc_facture.sngc_directeur"/>
+        <menuitem id="menu_liste_facture" name ="factures ordinaires" sequence="3" parent="menu_sonagess" action="act_list"/>
 
     </data>
 </odoo>

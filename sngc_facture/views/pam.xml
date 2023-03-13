@@ -68,7 +68,7 @@
 
 
         <record id="act_list_facture_pam" model="ir.actions.act_window">
-            <field name="name">Liste des factures proforma</field>
+            <field name="name">Factures proforma</field>
             <field name="res_model">sngc.facture.pam</field>
             <field name="view_mode">tree,form,kanban</field>
             <field name="context">{
@@ -86,7 +86,7 @@
 
 
         <record model="ir.actions.act_window" id="act_listpam">
-            <field name="name">Liste des factures</field>
+            <field name="name">Factures ordinaires</field>
             <field name="res_model">sngc.facture.pam</field>
             <field name="view_mode">tree,form</field>
             <field name="domain">['|', '|', '|',('state','=','FP'), ('state','=','V'), ('state','=','A'), ('state','=','draft')]</field>
@@ -162,14 +162,14 @@
 
 
         <record id="act_list_facture_manut" model="ir.actions.act_window">
-            <field name="name">Valider facture de manutentions</field>
+            <field name="name">Valider facture manutentions</field>
             <field name="res_model">sngc.manutention</field>
             <field name="view_mode">form</field>
         </record>
 
 
         <record model="ir.actions.act_window" id="act_listpamm">
-            <field name="name">Liste des factures de manutentions</field>
+            <field name="name">Factures manutentions</field>
             <field name="res_model">sngc.manutention</field>
             <field name="view_mode">tree</field>
             <field name="domain">['|', ('state','=','draft'), ('state','=','V')]</field>
@@ -251,7 +251,7 @@
 
 
         <record id="act_list_pamvalide" model="ir.actions.act_window">
-            <field name="name">Validation d'une facture</field>
+            <field name="name">Validation facture</field>
             <field name="res_model">sngc.facture.pam</field>
             <field name="view_mode">tree,form,kanban</field>
             <field name="domain">[('state','=','FP')]</field>
@@ -266,18 +266,18 @@
                           (0, 0, {'view_mode': 'form', 'view_id': ref('view_pam_form')})]"/>
             <field name="help" type="html">
                 <p class="o_view_nocontent_smiling_face">
-                    Pas de factures à valider
+                    Aucune facture à valider
                 </p>
             </field>
         </record>
 
 
         <menuitem id="menu_pam" name ="PAM" sequence="3" parent="main_menu"/>
-        <menuitem id="menu_emettre_facture_pam" name ="Emettre une facture proforma" sequence="1" parent="menu_pam" action="act_list_facture_pam" groups="sngc_facture.sngc_secretaire"/>
-        <menuitem id="menu_valider_facture_pam" name ="Valider facture définitive" sequence="2" parent="menu_pam" action="act_list_pamvalide" groups="sngc_facture.sngc_directeur"/>
+        <menuitem id="menu_emettre_facture_pam" name ="Nouv. facture proforma" sequence="1" parent="menu_pam" action="act_list_facture_pam" groups="sngc_facture.sngc_secretaire"/>
+        <menuitem id="menu_valider_facture_pam" name ="Valider facture ordinaire/définitive" sequence="2" parent="menu_pam" action="act_list_pamvalide" groups="sngc_facture.sngc_directeur"/>
         <menuitem id="menu_valider_facturem_pam" name ="Valider facture manutention" sequence="3" parent="menu_pam" action="act_list_facture_manut" groups="sngc_facture.sngc_secretaire"/>
-        <menuitem id="menu_liste_facture_pam" name ="Liste des factures" sequence="4" parent="menu_pam" action="act_listpam"/>
-        <menuitem id="menu_liste_facturem_pam" name ="Liste des factures de manutentions" sequence="5" parent="menu_pam" action="act_listpamm"/>
+        <menuitem id="menu_liste_facture_pam" name ="Factures ordinaires" sequence="4" parent="menu_pam" action="act_listpam"/>
+        <menuitem id="menu_liste_facturem_pam" name ="Factures manutentions" sequence="5" parent="menu_pam" action="act_listpamm"/>
 
     </data>
 </odoo>

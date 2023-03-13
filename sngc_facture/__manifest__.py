@@ -1,5 +1,5 @@
 {
-    "name": "Transport SONAGES PAM SNGC - SOTEC",
+    "name": "TRANSPORT SONAGES/PAM - SOTEC",
     "Summary": "SNGC FACTURATION",
     "sequence": 1,
     "version": "1.0",

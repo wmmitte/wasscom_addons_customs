@@ -10,12 +10,8 @@
             <field name="arch" type="xml">
                 <form string="Marches" delete="false">
                     <header>
-                        <button name="act_confirmer" string="Confirmer marché" type="object" class="oe_highlight"
-                                attrs="{'invisible' : [('state', 'not in', ['N'])]}"
-                                style="background-color: #28a745; border-color: #28a745;"/>
-                        <button name="act_cloturer" string="Clôturer marché" type="object" class="oe_highlight"
-                                attrs="{'invisible' : [('state', 'not in', ['E'])]}"
-                                style="background-color: #28a745; border-color: #28a745;"/>
+                        <button name="act_confirmer" string="Confirmer marché" type="object" class="oe_highlight" attrs="{'invisible' : [('state', 'not in', ['N'])]}" style="background-color: #28a745; border-color: #28a745;"/>
+                        <button name="act_cloturer" string="Clôturer marché" type="object" class="oe_highlight" attrs="{'invisible' : [('state', 'not in', ['E'])]}" style="background-color: #28a745; border-color: #28a745;"/>
                         <field name="state" widget="statusbar"/>
                     </header>
                     <sheet>
@@ -95,10 +91,7 @@
             <field name="arch" type="xml">
                 <form string="Entree de stock" delete="false">
                     <header>
-                        <button name="act_valider" string="Valider entréé" type="object" class="oe_highlight"
-                                attrs="{'invisible' : [('state', 'not in', ['draft'])]}"
-                                style="background-color: #28a745; border-color: #28a745;"
-                                confirm="Etes-vous sûr de valider cette opération ?"/>
+                        <button name="act_valider" string="Valider entréé" type="object" class="oe_highlight" attrs="{'invisible' : [('state', 'not in', ['draft'])]}" style="background-color: #28a745; border-color: #28a745;" confirm="Etes-vous sûr de valider cette opération ?"/>
                         <field name="state" widget="statusbar" />
                     </header>
                     <sheet>
@@ -197,13 +190,14 @@
             <field name="arch" type="xml">
                 <form string="Rebut de stock" delete="false">
                     <header>
-                        <button name="act_rebut" string="Valider" type="object" class="oe_highlight"
-                                attrs="{'invisible' : [('state', 'not in', ['draft'])]}"/>
+                        <button name="act_rebut" string="Valider" type="object" class="oe_highlight" attrs="{'invisible' : [('state', 'not in', ['draft'])]}"/>
                         <field name="state" widget="statusbar" />
                     </header>
                     <sheet>
                         <div class="oe_title">
-                            <h1><field name="name" nolabel="1"/></h1>
+                            <h1>
+                                <field name="name" nolabel="1"/>
+                            </h1>
                         </div>
                         <group col="2">
                             <group>
@@ -262,12 +256,8 @@
             <field name="arch" type="xml">
                 <form string="Liste des sorties de stock" delete="false">
                     <header>
-                        <button name="act_valider" string="Valider la sortie" type="object" class="oe_highlight"
-                                attrs="{'invisible' : [('state', 'not in', ['draft'])]}"
-                                style="background-color: #28a745; border-color: #28a745;"/>
-                        <button name="act_annuler" string="Annuler demande" type="object" class="oe_highlight"
-                                attrs="{'invisible' : [('state', 'not in', ['E'])]}"
-                                style="background-color: red; border-color: red;"/>
+                        <button name="act_valider" string="Valider la sortie" type="object" class="oe_highlight" attrs="{'invisible' : [('state', 'not in', ['draft'])]}" style="background-color: #28a745; border-color: #28a745;"/>
+                        <button name="act_annuler" string="Annuler demande" type="object" class="oe_highlight" attrs="{'invisible' : [('state', 'not in', ['E'])]}" style="background-color: red; border-color: red;"/>
                         <field name="state" widget="statusbar"/>
                     </header>
                     <sheet>
@@ -344,9 +334,7 @@
             <field name="arch" type="xml">
                 <form string="Liste des retours de stock" delete="false">
                     <header>
-                        <button name="act_valider" string="Valider le retour" type="object" class="oe_highlight"
-                                attrs="{'invisible' : [('state', 'not in', ['draft'])]}"
-                                style="background-color: #28a745; border-color: #28a745;"/>
+                        <button name="act_valider" string="Valider le retour" type="object" class="oe_highlight" attrs="{'invisible' : [('state', 'not in', ['draft'])]}" style="background-color: #28a745; border-color: #28a745;"/>
                         <field name="state" widget="statusbar"/>
                     </header>
                     <sheet>
@@ -424,10 +412,7 @@
             <field name="arch" type="xml">
                 <form string="Liste des bilans des journées" delete="false">
                     <header>
-                        <button name="act_sortie_mag" string="Valider bilan" type="object" class="oe_highlight"
-                                attrs="{'invisible' : [('state', 'not in', ['N'])]}"
-                                style="background-color: #28a745; border-color: #28a745;"
-                                confirm="Etes-vous sûr de valider cette action ?"/>
+                        <button name="act_sortie_mag" string="Valider bilan" type="object" class="oe_highlight" attrs="{'invisible' : [('state', 'not in', ['N'])]}" style="background-color: #28a745; border-color: #28a745;" confirm="Etes-vous sûr de valider cette action ?"/>
                         <field name="state" widget="statusbar"/>
                     </header>
                     <sheet>
@@ -439,8 +424,7 @@
                         <group col="2">
                             <group>
                                 <field name="dte" style = "width:50%" attrs="{'readonly' : [('state', 'in', ['V'])]}"/>
-                                <field name="marche_id" style = "width:100%" options="{'no_create': True}"
-                                       attrs="{'readonly' : [('state', 'in', ['V'])]}"/>
+                                <field name="marche_id" style = "width:100%" options="{'no_create': True}" attrs="{'readonly' : [('state', 'in', ['V'])]}"/>
                                 <field name="magasin_id" domain="[('marche_id.id', '=', marche_id)]" attrs="{'readonly' : [('state', 'in', ['V'])]}"
                                        style = "width:100%" options="{'no_create': True}"/>
                             </group>

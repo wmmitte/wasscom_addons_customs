@@ -1,5 +1,5 @@
 {
-    "name": "Gestion stock Chantier - SOTEC",
+    "name": "STOCK CHANTIER - SOTEC",
     "Summary": "Gestion de stock chantier",
     "sequence": 1,
     "version": "1.0",

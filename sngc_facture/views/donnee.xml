@@ -36,7 +36,7 @@
         </record>
 
         <record id="act_list_article" model="ir.actions.act_window">
-            <field name="name">Liste des articles</field>
+            <field name="name">Articles</field>
             <field name="res_model">sngc.article</field>
             <field name="view_mode">tree,form</field>
         </record>
@@ -76,7 +76,7 @@
         </record>
 
         <record id="act_list_type_article" model="ir.actions.act_window">
-            <field name="name">Liste des types articles</field>
+            <field name="name">Catégories d'articles</field>
             <field name="res_model">sngc.type.article</field>
             <field name="view_mode">tree,form</field>
         </record>
@@ -190,7 +190,7 @@
         </record>
 
         <record id="act_list_ville" model="ir.actions.act_window">
-            <field name="name">Liste des Villes</field>
+            <field name="name">Villes</field>
             <field name="res_model">sngc.ville</field>
             <field name="view_mode">tree,form</field>
         </record>
