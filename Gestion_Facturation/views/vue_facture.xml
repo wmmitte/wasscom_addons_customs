@@ -629,7 +629,7 @@
 		<field name="model">gest_depense</field>
 		<field name="priority" eval="16"/>
 		<field name="arch" type="xml">
-			<tree decoration-it ="state == 'Validé' " editable="top" string = "Depense">
+			<tree decoration-it ="state == 'Validé' " editable="top" string = "Depense" default_order='x_num_facture desc'>
 				<field name="sequence" widget="handle" />
 				<field name="x_num_facture" force_save="1" />
 				<field name="name" force_save="1" options="{'no_quick_create':True,'no_create_edit':True,'no_open':True,}" attrs="{'readonly' : [('state', 'in', ['Validé definitif'])]}"/>
