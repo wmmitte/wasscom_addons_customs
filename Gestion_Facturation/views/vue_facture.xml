@@ -632,6 +632,20 @@
 			<tree decoration-it ="state == 'Validé' " editable="top" string = "Depense">
 				<field name="sequence" widget="handle" />
 				<field name="x_num_facture" force_save="1" />
+				<field name="name" force_save="1" options="{'no_quick_create':True,'no_create_edit':True,'no_open':True,}" attrs="{'readonly' : [('state', 'in', ['Validé definitif'])]}"/>
+				<field name="x_personnel_id" force_save="1" options="{'no_quick_create':True,'no_create_edit':True,'no_open':True,}" attrs="{'readonly' : [('state', 'in', ['Validé definitif'])]}"/>
+				<field name="date_op" force_save="1" attrs="{'readonly' : [('state', 'in', ['Validé definitif'])]}"/>
+				<field name="objet_dep" force_save="1" attrs="{'readonly' : [('state', 'in', ['Validé definitif'])]}"/>
+				<field name="mt" force_save="1" attrs="{'readonly' : [('state', 'in', ['Validé definitif'])]}" sum="Total depensé"/>
+				<field name="currents_users" options="{'no_quick_create':True,'no_create_edit':True,'no_open':True,}"/>
+				<field name="company_id" invisible = '1'/>
+				<field name="state" invisible = '0'/>
+			</tree>
+		</field>
+		<!-- <field name="arch" type="xml">
+			<tree decoration-it ="state == 'Validé' " editable="top" string = "Depense">
+				<field name="sequence" widget="handle" />
+				<field name="x_num_facture" force_save="1" />
 				<field name="name" force_save="1" options="{'no_quick_create':True,'no_create_edit':True,'no_open':True,}" attrs="{'readonly' : [('state', 'in', ['Validé'])]}"/>
 				<field name="x_personnel_id" force_save="1" options="{'no_quick_create':True,'no_create_edit':True,'no_open':True,}" attrs="{'readonly' : [('state', 'in', ['Validé'])]}"/>
 				<field name="date_op" force_save="1" attrs="{'readonly' : [('state', 'in', ['Validé'])]}"/>
@@ -641,7 +655,7 @@
 				<field name="company_id" invisible = '1'/>
 				<field name="state" invisible = '0'/>
 			</tree>
-		</field>
+		</field>-->
 	</record>
 
 
