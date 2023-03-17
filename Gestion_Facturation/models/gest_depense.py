@@ -30,7 +30,7 @@ class GestDepense(models.Model):
     x_personnel_id = fields.Many2one('facture_conducteur_camion',string = 'Personnel',required = False)
 
     mt = fields.Integer('Montant depensé',required = True,states={'Validé': [('readonly', True)]})
-    date_op = fields.Date(string = 'Date opération',default=fields.Date.context_today, readonly = True)
+    date_op = fields.Date(string = 'Date opération',default=fields.Date.context_today)
 
     company_id = fields.Many2one('res.company',string = "Société", default=lambda self: self.env.user.company_id.id)
     active = fields.Boolean(string = "Etat", default=True) 
