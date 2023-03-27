@@ -13,7 +13,10 @@
 						<span style="font-size:15px;" t-field="o.date_operation" />
 					</div>
 				</div>
-				<br></br><br></br>
+				<br></br>
+				<br></br>
+				<br></br>
+				<br></br>
 				<h3 style="text-align:center;">
 
 					<div style="clear:both;"></div>
