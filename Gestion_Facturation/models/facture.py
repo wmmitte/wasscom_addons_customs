@@ -229,3 +229,69 @@ class FactureFacturePaiement(models.Model):
             elif record.x_total_reste_apr == 0:
                 record.env.cr.execute("UPDATE facture_facture SET x_total_encaisse = x_total_encaisse + %d, x_total_reste =  %d,state = 'Liquidation totale',x_etat_facture = 'Liquidation totale'  WHERE id = %d" %(record.x_mt_encaisse,x_total_reste,id_fact))
                 record.write({'state': 'Paiement effectuée'})
+
+
+class FactureQuantite(models.Model):
+    _name = 'facture.quantite'
+    _rec_name = 'camion_id'
+
+    camion_id = fields.Many2one('facture_camion', 'Camion', required=True)
+    chauffeur = fields.Many2one('facture_conducteur_camion', string='Chauffeur', related='camion_id.x_conducteur_id')
+    date_operation = fields.Date(string='Date opération', default=fields.Date.context_today, required=True)
+    x_date_be = fields.Date(string = 'Date BE',required = True)
+    x_num_be = fields.Char(string = 'N° BE',required = True)
+    x_date_bl = fields.Date(string = 'Date BL',required = True)
+    x_num_bl = fields.Char(string = 'N° BL',required = True)
+    quantite = fields.Float(string='Quantité perdue',required = True)
+    state = fields.Selection([('1', 'Nouveau'), ('2', 'Validé')], string='Etat', default='1')
+    company_id = fields.Many2one('res.company', string="Structure", default=lambda self: self.env.user.company_id.id,readonly=True)
+
+
+    def valider(self):
+        self.state = '2'
+
+
+class FactureEtatQuantite(models.TransientModel):
+    _name = 'facture.etat.quantite'
+
+    camion_id = fields.Many2one('facture_camion', 'Camion', required=True)
+    chauffeur = fields.Many2one('facture_conducteur_camion', string='Chauffeur', related='camion_id.x_conducteur_id')
+    dte_deb = fields.Date('Date de début', required=True)
+    dte_fin = fields.Date('Date de fin', required=True)
+    total = fields.Float('Qté totale perdue')
+    lines_ids = fields.One2many('facture.etat.quantite.line', 'etat_id', readonly=True)
+
+
+    def action_afficher(self):
+        for va in self:
+            va.etat_ids.unlink()
+            if va.camion_id:
+                lines = va.env['facture.quantite'].search([('camion_id.id', '=', self.camion_id.id),
+                                                      ('date_operation', '>=', self.dte_deb),
+                                                      ('date_operation', '<=', self.dte_fin), ('state', '=', '2')
+                                                      ])
+                for li in lines:
+                    self.sudo().env['facture.etat.quantite.line'].create({
+                        'dte': li.dte,
+                        'x_date_be': li.en_cours,
+                        'x_num_be': li.mode_id.id,
+                        'x_date_bl': li.reference,
+                        'x_num_bl': li.montant_envoi,
+                        'quantite': li.objet,
+                        'etat_id': self.id
+                    })
+    
+    def print_etat(self):
+        return self.env.ref('Gestion_Facturation.report_etat_detaille_view').report_action(self)
+
+class FactureEtatQuantiteLine(models.TransientModel):
+    _name = 'facture.etat.quantite.line'
+
+    etat_id = fields.Many2one('facture.etat.quantite')
+    x_date_be = fields.Date(string = 'Date BE')
+    x_num_be = fields.Char(string = 'N° BE')
+    x_date_bl = fields.Date(string = 'Date BL')
+    x_num_bl = fields.Char(string = 'N° BL')
+    quantite = fields.Float(string='Quantité perdue')
+
+

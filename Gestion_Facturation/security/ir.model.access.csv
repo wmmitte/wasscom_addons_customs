@@ -15,3 +15,6 @@ access_facture_facture_stats,access.facture_facture_stats,model_facture_facture_
 access_facture_stats_ca,access.facture_stats_ca,model_facture_stats_ca,base.group_user,1,1,1,0
 access_facture_stats_ca_line,access.facture_stats_ca_line,model_facture_stats_ca_line,base.group_user,1,1,1,0
 access_facture_facture_conducteur_camion,access.facture_conducteur_camion,model_facture_conducteur_camion,base.group_user,1,1,1,0
+access_facture_quantite,access.facture.quantite,model_facture_quantite,base.group_user,1,1,1,0
+access_facture_etat_quantite,access.facture.etat.quantite,model_facture_etat_quantite,base.group_user,1,1,1,0
+access_facture_etat_quantite_line,access.facture.etat.quantite.line,model_facture_etat_quantite_line,base.group_user,1,1,1,0

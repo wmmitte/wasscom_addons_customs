@@ -15,6 +15,7 @@
         "Report/report_approvisionnement.xml",
         "Report/report_facture.xml",
         "Report/report_facture_transit.xml",
+        "Report/report_etat_quantite.xml",
     ],
     'installable': True,
     'auto_install': False,

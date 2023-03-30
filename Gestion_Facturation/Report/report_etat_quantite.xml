@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="id_format_paysage" model="report.paperformat">
+        <field name="name">Format Paysage</field>
+        <field name="default" eval="True"/>
+        <field name="format">A4</field>
+        <field name="page_height">0</field>
+        <field name="page_width">0</field>
+        <field name="orientation">Landscape</field>
+        <field name="margin_top">35</field>
+        <field name="margin_bottom">28</field>
+        <field name="margin_left">7</field>
+        <field name="margin_right">7</field>
+        <field name="header_line" eval="False"/>
+        <field name="header_spacing">35</field>
+        <field name="dpi">90</field>
+    </record>
+
+    <report id = "report_etat_stock"
+            string = "Entrée en stock"
+            model = "facture.etat.quantite"
+            report_type = "qweb-pdf"
+            file = "Gestion_Facturation.report_etat_stock"
+            name = "Gestion_Facturation.report_etat"
+            paperformat="id_format_paysage"
+            menu = "True"/>
+
+    <template id="report_etat">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="o">
+                <t t-call="web.external_layout">
+                    <div class="page">
+                        <h3 style="text-align:center; border-style:solid;">Etat des quantités perdues <span t-field="o.name"/></h3><br/>
+                        <div>
+                            <b>Camion: </b><span t-field="o.canion_id"/><br/><br/>
+                            <b>Chauffeur: </b><span t-field="o.chauffeur"/><br/><br/>
+
+                        </div><br/>
+
+                        <table style="width:100%; border : 1px solid #ddd;border-collapse : collapse;">
+                            <thead style ="background-color : #159dd9; color : #fff">
+                                <th style ="border : 1px solid midnightblue;">Date BE</th>
+                                <th style ="border : 1px solid midnightblue;">N° BE</th>
+                                <th style ="border : 1px solid midnightblue; text-align:right;">Date BL</th>
+                                <th style ="border : 1px solid midnightblue; text-align:right;">N° BL</th>
+                                <th style ="border : 1px solid midnightblue; text-align:right;">Qté perdue</th>
+                            </thead>
+
+                            <tbody>
+                                <tr t-foreach="o.lines_ids" t-as="ligne">
+                                    <td style = "border : 1px solid midnightblue;">
+                                        <span t-field="ligne.x_date_be"/>
+                                    </td>
+                                    <td style = "border : 1px solid midnightblue;">
+                                        <span t-field="ligne.x_num_be"/>
+                                    </td>
+                                    <td style = "border : 1px solid midnightblue; text-align:right;">
+                                        <span t-field="ligne.x_date_bl"/> 
+                                    </td>
+                                     <td style = "border : 1px solid midnightblue; text-align:right;">
+                                        <span t-field="ligne.x_num_bl"/> 
+                                    </td>
+                                    <td style = "border : 1px solid midnightblue; text-align:right;">
+                                        <span t-esc="'{:,}'.format(int(ligne.quantite)).replace(',', ' ')"/>
+                                    </td>
+                                </tr>
+                                <tr style="border : 2px solid midnightblue;">
+                                    <td colspan ="4" style ="text-align:left;font-weight:bold;">Total</td>
+                                    <td style = "border : 2px solid midnightblue;; text-align:right; font-family : times new roman;"><span t-esc="'{:,}'.format(int(sum([ligne.quantite for ligne in o.lines_ids]))).replace(',', ' ')"/></td>
+                                </tr>
+                            </tbody>
+                        </table>               
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+

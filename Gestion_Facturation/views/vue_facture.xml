@@ -1030,6 +1030,100 @@
 	</record>
 
 
+
+	<!-- vue facture_stats_ca form-->
+	<record model="ir.ui.view" id="view_id_facture_quantite">
+		<field name="name">view.facture_quantite.form</field>
+		<field name="model">facture_quantite</field>
+		<field name="priority" eval="16"/>
+		<field name="arch" type="xml">
+			<form string="CA">
+				<header>
+					<button string="Valider" name="valider" type="object" class="oe_highlight"/>
+					<field name="state" widget = "statusbar"/>
+				</header>
+				<sheet>
+					<group col='2'>
+						<group>
+							<field name="camion_id" force_save="1"/>
+							<field name="chauffeur" force_save="1"/>
+							<field name="date_operation" force_save="1"/>
+							<field name="quantite" force_save="1"/>
+						</group>
+						<group>
+							<field name="x_date_be" force_save="1"/>
+							<field name="x_num_be" force_save="1"/>
+							<field name="x_date_bl" force_save="1"/>
+							<field name="x_num_bl" force_save="1"/>
+						</group>
+					</group>
+					<group invisible='1'>
+						<field name="company_id" style="width:50%"/>
+					</group>
+				</sheet>
+			</form>
+		</field>
+	</record>
+
+
+	<record model="ir.ui.view" id="view_facture_quantite_tree">
+		<field name="name">view.facture_quantite.tree</field>
+		<field name="model">facture.quantite</field>
+		<field name="priority" eval="16"/>
+		<field name="arch" type="xml">
+			<tree string="Stats">
+				<field name="date_operation"/>
+				<field name="camion_id"/>
+				<field name="chauffeur"/>
+				<field name="quantite"/>
+				<field name="state"/>
+			</tree>
+		</field>
+	</record>
+
+	<record model="ir.actions.act_window" id="act_qte_perdue">
+		<field name="name">Quantité perdue</field>
+		<field name="res_model">facture.quantite</field>
+		<field name="view_mode">tree,form</field>
+	</record>
+
+
+	<record model="ir.ui.view" id="view_id_facture_etat_quantite">
+		<field name="name">view.facture_etat_quantite.form</field>
+		<field name="model">facture.etat.quantite</field>
+		<field name="priority" eval="16"/>
+		<field name="arch" type="xml">
+			<form string="CA">
+				<header>
+					<button string="Afficher" name="action_afficher" type="object" class="oe_highlight" />
+
+				</header>
+				<sheet>
+					<group>
+						<field name="camion_id" force_save="1"/>
+						<field name="dte_deb" force_save="1"/>
+						<field name="dte_fin" force_save="1"/>
+					</group>
+					<group>
+						<field name="chauffeur" readonly="1"/>
+						<field name="total" readonly="1"/>
+					</group>
+						<field name="lines_ids" nolabel = "1">
+							<tree string="Ligne ca">
+								<field name="x_date_be" force_save = "1" />
+								<field name="x_num_be" force_save = "1" />
+								<field name="x_date_bl" force_save = "1" />
+								<field name="x_num_bl" force_save = "1"/>
+								<field name="quantite" force_save = "1"/>
+							</tree>
+						</field>
+				</sheet>
+
+			</form>
+		</field>
+	</record>
+
+
 	<!-- Menu-->
 
 	<menuitem id="main_menu" name="TRANSPORT SONABHY" web_icon="Gestion_Facture,static/description/icon.png"
@@ -1051,7 +1145,10 @@
 	<menuitem id="menu_facture_new_depense" parent="menu_facture_depense" name="Nouvelle dépense" sequence = "201" action="act_list_depense" />
 
 	<menuitem id="menu_stat_facture" parent="main_menu" name="Statistiques" sequence = "30" groups='Gestion_Facturation.Gestion_Facturation_admin_donnees,Gestion_Facturation.Gestion_Facturation_op,Gestion_Facturation.Gestion_Facturation_cptable'/>
-	<menuitem id="menu_facture_stat_dep_ca" parent="menu_stat_facture" name="Chiffre d'affaire" sequence = "301" action="act_list_facture_stats_ca" />
+	<menuitem id="menu_facture_stat_dep_ca" parent="menu_stat_facture" name="Chiffre d'affaire" sequence = "301" action="act_list_facture_stats_ca"/>
+	<menuitem id="menu_facture_qte" parent="menu_stat_facture" name="Quantité perdue" sequence = "302" action="act_qte_perdue"/>
+	<menuitem id="menu_facture_etat_qte" parent="menu_stat_facture" name="Etat des Quantités perdues" sequence = "303" action="act_etat_qte_perdue"/>
+
 
 	<menuitem id="menu_facture_param" parent="main_menu" name="Paramétrage" sequence = "100" groups='Gestion_Facturation.Gestion_Facturation_admin_donnees,Gestion_Facturation.Gestion_Facturation_op'/>
 	<menuitem id="menu_facture_client" parent="menu_facture_param" name="Saisie/MàJ- Client" sequence = "1001" action="act_list_client" />
