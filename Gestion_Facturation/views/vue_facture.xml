@@ -1082,7 +1082,7 @@
 	</record>
 
 	<record model="ir.actions.act_window" id="act_qte_perdue">
-		<field name="name">Quantité perdue</field>
+		<field name="name">Manquants</field>
 		<field name="res_model">facture.quantite</field>
 		<field name="view_mode">tree,form</field>
 	</record>
@@ -1127,7 +1127,7 @@
 
 
 	<record model="ir.actions.act_window" id="act_etat_qte_perdue">
-		<field name="name">Quantité perdue</field>
+		<field name="name">Etat des manquants</field>
 		<field name="res_model">facture.etat.quantite</field>
 		<field name="view_mode">form</field>
 	</record>
