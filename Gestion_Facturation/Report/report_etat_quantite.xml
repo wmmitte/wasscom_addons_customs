@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
 
-    <record id="id_format_paysage" model="report.paperformat">
+    <record id="id_format_portrait" model="report.paperformat">
         <field name="name">Format Paysage</field>
         <field name="default" eval="True"/>
         <field name="format">A4</field>
@@ -18,12 +18,12 @@
     </record>
 
     <report id = "report_etat_stock"
-            string = "Entrée en stock"
+            string = "Etat des quantités perdues"
             model = "facture.etat.quantite"
             report_type = "qweb-pdf"
             file = "Gestion_Facturation.report_etat_stock"
             name = "Gestion_Facturation.report_etat"
-            paperformat="id_format_paysage"
+            paperformat="id_format_portrait"
             menu = "True"/>
 
     <template id="report_etat">
@@ -31,10 +31,11 @@
             <t t-foreach="docs" t-as="o">
                 <t t-call="web.external_layout">
                     <div class="page">
-                        <h3 style="text-align:center; border-style:solid;">Etat des quantités perdues <span t-field="o.name"/></h3><br/>
+                        <h3 style="text-align:center; border-style:solid;">Etat des quantités perdues</h3><br/>
                         <div>
-                            <b>Camion: </b><span t-field="o.canion_id"/><br/><br/>
+                            <b>Camion: </b><span t-field="o.camion_id"/><br/><br/>
                             <b>Chauffeur: </b><span t-field="o.chauffeur"/><br/><br/>
+                            <b>Période: </b><span t-field="o.dte_deb"/> du <span t-field="o.dte_fin"/><br/><br/>
 
                         </div><br/>
 
@@ -77,3 +78,4 @@
         </t>
     </template>
 
+</odoo>

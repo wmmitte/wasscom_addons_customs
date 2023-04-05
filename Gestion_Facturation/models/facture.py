@@ -246,7 +246,6 @@ class FactureQuantite(models.Model):
     state = fields.Selection([('1', 'Nouveau'), ('2', 'Validé')], string='Etat', default='1')
     company_id = fields.Many2one('res.company', string="Structure", default=lambda self: self.env.user.company_id.id,readonly=True)
 
-
     def valider(self):
         self.state = '2'
 
@@ -258,13 +257,19 @@ class FactureEtatQuantite(models.TransientModel):
     chauffeur = fields.Many2one('facture_conducteur_camion', string='Chauffeur', related='camion_id.x_conducteur_id')
     dte_deb = fields.Date('Date de début', required=True)
     dte_fin = fields.Date('Date de fin', required=True)
-    total = fields.Float('Qté totale perdue')
+    total = fields.Float('Qté totale perdue', store=True, compute='_total')
     lines_ids = fields.One2many('facture.etat.quantite.line', 'etat_id', readonly=True)
+
+
+    @api.depends('lines_ids.quantite')
+    def _total(self):
+        for depense in self:
+            depense.total = sum(item.quantite for item in depense.lines_ids)
 
 
     def action_afficher(self):
         for va in self:
-            va.etat_ids.unlink()
+            va.lines_ids.unlink()
             if va.camion_id:
                 lines = va.env['facture.quantite'].search([('camion_id.id', '=', self.camion_id.id),
                                                       ('date_operation', '>=', self.dte_deb),
@@ -272,17 +277,14 @@ class FactureEtatQuantite(models.TransientModel):
                                                       ])
                 for li in lines:
                     self.sudo().env['facture.etat.quantite.line'].create({
-                        'dte': li.dte,
-                        'x_date_be': li.en_cours,
-                        'x_num_be': li.mode_id.id,
-                        'x_date_bl': li.reference,
-                        'x_num_bl': li.montant_envoi,
-                        'quantite': li.objet,
+                        'x_date_be': li.x_date_be,
+                        'x_num_be': li.x_num_be,
+                        'x_date_bl': li.x_date_bl,
+                        'x_num_bl': li.x_num_bl,
+                        'quantite': li.quantite,
                         'etat_id': self.id
                     })
-    
-    def print_etat(self):
-        return self.env.ref('Gestion_Facturation.report_etat_detaille_view').report_action(self)
+
 
 class FactureEtatQuantiteLine(models.TransientModel):
     _name = 'facture.etat.quantite.line'
