@@ -253,6 +253,7 @@ class FactureQuantite(models.Model):
 class FactureEtatQuantite(models.TransientModel):
     _name = 'facture.etat.quantite'
 
+    name = fields.Char(default="Etat quantité perdue", readonly=True)
     camion_id = fields.Many2one('facture_camion', 'Camion', required=True)
     chauffeur = fields.Many2one('facture_conducteur_camion', string='Chauffeur', related='camion_id.x_conducteur_id')
     dte_deb = fields.Date('Date de début', required=True)

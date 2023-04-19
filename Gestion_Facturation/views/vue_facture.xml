@@ -1101,6 +1101,7 @@
 				<sheet>
 					<group col="2">
 						<group>
+							<field name="name" force_save="1" invisible='1'/>
 							<field name="camion_id" force_save="1"/>
 							<field name="dte_deb" force_save="1"/>
 							<field name="dte_fin" force_save="1"/>
