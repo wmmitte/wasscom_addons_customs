@@ -145,7 +145,8 @@ class FactureFactureLine(models.Model):
 
     @api.depends('x_capacite','x_manquant')
     def _calcul_cap_net(self):
-        self.x_capacite_net = self.x_capacite - self.x_manquant
+        for record in self:
+            record.x_capacite_net = record.x_capacite - record.x_manquant
 
     @api.depends('x_date_be', 'x_num_be','x_date_bl','x_num_bl','x_immatricul_id')
     def action_concat_element(self):
