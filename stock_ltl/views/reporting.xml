@@ -75,6 +75,7 @@
                                 <field name="initial" invisible="1"/>
                                 <field name="en_stock" readonly="1" force_save='1'/>
                                 <field name="sortie"/>
+                                <field name="qte_stock"/>
                             </tree>
                         </field>
                         <footer>
@@ -106,9 +107,9 @@
             <field name="model">etat.detaille</field>
             <field name="priority" eval="16"/>
             <field name="arch" type="xml">
-                <form string="Liste des etats detaillés de stock">
+                <form string="Liste des etats detaillé des transferts">
                     <sheet>
-                        <group col="2">
+                        <group col="2" string="Etat détaillé des transferts d'argent">
                             <group>
                                 <field name="par" style = "width:50%"/>
                                 <field name="marche_id" style = "width:75%" options="{'no_create': True}" attrs="{'invisible' : [('par', 'not in', ['1'])]}"/>
@@ -161,7 +162,7 @@
             <field name="arch" type="xml">
                 <form string="Liste des etats detaillés de stock">
                     <sheet>
-                        <group col="3">
+                        <group col="3" string='Etat des mouvements de stock'>
                             <group>
                                 <field name="dte_deb" style = "width:100%"/>
                                 <field name="dte_fin" style = "width:100%"/>
@@ -216,7 +217,7 @@
         <menuitem id="menu_etat_stock" name ="Etat stock d'un Magasin" sequence="1" parent="menu_reporting" action="action_etat_stock"/>
         <menuitem id="menu_etat_mvt" name ="Etat des Entrées/Sorties stock" sequence="2" parent="menu_reporting" action="action_etat_mvt"/>
         <menuitem id="menu_etat_depen" name ="Etat Synthétique des Dépenses" sequence="3" parent="menu_reporting" action="action_etat_depense"/>
-        <menuitem id="menu_etat_det" name ="Etat détaillé des dépenses" sequence="4" parent="menu_reporting" action="action_etat_detaille"/>
+        <menuitem id="menu_etat_det" name ="Etat détaillé des transferts d'argent" sequence="4" parent="menu_reporting" action="action_etat_detaille"/>
 
     </data>
 </odoo>

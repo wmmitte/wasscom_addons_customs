@@ -55,7 +55,7 @@ class EtatDepense(models.TransientModel):
             va.resultat = va.montant_marche - va.total - va.total_rebut
 
     def print_dep(self):
-        return self.env.ref('stock_ltl.report_etat_stock_view').report_action(self)
+        return self.env.ref('stock_ltl.report_dep_view').report_action(self)
 
 
 class EtatStock(models.TransientModel):
@@ -78,6 +78,7 @@ class EtatStock(models.TransientModel):
                         'initial': li.stock_inital,
                         'en_stock': li.qte_stock,
                         'sortie': li.qte_sortie,
+                        'qte_stock': li.qte_stock - li.qte_sortie,
                         'etat_id': self.id
                     })
 
@@ -91,8 +92,11 @@ class EtatStockLine(models.TransientModel):
     etat_id = fields.Many2one("etat.stock")
     article_id = fields.Many2one("stock.article", "Désignation")
     initial = fields.Float("Stock initial")
-    en_stock = fields.Float("En stock")
+    en_stock = fields.Float("Entrée")
     sortie = fields.Float("Sortie")
+    qte_stock = fields.Float('Quantité en stock', readonly=True)
+
+
 
 
 class EtatDetaille(models.Model):
@@ -138,7 +142,7 @@ class EtatDetaille(models.Model):
                 for li in lines:
                     self.sudo().env['etat.detaille.line'].create({
                         'dte': li.dte,
-                        'article_id': li.marche_id.id,
+                        'marche_id': li.marche_id.id,
                         'responsable_id': li.personnel_id.id,
                         'en_cours': li.en_cours,
                         'mode_id': li.mode_id.id,

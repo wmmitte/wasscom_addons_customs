@@ -358,15 +358,18 @@
             <t t-foreach="docs" t-as="o">
                 <t t-call="web.external_layout">
                     <div class="page">
-                        <h3 style="text-align:center; border-style:solid;"><span t-field="o.magasin_id"/></h3><br/>
+                        <h3 style="text-align:center; border-style:solid;">ETAT DES STOCK</h3><br/>
+                        <br/>
+                        <h4 style="text-align:center; border-style:solid;"><span t-field="o.magasin_id"/></h4><br/>
                         <br/>
 
                         <table style="width:100%; border : 1px solid #ddd;border-collapse : collapse;">
                             <thead style ="background-color : #159dd9; color : #fff">
                                 <th style ="border : 1px solid midnightblue;">Désignation</th>
-                                <th style ="border : 1px solid midnightblue; text-align:right;">Stock initial</th>
-                                <th style ="border : 1px solid midnightblue; text-align:right;">En stock</th>
+                                <th style ="border : 1px solid midnightblue; text-align:right;">Entrée</th>
                                 <th style ="border : 1px solid midnightblue; text-align:right;">Sortie</th>
+                                <th style ="border : 1px solid midnightblue; text-align:right;">Qte en stock</th>
+
                             </thead>
 
                             <tbody>
@@ -374,14 +377,15 @@
                                     <td style ="border : 1px solid midnightblue;">
                                         <span t-field="ligne.article_id"/>
                                     </td>
-                                    <td style ="border : 1px solid midnightblue; text-align:right;">
-                                        <span t-field="ligne.initial"/>
-                                    </td>
+                            
                                     <td style ="border : 1px solid midnightblue; text-align:right;">
                                         <span t-field="ligne.en_stock"/>
                                     </td>
                                     <td style ="border : 1px solid midnightblue; text-align:right;">
                                         <span t-field="ligne.sortie"/>
+                                    </td>
+                                    <td style ="border : 1px solid midnightblue; text-align:right;">
+                                        <span t-field="ligne.qte_stock"/>
                                     </td>
                                 </tr>
                             </tbody>
@@ -419,27 +423,18 @@
             <t t-foreach="docs" t-as="o">
                 <t t-call="web.external_layout">
                     <div class="page">
-                        <h3 style="text-align:center; border-style:solid;"><span t-field="o.name"/></h3><br/>
+                        <h3 style="text-align:center; border-style:solid;"><span t-field="o.name"/> du <span t-field="o.dte_deb"/> au <span t-field="o.dte_fin"/></h3><br/>
                         <div>
                             <div style="float:left">
-                                <b>Date début: </b><span t-field="o.dte_deb"/><br/><br/>
-                                <b>Date fin: </b><span t-field="o.dte_fin"/><br/><br/>
                                 <b>Marché: </b><span t-field="o.marche_id"/><br/><br/>
                                 <b>Montant marché: </b><span t-esc="'{:,}'.format(int(o.montant_marche)).replace(',', ' ')"/><br/><br/>
-                            </div>
-                            <div style="float:right">
                                 <b>Total matériel: </b><span t-esc="'{:,}'.format(int(o.total_materiel)).replace(',', ' ')"/><br/><br/>
                                 <b>Total rébut: </b><span t-esc="'{:,}'.format(int(o.total_rebut)).replace(',', ' ')"/><br/><br/>
                                 <b>Total dépense: </b><span t-esc="'{:,}'.format(int(o.total_depense)).replace(',', ' ')"/><br/><br/>
                                 <b>Montant total: </b><span t-esc="'{:,}'.format(int(o.total)).replace(',', ' ')"/><br/><br/>
                                 <b>Résultat: </b><span t-esc="'{:,}'.format(int(o.resultat)).replace(',', ' ')"/><br/><br/>
                             </div>
-                        </div>
-
-                        <br/><br/>
-                        <div style="float:right">
-                            <span>La comptabilité</span>
-                        </div>
+                        </div>               
                     </div>
                 </t>
             </t>
@@ -449,7 +444,7 @@
 
 
     <report id = "report_etat_detaille_view"
-            string = "Etat détaillé des opérations"
+            string = "Etat détaillé des transferts d'argent"
             model = "etat.detaille"
             report_type = "qweb-pdf"
             file = "stock_ltl.report_etat_detaille_view"
@@ -462,22 +457,18 @@
             <t t-foreach="docs" t-as="o">
                 <t t-call="web.external_layout">
                     <div class="page">
-                        <h3 style="text-align:center; border-style:solid;"><span>Etat détaillé des opérations</span></h3><br/>
+                        <h3 style="text-align:center; border-style:solid;"><span>Etat détaillé des transferts d'argent</span></h3><br/>
                         <div>
-                            <div style="float:left">
-                                <b>Par: </b><span t-field="o.par"/><br/><br/>
-                                <b>Marché: </b><span t-field="o.marche_id"/><br/><br/>
-                            </div>
-                            <div style="float:right">
-                                <b>Date debut: </b><span t-field="o.dte_deb"/><br/><br/>
-                                <b>Date fin: </b><span t-field="o.dte_fin"/><br/><br/>
-                            </div>
-                        </div><br/>
+                            <b>Par: </b><span t-field="o.par"/><br/>
+                            <b>Marché: </b><span t-field="o.marche_id"/><br/>
+                            <h3><b>Période:</b> Du <span t-field="o.dte_deb"/> au <span t-field="o.dte_fin"/></h3>
+                        </div>
+                        <br/>
 
                         <table style="width:100%; border : 1px solid #ddd;border-collapse : collapse;">
                             <thead style ="background-color : #159dd9; color : #fff">
                                 <th style ="border : 1px solid midnightblue; text-align:left;">Date</th>
-                                <th style ="border : 1px solid midnightblue; text-align:left;">Marché</th>
+                                <!--<th style ="border : 1px solid midnightblue; text-align:left;">Marché</th>-->
                                 <th style ="border : 1px solid midnightblue; text-align:left;">Responsable</th>
                                 <th style ="border : 1px solid midnightblue; text-align:left;">Objet</th>
                                 <th style ="border : 1px solid midnightblue; text-align:left;">Mode</th>
@@ -490,9 +481,9 @@
                                     <td style ="border : 1px solid midnightblue;">
                                         <span t-field="ligne.dte"/>
                                     </td>
-                                    <td style ="border : 1px solid midnightblue; text-align:left;">
+                                    <!--<td style ="border : 1px solid midnightblue; text-align:left;">
                                         <span t-field="ligne.marche_id"/>
-                                    </td>
+                                    </td>-->
                                     <td style ="border : 1px solid midnightblue; text-align:left;">
                                         <span t-field="ligne.responsable_id"/>
                                     </td>
@@ -538,12 +529,11 @@
                 <t t-call="web.external_layout">
                     <div class="page">
                         <h3 style="text-align:center; border-style:solid;"><span>Etat des mouvents de stocks</span></h3><br/>
-                        <br/><br/>
+                        <br/>
                         <div>
-                            <b>Date debut: </b><span t-field="o.dte_deb"/><br/><br/>
-                            <b>Date fin: </b><span t-field="o.dte_fin"/><br/><br/>
+                            <h3><b>Période: </b> Du <span t-field="o.dte_deb"/> au <span t-field="o.dte_fin"/></h3>
                         </div><br/>
-                        <span>Entrées</span><br/>
+                        <h3 style="text-align:center;"><span>Entrées</span><br/></h3>
                         <table style="width:100%; border : 1px solid #ddd;border-collapse : collapse;">
                             <thead style ="background-color : #159dd9; color : #fff">
                                 <th style ="border : 1px solid midnightblue; text-align:left;">Date entrée</th>
@@ -570,7 +560,7 @@
                             </tbody>
                         </table>
                         <br/><br/>
-                        <span>Sorties</span><br/>
+                        <h3 style="text-align:center;"><span>Sorties</span><br/></h3>
                         <table style="width:100%; border : 1px solid #ddd;border-collapse : collapse;">
                             <thead style ="background-color : #159dd9; color : #fff">
                                 <th style ="border : 1px solid midnightblue; text-align:left;">Date sortie</th>
