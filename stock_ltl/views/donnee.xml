@@ -37,7 +37,7 @@
         </record>
 
         <record id="act_list_personnel" model="ir.actions.act_window">
-            <field name="name">Liste des personnels</field>
+            <field name="name">Personnels / Responsable</field>
             <field name="res_model">stock.personnel</field>
             <field name="view_mode">tree,form</field>
         </record>
@@ -78,7 +78,7 @@
         </record>
 
         <record id="act_list_article" model="ir.actions.act_window">
-            <field name="name">Liste des articles</field>
+            <field name="name">Materiaux de construction</field>
             <field name="res_model">stock.article</field>
             <field name="view_mode">tree,form</field>
         </record>
@@ -118,7 +118,7 @@
         </record>
 
         <record id="act_list_mode" model="ir.actions.act_window">
-            <field name="name">Liste des modes de règlement</field>
+            <field name="name">Modes de règlement</field>
             <field name="res_model">stock.mode</field>
             <field name="view_mode">tree,form</field>
         </record>
@@ -162,7 +162,7 @@
         </record>
 
         <record id="act_list_magasin" model="ir.actions.act_window">
-            <field name="name">Liste des magasins</field>
+            <field name="name">Magasins de stockages</field>
             <field name="res_model">stock.magasin</field>
             <field name="view_mode">tree,form</field>
         </record>
@@ -202,19 +202,19 @@
         </record>
 
         <record id="act_list_unite" model="ir.actions.act_window">
-            <field name="name">Liste des unités</field>
+            <field name="name">Unités de stock</field>
             <field name="res_model">stock.unite</field>
             <field name="view_mode">tree,form</field>
         </record>
 
 
         <menuitem id="main_menu" name ="STOCK CHANTIER" sequence="1" web_icon="stock_ltl,static/description/icon.png"/>
-        <menuitem id="main_menu_db" name ="Données de base" sequence="2" parent="main_menu"/>
-        <menuitem id="menu_unite" name = "Saisie/MàJ des Unités" sequence="1" parent="main_menu_db" action="act_list_unite"/>
-        <menuitem id="menu_article" name ="Saisie/MàJ des Articles" sequence="2" parent="main_menu_db" action="act_list_article"/>
-        <menuitem id="menu_personnel" name ="Saisie/MàJ des Responsables magasin" sequence="3" parent="main_menu_db" action="act_list_personnel"/>
-        <menuitem id="menu_magasin" name ="Saisie/MàJ des Magasins" sequence="4" parent="main_menu_db" action="act_list_magasin"/>
-        <menuitem id="menu_mode" name ="Saisie/MàJ des Modes de règlement" sequence="5" parent="main_menu_db" action="act_list_mode"/>
+        <menuitem id="main_menu_db" name ="Paramétrages" sequence="6" parent="main_menu"/>
+        <menuitem id="menu_unite" name = "Unités de stock" sequence="1" parent="main_menu_db" action="act_list_unite"/>
+        <menuitem id="menu_article" name ="Matériaux de constructions" sequence="2" parent="main_menu_db" action="act_list_article"/>
+        <menuitem id="menu_personnel" name ="Personnel/Responsables" sequence="3" parent="main_menu_db" action="act_list_personnel"/>
+        <menuitem id="menu_magasin" name ="Magasins de stockage" sequence="4" parent="main_menu_db" action="act_list_magasin"/>
+        <menuitem id="menu_mode" name ="Modes de règlement" sequence="5" parent="main_menu_db" action="act_list_mode"/>
 
 
     </data>

@@ -146,7 +146,7 @@
 
 
         <record id="act_list_entree_stock" model="ir.actions.act_window">
-            <field name="name">Entrée en stock</field>
+            <field name="name">Entrée de stock</field>
             <field name="res_model">stock.entree</field>
             <field name="view_mode">tree,form</field>
         </record>
@@ -176,7 +176,7 @@
 
 
         <record id="act_list_suivi_stock" model="ir.actions.act_window">
-            <field name="name">Suivi de stock</field>
+            <field name="name">Inventaire de stock</field>
             <field name="res_model">stock.suivi</field>
             <field name="view_mode">tree</field>
             <field name= "context">{'group_by' : ['magasin_id']}</field>
@@ -243,7 +243,7 @@
 
 
         <record id="act_list_rebut" model="ir.actions.act_window">
-            <field name="name">Ordre de Rébut</field>
+            <field name="name">Destockage / Ordre de Rébut</field>
             <field name="res_model">stock.rebut</field>
             <field name="view_mode">tree,form</field>
         </record>
@@ -321,7 +321,7 @@
 
 
         <record id="act_list_sortie" model="ir.actions.act_window">
-            <field name="name">Liste des sorties de stock</field>
+            <field name="name">Sorties de stock</field>
             <field name="res_model">stock.sortie</field>
             <field name="view_mode">tree,form</field>
         </record>
@@ -399,7 +399,7 @@
 
 
         <record id="act_list_retour" model="ir.actions.act_window">
-            <field name="name">Liste des retours de stock</field>
+            <field name="name">Retours de stock au magasin</field>
             <field name="res_model">stock.retour</field>
             <field name="view_mode">tree,form</field>
         </record>
@@ -468,24 +468,24 @@
 
 
         <record id="act_list_bilan" model="ir.actions.act_window">
-            <field name="name">Liste des bilans</field>
+            <field name="name">Bilans journalier de chantier</field>
             <field name="res_model">bilan.journee</field>
             <field name="view_mode">tree,form</field>
         </record>
 
 
 
-        <menuitem id="menu_gestion_marche" name ="Marché" sequence="2" parent="main_menu"/>
-        <menuitem id="menu_marche" name ="Saisie Marché" sequence="1" parent="menu_gestion_marche" action="act_list_marche"/>
+        <menuitem id="menu_gestion_marche" name ="Marchés" sequence="5" parent="main_menu"/>
+        <menuitem id="menu_marche" name ="Saisie des Marchés" sequence="1" parent="menu_gestion_marche" action="act_list_marche"/>
 
-        <menuitem id="menu_gestion_stock" name ="Gestion de Stock" sequence="3" parent="main_menu"/>
+        <menuitem id="menu_gestion_stock" name ="Gestion de Stock" sequence="1" parent="main_menu"/>
         <menuitem id="menu_entree_stock" name ="Entrée en stock" sequence="1" parent="menu_gestion_stock" action="act_list_entree_stock"/>
         <menuitem id="menu_sortie_stock" name ="Sortie de stock pour chantier" sequence="2" parent="menu_gestion_stock" action="act_list_sortie"/>
-        <menuitem id="menu_retour_stock" name ="Retour de materiel au magasin" sequence="3" parent="menu_gestion_stock" action="act_list_retour"/>
+        <menuitem id="menu_retour_stock" name ="Retour de materiaux au magasin" sequence="3" parent="menu_gestion_stock" action="act_list_retour"/>
 
-        <menuitem id="menu_bilan" name ="Bilan journée d'un chantier" sequence="4" parent="menu_gestion_stock" action="act_list_bilan"/>
-        <menuitem id="menu_rebu_stock" name ="Ordre de Rébut" sequence="5" parent="menu_gestion_stock" action="act_list_rebut"/>
-        <menuitem id="menu_suivi_stock" name ="Suivi de stock" sequence="6" parent="menu_gestion_stock" action="act_list_suivi_stock"/>
+        <menuitem id="menu_bilan" name ="Bilan journalier de chantier" sequence="4" parent="menu_gestion_stock" action="act_list_bilan"/>
+        <menuitem id="menu_rebu_stock" name ="Ordre de Rébut / Destockage" sequence="5" parent="menu_gestion_stock" action="act_list_rebut"/>
+        <menuitem id="menu_suivi_stock" name ="Inventaire du stock" sequence="6" parent="menu_gestion_stock" action="act_list_suivi_stock"/>
 
     </data>
 </odoo>
