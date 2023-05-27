@@ -5,14 +5,14 @@ from odoo.exceptions import ValidationError
 class EtatDepense(models.TransientModel):
     _name = 'etat.depense'
 
-    name = fields.Char(default="Etat des dépenses")
+    name = fields.Char(default="Etat synthétique de gestion")
     dte_deb = fields.Date("Date debut", required=True)
     dte_fin = fields.Date("Date fin", required=True)
     marche_id = fields.Many2one("stock.marche", "Marché", required=True)
-    total_materiel = fields.Float("Total matériel", readonly=True)
-    total_rebut = fields.Float("Total rebut", readonly=True)
-    total_depense = fields.Float("Total autres dépenses", readonly=True)
-    total = fields.Float("Total général", compute='_total')
+    total_materiel = fields.Float("Matériaux utilisés", readonly=True)
+    total_rebut = fields.Float("Destockage / Rébut", readonly=True)
+    total_depense = fields.Float("Transferts d'argent", readonly=True)
+    total = fields.Float("Total Charges", compute='_total')
     montant_marche = fields.Float("Montant du marché", related='marche_id.mnt_ttc', store=True)
     resultat = fields.Float("Résultat", compute='_total')
 
@@ -103,7 +103,7 @@ class EtatDetaille(models.Model):
     _name = "etat.detaille"
 
     name = fields.Char(default="Etat détaillé des opérations")
-    par = fields.Selection([('1', 'Par marché'), ('2', 'Tous les marché')],
+    par = fields.Selection([('1', 'Par marché'), ('2', 'Tous les marchés')],
                            string="Par", required=True)
     marche_id = fields.Many2one("stock.marche", "Marché")
     dte_deb = fields.Date("Date debut", required=True)

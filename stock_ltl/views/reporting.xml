@@ -25,16 +25,16 @@
                                 <field name="total_materiel" style = "width:75%"/>
                                 <field name="total_depense" style = "width:75%"/>
                                 <field name="total" style = "width:75%"/>
-                                <field name="resultat" style = "width:75%;"/>
+                                <field name="resultat" class="bigBold" style = "width:75%;"/>
                             </group>
                             <footer>
                                 <div>
-                                    <button name="etat" string="Afficher" type="object" class="oe_highlight" style="background-color: #28a745; border-color: #28a745; font-size:25px;
+                                    <button name="etat" string="Afficher" type="object" class="oe_highlight" style="background-color: #777777; border-color: #888888; font-size:25px;
                                         text-align:center;" icon="fa-search"/>
                                     <br/>
                                     <br/>
 
-                                    <button name="print_dep" string="Imprimer" type="object" class="oe_highlight" style="background-color: #28a745; border-color: white; font-size:25px;
+                                    <button name="print_dep" string="Imprimer" type="object" class="oe_highlight" style="background-color: #ea9516; border-color: white; font-size:25px;
                                         text-align:center;" icon="fa-print"/>
                                 </div>
                             </footer>
@@ -81,9 +81,9 @@
                         <footer>
                             <div>
                                 <div style="float:left">
-                                    <button name="etat" string="Afficher" type="object" class="oe_highlight" style="background-color: #28a745; border-color: #28a745; font-size:25px;
+                                    <button name="etat" string="Afficher" type="object" class="oe_highlight" style="background-color: #777777; border-color: #888888; font-size:25px;
                                             text-align:center;" icon="fa-search"/>
-                                    <button name="print_stock" string="Imprimer" type="object" class="oe_highlight" style="background-color: #28a745; border-color: white; font-size:25px;
+                                    <button name="print_stock" string="Imprimer" type="object" class="oe_highlight" style="background-color: #ea9516; border-color: white; font-size:25px;
                                             text-align:center;" icon="fa-print"/>
                                 </div>
                             </div>
@@ -134,10 +134,10 @@
                         <footer>
                             <div>
                                 <div style="float:left">
-                                    <button name="etat" string="Afficher" type="object" class="oe_highlight" style="background-color: #28a745; border-color: #28a745; font-size:25px;
+                                    <button name="etat" string="Afficher" type="object" class="oe_highlight" style="background-color: #777777; border-color: #888888; font-size:25px;
                                             text-align:center;" icon="fa-search"/>
 
-                                    <button name="print_det" string="Imprimer" type="object" class="oe_highlight" style="background-color: #28a745; border-color: white; font-size:25px;
+                                    <button name="print_det" string="Imprimer" type="object" class="oe_highlight" style="background-color: #ea9516; border-color: white; font-size:25px;
                                             text-align:center;" icon="fa-print"/>
                                 </div>
                             </div>
@@ -168,11 +168,11 @@
                                 <field name="dte_fin" style = "width:100%"/>
                             </group>
                             <group>
-                                <button name="etat" string="Afficher" type="object" class="oe_highlight" style="background-color: #28a745; border-color: #28a745; font-size:25px;
+                                <button name="etat" string="Afficher" type="object" class="oe_highlight" style="background-color: #777777; border-color: #888888; font-size:25px;
                                             text-align:center;" icon="fa-search"/>
                             </group>
                             <group>
-                                <button name="print_entree_sortie" string="Imprimer" type="object" class="oe_highlight" style="background-color: #28a745; border-color: white; font-size:25px;
+                                <button name="print_entree_sortie" string="Imprimer" type="object" class="oe_highlight" style="background-color: #ea9516; border-color: white; font-size:25px;
                                         text-align:center;" icon="fa-print"/>
                             </group>
                         </group>
@@ -216,7 +216,7 @@
         <menuitem id="menu_reporting" name ="Etat/Synthèse" sequence="4" parent="main_menu"/>
         <menuitem id="menu_etat_stock" name ="Etat stock d'un Magasin" sequence="1" parent="menu_reporting" action="action_etat_stock"/>
         <menuitem id="menu_etat_mvt" name ="Etat des Entrées/Sorties stock" sequence="2" parent="menu_reporting" action="action_etat_mvt"/>
-        <menuitem id="menu_etat_depen" name ="Etat Synthétique des Dépenses" sequence="3" parent="menu_reporting" action="action_etat_depense"/>
+        <menuitem id="menu_etat_depen" name ="Etat Synthétique de gestion" sequence="3" parent="menu_reporting" action="action_etat_depense"/>
         <menuitem id="menu_etat_det" name ="Etat détaillé des transferts d'argent" sequence="4" parent="menu_reporting" action="action_etat_detaille"/>
 
     </data>

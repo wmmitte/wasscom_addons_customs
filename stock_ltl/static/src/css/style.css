@@ -1,0 +1,165 @@
+/*
+
+.tableau-style {
+	border-collapse: collapse;
+	width: 100%;
+	cursor: pointer;
+	margin: 100px auto;
+	border: 1px solid #ddd;
+	margin-top: 10px;
+}
+
+th,
+td {
+	padding: 5px 5px 5px 5px;
+}
+
+
+tbody tr:nth-child(even) {
+	background-color: #f2f2f2;
+}
+
+tbody tr:last-of-type {
+	border: 2px solid midnightblue;
+}
+*/
+/*.custom_class {
+	border-collapse: collapse;
+	margin: 25px 0;
+	font-size: 0.9em;
+	font-family: sans-serif;
+	min-width: 400px;
+	box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+}
+
+.custom_class table thead tr {
+	background-color: #e40511;
+	color: #ffffff;
+	text-align: left;
+}
+
+.custom_class table th,
+.custom_class table td {
+	padding: 12px 15px;
+}
+
+.custom_class table tbody tr {
+	border-bottom: 1px solid #dddddd;
+}
+
+.custom_class table tbody tr:nth-of-type(even) {
+	background-color: #f3f3f3;
+}
+
+.custom_class table tbody tr:last-of-type {
+	border-bottom: 2px solid #e40511;
+}
+
+.custom_class table tbody tr.active-row {
+	font-weight: bold;
+	color: #e40511;
+}
+
+.custom_class table thead>tr>th:nth-child(4) {
+	width: 150px;
+	text-align: center;
+}*/
+body {
+	font-family: sans-serif;
+}
+
+.primaryColor {
+	color: #e40511;
+}
+
+.tableCollapseStripped {
+	border-collapse: collapse;
+	margin: 25px 0;
+	font-size: 0.9em;
+	font-family: sans-serif;
+	box-shadow: 0 0 08px rgba(0, 0, 0, 0.15);
+}
+
+.tableCollapseStripped thead tr {
+	background-color: #e40511;
+	color: #ffffff;
+	text-align: left;
+}
+
+.tableCollapseStripped th,
+.tableCollapseStripped td {
+	padding: 8px 11px;
+	text-align: justify;
+}
+
+.tableCollapseStripped tbody tr {
+	border-bottom: 1px solid #dddddd;
+}
+
+.tableCollapseStripped tbody tr:nth-of-type(even) {
+	background-color: #eeeeee;
+}
+
+.tableCollapseStripped tbody tr:last-of-type {
+	border-bottom: 1px solid #e40511;
+}
+
+.tableCollapseStripped tbody tr.active-row {
+	font-weight: bold;
+	color: #e40511;
+}
+
+.title {
+	text-align: center;
+	border-style: solid;
+	background-color: #f2f2f2;
+	color: #e40511;
+	font-weight: bold;
+	border-top: 1px solid #e40511;
+	border-bottom: 1px solid #e40511;
+	text-transform: uppercase;
+	font-size: 25px;
+	padding: 8px 11px;
+}
+
+.subTitle {
+	border-style: solid;
+	color: #e40511;
+	font-weight: bold;
+	border: 1px 0 solid #e40511;
+}
+
+.printedDate {
+	text-align: right;
+	font-style: italic;
+}
+
+.bold {
+	font-weight: bold;
+}
+
+.bigBold {
+	font-size: 25px;
+	font-weight: bold;
+}
+
+.italic {
+	font-style: italic;
+}
+
+.tRight {
+	text-align: right;
+}
+
+.tLeft {
+	text-align: right;
+}
+
+.tCenter {
+	text-align: center;
+
+}
+
+.tJustify {
+	text-align: justify;
+}

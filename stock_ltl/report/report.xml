@@ -16,34 +16,54 @@
         <field name="header_spacing">35</field>
         <field name="dpi">90</field>
     </record>
+    <record id="id_format_portrait" model="report.paperformat">
+        <field name="name">Format portrait</field>
+        <field name="default" eval="True"/>
+        <field name="format">A4</field>
+        <field name="page_height">0</field>
+        <field name="page_width">0</field>
+        <field name="orientation">Portrait</field>
+        <field name="margin_top">35</field>
+        <field name="margin_bottom">16</field>
+        <field name="margin_left">7</field>
+        <field name="margin_right">7</field>
+        <field name="header_line" eval="False"/>
+        <field name="header_spacing">25</field>
+        <field name="dpi">90</field>
+    </record>
 
     <report id = "report_entree_stock"
             string = "Entrée en stock"
             model = "stock.entree"
             report_type = "qweb-pdf"
             file = "stock_ltl.report_entree_stock"
-            name = "stock_ltl.report_entree"
-            print_report_name="'%s' % (object.name)"
-            paperformat="id_format_paysage"
+            name = "stock_ltl.report_entree" print_report_name="'%s' % (object.name)" paperformat="id_format_paysage"
             menu = "True"/>
 
     <template id="report_entree">
         <t t-call="web.html_container">
             <t t-foreach="docs" t-as="o">
                 <t t-call="web.external_layout">
-                    <!--<link rel="stylesheet" href="/stock_ltl/static/src/css/facture.css"/>-->
                     <div class="page">
-                        <h3 style="text-align:center; border-style:solid;">Entrée stock <span t-field="o.name"/></h3><br/>
+                        <h3 style="text-align:center; border-style:solid;">Entrée stock <span t-field="o.name"/>
+                        </h3>
+                        <br/>
                         <div>
-                            <b>Date: </b><span t-field="o.dte_entree"/><br/><br/>
-                            <b>Magasin: </b><span t-field="o.magasin_id"/><br/><br/>
-
-                        </div><br/>
+                            <b>Date: </b>
+                            <span t-field="o.dte_entree"/>
+                            <br/>
+                            <br/>
+                            <b>Magasin: </b>
+                            <span t-field="o.magasin_id"/>
+                            <br/>
+                            <br/>
+                        </div>
+                        <br/>
 
                         <table style="width:100%; border : 1px solid #ddd;border-collapse : collapse;">
                             <thead style ="background-color : #159dd9; color : #fff">
-                                <th style ="border : 1px solid midnightblue;">Désignation</th>
-                                <th style ="border : 1px solid midnightblue;">Unité</th>
+                                <th>Désignation</th>
+                                <th>Unité</th>
                                 <th style ="border : 1px solid midnightblue; text-align:right;">Quantité</th>
                                 <th style ="border : 1px solid midnightblue; text-align:right;">Prix unitaire</th>
                                 <th style ="border : 1px solid midnightblue; text-align:right;">Total</th>
@@ -69,11 +89,14 @@
                                 </tr>
                                 <tr style="border : 2px solid midnightblue;">
                                     <td colspan ="4" style ="text-align:left;font-weight:bold;">Totaux</td>
-                                    <td style = "border : 2px solid midnightblue;; text-align:right; font-family : times new roman;"><span t-esc="'{:,}'.format(int(sum([ligne.prix_total for ligne in o.stock_ids]))).replace(',', ' ')"/></td>
+                                    <td style = "border : 2px solid midnightblue;; text-align:right; font-family : times new roman;">
+                                        <span t-esc="'{:,}'.format(int(sum([ligne.prix_total for ligne in o.stock_ids]))).replace(',', ' ')"/>
+                                    </td>
                                 </tr>
                             </tbody>
                         </table>
-                        <br/><br/>
+                        <br/>
+                        <br/>
                         <div>
                             <div style="float:left">
                                 <span>Le magasinier</span>
@@ -95,9 +118,7 @@
             model = "stock.sortie"
             report_type = "qweb-pdf"
             file = "stock_ltl.report_sortie_stock"
-            name = "stock_ltl.report_sortie"
-            print_report_name="'%s' % (object.name)"
-            paperformat="id_format_paysage"
+            name = "stock_ltl.report_sortie" print_report_name="'%s' % (object.name)" paperformat="id_format_paysage"
             menu = "True"/>
 
     <template id="report_sortie">
@@ -105,22 +126,38 @@
             <t t-foreach="docs" t-as="o">
                 <t t-call="web.external_layout">
                     <div class="page">
-                        <h3 style="text-align:center; border-style:solid;"> <span t-field="o.name"/></h3><br/>
+                        <h3 style="text-align:center; border-style:solid;">
+                            <span t-field="o.name"/>
+                        </h3>
+                        <br/>
                         <div>
                             <div style="float:left">
-                                <b>Date: </b><span t-field="o.dte_sortie"/><br/><br/>
-                                <b>Marché: </b><span t-field="o.magasin_id"/><br/><br/>
+                                <b>Date: </b>
+                                <span t-field="o.dte_sortie"/>
+                                <br/>
+                                <br/>
+                                <b>Marché: </b>
+                                <span t-field="o.magasin_id"/>
+                                <br/>
+                                <br/>
 
                             </div>
                             <div style="float:right">
-                                <b>De: </b><span t-field="o.magasin_id"/><br/><br/>
-                                <b>Vers: </b><span t-field="o.magasin_vers.magasin_id"/><br/><br/>
+                                <b>De: </b>
+                                <span t-field="o.magasin_id"/>
+                                <br/>
+                                <br/>
+                                <b>Vers: </b>
+                                <span t-field="o.magasin_vers.magasin_id"/>
+                                <br/>
+                                <br/>
                             </div>
-                        </div><br/>
+                        </div>
+                        <br/>
 
                         <table style="width:100%; border : 1px solid #ddd;border-collapse : collapse;">
                             <thead style ="background-color : #159dd9; color : #fff">
-                                <th style ="border : 1px solid midnightblue;">Désignation</th>
+                                <th>Désignation</th>
                                 <th style ="border : 1px solid midnightblue;">Unité</th>
                                 <th style ="border : 1px solid midnightblue;; text-align:right;">Quantité disponible</th>
                                 <th style ="border : 1px solid midnightblue;; text-align:right;">Quantité demandée</th>
@@ -143,7 +180,8 @@
                                 </tr>
                             </tbody>
                         </table>
-                        <br/><br/>
+                        <br/>
+                        <br/>
                         <div>
                             <div style="float:left">
                                 <span>Le magasinier</span>
@@ -165,9 +203,7 @@
             model = "bilan.journee"
             report_type = "qweb-pdf"
             file = "stock_ltl.report_bilan_journee_view"
-            name = "stock_ltl.report_bilan_journee"
-            print_report_name="'%s' % (object.name)"
-            paperformat="id_format_paysage"
+            name = "stock_ltl.report_bilan_journee" print_report_name="'%s' % (object.name)" paperformat="id_format_paysage"
             menu = "True"/>
 
     <template id="report_bilan_journee">
@@ -175,18 +211,36 @@
             <t t-foreach="docs" t-as="o">
                 <t t-call="web.external_layout">
                     <div class="page">
-                        <h3 style="text-align:center; border-style:solid;"><span t-field="o.name"/></h3><br/>
+                        <h3 style="text-align:center; border-style:solid;">
+                            <span t-field="o.name"/>
+                        </h3>
+                        <br/>
                         <div>
                             <div style="float:left">
-                                <b>Date: </b><span t-field="o.dte"/><br/><br/>
-                                <b>Marché: </b><span t-field="o.marche_id"/><br/><br/>
+                                <b>Date: </b>
+                                <span t-field="o.dte"/>
+                                <br/>
+                                <br/>
+                                <b>Marché: </b>
+                                <span t-field="o.marche_id"/>
+                                <br/>
+                                <br/>
                             </div>
                             <div style="float:right">
-                                <b>De: </b><span t-field="o.magasin_id"/><br/><br/>
-                                <b>Responsable: </b><span t-field="o.responsable"/><br/><br/>
+                                <b>De: </b>
+                                <span t-field="o.magasin_id"/>
+                                <br/>
+                                <br/>
+                                <b>Responsable: </b>
+                                <span t-field="o.responsable"/>
+                                <br/>
+                                <br/>
                             </div>
-                        </div><br/><br/>
-<br></br><br></br>
+                        </div>
+                        <br/>
+                        <br/>
+                        <br></br>
+                        <br></br>
                         <table style="width:100%; border : 1px solid #ddd;border-collapse : collapse;">
                             <thead style ="background-color : #159dd9; color : #fff">
                                 <th style ="border : 1px solid midnightblue;">Désignation</th>
@@ -216,7 +270,8 @@
                                 </tr>
                             </tbody>
                         </table>
-                        <br/><br/>
+                        <br/>
+                        <br/>
                         <div>
                             <div style="float:left">
                                 <span>Le magasinier</span>
@@ -238,9 +293,7 @@
             model = "stock.rebut"
             report_type = "qweb-pdf"
             file = "stock_ltl.report_rebut_view"
-            name = "stock_ltl.report_rebut"
-            print_report_name="'%s' % (object.name)"
-            paperformat="id_format_paysage"
+            name = "stock_ltl.report_rebut" print_report_name="'%s' % (object.name)" paperformat="id_format_paysage"
             menu = "True"/>
 
     <template id="report_rebut">
@@ -248,24 +301,68 @@
             <t t-foreach="docs" t-as="o">
                 <t t-call="web.external_layout">
                     <div class="page">
-                        <h3 style="text-align:center; border-style:solid;"><span t-field="o.name"/></h3><br/>
+                        <h3 style="text-align:center; border-style:solid;">
+                            <span t-field="o.name"/>
+                        </h3>
+                        <br/>
                         <div>
                             <div style="float:left">
-                                <b>Date: </b><span t-field="o.dte_op"/><br/><br/>
-                                <b>Marché: </b><span t-field="o.marche_id"/><br/><br/>
-                                <b>Magasin: </b><span t-field="o.magasin_id"/><br/><br/>
+                                <b>Date: </b>
+                                <span t-field="o.dte_op"/>
+                                <br/>
+                                <br/>
+                                <b>Marché: </b>
+                                <span t-field="o.marche_id"/>
+                                <br/>
+                                <br/>
+                                <b>Magasin: </b>
+                                <span t-field="o.magasin_id"/>
+                                <br/>
+                                <br/>
                             </div>
                             <div style="float:right">
-                                <b>Article: </b><span t-field="o.article_id"/><br/><br/>
-                                <b>Unité: </b><span t-field="o.unite_id"/><br/><br/>
-                                <b>Qté avant rebut: </b><span t-field="o.qte_dispo"/><br/><br/>
-                                <b>Qté à détruire: </b><span t-field="o.quantite"/><br/><br/>
-                                <b>Prix unitaire: </b><span t-esc="'{:,}'.format(int(o.prix_unitaire)).replace(',', ' ')"/><br/><br/>
-                                <b>Montant total: </b><span t-esc="'{:,}'.format(int(o.total)).replace(',', ' ')"/><br/><br/>
+                                <b>Article: </b>
+                                <span t-field="o.article_id"/>
+                                <br/>
+                                <br/>
+                                <b>Unité: </b>
+                                <span t-field="o.unite_id"/>
+                                <br/>
+                                <br/>
+                                <b>Qté avant rebut: </b>
+                                <span t-field="o.qte_dispo"/>
+                                <br/>
+                                <br/>
+                                <b>Qté à détruire: </b>
+                                <span t-field="o.quantite"/>
+                                <br/>
+                                <br/>
+                                <b>Prix unitaire: </b>
+                                <span t-esc="'{:,}'.format(int(o.prix_unitaire)).replace(',', ' ')"/>
+                                <br/>
+                                <br/>
+                                <b>Montant total: </b>
+                                <span t-esc="'{:,}'.format(int(o.total)).replace(',', ' ')"/>
+                                <br/>
+                                <br/>
                             </div>
                         </div>
 
-                        <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+                        <br/>
+                        <br/>
+                        <br/>
+                        <br/>
+                        <br/>
+                        <br/>
+                        <br/>
+                        <br/>
+                        <br/>
+                        <br/>
+                        <br/>
+                        <br/>
+                        <br/>
+                        <br/>
+                        <br/>
                         <div>
                             <div style="float:left">
                                 <span>Le magasinier</span>
@@ -287,8 +384,7 @@
             model = "suivi.depense"
             report_type = "qweb-pdf"
             file = "stock_ltl.report_suivi_view"
-            name = "stock_ltl.report_suivi"
-            paperformat="id_format_paysage"
+            name = "stock_ltl.report_suivi" paperformat="id_format_paysage"
             menu = "True"/>
 
     <template id="report_suivi">
@@ -296,19 +392,41 @@
             <t t-foreach="docs" t-as="o">
                 <t t-call="web.external_layout">
                     <div class="page">
-                        <h3 style="text-align:center; border-style:solid;"><span>Suivi des dépenses</span></h3><br/>
+                        <h3 style="text-align:center; border-style:solid;">
+                            <span>Suivi des dépenses</span>
+                        </h3>
+                        <br/>
                         <div>
                             <div style="float:left">
-                                <b>Date: </b><span t-field="o.dte"/><br/><br/>
-                                <b>Marché: </b><span t-field="o.marche_id"/><br/><br/>
-                                <b>Responsable: </b><span t-field="o.personnel_id"/><br/><br/>
+                                <b>Date: </b>
+                                <span t-field="o.dte"/>
+                                <br/>
+                                <br/>
+                                <b>Marché: </b>
+                                <span t-field="o.marche_id"/>
+                                <br/>
+                                <br/>
+                                <b>Responsable: </b>
+                                <span t-field="o.personnel_id"/>
+                                <br/>
+                                <br/>
                             </div>
                             <div style="float:right">
-                                <b>En cours: </b><span t-esc="'{:,}'.format(int(o.en_cours)).replace(',', ' ')"/><br/><br/>
-                                <b>Montant: </b><span t-esc="'{:,}'.format(int(o.montant_depense)).replace(',', ' ')"/><br/><br/>
-                                <b>Nouveau disponible: </b><span t-esc="'{:,}'.format(int(o.nouveau_dispo)).replace(',', ' ')"/><br/><br/>
+                                <b>En cours: </b>
+                                <span t-esc="'{:,}'.format(int(o.en_cours)).replace(',', ' ')"/>
+                                <br/>
+                                <br/>
+                                <b>Montant: </b>
+                                <span t-esc="'{:,}'.format(int(o.montant_depense)).replace(',', ' ')"/>
+                                <br/>
+                                <br/>
+                                <b>Nouveau disponible: </b>
+                                <span t-esc="'{:,}'.format(int(o.nouveau_dispo)).replace(',', ' ')"/>
+                                <br/>
+                                <br/>
                             </div>
-                        </div><br/>
+                        </div>
+                        <br/>
 
                         <table style="width:100%; border : 1px solid #ddd;border-collapse : collapse;">
                             <thead style ="background-color : #159dd9; color : #fff">
@@ -327,7 +445,8 @@
                                 </tr>
                             </tbody>
                         </table>
-                        <br/><br/>
+                        <br/>
+                        <br/>
                         <div>
                             <div style="float:left">
                                 <span>Le magasinier</span>
@@ -343,14 +462,13 @@
     </template>
 
 
-
+    <!-- Etats du stock d'un magasin  -->
     <report id = "report_etat_stock_view"
             string = "Etat stock"
             model = "etat.stock"
             report_type = "qweb-pdf"
             file = "stock_ltl.report_etat_stock_view"
-            name = "stock_ltl.report_etat_stock"
-            paperformat="id_format_paysage"
+            name = "stock_ltl.report_etat_stock" paperformat="id_format_portrait"
             menu = "True"/>
 
     <template id="report_etat_stock">
@@ -358,239 +476,468 @@
             <t t-foreach="docs" t-as="o">
                 <t t-call="web.external_layout">
                     <div class="page">
-                        <h3 style="text-align:center; border-style:solid;">ETAT DES STOCK</h3><br/>
-                        <br/>
-                        <h4 style="text-align:center; border-style:solid;"><span t-field="o.magasin_id"/></h4><br/>
-                        <br/>
+                        <link rel='stylesheet' href="/stock_ltl/static/src/css/style.css"/>
 
-                        <table style="width:100%; border : 1px solid #ddd;border-collapse : collapse;">
-                            <thead style ="background-color : #159dd9; color : #fff">
-                                <th style ="border : 1px solid midnightblue;">Désignation</th>
-                                <th style ="border : 1px solid midnightblue; text-align:right;">Entrée</th>
-                                <th style ="border : 1px solid midnightblue; text-align:right;">Sortie</th>
-                                <th style ="border : 1px solid midnightblue; text-align:right;">Qte en stock</th>
+                        <h3 class="title" style="text-align:center;">ETAT DES STOCK</h3>
 
-                            </thead>
+                        <div>
+                            <table style="width:100%;">
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            <b>
+                                                <u>Magasin :</u>
+                                            </b>
+                                            <span class="primaryColor" t-field="o.magasin_id"/>
+                                        </td>
 
-                            <tbody>
-                                <tr t-foreach="o.etat_ids" t-as="ligne">
-                                    <td style ="border : 1px solid midnightblue;">
-                                        <span t-field="ligne.article_id"/>
-                                    </td>
-                            
-                                    <td style ="border : 1px solid midnightblue; text-align:right;">
-                                        <span t-field="ligne.en_stock"/>
-                                    </td>
-                                    <td style ="border : 1px solid midnightblue; text-align:right;">
-                                        <span t-field="ligne.sortie"/>
-                                    </td>
-                                    <td style ="border : 1px solid midnightblue; text-align:right;">
-                                        <span t-field="ligne.qte_stock"/>
+                                        <td class="printedDate">
+                                    Imprimé le <span t-esc="time.strftime('%d/%m/%Y')"/>
+                                        <span t-esc="time.strftime('%H:%M')"/>
+
                                     </td>
                                 </tr>
                             </tbody>
                         </table>
-                        <br/><br/>
-                        <div>
-                            <div style="float:left">
-                                <span>Le magasinier</span>
-                            </div>
-                            <div style="float:right">
-                                <span>La comptabilité</span>
-                            </div>
-                        </div>
+
                     </div>
-                </t>
-            </t>
-        </t>
-    </template>
 
+                    <table class="tableCollapseStripped" style="width:100%;">
+                        <thead>
+                            <th>N°#</th>
+                            <th>Désignation</th>
+                            <th style ="text-align:right;">Entrée</th>
+                            <th style ="text-align:right;">Sortie</th>
+                            <th style ="text-align:right;">Qte en stock</th>
 
+                        </thead>
 
+                        <tbody>
+                            <t t-set="idx" t-value="0"/>
+                            <tr t-foreach="o.etat_ids" t-as="ligne">
+                                <t t-set="idx" t-value="idx + 1"/>
+                                <td>
+                                    <span t-esc="idx"/>
+                                </td>
+                                <td>
+                                    <span t-field="ligne.article_id"/>
+                                </td>
 
-    <report id = "report_dep_view"
-            string = "Etat des dépenses"
-            model = "etat.depense"
-            report_type = "qweb-pdf"
-            file = "stock_ltl.report_dep_view"
-            name = "stock_ltl.report_dep"
-            print_report_name="'%s' % (object.name)"
-            paperformat="id_format_paysage"
-            menu = "True"/>
-
-    <template id="report_dep">
-        <t t-call="web.html_container">
-            <t t-foreach="docs" t-as="o">
-                <t t-call="web.external_layout">
-                    <div class="page">
-                        <h3 style="text-align:center; border-style:solid;"><span t-field="o.name"/> du <span t-field="o.dte_deb"/> au <span t-field="o.dte_fin"/></h3><br/>
-                        <div>
-                            <div style="float:left">
-                                <b>Marché: </b><span t-field="o.marche_id"/><br/><br/>
-                                <b>Montant marché: </b><span t-esc="'{:,}'.format(int(o.montant_marche)).replace(',', ' ')"/><br/><br/>
-                                <b>Total matériel: </b><span t-esc="'{:,}'.format(int(o.total_materiel)).replace(',', ' ')"/><br/><br/>
-                                <b>Total rébut: </b><span t-esc="'{:,}'.format(int(o.total_rebut)).replace(',', ' ')"/><br/><br/>
-                                <b>Total dépense: </b><span t-esc="'{:,}'.format(int(o.total_depense)).replace(',', ' ')"/><br/><br/>
-                                <b>Montant total: </b><span t-esc="'{:,}'.format(int(o.total)).replace(',', ' ')"/><br/><br/>
-                                <b>Résultat: </b><span t-esc="'{:,}'.format(int(o.resultat)).replace(',', ' ')"/><br/><br/>
-                            </div>
-                        </div>               
-                    </div>
-                </t>
-            </t>
-        </t>
-    </template>
-
-
-
-    <report id = "report_etat_detaille_view"
-            string = "Etat détaillé des transferts d'argent"
-            model = "etat.detaille"
-            report_type = "qweb-pdf"
-            file = "stock_ltl.report_etat_detaille_view"
-            name = "stock_ltl.report_etat_detaille"
-            paperformat="id_format_paysage"
-            menu = "True"/>
-
-    <template id="report_etat_detaille">
-        <t t-call="web.html_container">
-            <t t-foreach="docs" t-as="o">
-                <t t-call="web.external_layout">
-                    <div class="page">
-                        <h3 style="text-align:center; border-style:solid;"><span>Etat détaillé des transferts d'argent</span></h3><br/>
-                        <div>
-                            <b>Par: </b><span t-field="o.par"/><br/>
-                            <b>Marché: </b><span t-field="o.marche_id"/><br/>
-                            <h3><b>Période:</b> Du <span t-field="o.dte_deb"/> au <span t-field="o.dte_fin"/></h3>
+                                <td style ="text-align:right;">
+                                    <span t-field="ligne.en_stock"/>
+                                </td>
+                                <td style ="text-align:right;">
+                                    <span t-field="ligne.sortie"/>
+                                </td>
+                                <td style ="text-align:right;">
+                                    <span t-field="ligne.qte_stock"/>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <br/>
+                    <br/>
+                    <div>
+                        <div style="float:left">
+                            <span>Le magasinier</span>
                         </div>
-                        <br/>
-
-                        <table style="width:100%; border : 1px solid #ddd;border-collapse : collapse;">
-                            <thead style ="background-color : #159dd9; color : #fff">
-                                <th style ="border : 1px solid midnightblue; text-align:left;">Date</th>
-                                <!--<th style ="border : 1px solid midnightblue; text-align:left;">Marché</th>-->
-                                <th style ="border : 1px solid midnightblue; text-align:left;">Responsable</th>
-                                <th style ="border : 1px solid midnightblue; text-align:left;">Objet</th>
-                                <th style ="border : 1px solid midnightblue; text-align:left;">Mode</th>
-                                <th style ="border : 1px solid midnightblue; text-align:left;">Référence</th>
-                                <th style ="border : 1px solid midnightblue; text-align:right;">Montant</th>
-                            </thead>
-
-                            <tbody>
-                                <tr t-foreach="o.etat_ids" t-as="ligne">
-                                    <td style ="border : 1px solid midnightblue;">
-                                        <span t-field="ligne.dte"/>
-                                    </td>
-                                    <!--<td style ="border : 1px solid midnightblue; text-align:left;">
-                                        <span t-field="ligne.marche_id"/>
-                                    </td>-->
-                                    <td style ="border : 1px solid midnightblue; text-align:left;">
-                                        <span t-field="ligne.responsable_id"/>
-                                    </td>
-                                    <td style ="border : 1px solid midnightblue; text-align:left;">
-                                        <span t-field="ligne.objet"/>
-                                    </td>
-                                    <td style ="border : 1px solid midnightblue; text-align:left;">
-                                        <span t-field="ligne.mode_id"/>
-                                    </td>
-                                    <td style ="border : 1px solid midnightblue; text-align:left;">
-                                        <span t-field="ligne.reference"/>
-                                    </td>
-                                    <td style ="border : 1px solid midnightblue; text-align:right;">
-                                        <span t-esc="'{:,}'.format(int(ligne.montant)).replace(',', ' ')"/>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                        <br/><br/>
                         <div style="float:right">
                             <span>La comptabilité</span>
                         </div>
                     </div>
-                </t>
+                </div>
             </t>
         </t>
-    </template>
+    </t>
+</template>
 
 
 
-    <report id = "report_etat_entree_sortie_view"
+<!-- Etats styntétique des dépenses  -->
+<report id = "report_dep_view"
+            string = "Etat synthétique des dépenses"
+            model = "etat.depense"
+            report_type = "qweb-pdf"
+            file = "stock_ltl.report_dep_view"
+            name = "stock_ltl.report_dep" print_report_name="'%s' % (object.name)" paperformat="id_format_paysage"
+            menu = "True"/>
+
+<template id="report_dep">
+    <t t-call="web.html_container">
+        <t t-foreach="docs" t-as="o">
+            <t t-call="web.external_layout">
+                <div class="page">
+                    <link rel='stylesheet' href="/stock_ltl/static/src/css/style.css"/>
+                    <h3 class="title">
+                        <span>Etat synthétique de gestion</span>
+                    </h3>
+
+                    <br/>
+                    <div>
+                        <table style="width:100%;">
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <b>
+                                            <u>Marche :</u>
+                                        </b>
+                                        <span class="primaryColor" t-field="o.marche_id"/>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <table style="width:100%;">
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <b>
+                                            <u>Période :</u>
+                                        </b>
+                                        <span t-field="o.dte_deb"/>
+ au <span t-field="o.dte_fin"/>
+                                    </td>
+
+
+                                    <td class="printedDate">
+                                    Imprimé le <span t-esc="time.strftime('%d/%m/%Y')"/>
+                                    <span t-esc="time.strftime('%H:%M')"/>
+
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <div>
+
+                        <table class="tableCollapseStripped" style="width:100%;">
+                            <thead>
+                                <th>
+                                    <span>Désignation</span>
+                                </th>
+                                <th class="tRight" style="text-align:right;">
+                                    <span>Credit</span>
+                                </th>
+                                <th class="tRight" style="text-align:right;">
+                                    <span>Débit</span>
+                                </th>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <span class="bold">Montant du marché</span>
+                                    </td>
+                                    <td class="tRight" style="text-align:right;">
+                                        <span t-esc="'{:,}'.format(int(o.montant_marche)).replace(',', ' ')"/>
+                                    </td>
+                                    <td class="tRight" style="text-align:right;">
+                                        <span>-</span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <span class="bold">Matériaux utilisés en chantier</span>
+                                    </td>
+                                    <td class="tRight" style="text-align:right;">
+                                        <span>-</span>
+                                    </td>
+                                    <td class="tRight" style="text-align:right;">
+                                        <span t-esc="'{:,}'.format(int(o.total_materiel)).replace(',', ' ')"></span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <span class="bold">Destockage / Rébut</span>
+                                    </td>
+                                    <td class="tRight" style="text-align:right;">
+                                        <span>-</span>
+                                    </td>
+                                    <td class="tRight" style="text-align:right;">
+                                        <span t-esc="'{:,}'.format(int(o.total_rebut)).replace(',', ' ')"></span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <span class="bold">Transferts d'argent</span>
+                                    </td>
+                                    <td class="tRight" style="text-align:right;">
+                                        <span>-</span>
+                                    </td>
+                                    <td class="tRight" style="text-align:right;">
+                                        <span t-esc="'{:,}'.format(int(o.total_depense)).replace(',', ' ')"></span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <span class="bold">Total Charges</span>
+                                    </td>
+                                    <td class="tRight" style="text-align:right;">
+                                        <span>-</span>
+                                    </td>
+                                    <td class="tRight" style="text-align:right;">
+                                        <span t-esc="'{:,}'.format(int(o.total)).replace(',', ' ')"></span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <span class="bigBold">Résulat</span>
+                                    </td>
+                                    <td class="tRight" style="text-align:right;">
+                                        <span>-</span>
+                                    </td>
+                                    <td class="tRight" style="text-align:right;">
+                                        <span class="bigBold primaryColor" t-esc="'{:,}'.format(int(o.resultat)).replace(',', ' ')"></span>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                    </div>
+                </div>
+            </div>
+        </t>
+    </t>
+</t>
+</template>
+
+
+<!-- Etat détaillé de transferts d'argent -->
+<report id = "report_etat_detaille_view"
+            string = "Etat détaillé des transferts d'argent"
+            model = "etat.detaille"
+            report_type = "qweb-pdf"
+            file = "stock_ltl.report_etat_detaille_view"
+            name = "stock_ltl.report_etat_detaille" paperformat="id_format_portrait"
+            menu = "True"/>
+
+<template id="report_etat_detaille">
+<t t-call="web.html_container">
+    <t t-foreach="docs" t-as="o">
+        <t t-call="web.external_layout">
+            <div class="page">
+                <link rel="stylesheet" href="/stock_ltl/static/src/css/style.css"/>
+                <h3 class="title">
+                    <span>Etat détaillé des transferts d'argent</span>
+                </h3>
+                <br/>
+                <div>
+                    <table style="width:100%;">
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <b>
+                                        <u>Marche :</u>
+                                    </b>
+                                    <t t-if="o.par == '1'">
+                                        <span class="primaryColor" t-field="o.marche_id"/>
+                                    </t>
+                                    <t t-else="">
+                                        <span class="primaryColor" t-field="o.par"/>
+                                    </t>
+
+
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <table style="width:100%;">
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <b>
+                                        <u>Période :</u>
+                                    </b>
+                                    <span t-field="o.dte_deb"/>
+ au <span t-field="o.dte_fin"/>
+                                </td>
+
+
+                                <td class="printedDate">
+                                    Imprimé le <span t-esc="time.strftime('%d/%m/%Y')"/>
+                                <span t-esc="time.strftime('%H:%M')"/>
+
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <br/>
+
+            <table class="tableCollapseStripped" style="width:100%;">
+                <thead>
+                    <th>N°#</th>
+                    <th>Date</th>
+                    <th>Responsable</th>
+                    <th>Objet</th>
+                    <th>Mode</th>
+                    <th>Référence</th>
+                    <th style ="text-align:right;">Montant</th>
+                </thead>
+
+                <tbody>
+                    <t t-set="idx" t-value="0"/>
+                    <tr t-foreach="o.etat_ids" t-as="ligne">
+                        <t t-set="idx" t-value="idx + 1"/>
+                        <td>
+                            <span t-esc="idx"/>
+                        </td>
+
+                        <td>
+                            <span t-field="ligne.dte"/>
+                        </td>
+                        <td>
+                            <span t-field="ligne.responsable_id"/>
+                        </td>
+                        <td>
+                            <span t-field="ligne.objet"/>
+                        </td>
+                        <td>
+                            <span t-field="ligne.mode_id"/>
+                        </td>
+                        <td>
+                            <span t-field="ligne.reference"/>
+                        </td>
+                        <td style ="text-align:right;">
+                            <span t-esc="'{:,}'.format(int(ligne.montant)).replace(',', ' ')"/>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <br/>
+            <br/>
+            <div style="float:right">
+                <span>La comptabilité</span>
+            </div>
+        </div>
+    </t>
+</t>
+</t>
+</template>
+
+
+<!-- Etat des mouvements de stock -->
+<report id = "report_etat_entree_sortie_view"
             string = "Etat des mouvements de stock"
             model = "etat.det.stock"
             report_type = "qweb-pdf"
             file = "stock_ltl.report_etat_entree_sortie_view"
-            name = "stock_ltl.report_etat_entree_sortie"
-            paperformat="id_format_paysage"
+            name = "stock_ltl.report_etat_entree_sortie" paperformat="id_format_portrait"
             menu = "True"/>
 
-    <template id="report_etat_entree_sortie">
-        <t t-call="web.html_container">
-            <t t-foreach="docs" t-as="o">
-                <t t-call="web.external_layout">
-                    <div class="page">
-                        <h3 style="text-align:center; border-style:solid;"><span>Etat des mouvents de stocks</span></h3><br/>
-                        <br/>
-                        <div>
-                            <h3><b>Période: </b> Du <span t-field="o.dte_deb"/> au <span t-field="o.dte_fin"/></h3>
-                        </div><br/>
-                        <h3 style="text-align:center;"><span>Entrées</span><br/></h3>
-                        <table style="width:100%; border : 1px solid #ddd;border-collapse : collapse;">
-                            <thead style ="background-color : #159dd9; color : #fff">
-                                <th style ="border : 1px solid midnightblue; text-align:left;">Date entrée</th>
-                                <th style ="border : 1px solid midnightblue; text-align:left;">Désignation</th>
-                                <th style ="border : 1px solid midnightblue; text-align:left;">Unité</th>
-                                <th style ="border : 1px solid midnightblue; text-align:right;">Quantité</th>
-                            </thead>
+<template id="report_etat_entree_sortie">
+<t t-call="web.html_container">
+<t t-foreach="docs" t-as="o">
+    <t t-call="web.external_layout">
+        <div class="page">
+            <link rel='stylesheet' href="/stock_ltl/static/src/css/style.css"/>
+            <h3 class="title">
+                <span>Etat des mouvents de stocks</span>
+            </h3>
+            <div>
+                <table style="width:100%;">
+                    <tbody>
+                        <tr>
+                            <td>
+                                <b>
+                                    <u>Période :</u>
+                                </b>
+                                <span t-field="o.dte_deb"/>
+ au <span t-field="o.dte_fin"/>
+                            </td>
 
-                            <tbody>
-                                <tr t-foreach="o.etat_ids" t-as="ligne">
-                                    <td style ="border : 1px solid midnightblue;">
-                                        <span t-field="ligne.dte_entree"/>
-                                    </td>
-                                    <td style ="border : 1px solid midnightblue; text-align:left;">
-                                        <span t-field="ligne.article_id"/>
-                                    </td>
-                                    <td style ="border : 1px solid midnightblue; text-align:left;">
-                                        <span t-field="ligne.unite_id"/>
-                                    </td>
-                                    <td style ="border : 1px solid midnightblue; text-align:right;">
-                                        <span t-field="ligne.qte"/>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                        <br/><br/>
-                        <h3 style="text-align:center;"><span>Sorties</span><br/></h3>
-                        <table style="width:100%; border : 1px solid #ddd;border-collapse : collapse;">
-                            <thead style ="background-color : #159dd9; color : #fff">
-                                <th style ="border : 1px solid midnightblue; text-align:left;">Date sortie</th>
-                                <th style ="border : 1px solid midnightblue; text-align:left;">Désignation</th>
-                                <th style ="border : 1px solid midnightblue; text-align:left;">Unité</th>
-                                <th style ="border : 1px solid midnightblue; text-align:right;">Quantité</th>
-                            </thead>
+                            <td class="printedDate">
+                                    Imprimé le <span t-esc="time.strftime('%d/%m/%Y')"/>
+                            <span t-esc="time.strftime('%H:%M')"/>
 
-                            <tbody>
-                                <tr t-foreach="o.etat_sortie_ids" t-as="ligne">
-                                    <td style ="border : 1px solid midnightblue;">
-                                        <span t-field="ligne.dte_sortie"/>
-                                    </td>
-                                    <td style ="border : 1px solid midnightblue; text-align:left;">
-                                        <span t-field="ligne.article_id"/>
-                                    </td>
-                                    <td style ="border : 1px solid midnightblue; text-align:left;">
-                                        <span t-field="ligne.unite_id"/>
-                                    </td>
-                                    <td style ="border : 1px solid midnightblue; text-align:right;">
-                                        <span t-field="ligne.qte"/>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </t>
-            </t>
-        </t>
-    </template>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+        </div>
+        <br/>
+        <h3>
+            <span class="subTitle">Entrées</span>
+        </h3>
+        <table class="tableCollapseStripped" style="width:100%;">
+            <thead>
+                <th>
+                    <span>N°#</span>
+                </th>
+                <th>
+                    <span>Date entrée</span>
+                </th>
+                <th>
+                    <span>Désignation</span>
+                </th>
+                <th>
+                    <span style="">Unité</span>
+                </th>
+                <th style ="border : 0; text-align:right;">
+                    <span>Quantité</span>
+                </th>
+            </thead>
+
+            <tbody>
+                <t t-set="idx" t-value="0"/>
+                <tr t-foreach="o.etat_ids" t-as="ligne">
+                    <t t-set="idx" t-value="idx + 1"/>
+                    <td>
+                        <span t-esc="idx"/>
+                    </td>
+                    <td>
+                        <span t-field="ligne.dte_entree"/>
+                    </td>
+                    <td>
+                        <span t-field="ligne.article_id"/>
+                    </td>
+                    <td>
+                        <span t-field="ligne.unite_id"/>
+                    </td>
+                    <td style ="text-align:right;">
+                        <span t-field="ligne.qte"/>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <br/>
+        <h3>
+            <span class="subTitle">Sorties</span>
+        </h3>
+        <table class="tableCollapseStripped" style="width:100%">
+            <thead>
+                <th>N°#</th>
+                <th>Date sortie</th>
+                <th>Désignation</th>
+                <th>Unité</th>
+                <th style ="text-align:right;">Quantité</th>
+            </thead>
+            <tbody>
+                <t t-set="idx" t-value="0"/>
+                <tr t-foreach="o.etat_sortie_ids" t-as="ligne">
+                    <t t-set="idx" t-value="idx + 1"/>
+                    <td>
+                        <span t-esc="idx"/>
+                    </td>
+                    <td>
+                        <span t-field="ligne.dte_sortie"/>
+                    </td>
+                    <td>
+                        <span t-field="ligne.article_id"/>
+                    </td>
+                    <td>
+                        <span t-field="ligne.unite_id"/>
+                    </td>
+                    <td style ="text-align:right;">
+                        <span t-field="ligne.qte"/>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</t>
+</t>
+</t>
+</template>
 
 
 </odoo>
