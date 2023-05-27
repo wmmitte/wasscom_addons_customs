@@ -29,13 +29,11 @@
                             </group>
                             <footer>
                                 <div>
-                                    <button name="etat" string="Afficher" type="object" class="oe_highlight" style="background-color: #777777; border-color: #888888; font-size:25px;
-                                        text-align:center;" icon="fa-search"/>
+                                    <button name="etat" string="Afficher" type="object" style="background-color: #777777;border-color: #888888;font-size: 25px;text-align: center;" icon="fa-search"/>
                                     <br/>
                                     <br/>
 
-                                    <button name="print_dep" string="Imprimer" type="object" class="oe_highlight" style="background-color: #ea9516; border-color: white; font-size:25px;
-                                        text-align:center;" icon="fa-print"/>
+                                    <button name="print_dep" string="Imprimer" type="object" style="background-color: #ea9516;border-color: #ffffff;font-size: 25px;text-align: center;" icon="fa-print"/>
                                 </div>
                             </footer>
                         </group>
@@ -81,10 +79,8 @@
                         <footer>
                             <div>
                                 <div style="float:left">
-                                    <button name="etat" string="Afficher" type="object" class="oe_highlight" style="background-color: #777777; border-color: #888888; font-size:25px;
-                                            text-align:center;" icon="fa-search"/>
-                                    <button name="print_stock" string="Imprimer" type="object" class="oe_highlight" style="background-color: #ea9516; border-color: white; font-size:25px;
-                                            text-align:center;" icon="fa-print"/>
+                                    <button name="etat" string="Afficher" type="object" style="background-color: #777777;border-color: #888888;font-size: 25px;text-align: center;" icon="fa-search"/>
+                                    <button name="print_stock" string="Imprimer" type="object" style="background-color: #ea9516;border-color: #ffffff;font-size: 25px;text-align: center;" icon="fa-print"/>
                                 </div>
                             </div>
                         </footer>
@@ -134,11 +130,9 @@
                         <footer>
                             <div>
                                 <div style="float:left">
-                                    <button name="etat" string="Afficher" type="object" class="oe_highlight" style="background-color: #777777; border-color: #888888; font-size:25px;
-                                            text-align:center;" icon="fa-search"/>
+                                    <button name="etat" string="Afficher" type="object" style="background-color: #777777;border-color: #888888;font-size: 25px;text-align: center;" icon="fa-search"/>
 
-                                    <button name="print_det" string="Imprimer" type="object" class="oe_highlight" style="background-color: #ea9516; border-color: white; font-size:25px;
-                                            text-align:center;" icon="fa-print"/>
+                                    <button name="print_det" string="Imprimer" type="object" style="background-color: #ea9516;border-color: #ffffff;font-size: 25px;text-align: center;" icon="fa-print"/>
                                 </div>
                             </div>
                         </footer>
@@ -168,12 +162,10 @@
                                 <field name="dte_fin" style = "width:100%"/>
                             </group>
                             <group>
-                                <button name="etat" string="Afficher" type="object" class="oe_highlight" style="background-color: #777777; border-color: #888888; font-size:25px;
-                                            text-align:center;" icon="fa-search"/>
+                                <button name="etat" string="Afficher" type="object" style="background-color: #777777;border-color: #888888;font-size: 25px;text-align: center;" icon="fa-search"/>
                             </group>
                             <group>
-                                <button name="print_entree_sortie" string="Imprimer" type="object" class="oe_highlight" style="background-color: #ea9516; border-color: white; font-size:25px;
-                                        text-align:center;" icon="fa-print"/>
+                                <button name="print_entree_sortie" string="Imprimer" type="object" style="background-color: #ea9516;border-color: #ffffff;font-size: 25px;text-align: center;" icon="fa-print"/>
                             </group>
                         </group>
                         <notebook>
