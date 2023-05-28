@@ -4,7 +4,7 @@
     "author": "Songo Technonogies (SOTEC)",
     "sequence": 1,
     "category": "Comptabilité",
-    "Summary": "Gestion de la comptabilité",
+    "Summary": "Gestion de Comptabilité",
     "depends": ["base", "om_account_accountant"],
     "data": [
         "security/ir.model.access.csv",

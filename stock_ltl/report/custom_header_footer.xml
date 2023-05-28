@@ -6,7 +6,6 @@
         <t t-set="company" t-value="user.company_id"/>
         <div class="header">
             <link rel='stylesheet' href="/stock_ltl/static/src/css/style.css"/>
-
             <div class="row" style="font-family: sans-serif; font-size:12px;">
                 <div class="col-5 mb4">
                     <div>
@@ -37,7 +36,7 @@
                         </strong>
                     </li>
                 </div>
-                <div>
+                <div style="font-style:italic;">
                         Imprimé le, <span t-esc="context_timestamp(datetime.datetime.now()).strftime('%d/%m/%Y %H:%M')"/>
                 </div>
             </div>

@@ -101,10 +101,10 @@
                         <br/>
                         <div>
                             <div style="float:left">
-                                <span>Le magasinier</span>
+                                <span>Magasinier</span>
                             </div>
                             <div style="float:right">
-                                <span>La comptabilité</span>
+                                <span>Comptabilité</span>
                             </div>
                         </div>
                     </div>
@@ -188,10 +188,10 @@
                         <br/>
                         <div>
                             <div style="float:left">
-                                <span>Le magasinier</span>
+                                <span>Magasinier</span>
                             </div>
                             <div style="float:right">
-                                <span>La comptabilité</span>
+                                <span>Comptabilité</span>
                             </div>
                         </div>
                     </div>
@@ -279,10 +279,10 @@
                         <br/>
                         <div>
                             <div style="float:left">
-                                <span>Le magasinier</span>
+                                <span>Magasinier</span>
                             </div>
                             <div style="float:right">
-                                <span>La comptabilité</span>
+                                <span>Comptabilité</span>
                             </div>
                         </div>
                     </div>
@@ -372,10 +372,10 @@
                         <br/>
                         <div>
                             <div style="float:left">
-                                <span>Le magasinier</span>
+                                <span>Magasinier</span>
                             </div>
                             <div style="float:right">
-                                <span>La comptabilité</span>
+                                <span>Comptabilité</span>
                             </div>
                         </div>
                     </div>
@@ -457,10 +457,10 @@
                         <br/>
                         <div>
                             <div style="float:left">
-                                <span>Le magasinier</span>
+                                <span>Magasinier</span>
                             </div>
                             <div style="float:right">
-                                <span>La comptabilité</span>
+                                <span>Comptabilité</span>
                             </div>
                         </div>
                     </div>
@@ -549,10 +549,10 @@
                     <br/>
                     <div>
                         <div style="float:left">
-                            <span>Le magasinier</span>
+                            <span>Magasinier</span>
                         </div>
                         <div style="float:right">
-                            <span>La comptabilité</span>
+                            <span>Comptabilité</span>
                         </div>
                     </div>
                 </div>
@@ -573,6 +573,7 @@
             menu = "True"/>
 
 <template id="report_dep">
+
     <t t-call="web.html_container">
         <t t-foreach="docs" t-as="o">
             <div class="article o_report_layout_standard" t-att-data-oe-model="o and o._name" t-att-data-oe-id="o and o.id">
@@ -805,7 +806,7 @@
                     <br/>
                     <br/>
                     <div style="float:right">
-                        <span>La comptabilité</span>
+                        <span>Comptabilité</span>
                     </div>
                 </div>
             </div>

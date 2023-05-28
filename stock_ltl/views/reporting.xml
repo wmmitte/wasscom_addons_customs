@@ -9,8 +9,8 @@
                 <form string="Marches" create='false' delete="false">
                     <sheet>
                         <div>
-                            <h1 style="text-align:center; text-decoration:underline;">
-                                <field name="name" nolabel="1" readonly="1"/>
+                            <h1 style="text-align:center;">
+                                Etat synthétique de gestion
                             </h1>
                         </div>
                         <group col="3">
@@ -29,11 +29,9 @@
                             </group>
                             <footer>
                                 <div>
-                                    <button name="etat" string="Afficher" type="object" style="background-color: #777777;border-color: #888888;font-size: 25px;text-align: center;" icon="fa-search"/>
-                                    <br/>
-                                    <br/>
-
-                                    <button name="print_dep" string="Imprimer" type="object" style="background-color: #ea9516;border-color: #ffffff;font-size: 25px;text-align: center;" icon="fa-print"/>
+                                    <button name="etat" string="Afficher" type="object" class="btn-dark" icon="fa-search"/>
+                                    <![CDATA[&nbsp;]]>
+                                    <button name="print_dep" string="Imprimer" type="object" class="btn-warning" icon="fa-print"/>
                                 </div>
                             </footer>
                         </group>
@@ -60,12 +58,21 @@
                 <form string="Liste des sorties de stock">
                     <sheet>
                         <div>
-                            <h1 style="text-align:center; text-decoration:underline;">
-                                <field name="name" nolabel="1" readonly="1"/>
+                            <h1 style="text-align:center;">
+                                Etat stock d'un magasin
                             </h1>
                         </div>
                         <group>
-                            <field name="magasin_id" style = "width:50%" options="{'no_create': True}"/>
+                            <group>
+                                <field name="magasin_id" style = "width:50%" options="{'no_create': True}"/>
+                            </group>
+                            <group>
+                                <div>
+                                    <button name="etat" string="Afficher" type="object" class="btn-dark" icon="fa-search"/>
+                                    <![CDATA[&nbsp;]]>
+                                    <button name="print_stock" string="Imprimer" type="object" class="btn-warning" icon="fa-print"/>
+                                </div>
+                            </group>
                         </group>
                         <field name="etat_ids" nolabel = "1">
                             <tree string="Lignes demande" create ="false" delete="false">
@@ -76,14 +83,6 @@
                                 <field name="qte_stock"/>
                             </tree>
                         </field>
-                        <footer>
-                            <div>
-                                <div style="float:left">
-                                    <button name="etat" string="Afficher" type="object" style="background-color: #777777;border-color: #888888;font-size: 25px;text-align: center;" icon="fa-search"/>
-                                    <button name="print_stock" string="Imprimer" type="object" style="background-color: #ea9516;border-color: #ffffff;font-size: 25px;text-align: center;" icon="fa-print"/>
-                                </div>
-                            </div>
-                        </footer>
                     </sheet>
                 </form>
             </field>
@@ -103,9 +102,12 @@
             <field name="model">etat.detaille</field>
             <field name="priority" eval="16"/>
             <field name="arch" type="xml">
-                <form string="Liste des etats detaillé des transferts">
+                <form string="">
                     <sheet>
-                        <group col="2" string="Etat détaillé des transferts d'argent">
+                        <h1 style="text-align:center;">
+                                Etat détaillé des transferts d'argent
+                        </h1>
+                        <group col="3" string="">
                             <group>
                                 <field name="par" style = "width:50%"/>
                                 <field name="marche_id" style = "width:75%" options="{'no_create': True}" attrs="{'invisible' : [('par', 'not in', ['1'])]}"/>
@@ -113,6 +115,13 @@
                             <group>
                                 <field name="dte_deb" style = "width:50%"/>
                                 <field name="dte_fin" style = "width:50%"/>
+                            </group>
+                            <group>
+                                <div>
+                                    <button name="etat" string="Afficher" type="object" class="btn-dark" icon="fa-search"/>
+                                    <![CDATA[&nbsp;]]>
+                                    <button name="print_det" string="Imprimer" type="object" class="btn-warning" icon="fa-print"/>
+                                </div>
                             </group>
                         </group>
                         <field name="etat_ids" nolabel = "1">
@@ -127,15 +136,6 @@
                                 <field name="montant"/>
                             </tree>
                         </field>
-                        <footer>
-                            <div>
-                                <div style="float:left">
-                                    <button name="etat" string="Afficher" type="object" style="background-color: #777777;border-color: #888888;font-size: 25px;text-align: center;" icon="fa-search"/>
-
-                                    <button name="print_det" string="Imprimer" type="object" style="background-color: #ea9516;border-color: #ffffff;font-size: 25px;text-align: center;" icon="fa-print"/>
-                                </div>
-                            </div>
-                        </footer>
                     </sheet>
                 </form>
             </field>
@@ -154,18 +154,24 @@
             <field name="model">etat.det.stock</field>
             <field name="priority" eval="16"/>
             <field name="arch" type="xml">
-                <form string="Liste des etats detaillés de stock">
+                <form string="">
                     <sheet>
-                        <group col="3" string='Etat des mouvements de stock'>
+                        <h1 style="text-align:center;">
+                                Etat des mouvements de stock
+                        </h1>
+                        <group col="3" string=''>
                             <group>
                                 <field name="dte_deb" style = "width:100%"/>
                                 <field name="dte_fin" style = "width:100%"/>
                             </group>
                             <group>
-                                <button name="etat" string="Afficher" type="object" style="background-color: #777777;border-color: #888888;font-size: 25px;text-align: center;" icon="fa-search"/>
-                            </group>
-                            <group>
-                                <button name="print_entree_sortie" string="Imprimer" type="object" style="background-color: #ea9516;border-color: #ffffff;font-size: 25px;text-align: center;" icon="fa-print"/>
+                                <div>
+                                    <button name="etat" string="Afficher" type="object" class="btn-dark" icon="fa-search"/>
+                                    <![CDATA[
+&nbsp;
+]]>
+                                    <button name="print_entree_sortie" string="Imprimer" type="object" class="btn-warning" icon="fa-print"/>
+                                </div>
                             </group>
                         </group>
                         <notebook>
