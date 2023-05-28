@@ -2,7 +2,6 @@
 <odoo>
 
     <template id="custom_session_header_footer">
-
         <t t-set="company" t-value="user.company_id"/>
         <div class="header">
             <link rel='stylesheet' href="/stock_ltl/static/src/css/style.css"/>
