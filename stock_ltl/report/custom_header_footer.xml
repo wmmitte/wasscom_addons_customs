@@ -12,14 +12,22 @@
                         <span t-field="company.partner_id"/>
                     </div>
                     <div>
-                        <span t-field="company.street"/>
-,                        <span t-field="company.street2"/>
+                        <span t-if="company.street" t-field="company.street"/>
+                        <t t-if="company.street2">,                        
+                            <span t-field="company.street2"/>
+                        </t>
                     </div>
                     <div>
-                        <span t-field="company.city"/>
-,                        <span t-field="company.state_id"/>
-,                        <span t-field="company.zip"/>
-,                        <span t-field="company.country_id"/>
+                        <span t-if="company.city" t-field="company.city"/>
+                        <t t-if="company.state_id">,                        
+                            <span t-field="company.state_id"/>
+                        </t>
+                        <t t-if="company.country_id">,                        
+                            <span t-field="company.country_id"/>
+                        </t>
+                        <t t-if="company.zip">,                        
+                            <span t-field="company.zip"/>
+                        </t>
                     </div>
                     <!-- <div t-field="company.partner_id" t-options='{"widget": "contact", "fields": ["address", "name"], "no_marker": true}'
                     /> -->
