@@ -14,6 +14,8 @@
 				<field name="name"/>
 				<field name="description"/>
 				<field name="x_struct_id" invisible = '1'/>
+				<field name="create_date" string="Date_enr" />
+				<field name="create_uid" string="User" />
 			</tree>
 		</field>
 	</record>
@@ -64,6 +66,9 @@
 				<field name="name"/>
 				<field name="description"/>
 				<field name="x_struct_id" invisible = '1'/>
+				<field name="create_date" string="Date_enr" />
+				<field name="create_uid" string="User" />
+
 			</tree>
 		</field>
 	</record>
@@ -115,6 +120,9 @@
 				<field name="x_distance"/>
 				<field name="description"/>
 				<field name="x_struct_id" invisible = '1'/>
+				<field name="create_date" string="Date_enr" />
+				<field name="create_uid" string="User" />
+
 			</tree>
 		</field>
 	</record>
@@ -170,6 +178,8 @@
 				<field name="x_adress"/>
 				<field name="x_tel"/>
 				<field name="x_struct_id" invisible = '1'/>
+				<field name="create_date" string="Date_enr" />
+				<field name="create_uid" string="User" />
 			</tree>
 		</field>
 	</record>
@@ -220,6 +230,8 @@
 				<field name="name"/>
 				<field name="description"/>
 				<field name="x_struct_id" invisible = '1'/>
+				<field name="create_date" string="Date_enr" />
+				<field name="create_uid" string="User" />
 			</tree>
 		</field>
 	</record>
@@ -269,6 +281,8 @@
 				<field name="x_conducteur_id"/>
 				<field name="description"/>
 				<field name="x_struct_id" invisible = '1'/>
+				<field name="create_date" string="Date_enr" />
+				<field name="create_uid" string="User" />
 			</tree>
 		</field>
 	</record>
@@ -325,6 +339,8 @@
 				<field name="current_users"/>
 				<field name="state"/>
 				<field name="company_id" invisible = '1'/>
+				<field name="create_date" string="Date_enr" />
+				<field name="create_uid" string="User" />
 			</tree>
 		</field>
 	</record>
@@ -489,6 +505,8 @@
 				<field name="x_total_reste_apr"/>
 				<field name="current_users"/>
 				<field name="company_id" invisible = '1'/>
+				<field name="create_date" string="Date_enr" />
+				<field name="create_uid" string="User" />
 			</tree>
 		</field>
 	</record>
@@ -640,6 +658,8 @@
 				<field name="currents_users" options="{'no_quick_create':True,'no_create_edit':True,'no_open':True,}"/>
 				<field name="company_id" invisible = '1'/>
 				<field name="state" invisible = '0'/>
+				<field name="create_date" string="Date_enr" />
+				<field name="create_uid" string="User" />
 			</tree>
 		</field>
 		<!-- <field name="arch" type="xml">
@@ -708,6 +728,8 @@
 				<field name="current_users"/>
 				<field name="state"/>
 				<field name="company_id" invisible = '1'/>
+				<field name="create_date" string="Date_enr" />
+				<field name="create_uid" string="User" />
 			</tree>
 		</field>
 	</record>
@@ -824,6 +846,8 @@
 				<field name="x_total_reste_apr"/>
 				<field name="current_users"/>
 				<field name="company_id" invisible = '1'/>
+				<field name="create_date" string="Date_enr" />
+				<field name="create_uid" string="User" />
 			</tree>
 		</field>
 	</record>
@@ -950,6 +974,8 @@
 				<field name="x_dep_annuel"/>
 				<field name="x_ma_annuel" force_save="1"/>
 				<field name="company_id" invisible = '1'/>
+				<field name="create_date" string="Date_enr" />
+				<field name="create_uid" string="User" />
 			</tree>
 		</field>
 	</record>
@@ -1077,6 +1103,8 @@
 				<field name="chauffeur"/>
 				<field name="quantite"/>
 				<field name="state"/>
+				<field name="create_date" string="Date_enr" />
+				<field name="create_uid" string="User" />
 			</tree>
 		</field>
 	</record>
