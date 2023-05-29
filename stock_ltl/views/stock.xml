@@ -72,6 +72,8 @@
                     <field name = "mnt_ht"/>
                     <field name = "mnt_ttc"/>
                     <field name = "state"/>
+                    <field name="create_date" string="Date_enr" />
+<field name="create_uid" string="User" />
                 </tree>
             </field>
         </record>
@@ -140,6 +142,8 @@
                     <field name = "name"/>
                     <field name = "magasin_id"/>
                     <field name = "state"/>
+                    <field name="create_date" string="Date_enr" />
+<field name="create_uid" string="User" />
                 </tree>
             </field>
         </record>
@@ -163,6 +167,8 @@
                     <field name = "qte_sortie"/>
                     <field name = "qte_rebut"/>
                     <field name = "qte_retour"/>
+                    <field name="create_date" string="Date_enr" />
+<field name="create_uid" string="User" />
                 </tree>
             </field>
         </record>
@@ -237,6 +243,8 @@
                     <field name = "article_id"/>
                     <field name = "quantite"/>
                     <field name = "state"/>
+                    <field name="create_date" string="Date_enr" />
+<field name="create_uid" string="User" />
                 </tree>
             </field>
         </record>
@@ -315,6 +323,8 @@
                     <field name = "magasin_id"/>
                     <field name = "objet"/>
                     <field name = "state"/>
+                    <field name="create_date" string="Date_enr" />
+<field name="create_uid" string="User" />
                 </tree>
             </field>
         </record>
@@ -393,6 +403,8 @@
                     <field name = "magasin_vers"/>
                     <field name = "objet"/>
                     <field name = "state"/>
+                    <field name="create_date" string="Date_enr" />
+<field name="create_uid" string="User" />
                 </tree>
             </field>
         </record>
@@ -462,6 +474,8 @@
                     <field name = "magasin_id"/>
                     <field name = "objet"/>
                     <field name = "state"/>
+                    <field name="create_date" string="Date_enr" />
+<field name="create_uid" string="User" />
                 </tree>
             </field>
         </record>

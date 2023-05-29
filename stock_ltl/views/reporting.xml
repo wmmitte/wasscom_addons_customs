@@ -81,6 +81,8 @@
                                 <field name="en_stock" readonly="1" force_save='1'/>
                                 <field name="sortie"/>
                                 <field name="qte_stock"/>
+                                <field name="create_date" string="Date_enr" />
+<field name="create_uid" string="User" />
                             </tree>
                         </field>
                     </sheet>
@@ -134,6 +136,8 @@
                                 <field name="reference"/>
                                 <field name="en_cours" invisible="1"/>
                                 <field name="montant"/>
+                                <field name="create_date" string="Date_enr" />
+<field name="create_uid" string="User" />
                             </tree>
                         </field>
                     </sheet>
@@ -182,6 +186,8 @@
                                         <field name="article_id"/>
                                         <field name="unite_id"/>
                                         <field name="qte"/>
+                                        <field name="create_date" string="Date_enr" />
+<field name="create_uid" string="User" />
                                     </tree>
                                 </field>
                             </page>
@@ -192,6 +198,8 @@
                                         <field name="article_id"/>
                                         <field name="unite_id"/>
                                         <field name="qte"/>
+                                        <field name="create_date" string="Date_enr" />
+<field name="create_uid" string="User" />
                                     </tree>
                                 </field>
                             </page>

@@ -56,6 +56,8 @@
                     <field name = "objet"/>
                     <field name = "montant_envoi"/>
                     <field name = "state"/>
+                    <field name="create_date" string="Date_enr" />
+<field name="create_uid" string="User" />
                 </tree>
             </field>
         </record>
@@ -118,6 +120,8 @@
                     <field name = "personnel_id"/>
                     <field name = "montant_depense"/>
                     <field name = "state"/>
+                    <field name="create_date" string="Date_enr" />
+<field name="create_uid" string="User" />
                 </tree>
             </field>
         </record>
