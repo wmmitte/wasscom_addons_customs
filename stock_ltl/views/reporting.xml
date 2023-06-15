@@ -214,10 +214,7 @@
             <field name="res_model">etat.det.stock</field>
             <field name="view_mode">form</field>
             <field name="target">inline</field>
-        </record>
-
-
-
+        </record> 
 
         <menuitem id="menu_reporting" name ="Etat/Synthèse" sequence="4" parent="main_menu"/>
         <menuitem id="menu_etat_stock" name ="Etat stock d'un Magasin" sequence="1" parent="menu_reporting" action="action_etat_stock"/>

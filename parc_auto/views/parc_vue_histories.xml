@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+	<!-- vue fleet.vehicle.parc.assurance.history tree-->
+	<record model="ir.ui.view" id="view_fleet_vehicle_parc_assurance_history_tree">
+		<field name="name">view.fleet.vehicle.parc.assurance.history.tree</field>
+		<field name="model">fleet.vehicle.parc.assurance.history</field>
+		<field name="priority" eval="16"/>
+		<field name="arch" type="xml">
+			<tree string="Historique des assurances" create="0" delete="0">
+				<field name="vehicule_id"/>
+				<field name="assureur_id"/>
+				<field name="date_souscription"/>
+				<field name="duree_souscription"/>
+				<field name="date_expiration" readonly="1"/>
+				<field name="montant_souscription"/>
+				<field name="couverture_assurance"/>
+				<field name="create_uid" string="User"/>
+				<field name="create_date" string="Date enr"/>
+			</tree>
+		</field>
+	</record>
+
+	<!-- Action fleet.vehicle.parc.assurance.history -->
+	<record model="ir.actions.act_window" id="act_fleet_vehicle_parc_assurance_history">
+		<field name="name">Historique des assurances</field>
+		<field name="res_model">fleet.vehicle.parc.assurance.history</field>
+		<field name="view_mode">tree</field>
+		<field name="context">{'group_by':['vehicule_id']}</field>
+	</record>
+
+	<!-- vue fleet.vehicle.parc.visite.technique.history tree-->
+	<record model="ir.ui.view" id="view_fleet_vehicle_parc_visite_technique_history_tree">
+		<field name="name">view.fleet.vehicle.parc.visite.technique.history.tree</field>
+		<field name="model">fleet.vehicle.parc.visite.technique.history</field>
+		<field name="priority" eval="16"/>
+		<field name="arch" type="xml">
+			<tree string="Historique des visites techniques" create="0" delete="0">
+				<field name="vehicule_id"/>
+				<field name="centre_controle_id"/>
+				<field name="date_visite_technique"/>
+				<field name="date_expiration_visite_technique" readonly="1"/>
+				<field name="duree_visite"/>
+				<field name="montant_visite"/>
+				<field name="create_uid" string="User"/>
+				<field name="create_date" string="Date enr"/>
+			</tree>
+		</field>
+	</record>
+
+	<!-- Action fleet.vehicle.parc.visite.technique.history -->
+	<record model="ir.actions.act_window" id="act_fleet_vehicle_parc_visite_technique_history">
+		<field name="name">Historique des visites techniques</field>
+		<field name="res_model">fleet.vehicle.parc.visite.technique.history</field>
+		<field name="view_mode">tree</field>
+		<field name="context">{'group_by':['vehicule_id']}</field>
+	</record>
+
+	<!-- vue fleet.vehicle.parc.taxe.history tree-->
+	<record model="ir.ui.view" id="view_fleet_vehicle_parc_taxe_history_tree">
+		<field name="name">view.fleet.vehicle.parc.taxe.history.tree</field>
+		<field name="model">fleet.vehicle.parc.taxe.history</field>
+		<field name="priority" eval="16"/>
+		<field name="arch" type="xml">
+			<tree string="Historique des taxes" create="0" delete="0">
+				<field name="annee_paiement"/>
+				<field name="vehicule_id"/>
+				<field name="date_paiement_taxe"/>
+				<field name="montant_taxe"/>
+				<field name="create_uid" string="User"/>
+				<field name="create_date" string="Date enr"/>
+			</tree>
+		</field>
+	</record>
+
+	<!-- Action fleet.vehicle.parc.taxe.history -->
+	<record model="ir.actions.act_window" id="act_fleet_vehicle_parc_taxe_history">
+		<field name="name">Historique taxes</field>
+		<field name="res_model">fleet.vehicle.parc.taxe.history</field>
+		<field name="view_mode">tree</field>
+		<field name="context">{'group_by':['annee_paiement','vehicule_id']}</field>
+	</record>
+
+
+	<!-- Menu-->
+	<menuitem id="fleet_vehicle_historique_assurance_menu" parent="fleet_vehicle_etats_menu" name="Historique Assurances" sequence = "1" action="act_fleet_vehicle_parc_assurance_history"/>
+	<menuitem id="fleet_vehicle_historique_visite_technique_menu" parent="fleet_vehicle_etats_menu" name="Historique Visites Techniques" sequence = "2" action="act_fleet_vehicle_parc_visite_technique_history"/>
+	<menuitem id="fleet_vehicle_historique_taxe_menu" parent="fleet_vehicle_etats_menu" name="Historique Taxes" sequence = "3" action="act_fleet_vehicle_parc_taxe_history"/>
+</odoo>
+
+

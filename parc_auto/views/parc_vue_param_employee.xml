@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+	<!--Definition de la vue-->
+
+	<record model="ir.ui.view" id="hr_parc_employee_form">
+		<field name="name">hr.parc.employee.form</field>
+		<field name="model">hr.employee</field>
+		<field name="inherit_id" ref="hr.view_employee_form"/>
+		<field name="arch" type="xml">
+			<xpath expr="//group[@name='managers']" position="attributes">
+				<attribute name = "invisible">True</attribute>
+			</xpath>
+			<xpath expr="//page//group[4]" position="attributes">
+				<attribute name = "invisible">True</attribute>
+			</xpath>
+		</field>
+	</record>
+
+	<record model="ir.actions.act_window" id="act_hr_parc_employee">
+		<field name="name">Liste du personnel</field>
+		<field name="res_model">hr.employee</field>
+		<field name="view_mode">tree,form</field>
+	</record>
+
+	<!-- Menu-->
+	<menuitem id="fleet_employee_menu" parent="fleet.fleet_configuration" name="Personnel" sequence = "9" action="act_hr_parc_employee"/>
+</odoo>
+
+

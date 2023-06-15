@@ -1,0 +1,231 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+<record id="id_format_paysage" model="report.paperformat">
+        <field name="name">Format Paysage</field>
+        <field name="default" eval="True"/>
+        <field name="format">A4</field>
+        <field name="page_height">0</field>
+        <field name="page_width">0</field>
+        <field name="orientation">Landscape</field>
+        <field name="margin_top">38</field>
+        <field name="margin_bottom">8</field>
+        <field name="margin_left">7</field>
+        <field name="margin_right">7</field>
+        <field name="header_line" eval="False"/>
+        <field name="header_spacing">35</field>
+        <field name="dpi">90</field>
+    </record>
+<record id="id_format_portrait" model="report.paperformat">
+        <field name="name">Format portrait</field>
+        <field name="default" eval="True"/>
+        <field name="format">A4</field>
+        <field name="page_height">0</field>
+        <field name="page_width">0</field>
+        <field name="orientation">Portrait</field>
+        <field name="margin_top">45</field>
+        <field name="margin_bottom">16</field>
+        <field name="margin_left">7</field>
+        <field name="margin_right">7</field>
+        <field name="header_line" eval="False"/>
+        <field name="header_spacing">25</field>
+        <field name="dpi">90</field>
+    </record>
+
+    <!-- <report id = "parc_report_parc_list"
+            string = "Liste des véhicules du parc"
+            model = "parc_auto.fleet.vehicle"
+            report_type = "qweb-html"
+            file = "parc_auto.parc_report_parc_list"
+            name = "parc_auto.parc_report_parc_list_template" 
+            print_report_name="'%s' % (object.name)" 
+            paperformat="id_format_portrait"
+            menu = "True"/> -->
+
+<record id="parc_report_parc_list" model="ir.actions.report">
+        <field name="name">Liste des véhicules</field>
+        <field name="model">fleet.vehicle</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">parc_auto.parc_report_parc_list_template</field>
+        <field name="report_file">parc_auto.parc_report_parc_list_template</field>
+        <field name="print_report_name">'%s' % (object.name)</field>
+        <field name="paperformat_id" ref="parc_auto.id_format_paysage"/>
+        <field name="binding_model_id" ref="model_fleet_vehicle"/>
+        <field name="binding_type">report</field>
+    </record>
+
+<template id="parc_report_parc_list_template">
+    <t t-call="web.html_container">
+        <t t-foreach="docs" t-as="o">
+            <div class="article o_report_layout_standard" t-att-data-oe-model="o and o._name" t-att-data-oe-id="o and o.id">
+                <t t-call="parc_auto.custom_session_header_footer"/>
+                <div class="page">
+                    <link rel='stylesheet' href="/parc_auto/static/src/css/style.css"/>
+                    <h3 class="title">
+                        <span>Liste des véhicules du Parc Automobile</span>
+                    </h3>  
+                    <table class="tableCollapseStripped" style="width:100%">
+                        <thead>
+                            <th>N°#</th>
+                           <th>Véhicule / Immat</th>
+                           <th style="text-align:center">Année</th>
+                            <th>N° Chassis</th>
+                            <th>Type carburant</th>
+                            <th style="text-align:center">Puissance</th>
+                            <th style="text-align:center">Nbr place</th>
+                            <th>Couleur</th>
+                            <th>Affectation</th>
+                            <th style="text-align:right">Date Acquisition</th>
+                        </thead>
+                        <tbody>
+                            <t t-set="idx" t-value="0"/>
+                            <t t-set="dv" t-value="'-'"/>
+                            <tr t-foreach="request.env['fleet.vehicle'].search([])" t-as="ligne">
+                                <t t-set="idx" t-value="idx + 1"/>
+                                <td>
+                                    <span t-esc="idx"/>
+                                </td> 
+                                <td> 
+                                    <span t-field="ligne.name"/>
+                                </td> 
+                                <td style ="text-align:center;">
+                                <t t-if="ligne.model_year">
+                                    <span  t-field="ligne.model_year"/>
+                                </t>
+                                    <t t-else=""><span t-esc="dv"/>
+                                </t> 
+                                 </td> 
+                                <td>
+                                <t t-if="ligne.vin_sn">
+                                    <span t-field="ligne.vin_sn"/>
+                                </t>
+                                    <t t-else=""><span t-esc="dv"/>
+                                </t> 
+                                </td>
+                                <td>
+                                <t t-if="ligne.fuel_type">
+                                    <span t-field="ligne.fuel_type"/>
+                                </t>
+                                    <t t-else=""><span t-esc="dv"/>
+                                </t>
+                                </td> 
+
+                                <td style ="text-align:right;">
+                                <t t-if="ligne.power">
+                                    <span t-field="ligne.power"/>
+                                </t>
+                                    <t t-else=""><span t-esc="dv"/>
+                                </t> 
+                                 </td>
+                                <td style ="text-align:right;">
+                                <t t-if="ligne.seats">
+                                    <span t-field="ligne.seats"/>
+                                </t>
+                                    <t t-else=""><span t-esc="dv"/>
+                                </t> 
+                                 </td>
+                                <td>
+                                <t t-if="ligne.color">
+                                    <span t-field="ligne.color"/>
+                                </t>
+                                    <t t-else=""><span t-esc="dv"/>
+                                </t> 
+                                 </td>
+                                <td>
+                                <t t-if="ligne.employee_id">
+                                    <span t-field="ligne.employee_id"/>
+                                </t>
+                                    <t t-else=""><span t-esc="dv"/>
+                                </t> 
+                                 </td>
+                                 <td style ="text-align:right;">
+                                <t t-if="ligne.acquisition_date">
+                                    <span t-field="ligne.acquisition_date"/>
+                                </t>
+                                    <t t-else=""><span t-esc="dv"/>
+                                </t> 
+                                 </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>            <!-- article o_report_layout_standard-->
+        </t>        <!-- t-foreach="docs" t-as="o"-->
+    </t>    <!-- t-call="web.html_container"-->
+</template>
+      <!-- <template id="parc_report_parc_list_template">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="o">
+                <div class="article o_report_layout_standard" t-att-data-oe-model="o and o._name" t-att-data-oe-id="o and o.id">
+                  
+                    <t t-call="parc_auto.custom_session_header_footer"/>
+
+                    <div class="page">
+                   
+                         <link rel='stylesheet' href="/parc_auto/static/src/css/style.css"/>
+
+                        <h3 class="title" style="text-align:center;">Liste des véhicules du parc</h3>
+                       
+
+                    <table class="tableCollapseStripped" style="width:100%;">
+                        <thead>
+                            <th>N°#</th>
+                            <th>Marque</th>
+                            <th>Véhicule</th>
+                            <th>Modèle</th>
+                            <th style="text-align:center">Année Model</th>
+                            <th style="text-align:center">Immatriculation</th>
+                            <th>N° Chassis</th>
+                            <th>Type carburant</th>
+                            <th style="text-align:center">Puissance</th>
+                            <th style="text-align:center">Nbr place</th>
+                            <th>Couleur</th>
+                        </thead>
+
+                        <tbody>
+                            <t t-set="idx" t-value="0"/>
+                            <tr t-foreach="request.env['fleet.vehicle'].search([])" t-as="ligne">
+                                <t t-set="idx" t-value="idx + 1"/>
+                                <td>
+                                    <span t-esc="idx"/>
+                                </td>
+                                <td>
+                                    <span t-field="ligne.brand_id"/>
+                                </td>
+                                <td>
+                                    <span t-field="ligne.name"/>
+                                </td>
+                                <td>
+                                    <span t-field="ligne.model_id"/>
+                                </td>
+                                <td>
+                                    <span t-field="ligne.model_year"/>
+                                </td>
+                                <td>
+                                    <span t-field="ligne.license_plate"/>
+                                </td>
+                                <td>
+                                    <span t-field="ligne.vin_sn"/>
+                                </td>
+                                <td>
+                                    <span t-field="ligne.fuel_type"/>
+                                </td> 
+
+                                <td style ="text-align:right;">
+                                    <span t-field="ligne.power"/>
+                                </td>
+                                <td style ="text-align:right;">
+                                    <span t-field="ligne.seats"/>
+                                </td>
+                                <td>
+                                    <span t-field="ligne.color"/>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    
+                </div>
+            </div>
+        </t>
+    </t>
+</template> -->
+</odoo>

@@ -1,4 +1,9 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
 access_res_partner,access.res.partner,model_res_partner,base.group_user,1,1,1,1
+access_hr_employee,access.hr.employee,model_hr_employee,base.group_user,1,1,1,1
 access_fleet_type_permis,access.fleet.type.permis,model_fleet_type_permis,base.group_user,1,1,1,1
 access_fleet_fuel,access.fleet.fuel,model_fleet_fuel,base.group_user,1,1,1,1
+fleet_vehicle_parc_assurance_history,access.fleet.vehicle.parc.assurance.history,model_fleet_vehicle_parc_assurance_history,base.group_user,1,1,1,1
+fleet_vehicle_parc_visite_technique_history,access.fleet.vehicle.parc.visite.technique.history,model_fleet_vehicle_parc_visite_technique_history,base.group_user,1,1,1,1
+fleet_vehicle_parc_taxe_history,access.fleet.vehicle.parc.taxe.history,model_fleet_vehicle_parc_taxe_history,base.group_user,1,1,1,1
+access_fleet_chauffeur,access.fleet.chauffeur,model_fleet_chauffeur,base.group_user,1,1,1,1

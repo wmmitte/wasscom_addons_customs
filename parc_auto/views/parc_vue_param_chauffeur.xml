@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+	<!-- vue form / Chauffeur -->
+	<record model="ir.ui.view" id="fleet_chauffeur_form">
+		<field name="name">fleet.chauffeur.form</field>
+		<field name="model">fleet.chauffeur</field>
+		<field name="arch" type="xml">
+			<form string="Conducteurs">
+				<sheet>
+					<group>
+						<group string="Informations personnelles">
+							<field name="name"/>
+							<field name="date_naissance"/>
+							<field name="numero_identite"/>
+							<field name="date_expiration_identite"/>
+						</group>
+						<group string="Contacts / Adresse">
+							<field name="telephone"/>
+							<field name="email"/>
+							<field name="adresse"/>
+						</group>
+						<group string="Permis de conduire">
+							<field name="permis"/>
+							<field name="type_permis"/>
+							<field name="date_expiration_permis"/>
+						</group>
+					</group>
+				</sheet>
+			</form>
+		</field>
+	</record>
+
+	<!-- vue tree / Chauffeur -->
+	<record model="ir.ui.view" id="fleet_chauffeur_tree">
+		<field name="name">fleet.chauffeur.tree</field>
+		<field name="model">fleet.chauffeur</field>
+		<field name="arch" type="xml">
+			<tree>
+				<field name="name"/>
+				<field name="numero_identite"/>
+				<field name="telephone"/>
+				<field name="email"/>
+				<field name="type_permis"/>
+				<field name="permis"/>
+			</tree>
+		</field>
+	</record>
+
+	<!-- Action / Chauffeur -->
+	<record model="ir.actions.act_window" id="act_liste_conducteur">
+		<field name="name">Liste des conducteurs</field>
+		<field name="res_model">fleet.chauffeur</field>
+		<field name="view_mode">tree,form</field>
+	</record>
+
+	<!-- Menus / Chauffeur -->
+	<menuitem id="fleet_chauffeur" parent="fleet.fleet_configuration" name="Conducteurs" sequence = "8" action="act_liste_conducteur"/>
+</odoo>
+
+

@@ -327,11 +327,11 @@
 		<field name="arch" type="xml">
 			<tree decoration-it ="state == 'Nouvelle facture' " decoration-success ="state == 'Liquidation totale' "  decoration-warning ="state == 'Liquidation partielle' " decoration-info ="state == 'Approuvée' " string="Liste des factures">
 				<field name="sequence" widget="handle"/>
+				<field name="date_operation"/>
 				<field name="name"/>
 				<field name="x_client"/>
-				<field name="x_adress"/>
+				<field name="x_adress" invisible="1"/>
 				<field name="x_objet"/>
-				<field name="date_operation"/>
 				<field name="x_total_facture" sum = "Total facture"/>
 				<field name="x_total_encaisse" sum = "Total encaissé"/>
 				<field name="x_total_reste" sum = "Total reste"/>
@@ -503,6 +503,7 @@
 				<field name="x_total_reste" sum = "Total reste"/>
 				<field name="x_mt_encaisse"/>
 				<field name="x_total_reste_apr"/>
+				<field name="state" widget="badge" decoration-muted="state == 'Nouveau paiement'" decoration-success="state == 'Paiement effectuée'"/>
 				<field name="current_users"/>
 				<field name="company_id" invisible = '1'/>
 				<field name="create_date" string="Date_enr" />
@@ -520,7 +521,6 @@
 			<form string="Liste des paiements factures">
 				<header>
 					<button string="Valider le paiement" name="action_valider" type="object" class="oe_highlight" confirm="Vous êtes sur le point de valider un paiement ?" attrs="{'invisible' : [('state', 'not in', ['Nouveau paiement'])]}" />
-
 
 					<field name="state" widget = "statusbar"/>
 				</header>

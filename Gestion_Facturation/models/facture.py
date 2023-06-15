@@ -32,14 +32,14 @@ class FactureFacture(models.Model):
     date_operation = fields.Date(string='Date facture', default=fields.Date.context_today, required=True)
     company_id = fields.Many2one('res.company', string="Structure", default=lambda self: self.env.user.company_id.id,readonly=True)
     state = fields.Selection([
-        ('Nouvelle facture', 'Nouvelle facture'),
+        ('Nouvelle facture', 'Nouvelle'),
         ('Approuvée', 'Approuvée'),
-        ('Liquidation partielle', 'Liquidation partielle'),
-        ('Liquidation totale', "Liquidation totale"),
-    ], 'Statut', default='Nouvelle facture', index=True, required=False, copy=False, track_visibility='always')
-    x_total_facture = fields.Float(compute = '_calcul_total_fact',store = True,string = 'Total Facture payée')
-    x_total_facture_reel = fields.Float(compute = '_calcul_total_fact',store = True,string = 'Total Facture réelle')
-    x_total_encaisse = fields.Float(string='Total Encaissé',readonly = True,default = 0)
+        ('Liquidation partielle', 'En cours'),
+        ('Liquidation totale', "Soldée"),
+    ], 'Etat', default='Nouvelle facture', index=True, required=False, copy=False, track_visibility='always')
+    x_total_facture = fields.Float(compute = '_calcul_total_fact',store = True,string = 'Montant Total')
+    x_total_facture_reel = fields.Float(compute = '_calcul_total_fact',store = True,string = 'Montant réel')
+    x_total_encaisse = fields.Float(string='Montant Encaissé',readonly = True,default = 0)
     x_total_reste = fields.Float(compute = '_calcul_total_fact',store = True,string='Reste à payer')
     x_total_perte = fields.Float(compute = '_calcul_total_fact',store = True,string='Perte totale')
 
@@ -189,8 +189,8 @@ class FactureFacturePaiement(models.Model):
     date_operation = fields.Date(string='Date paiement', default=fields.Date.context_today, readonly=True)
     company_id = fields.Many2one('res.company', string="Structure", default=lambda self: self.env.user.company_id.id,readonly=True)
     state = fields.Selection([
-        ('Nouveau paiement', 'Nouveau paiement'),
-        ('Paiement effectuée', 'Paiement effectuée'),
+        ('Nouveau paiement', 'Non Validé'),
+        ('Paiement effectuée', 'Validé'),
     ], 'Statut', default='Nouveau paiement', index=True, required=False, copy=False, track_visibility='always')
     x_total_facture = fields.Float(compute = '_calcul_total_fact',store = True,string = 'Total Facture')
     x_total_encaisse = fields.Float(string='Total Encaissé',readonly = True)
@@ -216,7 +216,6 @@ class FactureFacturePaiement(models.Model):
     def action_valider(self):
         for record in self:
             id_fact = int(record.name.id)
-            print('id_fact',id_fact)
             x_mt_encaisse = float(record.x_mt_encaisse)
             x_total_reste = record.x_total_reste - record.x_mt_encaisse
 

@@ -1,1 +1,1 @@
-from . import parc
+from . import parc, parametres, parc_histories, parc_reports
