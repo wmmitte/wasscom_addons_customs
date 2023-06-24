@@ -202,8 +202,8 @@ class FactureFacturePaiement(models.Model):
     def _calcul_rest_mnt(self):
         for record in self:
             record.x_total_reste_apr = record.x_total_reste - record.x_mt_encaisse
-            print("========== TOTAL RESTE Boucle =",record.x_total_reste)
-        print("========== TOTAL RESTE AFTER =",self.x_total_reste)
+            print("========== TOTAL RESTE AVT =",record.x_total_reste_apr)
+        print("========== TOTAL RESTE APR =",self.x_total_reste_apr)
 
     @api.onchange('name')
     def act_remplir_champs(self):
@@ -214,6 +214,7 @@ class FactureFacturePaiement(models.Model):
             record.x_total_facture = record.name.x_total_facture
             record.x_total_encaisse = record.name.x_total_encaisse
             record.x_total_reste = record.name.x_total_reste
+            #record.x_mt_encaisse = 0
 
     def action_valider(self):
         for record in self:
@@ -233,19 +234,20 @@ class FactureFacturePaiement(models.Model):
                 record.write({'state': 'Paiement effectuée'})
     
 
+    #@api.constrains('x_mt_encaisse')
     @api.constrains('x_total_reste','x_mt_encaisse')
     def _check_montant(self):
         if self.x_total_reste < self.x_mt_encaisse:
-            raise ValidationError(_("MITTE-Le montant a encaissé est supérieur au reste à payer."))
+            raise ValidationError(_("A-Le montant a encaissé est supérieur au reste à payer."))
         else:
             facture = self.env['facture_facture_paiement'].search([('name','=',self.name.id)])
             print("--facture--", facture)
-            montant = 0
+            montant = 0.0
             for m in facture:
                 montant = montant + m.x_mt_encaisse
-                print("--montant ooooooo--", montant)
-                if self.x_total_reste < montant:
-                    raise ValidationError(_("LAEL-Le montant a encaissé est supérieur au reste à payer : reste= %d < montant encaissé=%d") % (self.x_total_reste, montant))
+                print("-----montant : %d, encaissé : %d" % (montant, m.x_mt_encaisse))
+                if self.x_total_facture < montant:
+                    raise ValidationError(_("B-Le montant a encaissé sera supérieur au montant de la facture : montant encaissé= %d > total facture=%d") % (montant,self.x_total_facture ))
                 else:
                     print("Ok")
 
@@ -318,3 +320,8 @@ class FactureEtatQuantiteLine(models.TransientModel):
     quantite = fields.Float(string='Quantité perdue')
 
 
+"""
+select id, name,state, x_total_facture,x_total_encaisse,x_total_reste,x_mt_encaisse,x_total_reste_apr from facture_facture_paiement;
+update facture_facture set x_total_encaisse=0,x_total_reste=x_total_facture;
+delete from facture_facture_paiement;
+"""
