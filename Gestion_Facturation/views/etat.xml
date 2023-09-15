@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+	<record model="ir.ui.view" id="view_etat_camion">
+		<field name="name">view.etat.camion.form</field>
+		<field name="model">etat.camion</field>
+		<field name="priority" eval="16"/>
+		<field name="arch" type="xml">
+			<form string="Liste des produits">
+				<sheet>
+                 <header>
+                        <button name="etatCamionDepRec" string="Afficher" type="object" class="btn-dark" icon="fa-search"/>
+                        <button name="print_camion" string="Imprimer" type="object" class="btn-warning" icon="fa-print"/>
+                </header>
+					<group string="Etat des camions">
+						<field name="camion_id" style="width:50%" options="{'no_quick_create':True,'no_create_edit':True,'no_open':True,}"/>
+						<field name="dt_deb" style="width:50%"/>
+						<field name="dt_fin" style="width:50%"/>
+						<field name="depense" style="width:50%"/>
+						<field name="recette" style="width:50%"/>
+					</group>                  
+				</sheet>
+			</form>
+		</field>
+	</record>
+
+	<!-- Action  facture_produit-->
+	<record model="ir.actions.act_window" id="act_etat_camion">
+		<field name="name">Etat camion</field>
+		<field name="res_model">etat.camion</field>
+		<field name="view_mode">form</field>
+        <field name="target">inline</field>
+	</record>
+
+
+    <record model="ir.ui.view" id="view_etat_chauffeur">
+		<field name="name">view.etat.chauffeur.form</field>
+		<field name="model">etat.chauffeur</field>
+		<field name="priority" eval="16"/>
+		<field name="arch" type="xml">
+			<form string="Liste des produits">
+				<sheet>
+                 <header>
+                        <button name="etatChauffeurDepRec" string="Afficher" type="object" class="btn-dark" icon="fa-search"/>
+                        <button name="print_chauffeur" string="Imprimer" type="object" class="btn-warning" icon="fa-print"/>
+                </header>
+					<group string="Etat des chauffeurs">
+						<field name="personnel_id" style="width:50%" options="{'no_quick_create':True,'no_create_edit':True,'no_open':True,}"/>
+						<field name="dt_deb" style="width:50%"/>
+						<field name="dt_fin" style="width:50%"/>
+						<field name="depense" style="width:50%"/>
+						<field name="recette" style="width:50%"/>
+					</group>
+				</sheet>             
+			</form>
+		</field>
+	</record>
+
+	<!-- Action  facture_produit-->
+	<record model="ir.actions.act_window" id="act_etat_chauffeur">
+		<field name="name">Etat chauffeur</field>
+		<field name="res_model">etat.chauffeur</field>
+		<field name="view_mode">form</field>
+        <field name="target">inline</field>
+	</record>
+
+
+    	<menuitem id="menu_facture_etat_cam" parent="menu_stat_facture" name="Etat des camions" sequence = "404" action="act_etat_camion"/>
+    	<menuitem id="menu_facture_etat_cha" parent="menu_stat_facture" name="Etat des chauffeurs" sequence = "404" action="act_etat_chauffeur"/>
+
+
+</odoo>

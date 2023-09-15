@@ -1,0 +1,139 @@
+html {
+	--main-primary-color: #e40511;
+	--main-print-bg-color: #ea9516;
+	--main-print-br-color: #ffffff;
+	--main-search-bg-color: #777777;
+	--main-search-br-color: #888888;
+}
+
+body {
+
+	font-family: sans-serif;
+	font-size: 0.9em;
+}
+
+._page {
+	background-image: url(/odoo_web_login/static/src/img/background_login_4.png);
+	background-size: cover;
+	background-position: bottom center;
+	background-repeat: no-repeat;
+	min-height: 620px;
+}
+
+.border-top-dashed-primary {
+	border-top: 1px dashed #e40511;
+}
+
+.border-bottom-dashed-primary {
+	border-bottom: 1px dashed #e40511;
+}
+
+.primaryColor {
+	color: #e40511;
+}
+
+.tableCollapseStripped {
+	border-collapse: collapse;
+	margin: 25px 0;
+	font-size: 0.8em;
+	font-family: sans-serif;
+	box-shadow: 0 0 08px rgba(0, 0, 0, 0.15);
+}
+
+.tableCollapseStripped thead tr {
+	background-color: #e40511;
+	color: #ffffff !important;
+	text-align: left;
+}
+
+.tableCollapseStripped th,
+.tableCollapseStripped td {
+	padding: 8px 11px;
+	text-align: justify;
+}
+
+.tableCollapseStripped tbody tr {
+	border-bottom: 1px solid #dddddd;
+}
+
+.tableCollapseStripped tbody tr:nth-of-type(even) {
+	background-color: #eeeeee;
+}
+
+.tableCollapseStripped tbody tr:last-of-type {
+	border-bottom: 1px solid #e40511;
+}
+
+.tableCollapseStripped tbody tr.active-row {
+	font-weight: bold;
+	color: #e40511;
+}
+
+.title {
+	text-align: center;
+	border-style: solid;
+	background-color: #f2f2f2;
+	color: #e40511;
+	font-weight: bold;
+	border-top: 1px solid #e40511;
+	border-bottom: 1px solid #e40511;
+	text-transform: uppercase;
+	font-size: 1.3em;
+	padding: 8px 11px;
+}
+
+.subTitle {
+	border-style: solid;
+	color: #e40511;
+	font-weight: bold;
+	border: 1px 0 solid #e40511;
+}
+
+.printedDate {
+	text-align: right;
+	font-style: italic;
+}
+
+.bold {
+	font-weight: bold;
+}
+
+.bigBold {
+	font-size: 1.3em;
+	font-weight: bold;
+}
+
+.italic {
+	font-style: italic;
+}
+
+.tRight {
+	text-align: right;
+}
+
+.tLeft {
+	text-align: right;
+}
+
+.tCenter {
+	text-align: center;
+
+}
+
+.tJustify {
+	text-align: justify;
+}
+
+.print-btn {
+	background-color: #ea9516;
+	border-color: #ffffff;
+	font-size: 25px;
+	text-align: center;
+}
+
+.search-btn {
+	background-color: #777777;
+	border-color: #888888;
+	font-size: 25px;
+	text-align: center;
+}

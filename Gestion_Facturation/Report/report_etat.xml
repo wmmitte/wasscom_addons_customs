@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="id_format_paysage" model="report.paperformat">
+        <field name="name">Format Paysage</field>
+        <field name="default" eval="True"/>
+        <field name="format">A4</field>
+        <field name="page_height">0</field>
+        <field name="page_width">0</field>
+        <field name="orientation">Landscape</field>
+        <field name="margin_top">35</field>
+        <field name="margin_bottom">28</field>
+        <field name="margin_left">7</field>
+        <field name="margin_right">7</field>
+        <field name="header_line" eval="False"/>
+        <field name="header_spacing">35</field>
+        <field name="dpi">90</field>
+    </record>
+    <record id="id_format_portrait" model="report.paperformat">
+        <field name="name">Format portrait</field>
+        <field name="default" eval="True"/>
+        <field name="format">A4</field>
+        <field name="page_height">0</field>
+        <field name="page_width">0</field>
+        <field name="orientation">Portrait</field>
+        <field name="margin_top">35</field>
+        <field name="margin_bottom">16</field>
+        <field name="margin_left">7</field>
+        <field name="margin_right">7</field>
+        <field name="header_line" eval="False"/>
+        <field name="header_spacing">25</field>
+        <field name="dpi">90</field>
+    </record>
+
+    <report id = "report_etat_camion"
+            string = "Etat des camions"
+            model = "etat.camion"
+            report_type = "qweb-pdf"
+            file = "Gestion_Facturation.report_etat_camion"
+            name = "Gestion_Facturation.report_etat" print_report_name="'%s' % (object.camion_id)" paperformat="id_format_paysage"
+            menu = "True"/>
+
+    <template id="report_etat">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="o">
+                <div class="article o_report_layout_standard" t-att-data-oe-model="o and o._name" t-att-data-oe-id="o and o.id">
+                    <t t-call="stock_ltl.custom_session_header_footer"/>
+
+                    <div class="page">
+                        <h3 style="text-align:center; border-style:solid;">Etat camion <span t-field="o.camion_id"/>
+                        </h3>
+                        <br/>
+                        <div>
+                            <b>Date début : </b>
+                            <span t-field="o.dt_deb"/>
+                            <br/>
+                            <br/>
+                            <b>Date de fin : </b>
+                            <span t-field="o.dt_fin"/>
+                            <br/>
+                            <br/>
+                        </div>
+
+                        <div>
+                            <b>Dépense : </b>
+                            <span t-field="o.depense"/>
+                            <br/>
+                            <br/>
+                            <b>Recette : </b>
+                            <span t-field="o.recette"/>
+                            <br/>
+                            <br/>
+                        </div>
+
+                    </div>
+                </div>
+            </t>
+        </t>
+    </template>
+
+
+    <report id = "report_etat_chauffeur"
+            string = "Etat des chauffeurs"
+            model = "etat.chauffeur"
+            report_type = "qweb-pdf"
+            file = "Gestion_Facturation.report_etat_chauffeur"
+            name = "Gestion_Facturation.report_etatc" print_report_name="'%s' % (object.personnel_id)" paperformat="id_format_paysage"
+            menu = "True"/>
+
+    <template id="report_etatc">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="o">
+                <div class="article o_report_layout_standard" t-att-data-oe-model="o and o._name" t-att-data-oe-id="o and o.id">
+                    <t t-call="stock_ltl.custom_session_header_footer"/>
+
+                    <div class="page">
+                        <h3 style="text-align:center; border-style:solid;">Etat chauffeur <span t-field="o.personnel_id"/>
+                        </h3>
+                        <br/>
+                        <div>
+                            <b>Date début : </b>
+                            <span t-field="o.dt_deb"/>
+                            <br/>
+                            <br/>
+                            <b>Date de fin : </b>
+                            <span t-field="o.dt_fin"/>
+                            <br/>
+                            <br/>
+                        </div>
+
+                        <div>
+                            <b>Dépense : </b>
+                            <span t-field="o.depense"/>
+                            <br/>
+                            <br/>
+                            <b>Recette : </b>
+                            <span t-field="o.recette"/>
+                            <br/>
+                            <br/>
+                        </div>
+
+                    </div>
+                </div>
+            </t>
+        </t>
+    </template>
+
+    
+
+</odoo>

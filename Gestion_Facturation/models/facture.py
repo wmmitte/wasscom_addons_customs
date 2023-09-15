@@ -142,6 +142,7 @@ class FactureFactureLine(models.Model):
     x_capacite_net = fields.Integer(compute = '_calcul_cap_net', store = True,string = 'Capacité finale')
     x_mnt_perte = fields.Float(compute = '_mnt_ligne', store = True,string = 'Perte')
     x_mt_ligne_reel = fields.Float(compute = '_mnt_ligne', store = True,string='Mnt Ligne sans perte', readonly=True)
+    mnt_manquant = fields.Float("Montant manquant")
 
     @api.depends('x_capacite','x_manquant')
     def _calcul_cap_net(self):
@@ -198,6 +199,14 @@ class FactureFacturePaiement(models.Model):
     x_mt_encaisse = fields.Float(string='Somme versée', required=True)
     x_total_reste_apr = fields.Float(compute = '_calcul_rest_mnt', store = True,string='Reste après opération', readonly=True)
 
+    taux5 = fields.Float("Taux(%)", default=5)
+    mnt_manquant = fields.Float('Total manquants', store=True)
+    x_total_deduit = fields.Float(string='Total déduit de 5%',readonly = True)
+    mnt_a_payer = fields.Float(string='Somme à payer',compute='_calcul_mnqt')
+    ligne_facture = fields.One2many("facture_facture_line", "x_fact_id")
+
+
+
     @api.depends('x_mt_encaisse')
     def _calcul_rest_mnt(self):
         for record in self:
@@ -212,9 +221,17 @@ class FactureFacturePaiement(models.Model):
             record.x_adress = record.name.x_adress
             record.x_objet = record.name.x_objet
             record.x_total_facture = record.name.x_total_facture
+            record.x_total_deduit = record.name.x_total_facture - (record.name.x_total_facture * record.taux5)/100
             record.x_total_encaisse = record.name.x_total_encaisse
+
             record.x_total_reste = record.name.x_total_reste
-            #record.x_mt_encaisse = 0
+            record.ligne_facture = record.name.x_line_ids
+    
+    @api.depends('x_total_deduit', 'mnt_manquant')
+    def _calcul_mnqt(self):
+        for val in self:
+            val.mnt_a_payer = val.x_total_deduit - val.mnt_manquant
+
 
     def action_valider(self):
         for record in self:

@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+    <template id="custom_session_header_footer">
+        <t t-set="company" t-value="user.company_id"/>
+        <div class="header">
+            <link rel='stylesheet' href="/stock_ltl/static/src/css/style.css"/>
+            <div class="row" style="font-family: sans-serif; font-size:12px;">
+                <div class="col-5 mb4">
+                    <div>
+                        <span t-field="company.partner_id"/>
+                    </div>
+                    <div>
+                        <span t-if="company.street" t-field="company.street"/>
+                        <t t-if="company.street2">,                        
+                            <span t-field="company.street2"/>
+                        </t>
+                    </div>
+                    <div>
+                        <span t-if="company.city" t-field="company.city"/>
+                        <t t-if="company.state_id">,                        
+                            <span t-field="company.state_id"/>
+                        </t>
+                        <t t-if="company.country_id">,                        
+                            <span t-field="company.country_id"/>
+                        </t>
+                        <t t-if="company.zip">,                        
+                            <span t-field="company.zip"/>
+                        </t>
+                    </div>
+                    <!-- <div t-field="company.partner_id" t-options='{"widget": "contact", "fields": ["address", "name"], "no_marker": true}'
+                    /> -->
+                </div>
+                <div class="col-2 mb4" style="text-align:center;">
+                    <img t-if="company.logo" t-att-src="image_data_uri(company.logo)" style="max-height: 80px;" alt="Logo"/>
+                </div>
+                <div class="col-5 mb4 text-right">
+                    <div t-if="report_type == 'pdf'" class="text-muted">
+                        Page: <li class="list-inline-item">
+                        <strong>
+                            <span class="page"/>
+ /                            <span class="topage"/>
+                        </strong>
+                    </li>
+                </div>
+                <div style="font-style:italic;">
+                        Imprimé le, <span t-esc="context_timestamp(datetime.datetime.now()).strftime('%d/%m/%Y %H:%M')"/>
+                </div>
+            </div>
+        </div>
+        <div t-if="company.logo or company.report_header" class="row zero_min_height">
+            <div class="col-12 border-bottom-dashed-primary" style="margin-top:10px;">
+            </div>
+        </div>
+    </div>
+    <div class="footer">
+        <link rel='stylesheet' href="/stock_ltl/static/src/css/style.css"/>
+
+        <div class="text-center border-top-dashed-primary" style="font-size:12px">
+            <ul class="list-inline mb4 text-nowrap">
+                <li t-if="company.phone" class="list-inline-item d-inline">Telephone: <span class="o_force_ltr" t-field="company.phone"/>
+                </li>
+                <li t-if="company.email" class="list-inline-item d-inline">Email: <span t-field="company.email"/>
+                </li>
+                <li t-if="company.website" class="list-inline-item d-inline">Site Web: <span t-field="company.website"/>
+                </li>
+                <li t-if="company.vat" class="list-inline-item d-inline">
+                    <t t-esc="company.country_id.vat_label or 'Tax ID'"/>
+:                    <span t-field="company.vat"/>
+                </li>
+            </ul>
+        </div>
+    </div>
+</template>
+</odoo>

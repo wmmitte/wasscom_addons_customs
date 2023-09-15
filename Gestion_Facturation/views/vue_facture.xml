@@ -538,9 +538,13 @@
 							<field name="x_objet" style="width:100%" invisible = '0' force_save="1" />
 						</group>
 						<group>
+							<field name="taux5" style="width:100%" invisible = '1' force_save="1"/>						
 							<field name="x_total_facture" style="width:100%" invisible = '0' force_save="1"/>
 							<field name="x_total_encaisse" style="width:50%" force_save="1"/>
-							<field name="x_total_reste" style="width:50%" force_save="1"/>
+							<field name="x_total_deduit" style="width:100%" invisible = '1' force_save="1"/>
+							<field name="mnt_manquant" style="width:100%" invisible = '0' force_save="1"/>
+							<field name="mnt_a_payer" style="width:100%" invisible = '0' force_save="1"/>
+							<field name="x_total_reste" style="width:50%" invisible ='1' force_save="1"/>
 						</group>
 					</group>
 					<group col = '2' invisible = '0'>
@@ -562,6 +566,19 @@
 							<field name="company_id" style="width:50%"/>
 						</group>
 					</group>
+
+					<!--<field name="ligne_facture" nolabel = "1">
+						<tree string="Ligne facture" editable = "bottom" delete='0' create='0'>
+							<field name="x_date_be" force_save = "1" readonly="1"/>
+							<field name="x_num_be" force_save = "1" readonly="1"/>
+							<field name="x_date_bl" force_save = "1" readonly="1"/>
+							<field name="x_num_bl" force_save = "1" readonly="1"/>
+							<field name="x_immatricul_id" force_save = "1" readonly="1"/>
+							<field name="x_trajet_id" force_save = "1" readonly="1"/>
+							<field name="mnt_manquant" force_save = "1" sum='Total'/>
+						</tree>
+					</field>-->
+
 					<div class="oe_chatter">
 						<field name="message_follower_ids" widget="mail_followers" groups="base.group_user"/>
 						<field name="activity_ids" widget="mail_activity"/>
