@@ -132,3 +132,12 @@ class Facturation_Camion(models.Model):
     x_struct_id = fields.Many2one('res.company' ,string = "Structure" ,default=lambda self: self.env.user.company_id.id, required = True)
     active = fields.Boolean(string = "Etat", default=True)
 
+
+# class camion
+class Taux(models.Model):
+    _name = 'taux'
+    _order = 'id'
+
+    name = fields.Float(string = "Taux de réduction" ,required = True, default=5)
+    description = fields.Text(string = "Description" ,required = False)
+    active = fields.Boolean(string = "Etat", default=True)

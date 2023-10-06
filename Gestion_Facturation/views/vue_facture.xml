@@ -3,7 +3,26 @@
 	<!--Definition de la vue-->
 
 
-	<!-- vue facture_produit tree-->
+	<!-- vue facture_prodtauxuit tree-->
+	<record model="ir.ui.view" id="view_id_taux">
+		<field name="name">view.taux.tree</field>
+		<field name="model">taux</field>
+		<field name="priority" eval="16"/>
+		<field name="arch" type="xml">
+			<tree string="Liste des taux" editable="bottom">
+				<field name="name"/>
+				<field name="description"/>
+				<field name="active"/>
+			</tree>
+		</field>
+	</record>
+
+	<record model="ir.actions.act_window" id="act_list_taux">
+		<field name="name">Liste des taux</field>
+		<field name="res_model">taux</field>
+		<field name="view_mode">tree</field>
+	</record>
+
 	<record model="ir.ui.view" id="view_id_facture_produit">
 		<field name="name">view.facture_produit.tree</field>
 		<field name="model">facture_produit</field>
@@ -373,6 +392,8 @@
 					<group>
 						<field name="x_objet" style="width:100%" invisible = '0' force_save="1" attrs="{'readonly' : [('state', 'in', ['Approuvée','Liquidation partielle','Liquidation totale'])]}"/>
 						<field name="name" style="width:50%"/>
+						<field name="x_taux" style="width:50%" force_save="1"/>
+						<field name="x_mnt_deduit" style="width:50%" invisible="0"/>
 						<field name="x_concat_fields" style="width:100%" invisible = '1'/>
 					</group>
 				</group>
@@ -414,7 +435,7 @@
 						<field name="x_total_encaisse" style="width:100%" force_save="1"/>
 					</group>
 					<group>
-						<field name="x_total_reste" style="width:100%" force_save="1"/>
+						<field name="x_total_reste" style="width:100%" force_save="1" invisible="1"/>
 					</group>
 					<group>
 						<field name="x_mnt_lettre" style="width:100%" force_save="1" invisible="1"/>
@@ -541,9 +562,6 @@
 							<field name="taux5" style="width:100%" invisible = '1' force_save="1"/>						
 							<field name="x_total_facture" style="width:100%" invisible = '0' force_save="1"/>
 							<field name="x_total_encaisse" style="width:50%" force_save="1"/>
-							<field name="x_total_deduit" style="width:100%" invisible = '1' force_save="1"/>
-							<field name="mnt_manquant" style="width:100%" invisible = '0' force_save="1"/>
-							<field name="mnt_a_payer" style="width:100%" invisible = '0' force_save="1"/>
 							<field name="x_total_reste" style="width:50%" invisible ='1' force_save="1"/>
 						</group>
 					</group>
@@ -1209,12 +1227,13 @@
 
 
 	<menuitem id="menu_facture_param" parent="main_menu" name="Paramétrage" sequence = "100" groups='Gestion_Facturation.Gestion_Facturation_admin_donnees,Gestion_Facturation.Gestion_Facturation_op'/>
-	<menuitem id="menu_facture_client" parent="menu_facture_param" name="Saisie/MàJ- Client" sequence = "1001" action="act_list_client" />
-	<menuitem id="menu_facture_param_prod" parent="menu_facture_param" name="Saisie/MàJ- Produit" sequence = "1002" action="act_list_produit" />
-	<menuitem id="menu_facture_param_localite" parent="menu_facture_param" name="Saisie/MàJ- Localité" sequence = "1003" action="act_list_localite" />
-	<menuitem id="menu_facture_param_trajet" parent="menu_facture_param" name="Saisie/MàJ- Trajet" sequence = "1004" action="act_list_trajet" />
-	<menuitem id="menu_facture_param_personnel_conducteur" parent="menu_facture_param" name="Saisie/MàJ- Personnel" sequence = "1005" action="act_list_conducteur" />
+	<menuitem id="menu_facture_client" parent="menu_facture_param" name="Saisie/MàJ- Client" sequence = "1001" action="act_list_client"/>
+	<menuitem id="menu_facture_param_prod" parent="menu_facture_param" name="Saisie/MàJ- Produit" sequence = "1002" action="act_list_produit"/>
+	<menuitem id="menu_facture_param_localite" parent="menu_facture_param" name="Saisie/MàJ- Localité" sequence = "1003" action="act_list_localite"/>
+	<menuitem id="menu_facture_param_trajet" parent="menu_facture_param" name="Saisie/MàJ- Trajet" sequence = "1004" action="act_list_trajet"/>
+	<menuitem id="menu_facture_param_personnel_conducteur" parent="menu_facture_param" name="Saisie/MàJ- Personnel" sequence = "1005" action="act_list_conducteur"/>
 	<menuitem id="menu_facture_param_camion" parent="menu_facture_param" name="Saisie/MàJ- Camion" sequence = "1006" action="act_list_camion" />
+	<menuitem id="menu_facture_taux" parent="menu_facture_param" name="Saisie/MàJ- Taux de réduction" sequence = "1007" action="act_list_taux"/>
 
 </odoo>
 

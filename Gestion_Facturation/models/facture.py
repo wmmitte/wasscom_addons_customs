@@ -42,6 +42,8 @@ class FactureFacture(models.Model):
     x_total_encaisse = fields.Float(string='Montant Encaissé',readonly = True,default = 0)
     x_total_reste = fields.Float(compute = '_calcul_total_fact',store = True,string='Reste à payer')
     x_total_perte = fields.Float(compute = '_calcul_total_fact',store = True,string='Perte totale')
+    x_taux = fields.Float("Taux", readonly=True)
+    x_mnt_deduit = fields.Float(compute = '_calcul_total_fact',store = True,string='Montant déduit')
 
     x_etat_facture = fields.Char('Etat facture',default = 'Nouvelle facture')
 
@@ -54,7 +56,10 @@ class FactureFacture(models.Model):
         for record in self:
             annee = date.today().year
             record.x_annee_en_cours = annee
-
+    
+    @api.onchange('x_client')
+    def taux(self):
+        self.x_taux = self.env['taux'].search([('active', '=', True)]).name
 
 
     @api.depends('name', 'x_client')
@@ -67,10 +72,16 @@ class FactureFacture(models.Model):
     def _calcul_total_fact(self):
         for record in self:
             text = ''
-            record.x_total_facture = sum(line.x_mt_ligne for line in record.x_line_ids)
+            record.x_mnt_deduit = (sum(line.x_mt_ligne_reel for line in record.x_line_ids) * record.x_taux) / 100.00
+            
             record.x_total_facture_reel = sum(line.x_mt_ligne_reel for line in record.x_line_ids)
-            record.x_total_reste = record.x_total_facture
+            
+            
             record.x_total_perte = sum(line.x_mnt_perte for line in record.x_line_ids)
+
+            record.x_total_facture = sum(line.x_mt_ligne_reel for line in record.x_line_ids) - record.x_mnt_deduit - record.x_total_perte
+            record.x_total_reste = record.x_total_facture
+
             text+=num2words(record.x_total_facture,lang='fr')
             record.x_mnt_lettre = text
 
@@ -201,8 +212,6 @@ class FactureFacturePaiement(models.Model):
 
     taux5 = fields.Float("Taux(%)", default=5)
     mnt_manquant = fields.Float('Total manquants', store=True)
-    x_total_deduit = fields.Float(string='Total déduit de 5%',readonly = True)
-    mnt_a_payer = fields.Float(string='Somme à payer',compute='_calcul_mnqt')
     ligne_facture = fields.One2many("facture_facture_line", "x_fact_id")
 
 
@@ -221,17 +230,10 @@ class FactureFacturePaiement(models.Model):
             record.x_adress = record.name.x_adress
             record.x_objet = record.name.x_objet
             record.x_total_facture = record.name.x_total_facture
-            record.x_total_deduit = record.name.x_total_facture - (record.name.x_total_facture * record.taux5)/100
             record.x_total_encaisse = record.name.x_total_encaisse
 
             record.x_total_reste = record.name.x_total_reste
-            record.ligne_facture = record.name.x_line_ids
     
-    @api.depends('x_total_deduit', 'mnt_manquant')
-    def _calcul_mnqt(self):
-        for val in self:
-            val.mnt_a_payer = val.x_total_deduit - val.mnt_manquant
-
 
     def action_valider(self):
         for record in self:
@@ -287,6 +289,15 @@ class FactureQuantite(models.Model):
 
     def valider(self):
         self.state = '2'
+        mnqt = self.quantite
+        lines_manquant = self.env['facture_facture_line'].search([('x_immatricul_id.id', '=', self.camion_id.id),
+                                                      ('x_num_bl', '=', self.x_num_bl),
+                                                      ('x_date_bl', '=', self.x_date_bl), 
+                                                      ('x_num_be', '=', self.x_num_be),
+                                                      ('x_date_bl', '=', self.x_date_bl),
+                                                      ])
+        for val in lines_manquant:
+            val.update({'x_manquant': mnqt, 'x_mnt_perte': mnqt * lines_manquant.x_taux})
 
 
 class FactureEtatQuantite(models.TransientModel):
