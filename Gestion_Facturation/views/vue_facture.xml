@@ -351,10 +351,11 @@
 				<field name="x_client"/>
 				<field name="x_adress" invisible="1"/>
 				<field name="x_objet"/>
-				<field name="x_total_facture" sum = "Total facture"/>
+				<field name="x_total_facture_reel" string = "Montant total"/>
+				<field name="x_total_facture" string = "Montant réel"/>
 				<field name="x_total_encaisse" sum = "Total encaissé"/>
 				<field name="x_total_reste" sum = "Total reste"/>
-				<field name="x_total_perte" sum = "Total perte"/>
+				<field name="x_total_perte" sum = "Total perte"/>	
 				<field name="current_users"/>
 				<field name="state"/>
 				<field name="company_id" invisible = '1'/>
@@ -373,6 +374,7 @@
 			<form string="Liste des factures">
 				<header>
 					<button string="Approuver" name="action_approuver" type="object" class="oe_highlight" confirm="Vous êtes sur le point d'approuver cette facture ?" attrs="{'invisible' : [('state', 'not in', ['Nouvelle facture'])]}" groups="Gestion_Facturation.Gestion_Facturation_admin_donnees,Gestion_Facturation.Gestion_Facturation_cptable" />
+					<button string="Mettre à jour" name="fonction_maj" type="object" class="btn-dark"/>
 
 
 					<field name="state" widget = "statusbar"/>
@@ -423,19 +425,19 @@
 				</group>
 				<group col = '4'>
 					<group>
-						<field name="x_total_facture_reel" style="width:100%" invisible = '0' force_save="1"/>
+						<field name="x_total_facture_reel" style="width:100%" invisible = '0' string="Montant total" force_save="1"/>
 					</group>
 					<group>
 						<field name="x_total_perte" style="width:100%" force_save="1"/>
 					</group>
 					<group>
-						<field name="x_total_facture" style="width:100%" invisible = '0' force_save="1"/>
+						<field name="x_total_facture" style="width:100%" invisible = '0' string="Montant réel" readonly="0" force_save="1"/>
 					</group>
 					<group>
 						<field name="x_total_encaisse" style="width:100%" force_save="1"/>
 					</group>
 					<group>
-						<field name="x_total_reste" style="width:100%" force_save="1" invisible="1"/>
+						<field name="x_total_reste" style="width:100%" force_save="1" readonly="0" invisible="0"/>
 					</group>
 					<group>
 						<field name="x_mnt_lettre" style="width:100%" force_save="1" invisible="1"/>
@@ -1100,7 +1102,7 @@
 		<field name="arch" type="xml">
 			<form string="CA">
 				<header>
-					<button string="Valider" name="valider" type="object" class="oe_highlight" attrs="{'invisible' : [('state', 'in', ['2'])]}"/>
+					<button string="Valider" name="valider" type="object" class="oe_highlight"/>
 					<field name="state" widget = "statusbar"/>
 				</header>
 				<sheet>

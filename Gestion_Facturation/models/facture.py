@@ -79,10 +79,10 @@ class FactureFacture(models.Model):
             
             record.x_total_perte = sum(line.x_mnt_perte for line in record.x_line_ids)
 
-            record.x_total_facture = sum(line.x_mt_ligne_reel for line in record.x_line_ids) - record.x_mnt_deduit - record.x_total_perte
+            record.x_total_facture = record.x_total_facture_reel - record.x_mnt_deduit - record.x_total_perte
             record.x_total_reste = record.x_total_facture
 
-            text+=num2words(record.x_total_facture,lang='fr')
+            text+=num2words(record.x_total_facture_reel,lang='fr')
             record.x_mnt_lettre = text
 
     @api.onchange('x_client')
@@ -121,6 +121,15 @@ class FactureFacture(models.Model):
                 self.env.cr.execute("UPDATE facture_facture_stats SET name = %d,x_ca_annuel = x_ca_annuel + %d WHERE company_id = %d and name = %d" % (x_annee,x_total_facture,x_struct_id,x_annee))
                 record.write({'state': 'Approuvée','x_etat_facture': 'Approuvée'})
 
+
+    def fonction_maj(self):
+
+        pour_maj = self.env['facture_facture'].search(
+                [('state', '=', 'Approuvée'), ('company_id', '=', self.company_id.id)])
+        for p in pour_maj:
+            p.update({'x_mnt_deduit' : sum(line.x_mt_ligne_reel for line in p.x_line_ids) * 0.05,
+                    'x_total_facture' : sum(line.x_mt_ligne_reel for line in p.x_line_ids) - p.x_mnt_deduit - p.x_total_perte,
+                    'x_total_reste' : sum(line.x_mt_ligne_reel for line in p.x_line_ids) - p.x_mnt_deduit - p.x_total_perte, 'x_taux':5})
 
 #Classe pour gerer le compteur pour le code des factures
 class Compteur_Code_Facture(models.Model):
