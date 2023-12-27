@@ -47,22 +47,25 @@
 				<br></br>
 				<table class="table table-bordered table-sm text-center border border-dark" border="1" cellpading="5" style="border-collapse: collapse;width: 100%;">
 					<tr style="border:1px solid #000;background-color:#CCC; font-size:15px;">
-						<th width="16%" style="text-align:center;">
+						<th width="14%" style="text-align:center;">
 							<span style="padding:2px">N°BE</span>
 						</th>
-						<th width="16%" style="text-align:center;">
+						<th width="14%" style="text-align:center;">
 							<span style="padding:2px">N°BL</span>
 						</th>
-						<th width="16%" style="text-align:center;">
+						<th width="15%" style="text-align:center;">
 							<span style="padding:2px">Immatriculation</span>
 						</th>
-						<th width="20%" style="text-align:center;">
+						<th width="18%" style="text-align:center;">
 							<span style="padding:2px">Trajet</span>
 						</th>
 						<th width="12%" style="text-align:center;">
 							<span style="padding:2px">Produit</span>
 						</th>
-						<th width="16%" style="text-align:right;">
+						<th width="12%" style="text-align:center;">
+							<span style="padding:2px">Capacite (L)</span>
+						</th>
+						<th width="15%" style="text-align:right;">
 							<span style="padding:2px">Montant Ligne</span>
 						</th>
 					</tr>
@@ -97,6 +100,9 @@
 
 								<td style="text-align:center; ">
 									<span style="padding:2px" t-field="p.x_produit_id.name" />
+								</td>
+								<td style="text-align:center; ">
+									<span style="padding:2px" t-field="p.x_capacite" />
 								</td>
 								<td style="text-align:right; ">
 									<span style="padding:2px" t-esc="'{:,}'.format(int(p.x_mt_ligne)).replace(',', ' ')"/>

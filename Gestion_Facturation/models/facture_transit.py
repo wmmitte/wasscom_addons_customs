@@ -98,6 +98,7 @@ class FactureTransitLine(models.Model):
     x_immatricul_id = fields.Many2one('facture_camion', string='Immatriculation', required=True)
     x_trajet_id = fields.Many2one('facture_trajet', string='Trajet', required=True)
     x_produit_id = fields.Many2one('facture_produit', string='Produit', required=True)
+    x_capacite = fields.Float(string='Capacité',digits=(15,1),required = True)
     x_mt_ligne = fields.Float(string='Mnt Ligne', required=True)
 
     """name = fields.Many2one('facture_facture',string = 'N° Facture',required=True)
