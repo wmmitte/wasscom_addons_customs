@@ -43,6 +43,19 @@ class FactureTransit(models.Model):
     x_mnt_lettre = fields.Char(string='Montant en lettre')
     x_signataire_id = fields.Many2one('res.users', 'Sigantaire', required=True)
 
+    def fonction_maj(self):
+
+        vals = self.env['facture_transit'].search(
+                [('company_id', '=', self.company_id.id)])
+        for pour_maj in vals:
+            dte = pour_maj.date_operation
+            total_a_payer = round(pour_maj.x_total_facture)            
+            self.sudo().env['ligne.facture'].create({
+                'dte' : dte,
+                'total_a_payer' : total_a_payer,
+                'type' : 'Transit'
+                })
+
     @api.depends('x_line_ids.x_mt_ligne')
     def _calcul_total_fact(self):
         text = ''
@@ -74,6 +87,8 @@ class FactureTransit(models.Model):
                 vals = c1
                 self.env.cr.execute("INSERT INTO facture_code(company_id,no_code,x_annee)  VALUES(%d,%d,%d)" % (x_struct_id, vals,x_annee))
                 self.env.cr.execute("INSERT INTO facture_facture_stats(name,x_ca_annuel,company_id)  VALUES(%d,%d,%d)" % (x_annee,x_total_facture,x_struct_id))
+                self.env.cr.execute("""INSERT INTO ligne_facture(num_fact, dte, total_a_payer, type) 
+                                    VALUES(%s,%s,%s, 'Transit')""" ,(self.x_num_fact, self.date_operation, x_total_facture))
                 self.write({'state': 'Approuvée','x_etat_facture': 'Approuvée'})
             else:
                 c1 = int(no_lo) + 1
@@ -83,6 +98,7 @@ class FactureTransit(models.Model):
                 vals = c1
                 self.env.cr.execute("UPDATE facture_code SET no_code = %d  WHERE company_id = %d and x_annee = %d" % (vals, x_struct_id,x_annee))
                 self.env.cr.execute("UPDATE facture_facture_stats SET name = %d,x_ca_annuel = x_ca_annuel + %d  WHERE company_id = %d and name = %d" % (x_annee,x_total_facture,x_struct_id,x_annee))
+                self.env.cr.execute("""INSERT INTO ligne_facture(num_fact, dte, total_a_payer, type) VALUES(%s,%s,%s, 'Transit')""" ,(self.x_num_fact, self.date_operation, x_total_facture))                
                 self.write({'state': 'Approuvée','x_etat_facture': 'Approuvée'})
 
 
@@ -98,7 +114,6 @@ class FactureTransitLine(models.Model):
     x_immatricul_id = fields.Many2one('facture_camion', string='Immatriculation', required=True)
     x_trajet_id = fields.Many2one('facture_trajet', string='Trajet', required=True)
     x_produit_id = fields.Many2one('facture_produit', string='Produit', required=True)
-    x_capacite = fields.Float(string='Capacité',digits=(15,1),required = True)
     x_mt_ligne = fields.Float(string='Mnt Ligne', required=True)
 
     """name = fields.Many2one('facture_facture',string = 'N° Facture',required=True)

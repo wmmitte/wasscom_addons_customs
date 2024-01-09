@@ -41,22 +41,6 @@ class GestDepense(models.Model):
         ], 'Etat', default='draft', index=True,readonly=True, copy=False, track_visibility='always')
     x_num_facture = fields.Char(string = 'Dépense N°',readonly=True)
 
-    """"@api.onchange('name')
-    def _act_rempl_champ(self):
-        for record in self:
-            if record.x_type_depense == 'Voyage':
-                record.x_immatricul_id = record.name.x_immatricul_id
-                record.x_trajet_id = record.name.x_trajet_id
-                record.x_distance = record.name.x_distance
-                record.x_produit_id = record.name.x_produit_id
-                record.x_capacite = record.name.x_capacite
-            else:
-                record.x_immatricul_id = ''
-                record.x_trajet_id = ''
-                record.x_distance = ''
-                record.x_produit_id = ''
-                record.x_capacite = '' """
-
 
     @api.constrains('name')
     def action_valider(self):
@@ -95,3 +79,18 @@ class Compteur_Code_Depense(models.Model):
     company_id = fields.Many2one('res.company', default=lambda self: self.env.user.company_id.id)
     x_annee = fields.Integer('année')
     no_code = fields.Integer()
+
+
+
+class LigneFacture(models.Model):
+    _name = "ligne.facture"
+
+    num_fact = fields.Char()
+    dte = fields.Date()
+    total_reel = fields.Float()
+    total_a_payer = fields.Float()
+    mnt_manquant = fields.Float()
+    mnt_deduit = fields.Float()
+    mnt_perte = fields.Float()
+    mnt_depense = fields.Float()
+    type = fields.Char()

@@ -79,7 +79,7 @@ class FactureFacture(models.Model):
             
             record.x_total_perte = sum(line.x_mnt_perte for line in record.x_line_ids)
 
-            record.x_total_facture = record.x_total_facture_reel - record.x_mnt_deduit - record.x_total_perte
+            record.x_total_facture = round(record.x_total_facture_reel - record.x_mnt_deduit - record.x_total_perte)
             record.x_total_reste = record.x_total_facture
 
             text+=num2words(record.x_total_facture_reel,lang='fr')
@@ -97,6 +97,9 @@ class FactureFacture(models.Model):
             print('année en cours',x_annee)
 
             x_total_facture = record.x_total_facture
+            x_total_facture_reel = record.x_total_facture_reel
+            x_total_perte = record.x_total_perte
+            x_mnt_deduit = record.x_mnt_deduit
 
 
             self.env.cr.execute("select no_code from facture_code where company_id = %d and x_annee = %d" % (x_struct_id,x_annee))
@@ -110,6 +113,8 @@ class FactureFacture(models.Model):
                 vals = c1
                 self.env.cr.execute("INSERT INTO facture_code(company_id,no_code,x_annee)  VALUES(%d,%d,%d)" % (x_struct_id, vals,x_annee))
                 self.env.cr.execute("INSERT INTO facture_facture_stats(name,x_ca_annuel,x_dep_annuel,x_ma_annuel,company_id)  VALUES(%d,%d,%d,%d,%d)" % (x_annee,x_total_facture,0,0,x_struct_id))
+                self.env.cr.execute("""INSERT INTO ligne_facture(num_fact, dte, total_reel, total_a_payer, mnt_manquant, mnt_deduit, type) 
+                                    VALUES(%s, %s, %s, %s, %s, %s, 'Transit')""" ,(self.name, self.date_operation, x_total_facture, x_total_facture_reel, x_total_perte ,x_mnt_deduit))
                 record.write({'state': 'Approuvée','x_etat_facture': 'Approuvée'})
             else:
                 c1 = int(no_lo) + 1
@@ -119,17 +124,33 @@ class FactureFacture(models.Model):
                 vals = c1
                 self.env.cr.execute("UPDATE facture_code SET no_code = %d  WHERE company_id = %d and x_annee = %d" % (vals, x_struct_id,x_annee))
                 self.env.cr.execute("UPDATE facture_facture_stats SET name = %d,x_ca_annuel = x_ca_annuel + %d WHERE company_id = %d and name = %d" % (x_annee,x_total_facture,x_struct_id,x_annee))
+                self.env.cr.execute("""INSERT INTO ligne_facture(num_fact, dte, total_reel, total_a_payer, mnt_manquant, mnt_deduit, type) 
+                                    VALUES(%s, %s, %s, %s, %s, %s, 'Normale')""" ,(self.name, self.date_operation, x_total_facture, x_total_facture_reel, x_total_perte ,x_mnt_deduit))
                 record.write({'state': 'Approuvée','x_etat_facture': 'Approuvée'})
 
 
     def fonction_maj(self):
 
-        pour_maj = self.env['facture_facture'].search(
-                [('state', '=', 'Approuvée'), ('company_id', '=', self.company_id.id)])
-        for p in pour_maj:
-            p.update({'x_mnt_deduit' : sum(line.x_mt_ligne_reel for line in p.x_line_ids) * 0.05,
-                    'x_total_facture' : sum(line.x_mt_ligne_reel for line in p.x_line_ids) - p.x_mnt_deduit - p.x_total_perte,
-                    'x_total_reste' : sum(line.x_mt_ligne_reel for line in p.x_line_ids) - p.x_mnt_deduit - p.x_total_perte, 'x_taux':5})
+        vals = self.env['facture_facture'].search(
+                [('company_id', '=', self.company_id.id)])
+        for pour_maj in vals:
+            num_fact = pour_maj.name,
+            dte = pour_maj.date_operation
+            total_reel = round(pour_maj.x_total_facture)
+            total_a_payer = round(pour_maj.x_total_facture_reel)
+            mnt_manquant = round(pour_maj.x_total_perte)
+            mnt_deduit = round(pour_maj.x_mnt_deduit)
+            
+            self.sudo().env['ligne.facture'].create({
+                'num_fact' : num_fact,
+                'dte' : dte,
+                'total_reel' : total_reel,
+                'total_a_payer' : total_a_payer,
+                'mnt_manquant' : mnt_manquant,
+                'mnt_deduit' : mnt_deduit,
+                'type' : 'Normale'
+                })
+
 
 #Classe pour gerer le compteur pour le code des factures
 class Compteur_Code_Facture(models.Model):
@@ -215,9 +236,9 @@ class FactureFacturePaiement(models.Model):
     ], 'Statut', default='Nouveau paiement', index=True, required=False, copy=False, track_visibility='always')
     x_total_facture = fields.Float(compute = '_calcul_total_fact',store = True,string = 'Total Facture')
     x_total_encaisse = fields.Float(string='Total Encaissé',readonly = True)
-    x_total_reste = fields.Float(string='Reste à payer',readonly = True)
+    x_total_reste = fields.Float(string='Reste à payer avant Op.',readonly = True)
     x_mt_encaisse = fields.Float(string='Somme versée', required=True)
-    x_total_reste_apr = fields.Float(compute = '_calcul_rest_mnt', store = True,string='Reste après opération', readonly=True)
+    x_total_reste_apr = fields.Float(compute = '_calcul_rest_mnt', store = True,string='Reste à payer après Op.', readonly=True)
 
     taux5 = fields.Float("Taux(%)", default=5)
     mnt_manquant = fields.Float('Total manquants', store=True)

@@ -431,13 +431,13 @@
 						<field name="x_total_perte" style="width:100%" force_save="1"/>
 					</group>
 					<group>
-						<field name="x_total_facture" style="width:100%" invisible = '0' string="Montant réel" readonly="0" force_save="1"/>
+						<field name="x_total_facture" style="width:100%" invisible = '0' string="Montant réel" readonly="1" force_save="1"/>
 					</group>
 					<group>
 						<field name="x_total_encaisse" style="width:100%" force_save="1"/>
 					</group>
 					<group>
-						<field name="x_total_reste" style="width:100%" force_save="1" readonly="0" invisible="0"/>
+						<field name="x_total_reste" style="width:100%" force_save="1" readonly="1" invisible="0"/>
 					</group>
 					<group>
 						<field name="x_mnt_lettre" style="width:100%" force_save="1" invisible="1"/>
@@ -526,7 +526,7 @@
 				<field name="x_total_reste" sum = "Total reste"/>
 				<field name="x_mt_encaisse"/>
 				<field name="x_total_reste_apr"/>
-				<field name="state" widget="badge" decoration-muted="state == 'Nouveau paiement'" decoration-success="state == 'Paiement effectuée'"/>
+				<field name="state" widget="badge" decoration-muted="state == 'Nouveau paiement'" decoration-success="state == 'Paiement effectué'"/>
 				<field name="current_users"/>
 				<field name="company_id" invisible = '1'/>
 				<field name="create_date" string="Date_enr" />
@@ -536,7 +536,7 @@
 	</record>
 
 	<!-- vue facture_facture_paiement form-->
-	<record model="ir.ui.view" id="view_id_form_facture_facture_paiement">
+	<record model="ir.ui.view" id="view_form_facture_facture_paiement">
 		<field name="name">view.facture_facture_paiement.form</field>
 		<field name="model">facture_facture_paiement</field>
 		<field name="priority" eval="16"/>
@@ -564,7 +564,7 @@
 							<field name="taux5" style="width:100%" invisible = '1' force_save="1"/>						
 							<field name="x_total_facture" style="width:100%" invisible = '0' force_save="1"/>
 							<field name="x_total_encaisse" style="width:50%" force_save="1"/>
-							<field name="x_total_reste" style="width:50%" invisible ='1' force_save="1"/>
+							<field name="x_total_reste" style="width:50%" force_save="1"/>
 						</group>
 					</group>
 					<group col = '2' invisible = '0'>
@@ -780,7 +780,7 @@
 			<form string="Liste des factures Transit">
 				<header>
 					<button string="Approuver" name="action_approuver_facture" type="object" class="oe_highlight" confirm="Vous êtes sur le point d'approuver cette facture ?" attrs="{'invisible' : [('state', 'not in', ['Nouvelle'])]}" groups="Gestion_Facturation.Gestion_Facturation_admin_donnees,Gestion_Facturation.Gestion_Facturation_cptable" />
-
+					<button string="Mettre à jour" name="fonction_maj" type="object" class="btn-dark"/>
 
 					<field name="state" widget = "statusbar"/>
 				</header>
@@ -811,7 +811,6 @@
 								<field name="x_immatricul_id" force_save = "1" />
 								<field name="x_trajet_id" force_save = "1" invisible = '0' />
 								<field name="x_produit_id" force_save = "1" invisible = '0'/>
-								<field name="x_capacite" force_save = "1" invisible = '0'/>
 								<field name="x_mt_ligne" force_save = "1" invisible = '0' />
 								<field name="x_annee_en_cours" style="width:100%" invisible = '0' force_save="1"/>
 							</tree>
@@ -1225,7 +1224,7 @@
 
 
 	<menuitem id="menu_stat_facture" parent="main_menu" name="Statistiques" sequence = "40" groups='Gestion_Facturation.Gestion_Facturation_admin_donnees,Gestion_Facturation.Gestion_Facturation_op,Gestion_Facturation.Gestion_Facturation_cptable'/>
-	<menuitem id="menu_facture_stat_dep_ca" parent="menu_stat_facture" name="Chiffre d'affaire" sequence = "401" action="act_list_facture_stats_ca"/>
+	<!--<menuitem id="menu_facture_stat_dep_ca" parent="menu_stat_facture" name="Chiffre d'affaire" sequence = "401" action="act_list_facture_stats_ca"/>-->
 	<menuitem id="menu_facture_etat_qte" parent="menu_stat_facture" name="Etat des manquants" sequence = "403" action="act_etat_qte_perdue"/>
 
 

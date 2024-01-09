@@ -1,0 +1,324 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+	<record model="ir.ui.view" id="view_chiffre_affaire">
+		<field name="name">chiffre.affaire.form</field>
+		<field name="model">chiffre.affaire</field>
+		<field name="priority" eval="16"/>
+		<field name="arch" type="xml">
+			<form string="Liste des produits">
+				<sheet>
+                 <header>
+                        <button name="afficher" string="Afficher" type="object" class="btn-dark" icon="fa-search"/>
+						<![CDATA[&nbsp;]]>
+                        <button name="imprimer" string="Imprimer" type="object" class="btn-warning" icon="fa-print"/>
+                </header>
+				<div>
+					<h1 style="text-align:center;">
+						Chiffre d'affaire
+					</h1>
+				</div>
+					<group>
+						<field name="dte_deb" style="width:50%"/>
+						<field name="dte_fin" style="width:50%"/>
+					</group>
+					<field name="chiffre_ids" nolabel = "1">
+						<tree string="Lignes demande" create ="false" delete="false">
+							<field name="brut_fn"/>
+							<field name="retenue_fn"/>
+							<field name="manquant_fn"/>
+							<field name="net_fn"/>
+							<field name="brut_ft"/>
+						</tree>
+					</field>                  
+				</sheet>
+			</form>
+		</field>
+	</record>
+
+	<!-- Action chiffre d'affaire-->
+	<record model="ir.actions.act_window" id="act_chiffre_affaire">
+		<field name="name">Chiffre d'affaire</field>
+		<field name="res_model">chiffre.affaire</field>
+		<field name="view_mode">form</field>
+        <field name="target">inline</field>
+	</record>
+
+
+
+	<record model="ir.ui.view" id="view_etat_chauffeur_def">
+		<field name="name">etat.chauffeur.def.form</field>
+		<field name="model">etat.chauffeur.def</field>
+		<field name="priority" eval="16"/>
+		<field name="arch" type="xml">
+			<form string="Liste des produits">
+				<sheet>
+                 <header>
+                        <button name="afficher" string="Afficher" type="object" class="btn-dark" icon="fa-search"/>
+						<![CDATA[&nbsp;]]>
+                        <button name="imprimer" string="Imprimer" type="object" class="btn-warning" icon="fa-print"/>
+                </header>
+				<div>
+					<h1 style="text-align:center;">
+						Etat détaillé chauffeur
+					</h1>
+				</div>
+					<group>
+						<field name="personnel_id" style="width:50%"/>
+						<field name="dte_deb" style="width:50%"/>
+						<field name="dte_fin" style="width:50%"/>
+					</group>
+					<field name="chauffeur_ids" nolabel = "1">
+						<tree string="Lignes demande" create ="false" delete="false">
+							<field name="brut_fn"/>
+							<field name="retenue_fn"/>
+							<field name="manquant_fn"/>
+							<field name="dep_chauffeur"/>
+						</tree>
+					</field>                  
+				</sheet>
+			</form>
+		</field>
+	</record>
+    
+
+	<!-- Action  facture_produit-->
+	<record model="ir.actions.act_window" id="act_etat_chauffeur_det">
+		<field name="name">Etat détaillé des chauffeurs</field>
+		<field name="res_model">etat.chauffeur.def</field>
+		<field name="view_mode">form</field>
+        <field name="target">inline</field>
+	</record>
+
+
+	<record model="ir.ui.view" id="view_etat_camion_def">
+		<field name="name">etat.camion.def.form</field>
+		<field name="model">etat.camion.def</field>
+		<field name="priority" eval="16"/>
+		<field name="arch" type="xml">
+			<form string="Liste des produits">
+				<sheet>
+                 <header>
+                        <button name="afficher" string="Afficher" type="object" class="btn-dark" icon="fa-search"/>
+						<![CDATA[&nbsp;]]>
+                        <button name="imprimer" string="Imprimer" type="object" class="btn-warning" icon="fa-print"/>
+                </header>
+				<div>
+					<h1 style="text-align:center;">
+						Etat détaillé camion
+					</h1>
+				</div>
+					<group>
+						<field name="camion" style="width:50%"/>
+						<field name="dte_deb" style="width:50%"/>
+						<field name="dte_fin" style="width:50%"/>
+					</group>
+					<field name="camion_ids" nolabel = "1">
+						<tree string="Lignes demande" create ="false" delete="false">
+							<field name="brut"/>
+							<field name="retenue"/>
+							<field name="net"/>
+							<field name="dep_camion"/>
+						</tree>
+					</field>                  
+				</sheet>
+			</form>
+		</field>
+	</record>
+    
+
+	<!-- Action  facture_produit-->
+	<record model="ir.actions.act_window" id="act_etat_camion_det">
+		<field name="name">Etat détaillé des camions</field>
+		<field name="res_model">etat.camion.def</field>
+		<field name="view_mode">form</field>
+        <field name="target">inline</field>
+	</record>
+
+
+	<record model="ir.ui.view" id="view_etat_facture_normale_def">
+		<field name="name">etat.facture.normale.form</field>
+		<field name="model">etat.facture.normale</field>
+		<field name="priority" eval="16"/>
+		<field name="arch" type="xml">
+			<form string="Liste des produits">
+				<sheet>
+                 <header>
+                        <button name="afficher" string="Afficher" type="object" class="btn-dark" icon="fa-search"/>
+						<![CDATA[&nbsp;]]>
+                        <button name="imprimer" string="Imprimer" type="object" class="btn-warning" icon="fa-print"/>
+                </header>
+				<div>
+					<h1 style="text-align:center;">
+						Etat facture normale
+					</h1>
+				</div>
+					<group>
+						<field name="dte_deb" style="width:50%"/>
+						<field name="dte_fin" style="width:50%"/>
+					</group>
+					<field name="facture_ids" nolabel = "1">
+						<tree string="Lignes demande" create ="false" delete="false">
+							<field name="num_fact"/>
+							<field name="brut_fn"/>
+							<field name="retenue_fn"/>
+							<field name="manquant_fn"/>
+							<field name="net_fn"/>
+							<field name="state"/>
+						</tree>
+					</field>                  
+				</sheet>
+			</form>
+		</field>
+	</record>
+    
+
+	<!-- Action  facture_produit-->
+	<record model="ir.actions.act_window" id="act_etat_facture">
+		<field name="name">Etat facture</field>
+		<field name="res_model">etat.facture.normale</field>
+		<field name="view_mode">form</field>
+        <field name="target">inline</field>
+	</record>
+
+
+	<record model="ir.ui.view" id="view_etat_facture_transit">
+		<field name="name">etat.facture.transit.form</field>
+		<field name="model">etat.facture.transit</field>
+		<field name="priority" eval="16"/>
+		<field name="arch" type="xml">
+			<form string="Liste des produits">
+				<sheet>
+                 <header>
+                        <button name="afficher" string="Afficher" type="object" class="btn-dark" icon="fa-search"/>
+						<![CDATA[&nbsp;]]>
+                        <button name="imprimer" string="Imprimer" type="object" class="btn-warning" icon="fa-print"/>
+                </header>
+				<div>
+					<h1 style="text-align:center;">
+						Etat facture transit
+					</h1>
+				</div>
+					<group>
+						<field name="dte_deb" style="width:50%"/>
+						<field name="dte_fin" style="width:50%"/>
+					</group>
+					<field name="facture_ids" nolabel = "1">
+						<tree string="Lignes demande" create ="false" delete="false">
+							<field name="dte"/>
+							<field name="num_fact"/>
+							<field name="montant"/>
+						</tree>
+					</field>                  
+				</sheet>
+			</form>
+		</field>
+	</record>
+    
+
+	<!-- Action  facture_produit-->
+	<record model="ir.actions.act_window" id="act_etat_facture_transit">
+		<field name="name">Etat facture transit</field>
+		<field name="res_model">etat.facture.transit</field>
+		<field name="view_mode">form</field>
+        <field name="target">inline</field>
+	</record>
+
+
+	<record model="ir.ui.view" id="view_etat_paiement">
+		<field name="name">etat.paiement.form</field>
+		<field name="model">etat.paiement</field>
+		<field name="priority" eval="16"/>
+		<field name="arch" type="xml">
+			<form string="Liste des produits">
+				<sheet>
+                 <header>
+                        <button name="afficher" string="Afficher" type="object" class="btn-dark" icon="fa-search"/>
+						<![CDATA[&nbsp;]]>
+                        <button name="imprimer" string="Imprimer" type="object" class="btn-warning" icon="fa-print"/>
+                </header>
+				<div>
+					<h1 style="text-align:center;">
+						Etat paiement
+					</h1>
+				</div>
+					<group>
+						<field name="dte_deb" style="width:50%"/>
+						<field name="dte_fin" style="width:50%"/>
+					</group>
+					<field name="facture_ids" nolabel = "1">
+						<tree string="Lignes demande" create ="false" delete="false">
+							<field name="dte"/>
+							<field name="numero"/>
+							<field name="montant"/>
+						</tree>
+					</field>                  
+				</sheet>
+			</form>
+		</field>
+	</record>
+    
+
+	<!-- Action  facture_produit-->
+	<record model="ir.actions.act_window" id="act_etat_paiement_normal">
+		<field name="name">Etat paiement </field>
+		<field name="res_model">etat.paiement</field>
+		<field name="view_mode">form</field>
+        <field name="target">inline</field>
+	</record>
+
+
+	<record model="ir.ui.view" id="view_etat_paiement_transit">
+		<field name="name">etat.paiement.transit.form</field>
+		<field name="model">etat.paiement.transit</field>
+		<field name="priority" eval="16"/>
+		<field name="arch" type="xml">
+			<form string="Liste des produits">
+				<sheet>
+                 <header>
+                        <button name="afficher" string="Afficher" type="object" class="btn-dark" icon="fa-search"/>
+						<![CDATA[&nbsp;]]>
+                        <button name="imprimer" string="Imprimer" type="object" class="btn-warning" icon="fa-print"/>
+                </header>
+				<div>
+					<h1 style="text-align:center;">
+						Etat paiement paiement
+					</h1>
+				</div>
+					<group>
+						<field name="dte_deb" style="width:50%"/>
+						<field name="dte_fin" style="width:50%"/>
+					</group>
+					<field name="facture_ids" nolabel = "1">
+						<tree string="Lignes demande" create ="false" delete="false">
+							<field name="dte"/>
+							<field name="numero"/>
+							<field name="montant"/>
+						</tree>
+					</field>                  
+				</sheet>
+			</form>
+		</field>
+	</record>
+    
+
+	<!-- Action  facture_produit-->
+	<record model="ir.actions.act_window" id="act_etat_paiement_trans">
+		<field name="name">Etat paiement transit </field>
+		<field name="res_model">etat.paiement.transit</field>
+		<field name="view_mode">form</field>
+        <field name="target">inline</field>
+	</record>
+
+
+
+    	<menuitem id="menu_facture_etat_chaf" parent="menu_stat_facture" name="Chiffre d'affaire" sequence = "406" action="act_chiffre_affaire"/>
+    	<menuitem id="menu_facture_etat_chdet" parent="menu_stat_facture" name="Etat détaillé des chauffeurs" sequence = "407" action="act_etat_chauffeur_det"/>
+    	<!--<menuitem id="menu_facture_etat_cadet" parent="menu_stat_facture" name="Etat détaillé des camions" sequence = "408" action="act_etat_camion_det"/>-->
+    	<menuitem id="menu_facture_etat_facdet" parent="menu_stat_facture" name="Etat des factures normales" sequence = "409" action="act_etat_facture"/>
+    	<menuitem id="menu_facture_etat_factra" parent="menu_stat_facture" name="Etat des factures de transit" sequence = "410" action="act_etat_facture_transit"/>
+    	<menuitem id="menu_facture_etat_facnorm" parent="menu_stat_facture" name="Etat des paiements factures normales " sequence = "411" action="act_etat_paiement_normal"/>
+    	<menuitem id="menu_facture_etat_factrans" parent="menu_stat_facture" name="Etat des paiements factures de transit" sequence = "412" action="act_etat_paiement_trans"/>
+
+
+</odoo>
