@@ -811,6 +811,7 @@
 								<field name="x_immatricul_id" force_save = "1" />
 								<field name="x_trajet_id" force_save = "1" invisible = '0' />
 								<field name="x_produit_id" force_save = "1" invisible = '0'/>
+								<field name="x_capacite" force_save = "1" invisible = '0'/>
 								<field name="x_mt_ligne" force_save = "1" invisible = '0' />
 								<field name="x_annee_en_cours" style="width:100%" invisible = '0' force_save="1"/>
 							</tree>

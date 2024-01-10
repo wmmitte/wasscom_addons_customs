@@ -63,13 +63,13 @@
 						<th width="10%" style="text-align:center;font-size:15px">
 							<span style="padding:0 2px 0 2px">Produit</span>
 						</th>
-						<th width="9%" style="text-align:center;font-size:15px">
+						<th width="10%" style="text-align:center;font-size:15px">
 							<span style="padding:0 2px 0 2px">Capacité</span>
 						</th>
 						<th width="8%" style="text-align:center;font-size:15px">
 							<span style="padding:0 2px 0 2px">Taux</span>
 						</th>
-						<th width="17%" style="text-align:right;font-size:15px">
+						<th width="16%" style="text-align:right;font-size:15px">
 							<span style="padding:0 2px 0 2px">Montant Ligne</span>
 						</th>
 					</tr>
