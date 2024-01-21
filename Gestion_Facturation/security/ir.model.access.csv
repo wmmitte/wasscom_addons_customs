@@ -40,4 +40,12 @@ access_etat_paiement_line,access.etat.paiement.line,model_etat_paiement_line,bas
 access_etat_paiement_transit,access.etat.paiement.transit,model_etat_paiement_transit,base.group_user,1,1,1,0
 access_etat_paiement_transit_line,access.etat.paiement.transit.line,model_etat_paiement_transit_line,base.group_user,1,1,1,1
 access_ligne_facture,access.ligne.facture,model_ligne_facture,base.group_user,1,1,1,1
+access_nombre,access.nombre,model_nombre,base.group_user,1,1,1,1
+access_nombre_line,access.nombre.line,model_nombre_line,base.group_user,1,1,1,1
+
+access_voyage_chauffeur,access.voyage.chauffeur,model_voyage_chauffeur,base.group_user,1,1,1,1
+access_voyage_chauffeur_line,access.voyage.chauffeur.line,model_voyage_chauffeur_line,base.group_user,1,1,1,1
+
+access_voyage_chauffeur_detail,access.voyage.chauffeur.detail,model_voyage_chauffeur_detail,base.group_user,1,1,1,1
+access_voyage_chauffeur_detail_line,access.voyage.chauffeur.detail.line,model_voyage_chauffeur_detail_line,base.group_user,1,1,1,1
 

@@ -70,9 +70,10 @@
 					</group>
 					<field name="chauffeur_ids" nolabel = "1">
 						<tree string="Lignes demande" create ="false" delete="false">
+							<field name="dte"/>
 							<field name="brut_fn"/>
-							<field name="retenue_fn"/>
 							<field name="manquant_fn"/>
+							<field name="net_fn"/>
 							<field name="dep_chauffeur"/>
 						</tree>
 					</field>                  
@@ -112,11 +113,13 @@
 						<field name="camion" style="width:50%"/>
 						<field name="dte_deb" style="width:50%"/>
 						<field name="dte_fin" style="width:50%"/>
+						<field name="nbre" style="width:50%" readonly='1'/>
 					</group>
 					<field name="camion_ids" nolabel = "1">
 						<tree string="Lignes demande" create ="false" delete="false">
+							<field name="dte"/>
 							<field name="brut"/>
-							<field name="retenue"/>
+							<field name="manquant"/>
 							<field name="net"/>
 							<field name="dep_camion"/>
 						</tree>
@@ -309,16 +312,159 @@
 		<field name="view_mode">form</field>
         <field name="target">inline</field>
 	</record>
+    
+	<!-- 
+	===========================
+	voyages des camions 
+	===========================
+	-->
+   <!-- Vue  voyages des camions -->
+	<record model="ir.ui.view" id="view_nombre_form">
+		<field name="name">nombre.form</field>
+		<field name="model">nombre</field>
+		<field name="priority" eval="16"/>
+		<field name="arch" type="xml">
+			<form string="Liste des produits">
+				<sheet>
+                 <header>
+                        <button name="afficher" string="Afficher" type="object" class="btn-dark" icon="fa-search"/>
+						<![CDATA[&nbsp;]]>
+                        <button name="imprimer" string="Imprimer" type="object" class="btn-warning" icon="fa-print"/>
+                </header>
+					<group>
+						<field name="dte_deb" style="width:50%"/>
+						<field name="dte_fin" style="width:50%"/>
+					</group>
+					<field name="facture_ids" nolabel = "1">
+						<tree string="Lignes demande" create ="false" delete="false">
+							<field name="chauffeur"/>
+							<field name="camion"/>
+							<field name="voyage"/>
+						</tree>
+					</field>                  
+				</sheet>
+			</form>
+		</field>
+	</record>
+    
+
+	<!-- Action  voyages des camions -->
+	<record model="ir.actions.act_window" id="act_nombre">
+		<field name="name">Nombre de voyage par camion </field>
+		<field name="res_model">nombre</field>
+		<field name="view_mode">form</field>
+        <field name="target">inline</field>
+	</record>
 
 
+<!-- 
+	===========================
+	voyages des chauffeurs 
+	===========================
+	-->
+   <!-- Vue  voyages des chauffeurs -->
+	<record model="ir.ui.view" id="view_voyage_chauffeur_form">
+		<field name="name">voyaye.chauffeur.form</field>
+		<field name="model">voyage.chauffeur</field>
+		<field name="priority" eval="16"/>
+		<field name="arch" type="xml">
+			<form string="Liste des voyages des chauffeurs">
+				<sheet>
+                 <header>
+                        <button name="afficher" string="Afficher" type="object" class="btn-dark" icon="fa-search"/>
+						<![CDATA[&nbsp;]]>
+                        <button name="imprimer" string="Imprimer" type="object" class="btn-warning" icon="fa-print"/>
+                </header>
+					<group>
+						<field name="dte_deb" style="width:50%"/>
+						<field name="dte_fin" style="width:50%"/>
+					</group>
+					<field name="donnees_ids" nolabel = "1">
+						<tree string="Lignes voyage chauffeurs" create ="false" delete="false">
+							<field name="chauffeur"/>
+							<field name="telephone"/>
+							<field name="voyage"/>
+						</tree>
+					</field>                  
+				</sheet>
+			</form>
+		</field>
+	</record>
+    
 
-    	<menuitem id="menu_facture_etat_chaf" parent="menu_stat_facture" name="Chiffre d'affaire" sequence = "406" action="act_chiffre_affaire"/>
-    	<menuitem id="menu_facture_etat_chdet" parent="menu_stat_facture" name="Etat détaillé des chauffeurs" sequence = "407" action="act_etat_chauffeur_det"/>
-    	<!--<menuitem id="menu_facture_etat_cadet" parent="menu_stat_facture" name="Etat détaillé des camions" sequence = "408" action="act_etat_camion_det"/>-->
-    	<menuitem id="menu_facture_etat_facdet" parent="menu_stat_facture" name="Etat des factures normales" sequence = "409" action="act_etat_facture"/>
-    	<menuitem id="menu_facture_etat_factra" parent="menu_stat_facture" name="Etat des factures de transit" sequence = "410" action="act_etat_facture_transit"/>
-    	<menuitem id="menu_facture_etat_facnorm" parent="menu_stat_facture" name="Etat des paiements factures normales " sequence = "411" action="act_etat_paiement_normal"/>
-    	<menuitem id="menu_facture_etat_factrans" parent="menu_stat_facture" name="Etat des paiements factures de transit" sequence = "412" action="act_etat_paiement_trans"/>
+	<!-- Action  voyages des chauffeurs -->
+	<record model="ir.actions.act_window" id="act_voyage_chauffeur">
+		<field name="name">Nombre de voyage par chauffeur </field>
+		<field name="res_model">voyage.chauffeur</field>
+		<field name="view_mode">form</field>
+        <field name="target">inline</field>
+	</record>
 
+<!-- 
+	===========================
+	Details voyages des chauffeurs 
+	===========================
+	-->
+   <!-- Vue  details voyages des camions -->
+	<record model="ir.ui.view" id="view_voyage_chauffeur_detail_form">
+		<field name="name">voyaye.chauffeur.detail.form</field>
+		<field name="model">voyage.chauffeur.detail</field>
+		<field name="priority" eval="16"/>
+		<field name="arch" type="xml">
+			<form string="Liste des voyages des chauffeurs">
+				<sheet>
+                 <header>
+                        <button name="afficher" string="Afficher" type="object" class="btn-dark" icon="fa-search"/>
+						<![CDATA[&nbsp;]]>
+                        <button name="imprimer" string="Imprimer" type="object" class="btn-warning" icon="fa-print"/>
+                </header>
+					<group>
+						<field name="dte_deb" style="width:50%"/>
+						<field name="dte_fin" style="width:50%"/>
+					</group>
+					<field name="donnees_ids" nolabel = "1">
+						<tree string="Lignes details voyage chauffeurs" create ="false" delete="false">
+							<field name="chauffeur"/>
+							<field name="date_be"/>
+							<field name="be"/>
+							<field name="date_bl"/>
+							<field name="bl"/>
+							<field name="trajet"/>
+							<field name="produit"/>
+							<field name="capacite"/>
+						</tree>
+					</field>                  
+				</sheet>
+			</form>
+		</field>
+	</record>
+    
 
+	<!-- Action  details voyages des chauffeurs -->
+	<record model="ir.actions.act_window" id="act_voyage_chauffeur_detail">
+		<field name="name">Details des voyages</field>
+		<field name="res_model">voyage.chauffeur.detail</field>
+		<field name="view_mode">form</field>
+        <field name="target">inline</field>
+	</record>
+
+    	<menuitem id="menu_facture_etat_chiffre_affaire" parent="menu_stat_facture" name="CHIFFRE D'AFFAIRE" sequence = "406"/>
+    	<menuitem id="menu_facture_etat_ca" parent="menu_facture_etat_chiffre_affaire" name="Chiffre d'affaire" sequence = "4061" action="act_chiffre_affaire"/>
+		<menuitem id="menu_facture_etat_qte" parent="menu_facture_etat_chiffre_affaire" name="Etat des manquants" sequence = "4062" action="act_etat_qte_perdue"/>
+    	<menuitem id="menu_facture_etat_factures" parent="menu_stat_facture" name="ETATS FACTURES" sequence = "407"/>
+    	<menuitem id="menu_facture_etat_factnormales" parent="menu_facture_etat_factures" name="Etat des factures normales" sequence = "4071" action="act_etat_facture"/>
+    	<menuitem id="menu_facture_etat_factransits" parent="menu_facture_etat_factures" name="Etat des factures transit" sequence = "4072" action="act_etat_facture_transit"/>
+    	<menuitem id="menu_facture_etat_paiements" parent="menu_stat_facture" name="ETATS PAIEMENTS" sequence = "408"/>
+    	<menuitem id="menu_facture_etat_factnormales" parent="menu_facture_etat_paiements" name="Etat des paiements factures normales " sequence = "4081" action="act_etat_paiement_normal"/>
+    	<menuitem id="menu_facture_etat_factransits" parent="menu_facture_etat_paiements" name="Etat des paiements factures de transit" sequence = "4082" action="act_etat_paiement_trans"/>
+    	<menuitem id="menu_facture_etat_voyages" parent="menu_stat_facture" name="ETATS VOYAGES" sequence = "409"/>
+		<menuitem id="menu_facture_etat_nombre" parent="menu_facture_etat_voyages" name="voyages des camions" sequence = "4091" action="act_nombre"/>
+		<menuitem id="menu_facture_etat_voyage_chauffeur" parent="menu_facture_etat_voyages" name="voyages des chauffeurs" sequence = "4092" action="act_voyage_chauffeur"/>
+		<menuitem id="menu_facture_etat_voyage_chauffeur_detail" parent="menu_facture_etat_voyages" name="Details voyages des chauffeurs" sequence = "4093" action="act_voyage_chauffeur_detail"/>
+    	<menuitem id="menu_facture_etat_camions" parent="menu_stat_facture" name="ETATS CAMIONS" sequence = "410"/>
+		<menuitem id="menu_facture_etat_cam" parent="menu_facture_etat_camions" name="Etat synthétique des camions" sequence = "4101" action="act_etat_camion"/>
+    	<menuitem id="menu_facture_etat_cadet" parent="menu_facture_etat_camions" name="Etat détaillé des camions" sequence = "4102" action="act_etat_camion_det"/>
+    	<menuitem id="menu_facture_etat_chauffeurs" parent="menu_stat_facture" name="ETATS CHAUFFEURS" sequence = "411"/>
+		<menuitem id="menu_facture_etat_cha" parent="menu_facture_etat_chauffeurs" name="Etat synthétique des chauffeurs" sequence = "4111" action="act_etat_chauffeur"/>
+    	<menuitem id="menu_facture_etat_chdet" parent="menu_facture_etat_chauffeurs" name="Etat détaillé des chauffeurs" sequence = "4112" action="act_etat_chauffeur_det"/>
 </odoo>

@@ -1226,8 +1226,7 @@
 
 	<menuitem id="menu_stat_facture" parent="main_menu" name="Statistiques" sequence = "40" groups='Gestion_Facturation.Gestion_Facturation_admin_donnees,Gestion_Facturation.Gestion_Facturation_op,Gestion_Facturation.Gestion_Facturation_cptable'/>
 	<!--<menuitem id="menu_facture_stat_dep_ca" parent="menu_stat_facture" name="Chiffre d'affaire" sequence = "401" action="act_list_facture_stats_ca"/>-->
-	<menuitem id="menu_facture_etat_qte" parent="menu_stat_facture" name="Etat des manquants" sequence = "403" action="act_etat_qte_perdue"/>
-
+	
 
 	<menuitem id="menu_facture_param" parent="main_menu" name="Paramétrage" sequence = "100" groups='Gestion_Facturation.Gestion_Facturation_admin_donnees,Gestion_Facturation.Gestion_Facturation_op'/>
 	<menuitem id="menu_facture_client" parent="menu_facture_param" name="Saisie/MàJ- Client" sequence = "1001" action="act_list_client"/>

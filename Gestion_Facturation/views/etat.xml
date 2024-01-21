@@ -62,11 +62,6 @@
 		<field name="res_model">etat.chauffeur</field>
 		<field name="view_mode">form</field>
         <field name="target">inline</field>
-	</record>
-
-
-    	<menuitem id="menu_facture_etat_cam" parent="menu_stat_facture" name="Etat des camions" sequence = "404" action="act_etat_camion"/>
-    	<menuitem id="menu_facture_etat_cha" parent="menu_stat_facture" name="Etat des chauffeurs" sequence = "405" action="act_etat_chauffeur"/>
-
+	</record> 
 
 </odoo>

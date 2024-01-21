@@ -63,10 +63,26 @@ body {
 .tableCollapseStripped tbody tr:last-of-type {
 	border-bottom: 1px solid #e40511;
 }
+.tableCollapseStripped tbody tr.total {
+	border-top: 2px double #e40511;
+}
 
 .tableCollapseStripped tbody tr.active-row {
 	font-weight: bold;
 	color: #e40511;
+}
+
+.tableCollapseStripped td.tCenter {
+	text-align: center;
+}
+.tableCollapseStripped td.tJustify {
+	text-align: justify;
+}
+.tableCollapseStripped td.tRight {
+	text-align: right;
+}
+.tableCollapseStripped td.tLeft {
+	text-align: left;
 }
 
 .title {

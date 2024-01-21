@@ -125,6 +125,446 @@
         </t>
     </template>
 
-    
+    <report id = "report_chauff_etat"
+            string = "Etat détaillé des chauffeurs"
+            model = "etat.chauffeur.def"
+            report_type = "qweb-pdf"
+            file = "Gestion_Facturation.report_chauff_etat"
+            name = "Gestion_Facturation.report_chauff" paperformat="id_format_paysage"
+            menu = "True"/>
 
+    <template id="report_chauff">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="o">
+                <div class="article o_report_layout_standard" t-att-data-oe-model="o and o._name" t-att-data-oe-id="o and o.id">
+                    <t t-call="Gestion_Facturation.custom_session_header_footer"/>
+
+                    <div class="page">
+                        <h3 style="text-align:center; border-style:solid;"><span t-field="o.name"/>
+                        </h3>
+                        <br/>
+                        <div>
+                            <b>Chauffeur: </b>
+                            <span t-field="o.personnel_id"/>
+                            <br/>
+                            <br/>
+                            <b>Date debut: </b>
+                            <span t-field="o.dte_deb"/>
+                            <br/>
+                            <br/>
+                            <b>Date fin: </b>
+                            <span t-field="o.dte_fin"/>
+                            <br/>
+                            <br/>
+                        </div>
+                        <br/>
+
+                        <table style="width:100%; border : 1px solid #ddd;border-collapse : collapse;">
+                            <thead style ="background-color : #159dd9; color : #fff">
+                                <th style ="border : 1px solid midnightblue; text-align:right;">Date</th>
+                                <th style ="border : 1px solid midnightblue; text-align:right;">Mt Brut</th>
+                                <th style ="border : 1px solid midnightblue; text-align:right;">Mt Manquant</th>
+                                <th style ="border : 1px solid midnightblue; text-align:right;">Net</th>
+                                <th style ="border : 1px solid midnightblue; text-align:right;">Dépense</th>
+                            </thead>
+
+                            <tbody>
+                                <tr t-foreach="o.chauffeur_ids" t-as="ligne">
+                                    <td style = "border : 1px solid midnightblue;">
+                                        <span t-field="ligne.dte"/>
+                                    </td>
+                                    <td style = "border : 1px solid midnightblue;">
+                                        <span t-esc="'{:,}'.format(int(ligne.brut_fn)).replace(',', ' ')"/>
+                                    </td>                 
+                                    <td style = "border : 1px solid midnightblue; text-align:right;">
+                                        <span t-esc="'{:,}'.format(int(ligne.manquant_fn)).replace(',', ' ')"/>
+                                    </td>
+                                    <td style = "border : 1px solid midnightblue; text-align:right;">
+                                        <span t-esc="'{:,}'.format(int(ligne.net_fn)).replace(',', ' ')"/>
+                                    </td>
+                                    <td style = "border : 1px solid midnightblue; text-align:right;">
+                                        <span t-esc="'{:,}'.format(int(ligne.dep_chauffeur)).replace(',', ' ')"/>
+                                    </td>
+                                </tr>
+                                <!--<tr style="border : 2px solid midnightblue;">
+                                    <td colspan ="4" style ="text-align:left;font-weight:bold;">Totaux</td>
+                                    <td style = "border : 2px solid midnightblue;; text-align:right; font-family : times new roman;">
+                                        <span t-esc="'{:,}'.format(int(sum([ligne.prix_total for ligne in o.stock_ids]))).replace(',', ' ')"/>
+                                    </td>
+                                </tr>-->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </t>
+        </t>
+    </template>
+
+
+
+    <report id = "report_camion_etat"
+            string = "Etat détaillé des camions"
+            model = "etat.camion.def"
+            report_type = "qweb-pdf"
+            file = "Gestion_Facturation.report_camion_etat"
+            name = "Gestion_Facturation.report_camion" paperformat="id_format_paysage"
+            menu = "True"/>
+
+    <template id="report_camion">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="o">
+                <div class="article o_report_layout_standard" t-att-data-oe-model="o and o._name" t-att-data-oe-id="o and o.id">
+                    <t t-call="Gestion_Facturation.custom_session_header_footer"/>
+
+                    <div class="page">
+                        <h3 style="text-align:center; border-style:solid;"><span t-field="o.name"/>
+                        </h3>
+                        <br/>
+                        <div>
+                            <b>Chauffeur: </b>
+                            <span t-field="o.camion"/>
+                            <br/>
+                            <br/>
+                            <b>Date debut: </b>
+                            <span t-field="o.dte_deb"/>
+                            <br/>
+                            <br/>
+                            <b>Date fin: </b>
+                            <span t-field="o.dte_fin"/>
+                            <br/>
+                            <br/>
+                            <b>Nombre de voyage: </b>
+                            <span t-field="o.nbre"/>
+                            <br/>
+                            <br/>
+                        </div>
+                        <br/>
+
+                        <table style="width:100%; border : 1px solid #ddd;border-collapse : collapse;">
+                            <thead style ="background-color : #159dd9; color : #fff">
+                                <th style ="border : 1px solid midnightblue; text-align:right;">Date</th>
+                                <th style ="border : 1px solid midnightblue; text-align:right;">Mt Brut</th>
+                                <th style ="border : 1px solid midnightblue; text-align:right;">Mt Manquant</th>
+                                <th style ="border : 1px solid midnightblue; text-align:right;">Net</th>
+                                <th style ="border : 1px solid midnightblue; text-align:right;">Dépense</th>
+                            </thead>
+
+                            <tbody>
+                                <tr t-foreach="o.camion_ids" t-as="ligne">
+                                    <td style = "border : 1px solid midnightblue;">
+                                        <span t-field="ligne.dte"/>
+                                    </td>
+                                    <td style = "border : 1px solid midnightblue;">
+                                        <span t-esc="'{:,}'.format(int(ligne.brut)).replace(',', ' ')"/>
+                                    </td>                 
+                                    <td style = "border : 1px solid midnightblue; text-align:right;">
+                                        <span t-esc="'{:,}'.format(int(ligne.manquant)).replace(',', ' ')"/>
+                                    </td>
+                                    <td style = "border : 1px solid midnightblue; text-align:right;">
+                                        <span t-esc="'{:,}'.format(int(ligne.net)).replace(',', ' ')"/>
+                                    </td>
+                                    <td style = "border : 1px solid midnightblue; text-align:right;">
+                                        <span t-esc="'{:,}'.format(int(ligne.dep_camion)).replace(',', ' ')"/>
+                                    </td>
+                                </tr>
+                                <!--<tr style="border : 2px solid midnightblue;">
+                                    <td colspan ="4" style ="text-align:left;font-weight:bold;">Totaux</td>
+                                    <td style = "border : 2px solid midnightblue;; text-align:right; font-family : times new roman;">
+                                        <span t-esc="'{:,}'.format(int(sum([ligne.prix_total for ligne in o.stock_ids]))).replace(',', ' ')"/>
+                                    </td>
+                                </tr>-->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </t>
+        </t>
+    </template>
+
+
+     <!-- Etats des voyages d'un camion  -->
+    <report id = "report_nombre_etat"
+            string = "Etat des  voyages des camions"
+            model = "nombre"
+            report_type = "qweb-pdf"
+            file = "Gestion_Facturation.report_nombre_etat"
+            name = "Gestion_Facturation.report_nombre" paperformat="id_format_portrait"
+            menu = "True"/>
+
+    <template id="report_nombre">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="o">
+                <div class="article o_report_layout_standard" t-att-data-oe-model="o and o._name" t-att-data-oe-id="o and o.id">
+                    <t t-call="Gestion_Facturation.custom_session_header_footer"/>
+
+                    <div class="page">
+                        <link rel='stylesheet' href="/Gestion_Facturation/static/src/css/style.css"/>
+
+                        <h3 class="title" style="text-align:center;">Etat des  voyages des camions</h3>
+
+                        <div>
+                            <table style="width:100%;">
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                        <t t-if="o.dte_fin">
+                                         <b>
+                                                <u>Période :</u>
+                                        </b>
+                                        <span class="primaryColor" t-field="o.dte_deb"/> au <span class="primaryColor" t-field="o.dte_fin"/>
+                                        </t>
+                                        <t t-else="">
+                                           <b>
+                                                <u>Date :</u>
+                                        </b>
+                                           <span class="primaryColor" t-field="o.dte_deb"/>
+                                        </t> 
+                                        </td>
+
+                                        <td class="printedDate">
+                                    Imprimé le <span t-esc="time.strftime('%d/%m/%Y')"/>
+                                        <span t-esc="time.strftime('%H:%M')"/>
+
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                    </div>
+
+                    <table class="tableCollapseStripped" style="width:100%;">
+                        <thead>
+                            <th>N°</th>
+                            <th>Camion</th>
+                            <th style ="text-align:justify;">Chauffeur</th>
+                            <th style ="text-align:center;">Voyages</th>
+                        </thead>
+
+                        <tbody>
+                            <t t-set="idx" t-value="0"/>
+                            <t t-set="total_voyage" t-value="0"/>
+                            <tr t-foreach="o.facture_ids" t-as="ligne">
+                                <t t-set="idx" t-value="idx + 1"/>
+                                <t t-set="total_voyage" t-value="total_voyage + ligne.voyage"/>
+                                <td>
+                                    <span t-esc="idx"/>
+                                </td>
+                                <td class="tJustify">
+                                    <span t-field="ligne.camion"/>
+                                </td>
+
+                                <td class="tJustify">
+                                    <span t-field="ligne.chauffeur"/>
+                                </td>
+                                <td class="tCenter">
+                                    <span t-field="ligne.voyage"/>
+                                </td> 
+                            </tr>
+                            <tr class="total">
+                                <td colspan="3" class="bigBold">Total des voyages</td>
+                                <td class="bigBold tCenter"> <span t-esc="total_voyage"/></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    
+                </div>
+            </div>
+        </t>
+    </t>
+</template>
+
+ <!-- Etats des voyages d'un chauffeur  -->
+    <report id = "report_voyage_chauffeur_etat"
+            string = "Etat des  voyages des chauffeurs"
+            model = "voyage.chauffeur"
+            report_type = "qweb-pdf"
+            file = "Gestion_Facturation.report_voyage_chauffeur_etat"
+            name = "Gestion_Facturation.report_voyage_chauffeur" paperformat="id_format_portrait"
+            menu = "True"/>
+
+    <template id="report_voyage_chauffeur">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="o">
+                <div class="article o_report_layout_standard" t-att-data-oe-model="o and o._name" t-att-data-oe-id="o and o.id">
+                    <t t-call="Gestion_Facturation.custom_session_header_footer"/>
+
+                    <div class="page">
+                        <link rel='stylesheet' href="/Gestion_Facturation/static/src/css/style.css"/>
+
+                        <h3 class="title" style="text-align:center;">Etat des  voyages des chauffeurs</h3>
+
+                        <div>
+                            <table style="width:100%;">
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                        <t t-if="o.dte_fin">
+                                         <b>
+                                                <u>Période :</u>
+                                        </b>
+                                        <span class="primaryColor" t-field="o.dte_deb"/> au <span class="primaryColor" t-field="o.dte_fin"/>
+                                        </t>
+                                        <t t-else="">
+                                           <b>
+                                                <u>Date :</u>
+                                        </b>
+                                           <span class="primaryColor" t-field="o.dte_deb"/>
+                                        </t> 
+                                        </td>
+
+                                        <td class="printedDate">
+                                    Imprimé le <span t-esc="time.strftime('%d/%m/%Y')"/>
+                                        <span t-esc="time.strftime('%H:%M')"/>
+
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                    </div>
+
+                    <table class="tableCollapseStripped" style="width:100%;">
+                        <thead>
+                            <th>N°</th>
+                            <th style ="text-align:justify;">Chauffeur</th>
+                            <th>Contact</th>
+                            <th style ="text-align:center;">Voyages</th>
+                        </thead>
+
+                        <tbody>
+                            <t t-set="idx" t-value="0"/>
+                            <t t-set="total_voyage" t-value="0"/>
+                            <tr t-foreach="o.donnees_ids" t-as="ligne">
+                                <t t-set="idx" t-value="idx + 1"/>
+                                <t t-set="total_voyage" t-value="total_voyage + ligne.voyage"/>
+                                <td>
+                                    <span t-esc="idx"/>
+                                </td>
+                                <td class="tJustify">
+                                    <span t-field="ligne.chauffeur"/>
+                                </td>
+                                <td class="tJustify">
+                                    <span t-field="ligne.telephone"/>
+                                </td>       
+                                <td class="tCenter">
+                                    <span t-field="ligne.voyage"/>
+                                </td> 
+                            </tr>
+                            <tr class="total">
+                                <td colspan="3" class="bigBold">Total des voyages</td>
+                                <td class="bigBold tCenter"> <span t-esc="total_voyage"/></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    
+                </div>
+            </div>
+        </t>
+    </t>
+</template>
+
+
+<!-- Etats des details voyages d'un chauffeur  -->
+    <report id = "report_voyage_chauffeur_detail_etat"
+            string = "Etat detaillé des  voyages des chauffeurs"
+            model = "voyage.chauffeur.detail"
+            report_type = "qweb-pdf"
+            file = "Gestion_Facturation.report_voyage_chauffeur_detail_etat"
+            name = "Gestion_Facturation.report_voyage_chauffeur_detail" paperformat="id_format_paysage"
+            menu = "True"/>
+
+    <template id="report_voyage_chauffeur_detail">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="o">
+                <div class="article o_report_layout_standard" t-att-data-oe-model="o and o._name" t-att-data-oe-id="o and o.id">
+                    <t t-call="Gestion_Facturation.custom_session_header_footer"/>
+
+                    <div class="page">
+                        <link rel='stylesheet' href="/Gestion_Facturation/static/src/css/style.css"/>
+
+                        <h3 class="title" style="text-align:center;">Etat détaillé des  voyages des chauffeurs</h3>
+
+                        <div>
+                            <table style="width:100%;">
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                        <t t-if="o.dte_fin">
+                                         <b>
+                                                <u>Période :</u>
+                                        </b>
+                                        <span class="primaryColor" t-field="o.dte_deb"/> au <span class="primaryColor" t-field="o.dte_fin"/>
+                                        </t>
+                                        <t t-else="">
+                                           <b>
+                                                <u>Date :</u>
+                                        </b>
+                                           <span class="primaryColor" t-field="o.dte_deb"/>
+                                        </t> 
+                                        </td>
+
+                                        <td class="printedDate">
+                                    Imprimé le <span t-esc="time.strftime('%d/%m/%Y')"/>
+                                        <span t-esc="time.strftime('%H:%M')"/>
+
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                    </div>
+
+                    <table class="tableCollapseStripped" style="width:100%;">
+                        <thead>
+                            <th>N°</th>
+                            <th style ="text-align:justify;">D. BE</th>
+                            <th style ="text-align:justify;">D. BL</th>
+                            <th style ="text-align:justify;">N° BE</th>
+                            <th style ="text-align:justify;">N° BL</th>
+                            <th style ="text-align:justify;">Chauffeur</th>
+                            <th style ="text-align:center;">Trajet</th>
+                            <th style ="text-align:center;">Produit</th>
+                            <th style ="text-align:center;">Capacite</th>
+                        </thead>
+
+                        <tbody>
+                            <t t-set="idx" t-value="0"/>
+                            <tr t-foreach="o.donnees_ids" t-as="ligne">
+                                <t t-set="idx" t-value="idx + 1"/>
+                                <td>
+                                    <span t-esc="idx"/>
+                                </td>
+                                <td class="tJustify">
+                                    <span t-field="ligne.date_be"/>
+                                </td>
+                                <td class="tJustify">
+                                    <span t-field="ligne.date_bl"/>
+                                </td>
+                                <td class="tJustify">
+                                    <span t-field="ligne.be"/>
+                                </td> 
+                                <td class="tJustify">
+                                    <span t-field="ligne.bl"/>
+                                </td>
+                                <td class="tJustify">
+                                    <span t-field="ligne.chauffeur"/>
+                                </td>
+                                <td class="tCenter">
+                                    <span t-field="ligne.trajet"/>
+                                </td>
+                                <td class="tCenter">
+                                    <span t-field="ligne.produit"/>
+                                </td> 
+                                <td class="tCenter">
+                                    <span t-field="ligne.capacite"/>
+                                </td> 
+                            </tr> 
+                        </tbody>
+                    </table>
+                    
+                </div>
+            </div>
+        </t>
+    </t>
+</template>
 </odoo>
