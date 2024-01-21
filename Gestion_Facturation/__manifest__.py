@@ -13,7 +13,7 @@
         'views/vue_facture.xml',
         'views/etat.xml',
         'views/statistique.xml',
-        "report/custom_header_footer.xml",
+        "Report/custom_header_footer.xml",
         "Report/report_comm.xml",
         "Report/report_approvisionnement.xml",
         "Report/report_facture.xml",
