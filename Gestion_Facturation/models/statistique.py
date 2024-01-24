@@ -347,14 +347,12 @@ class VoyageChauffeur(models.TransientModel):
         for vals in self:
             if self.dte_fin:
                 vals.env.cr.execute("""select d.name as chauffeur,d.x_tel as telephone, count(*) as voyages from facture_facture_line fl
-                inner join facture_camion c on c.id=fl.x_immatricul_id 
-                inner join facture_conducteur_camion d on d.id=c.x_conducteur_id
+                inner join facture_conducteur_camion d on d.id=fl.x_chauffeur_id
                 where fl.x_date_bl between %s and %s
                 group by d.name,d.x_tel order by voyages desc, chauffeur asc;""",(self.dte_deb, self.dte_fin))
             else:
                 vals.env.cr.execute("""select d.name as chauffeur,d.x_tel as telephone, count(*) as voyages from facture_facture_line fl
-                inner join facture_camion c on c.id=fl.x_immatricul_id 
-                inner join facture_conducteur_camion d on d.id=c.x_conducteur_id
+                inner join facture_conducteur_camion d on d.id=fl.x_chauffeur_id
                 where fl.x_date_bl = %s
                 group by d.name,d.x_tel order by voyages desc, chauffeur asc;""",(self.dte_deb,))
 
@@ -393,8 +391,7 @@ class VoyageChauffeurDetail(models.TransientModel):
                                     fl.x_capacite as capacite,ft.name as trajet,
                                     fp.name as produit
                                      from facture_facture_line fl
-                inner join facture_camion c on c.id=fl.x_immatricul_id 
-                inner join facture_conducteur_camion d on d.id=c.x_conducteur_id
+                inner join facture_conducteur_camion d on d.id=fl.x_chauffeur_id
                 inner join facture_trajet ft on ft.id=fl.x_trajet_id
                 inner join facture_produit fp on fp.id=fl.x_produit_id
                 where fl.x_date_bl between %s and %s
@@ -405,8 +402,7 @@ class VoyageChauffeurDetail(models.TransientModel):
                                     fl.x_capacite as capacite,ft.name as trajet,
                                     fp.name as produit
                                      from facture_facture_line fl
-                inner join facture_camion c on c.id=fl.x_immatricul_id 
-                inner join facture_conducteur_camion d on d.id=c.x_conducteur_id
+                inner join facture_conducteur_camion d on d.id=fl.x_chauffeur_id
                 inner join facture_trajet ft on ft.id=fl.x_trajet_id
                 inner join facture_produit fp on fp.id=fl.x_produit_id
                 where fl.x_date_bl  = %s

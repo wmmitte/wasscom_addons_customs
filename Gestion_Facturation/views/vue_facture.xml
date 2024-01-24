@@ -247,10 +247,12 @@
 			<tree string="Liste des conducteurs">
 				<field name="sequence" widget="handle"/>
 				<field name="name"/>
+				<field name="x_tel"/>
 				<field name="description"/>
 				<field name="x_struct_id" invisible = '1'/>
 				<field name="create_date" string="Date_enr" />
 				<field name="create_uid" string="User" />
+				<field name="active_text" string="Statut"/>
 			</tree>
 		</field>
 	</record>
@@ -302,6 +304,7 @@
 				<field name="x_struct_id" invisible = '1'/>
 				<field name="create_date" string="Date_enr" />
 				<field name="create_uid" string="User" />
+				<field name="active_text" string="Statut"/>
 			</tree>
 		</field>
 	</record>
@@ -406,7 +409,8 @@
 							<field name="x_num_be" force_save = "1" />
 							<field name="x_date_bl" force_save = "1" />
 							<field name="x_num_bl" force_save = "1" />
-							<field name="x_immatricul_id" force_save = "1" options="{'no_quick_create':True,'no_create_edit':True,'no_open':True,}"/>
+							<field name="x_immatricul_id" force_save = "1" options="{'no_quick_create':True,'no_create_edit':True,'no_open':True,}" domain="[('active', '=', True)]"/>
+							<field name="x_chauffeur_id" force_save = "1" options="{'no_quick_create':True,'no_create_edit':True,'no_open':True,}" domain="[('active', '=', True)]"/>
 							<field name="x_trajet_id" force_save = "1" invisible = '0' options="{'no_quick_create':True,'no_create_edit':True,'no_open':True,}"/>
 							<field name="x_distance" force_save = "1" invisible = '0'/>
 							<field name="x_produit_id" force_save = "1" invisible = '0' options="{'no_quick_create':True,'no_create_edit':True,'no_open':True,}"/>

@@ -118,6 +118,12 @@ class Facturation_Conducteur_Camion(models.Model):
     description = fields.Text(string = "Description" ,required = False)
     x_struct_id = fields.Many2one('res.company' ,string = "Structure" ,default=lambda self: self.env.user.company_id.id, required = True)
     active = fields.Boolean(string = "Etat", default=True)
+    active_text = fields.Char(string="Statut", compute='_compute_active_text')
+
+    @api.depends('active')
+    def _compute_active_text(self):
+        for record in self:
+            record.active_text = 'Actif' if record.active else 'Désactivé'
 
 
 # class camion
@@ -131,6 +137,12 @@ class Facturation_Camion(models.Model):
     description = fields.Text(string = "Description" ,required = False)
     x_struct_id = fields.Many2one('res.company' ,string = "Structure" ,default=lambda self: self.env.user.company_id.id, required = True)
     active = fields.Boolean(string = "Etat", default=True)
+    active_text = fields.Char(string="Statut", compute='_compute_active_text')
+    
+    @api.depends('active')
+    def _compute_active_text(self):
+        for record in self:
+            record.active_text = 'Actif' if record.active else 'Désactivé'
 
 
 # class camion

@@ -172,6 +172,7 @@ class FactureFactureLine(models.Model):
     x_date_bl = fields.Date(string = 'Date BL',required = True)
     x_num_bl = fields.Char(string = 'N° BL',required = True)
     x_immatricul_id = fields.Many2one('facture_camion',string = 'Immatriculation',required = True)
+    x_chauffeur_id = fields.Many2one('facture_conducteur_camion',string = 'Chauffeur',required = True)
     x_trajet_id = fields.Many2one('facture_trajet',string = 'Trajet',required = True)
     x_distance = fields.Float(string = 'Distance (km)',readonly = True)
     x_produit_id = fields.Many2one('facture_produit',string = 'Produit',required = True)
@@ -376,10 +377,3 @@ class FactureEtatQuantiteLine(models.TransientModel):
     x_date_bl = fields.Date(string = 'Date BL')
     x_num_bl = fields.Char(string = 'N° BL')
     quantite = fields.Float(string='Quantité perdue')
-
-
-"""
-select id, name,state, x_total_facture,x_total_encaisse,x_total_reste,x_mt_encaisse,x_total_reste_apr from facture_facture_paiement;
-update facture_facture set x_total_encaisse=0,x_total_reste=x_total_facture;
-delete from facture_facture_paiement;
-"""
