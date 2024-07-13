@@ -201,7 +201,7 @@
     </template>
 
 
-
+<!--
     <report id = "report_camion_etat"
             string = "Etat détaillé des camions"
             model = "etat.camion.def"
@@ -267,12 +267,6 @@
                                         <span t-esc="'{:,}'.format(int(ligne.dep_camion)).replace(',', ' ')"/>
                                     </td>
                                 </tr>
-                                <!--<tr style="border : 2px solid midnightblue;">
-                                    <td colspan ="4" style ="text-align:left;font-weight:bold;">Totaux</td>
-                                    <td style = "border : 2px solid midnightblue;; text-align:right; font-family : times new roman;">
-                                        <span t-esc="'{:,}'.format(int(sum([ligne.prix_total for ligne in o.stock_ids]))).replace(',', ' ')"/>
-                                    </td>
-                                </tr>-->
                             </tbody>
                         </table>
                     </div>
@@ -280,6 +274,136 @@
             </t>
         </t>
     </template>
+    -->
+
+
+<!-- Etats des dépenses d'un chauffeur  -->
+    <report id = "report_camion_etat"
+            string = "Etat détaillé des camions"
+            model = "etat.camion.def"
+            report_type = "qweb-pdf"
+            file = "Gestion_Facturation.report_camion_etat"
+            name = "Gestion_Facturation.report_camion" paperformat="id_format_portrait"
+            menu = "True"/>
+
+    <template id="report_camion">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="o">
+                <div class="article o_report_layout_standard" t-att-data-oe-model="o and o._name" t-att-data-oe-id="o and o.id">
+                    <t t-call="Gestion_Facturation.custom_session_header_footer"/>
+
+                    <div class="page">
+                        <link rel='stylesheet' href="/Gestion_Facturation/static/src/css/style.css"/>
+
+                        <h3 class="title" style="text-align:center;">Situation journaliere de camions</h3>
+
+                        <div>
+                            <table style="width:100%;">
+                                <tbody>
+                                <tr>
+                                        <td colspan="3">
+                                         <b>
+                                                <u>Reférence Camion :</u>
+                                        </b>
+                                        <span class="primaryColor" t-field="o.camion"/>
+                                    </td>
+                                </tr>
+                                    <tr>
+                                        <td>
+                                        <t t-if="o.dte_fin">
+                                         <b>
+                                                <u>Période :</u>
+                                        </b>
+                                        <span class="primaryColor" t-field="o.dte_deb"/> au <span class="primaryColor" t-field="o.dte_fin"/>
+                                        </t>
+                                        <t t-else="">
+                                           <b>
+                                                <u>Date :</u>
+                                        </b>
+                                           <span class="primaryColor" t-field="o.dte_deb"/>
+                                        </t> 
+                                        </td>
+
+                                        <td>
+                                           <b>
+                                                <u>Total voyages :</u>
+                                        </b>
+                                           <span class="primaryColor" t-field="o.nbre"/>
+                                        </td>
+
+
+                                        <td class="printedDate">
+                                    Imprimé le <span t-esc="time.strftime('%d/%m/%Y')"/>
+                                        <span t-esc="time.strftime('%H:%M')"/>
+
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                    </div>
+
+                    <table class="tableCollapseStripped" style="width:100%;">
+                        <thead>
+                            <th>N°</th>
+                            <th style ="text-align:justify;">Date</th>
+                            <th style ="text-align:right;">Mnt Voyages (A)</th>
+                            <th style ="text-align:right;">Mnt Manquants (B)</th>
+                            <th style ="text-align:right;">Mnt Net (A-B)</th>
+                            <th style ="text-align:right;">Mnt Dépenses</th>
+                        </thead>
+
+                        <tbody>
+                            <t t-set="idx" t-value="0"/>
+                            <t t-set="total_factures" t-value="0"/>
+                            <t t-set="total_manquants" t-value="0"/>
+                            <t t-set="total_net" t-value="0"/>
+                            <t t-set="total_depenses" t-value="0"/>
+                            <tr t-foreach="o.camion_ids" t-as="ligne">
+                                <t t-set="idx" t-value="idx + 1"/>
+                                <t t-set="total_factures" t-value="total_factures + ligne.brut"/>
+                                <t t-set="total_manquants" t-value="total_manquants + ligne.manquant"/>
+                                <t t-set="total_net" t-value="total_net + ligne.net"/>
+                                <t t-set="total_depenses" t-value="total_depenses + ligne.dep_camion"/>
+                                <td>
+                                    <span t-esc="idx"/>
+                                </td>
+
+                                <td class="tJustify">
+                                    <span t-field="ligne.dte"/>
+                                </td>
+
+                                <td class="tRight">
+                                     <span t-esc="'{:,}'.format(int(ligne.brut)).replace(',', ' ')"/>
+                                </td> 
+
+                                <td class="tRight">
+                                   <span t-esc="'{:,}'.format(int(ligne.manquant)).replace(',', ' ')"/>
+                                </td> 
+
+                                <td class="tRight">
+                                    <span t-esc="'{:,}'.format(int(ligne.net)).replace(',', ' ')"/>
+                                </td>  
+                                
+                                <td class="tRight">
+                                    <span t-esc="'{:,}'.format(int(ligne.dep_camion)).replace(',', ' ')"/>
+                                </td>
+                            </tr>
+                            <tr class="total">
+                                <td colspan="2" class="bigBold">Totaux situations</td>
+                                <td class="bigBold tRight"> <span t-esc="'{:,}'.format(int(total_factures)).replace(',', ' ')"/></td>
+                                <td class="bigBold tRight"> <span t-esc="'{:,}'.format(int(total_manquants)).replace(',', ' ')"/></td>
+                                <td class="bigBold tRight"> <span t-esc="'{:,}'.format(int(total_net)).replace(',', ' ')"/></td>
+                                <td class="bigBold tRight"> <span t-esc="'{:,}'.format(int(total_depenses)).replace(',', ' ')"/></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    
+                </div>
+            </div>
+        </t>
+    </t>
+</template>
 
 
      <!-- Etats des voyages d'un camion  -->

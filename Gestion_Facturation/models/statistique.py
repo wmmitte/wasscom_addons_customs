@@ -104,7 +104,7 @@ class EtatChauffeurDefLine(models.TransientModel):
     manquant_fn = fields.Float("Manquant")
     dep_chauffeur = fields.Float("Dépense Chauffeur")
 
-### RAS ###
+### ETAT DETAILLE DES CAMIONS ###
 class EtatCamionDef(models.TransientModel):
     _name = "etat.camion.def"
 
@@ -120,10 +120,11 @@ class EtatCamionDef(models.TransientModel):
             nb = va.env['facture_facture_line'].search_count([('x_fact_id.date_operation', '>=', self.dte_deb),('x_fact_id.date_operation', '<=', self.dte_fin), 
                                                            ('x_immatricul_id.name','=', self.camion.name)])
             self.nbre = nb
+            
             va.camion_ids.unlink()
-            lines = va.env['facture_facture_line'].search([('x_fact_id.date_operation', '>=', self.dte_deb),('x_fact_id.date_operation', '<=', self.dte_fin), 
+            lignes_factures = va.env['facture_facture_line'].search([('x_fact_id.date_operation', '>=', self.dte_deb),('x_fact_id.date_operation', '<=', self.dte_fin), 
                                                            ('x_immatricul_id.name','=', self.camion.name)])
-            for li in lines:
+            for li in lignes_factures:
                 self.sudo().env['etat.camion.def.line'].create({
                     'brut': li.x_mt_ligne_reel,
                     'manquant': li.x_mnt_perte,
@@ -132,9 +133,9 @@ class EtatCamionDef(models.TransientModel):
                     'camion_id': self.id
                 })
             
-            liness = va.env['gest_depense'].search([('date_op', '>=', self.dte_deb),('date_op', '<=', self.dte_fin), 
+            depenses = va.env['gest_depense'].search([('date_op', '>=', self.dte_deb),('date_op', '<=', self.dte_fin), 
                                                            ('name.name','=', self.camion.name)])
-            for lis in liness:
+            for lis in depenses:
                 self.sudo().env['etat.camion.def.line'].create({
                     'dep_camion': lis.mt,
                     'dte': lis.date_op,
