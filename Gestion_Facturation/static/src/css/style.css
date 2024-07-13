@@ -50,6 +50,7 @@ body {
 .tableCollapseStripped td {
 	padding: 8px 11px;
 	text-align: justify;
+	vertical-align: middle;
 }
 
 .tableCollapseStripped tbody tr {

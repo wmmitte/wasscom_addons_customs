@@ -448,6 +448,99 @@
         <field name="target">inline</field>
 	</record>
 
+
+	<!-- 
+	===========================
+	Depenses des camions 
+	===========================
+	-->
+   <!-- Vue  etat depenses des camions -->
+	<record model="ir.ui.view" id="view_etat_depenses_camions_form">
+		<field name="name">etat.depenses.camions.form</field>
+		<field name="model">etat.depenses.camions</field>
+		<field name="priority" eval="16"/>
+		<field name="arch" type="xml">
+			<form string="Liste des dépenses des camions">
+				<sheet>
+                 <header>
+                        <button name="afficher" string="Afficher" type="object" class="btn-dark" icon="fa-search"/>
+						<![CDATA[&nbsp;]]>
+                        <button name="imprimer" string="Imprimer" type="object" class="btn-warning" icon="fa-print"/>
+                </header>
+					<group>
+						<field name="dte_deb" style="width:50%"/>
+						<field name="dte_fin" style="width:50%"/>
+						<field name="camion_id" style="width:50%"/>
+					</group>
+					<field name="depense_ids" nolabel = "1">
+						<tree string="Lignes des depenses camion" create ="false" delete="false">
+							<field name="date_op"/>
+							<field name="code"/>
+							<field name="chauffeur"/> 
+							<field name="camion"/> 
+							<field name="montant"/> 
+							<field name="objet"/> 
+						</tree>
+					</field>                  
+				</sheet>
+			</form>
+		</field>
+	</record>
+
+	<!-- Action  etat des depenses des camions -->
+	<record model="ir.actions.act_window" id="act_etat_depenses_camions">
+		<field name="name">Depenses des camions </field>
+		<field name="res_model">etat.depenses.camions</field>
+		<field name="view_mode">form</field>
+        <field name="target">inline</field>
+	</record>
+
+	<!-- 
+	===========================
+	Depenses des chauffeurs 
+	===========================
+	-->
+   <!-- Vue  etat depenses des chauffeurs -->
+	<record model="ir.ui.view" id="view_etat_depenses_chauffeurs_form">
+		<field name="name">etat.depenses.chauffeurs.form</field>
+		<field name="model">etat.depenses.chauffeurs</field>
+		<field name="priority" eval="16"/>
+		<field name="arch" type="xml">
+			<form string="Liste des dépenses des chauffeurs">
+				<sheet>
+                 <header>
+                        <button name="afficher" string="Afficher" type="object" class="btn-dark" icon="fa-search"/>
+						<![CDATA[&nbsp;]]>
+                        <button name="imprimer" string="Imprimer" type="object" class="btn-warning" icon="fa-print"/>
+                </header>
+					<group>
+						<field name="dte_deb" style="width:50%"/>
+						<field name="dte_fin" style="width:50%"/>
+						<field name="chauffeur_id" style="width:50%"/>
+					</group>
+					<field name="depense_ids" nolabel = "1">
+						<tree string="Lignes des depenses chauffeur" create ="false" delete="false">
+							<field name="date_op"/>
+							<field name="code"/>
+							<field name="chauffeur"/> 
+							<field name="camion"/> 
+							<field name="montant"/> 
+							<field name="objet"/> 
+						</tree>
+					</field>                  
+				</sheet>
+			</form>
+		</field>
+	</record>
+
+	<!-- Action  etat des depenses des chauffeurs -->
+	<record model="ir.actions.act_window" id="act_etat_depenses_chauffeurs">
+		<field name="name">Depenses des chauffeurs </field>
+		<field name="res_model">etat.depenses.chauffeurs</field>
+		<field name="view_mode">form</field>
+        <field name="target">inline</field>
+	</record>
+
     	<menuitem id="menu_facture_etat_chiffre_affaire" parent="menu_stat_facture" name="CHIFFRE D'AFFAIRE" sequence = "406"/>
     	<menuitem id="menu_facture_etat_ca" parent="menu_facture_etat_chiffre_affaire" name="Chiffre d'affaire" sequence = "4061" action="act_chiffre_affaire"/>
 		<menuitem id="menu_facture_etat_qte" parent="menu_facture_etat_chiffre_affaire" name="Etat des manquants" sequence = "4062" action="act_etat_qte_perdue"/>
@@ -467,4 +560,7 @@
     	<menuitem id="menu_facture_etat_chauffeurs" parent="menu_stat_facture" name="ETATS CHAUFFEURS" sequence = "411"/>
 		<menuitem id="menu_facture_etat_cha" parent="menu_facture_etat_chauffeurs" name="Etat synthétique des chauffeurs" sequence = "4111" action="act_etat_chauffeur"/>
     	<menuitem id="menu_facture_etat_chdet" parent="menu_facture_etat_chauffeurs" name="Etat détaillé des chauffeurs" sequence = "4112" action="act_etat_chauffeur_det"/>
+		<menuitem id="menu_facture_etat_depenses" parent="menu_stat_facture" name="ETATS DEPENSES" sequence = "412"/>
+		<menuitem id="menu_facture_etat_depenses_camion" parent="menu_facture_etat_depenses" name="Dépenses des camions" sequence = "4121" action="act_etat_depenses_camions"/>
+		 <menuitem id="menu_facture_etat_depenses_chauffeur" parent="menu_facture_etat_depenses" name="Dépenses des chauffeurs" sequence = "4122" action="act_etat_depenses_chauffeurs"/>
 </odoo>

@@ -175,6 +175,7 @@ class FactureFactureLine(models.Model):
     x_chauffeur_id = fields.Many2one('facture_conducteur_camion',string = 'Chauffeur',required = True)
     x_trajet_id = fields.Many2one('facture_trajet',string = 'Trajet',required = True)
     x_distance = fields.Float(string = 'Distance (km)',readonly = True)
+    x_taux_coulage = fields.Float(string = 'Taux Coulage',readonly = False)
     x_produit_id = fields.Many2one('facture_produit',string = 'Produit',required = True)
     x_capacite = fields.Float(string='Capacité',digits=(15,3),required = True)
     x_taux = fields.Float(string='Taux',required = True)
@@ -198,6 +199,11 @@ class FactureFactureLine(models.Model):
                 record.x_concat =  record.x_num_be + '/' + record.x_num_bl + '/' + record.x_immatricul_id.name
 
 
+    @api.onchange('x_produit_id')
+    def remplir_taux_coulage(self):
+        for vals in self:
+            vals.x_taux_coulage = vals.x_produit_id.taux_coulage
+
     @api.onchange('x_trajet_id')
     def remplir_distance(self):
         for vals in self:
@@ -208,7 +214,7 @@ class FactureFactureLine(models.Model):
     def _mnt_ligne(self):
         for vals in self:
             vals.x_mt_ligne = round(vals.x_capacite_net * vals.x_taux)
-            vals.x_mnt_perte = round(vals.x_manquant * vals.x_taux)
+            vals.x_mnt_perte = round(vals.x_manquant * vals.x_taux_coulage)
             vals.x_mt_ligne_reel = round(vals.x_capacite * vals.x_taux)
 
 

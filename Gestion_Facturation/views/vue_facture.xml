@@ -31,6 +31,7 @@
 			<tree string="Liste des produits">
 				<field name="sequence" widget="handle"/>
 				<field name="name"/>
+				<field name="taux_coulage"/>
 				<field name="description"/>
 				<field name="x_struct_id" invisible = '1'/>
 				<field name="create_date" string="Date_enr" />
@@ -55,6 +56,7 @@
 					<group>
 						<field name="name" style="width:50%" options="{'no_quick_create':True,'no_create_edit':True,'no_open':True,}" invisible = '1'/>
 						<field name="libelle" style="width:50%" options="{'no_quick_create':True,'no_create_edit':True,'no_open':True,}"/>
+						<field name="taux_coulage" style="width:50%" options="{'no_quick_create':True,'no_create_edit':True,'no_open':True,}"/>
 						<field name="description" style="width:50%"/>
 						<field name="x_struct_id" style="width:50%" invisible = '1' options="{'no_quick_create':True,'no_create_edit':True,'no_open':True,}"/>
 					</group>
@@ -416,6 +418,7 @@
 							<field name="x_produit_id" force_save = "1" invisible = '0' options="{'no_quick_create':True,'no_create_edit':True,'no_open':True,}"/>
 							<field name="x_capacite" force_save = "1" invisible = '0'/>
 							<field name="x_manquant" force_save = "1" invisible = '0'/>
+							<field name="x_taux_coulage" force_save = "1" invisible = '0'/>
 							<field name="x_capacite_net" force_save = "1" invisible = '0'/>
 							<field name="x_taux" force_save = "1" invisible = '0'/>
 							<field name="x_mt_ligne_reel" force_save = "1" invisible = '0'/>
@@ -1222,7 +1225,7 @@
 	<menuitem id="menu_facture_factur_paiement_transit_solde" parent="menu_facture_factur_autres" name="Factures Transit Soldées" sequence = "1034" action="act_list_fact_transit_solde" />
 
 	<menuitem id="menu_facture_depense" parent="main_menu" name="Dépenses" sequence = "20" groups='Gestion_Facturation.Gestion_Facturation_admin_donnees,Gestion_Facturation.Gestion_Facturation_op'/>
-	<menuitem id="menu_facture_new_depense" parent="menu_facture_depense" name="Nouvelle dépense" sequence = "201" action="act_list_depense" />
+	<menuitem id="menu_facture_liste_depense" parent="menu_facture_depense" name="Liste des dépenses" sequence = "201" action="act_list_depense" />
 
 	<menuitem id="menu_facture_manquant" parent="main_menu" name="Manquants" sequence = "30" groups='Gestion_Facturation.Gestion_Facturation_admin_donnees,Gestion_Facturation.Gestion_Facturation_op'/>
 	<menuitem id="menu_facture_qte" parent="menu_facture_manquant" name="Nouveau manquant" sequence = "302" action="act_qte_perdue"/>

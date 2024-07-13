@@ -567,4 +567,223 @@
         </t>
     </t>
 </template>
+
+ <!-- Etats des dépenses d'un camion  -->
+    <report id = "report_depenses_camions_etat"
+            string = "Etat des  dépenses des camions"
+            model = "etat.depenses.camions"
+            report_type = "qweb-pdf"
+            file = "Gestion_Facturation.report_depenses_camions_etat"
+            name = "Gestion_Facturation.report_depenses_camions" paperformat="id_format_portrait"
+            menu = "True"/>
+
+    <template id="report_depenses_camions">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="o">
+                <div class="article o_report_layout_standard" t-att-data-oe-model="o and o._name" t-att-data-oe-id="o and o.id">
+                    <t t-call="Gestion_Facturation.custom_session_header_footer"/>
+
+                    <div class="page">
+                        <link rel='stylesheet' href="/Gestion_Facturation/static/src/css/style.css"/>
+
+                        <h3 class="title" style="text-align:center;">Etat des  dépenses des camions</h3>
+
+                        <div>
+                            <table style="width:100%;">
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                        <t t-if="o.dte_fin">
+                                         <b>
+                                                <u>Période :</u>
+                                        </b>
+                                        <span class="primaryColor" t-field="o.dte_deb"/> au <span class="primaryColor" t-field="o.dte_fin"/>
+                                        </t>
+                                        <t t-else="">
+                                           <b>
+                                                <u>Date :</u>
+                                        </b>
+                                           <span class="primaryColor" t-field="o.dte_deb"/>
+                                        </t> 
+                                        </td>
+
+                                        <td class="printedDate">
+                                    Imprimé le <span t-esc="time.strftime('%d/%m/%Y')"/>
+                                        <span t-esc="time.strftime('%H:%M')"/>
+
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                    </div>
+
+                    <table class="tableCollapseStripped" style="width:100%;">
+                        <thead>
+                            <th>N°</th>
+                            <th style ="text-align:justify;">date</th>
+                            <th style ="text-align:justify;">Code Dep</th>
+                            <th style ="text-align:justify;">Camion</th>
+                            <th style ="text-align:justify;">Chauffeur</th>
+                            <th style ="text-align:justify;">Objet</th>
+                            <th style ="text-align:center;">Montant</th>
+                        </thead>
+
+                        <tbody>
+                            <t t-set="idx" t-value="0"/>
+                            <t t-set="total_montant" t-value="0"/>
+                            <tr t-foreach="o.depense_ids" t-as="ligne">
+                                <t t-set="idx" t-value="idx + 1"/>
+                                <t t-set="total_montant" t-value="total_montant + ligne.montant"/>
+                                <td>
+                                    <span t-esc="idx"/>
+                                </td>
+
+                                <td class="tJustify">
+                                    <span t-field="ligne.date_op"/>
+                                </td>
+
+                                <td class="tJustify">
+                                    <span t-field="ligne.code"/>
+                                </td>
+
+                                <td class="tJustify">
+                                    <span t-field="ligne.camion"/>
+                                </td>  
+
+                                <td class="tJustify">
+                                    <span t-field="ligne.chauffeur"/>
+                                </td> 
+
+                                <td class="tJustify">
+                                    <span t-field="ligne.objet"/>
+                                </td>
+
+                                 <td class="tCenter">
+                                    <span t-field="ligne.montant"/>
+                                </td> 
+                            </tr>
+                            <tr class="total">
+                                <td colspan="5" class="bigBold">Total des dépenses camions</td>
+                                <td colspan="2" class="bigBold tRight"> <span t-esc="'{:,}'.format(int(total_montant)).replace(',', ' ')"/></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    
+                </div>
+            </div>
+        </t>
+    </t>
+</template>
+
+
+<!-- Etats des dépenses d'un chauffeur  -->
+    <report id = "report_depenses_chauffeurs_etat"
+            string = "Etat des  dépenses des chauffeurs"
+            model = "etat.depenses.chauffeurs"
+            report_type = "qweb-pdf"
+            file = "Gestion_Facturation.report_depenses_chauffeurs_etat"
+            name = "Gestion_Facturation.report_depenses_chauffeurs" paperformat="id_format_portrait"
+            menu = "True"/>
+
+    <template id="report_depenses_chauffeurs">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="o">
+                <div class="article o_report_layout_standard" t-att-data-oe-model="o and o._name" t-att-data-oe-id="o and o.id">
+                    <t t-call="Gestion_Facturation.custom_session_header_footer"/>
+
+                    <div class="page">
+                        <link rel='stylesheet' href="/Gestion_Facturation/static/src/css/style.css"/>
+
+                        <h3 class="title" style="text-align:center;">Etat des  dépenses des chauffeurs</h3>
+
+                        <div>
+                            <table style="width:100%;">
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                        <t t-if="o.dte_fin">
+                                         <b>
+                                                <u>Période :</u>
+                                        </b>
+                                        <span class="primaryColor" t-field="o.dte_deb"/> au <span class="primaryColor" t-field="o.dte_fin"/>
+                                        </t>
+                                        <t t-else="">
+                                           <b>
+                                                <u>Date :</u>
+                                        </b>
+                                           <span class="primaryColor" t-field="o.dte_deb"/>
+                                        </t> 
+                                        </td>
+
+                                        <td class="printedDate">
+                                    Imprimé le <span t-esc="time.strftime('%d/%m/%Y')"/>
+                                        <span t-esc="time.strftime('%H:%M')"/>
+
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                    </div>
+
+                    <table class="tableCollapseStripped" style="width:100%;">
+                        <thead>
+                            <th>N°</th>
+                            <th style ="text-align:justify;">date</th>
+                            <th style ="text-align:justify;">Code Dep</th>
+                            <th style ="text-align:justify;">Chauffeur</th>
+                            <th style ="text-align:justify;">Camion</th>
+                            <th style ="text-align:justify;">Objet</th>
+                            <th style ="text-align:center;">Montant</th>
+                        </thead>
+
+                        <tbody>
+                            <t t-set="idx" t-value="0"/>
+                            <t t-set="total_montant" t-value="0"/>
+                            <tr t-foreach="o.depense_ids" t-as="ligne">
+                                <t t-set="idx" t-value="idx + 1"/>
+                                <t t-set="total_montant" t-value="total_montant + ligne.montant"/>
+                                <td>
+                                    <span t-esc="idx"/>
+                                </td>
+
+                                <td class="tJustify">
+                                    <span t-field="ligne.date_op"/>
+                                </td>
+
+                                <td class="tJustify">
+                                    <span t-field="ligne.code"/>
+                                </td> 
+
+                                <td class="tJustify">
+                                    <span t-field="ligne.chauffeur"/>
+                                </td> 
+
+                                <td class="tJustify">
+                                    <span t-field="ligne.camion"/>
+                                </td>  
+                                
+                                <td class="tJustify">
+                                    <span t-field="ligne.objet"/>
+                                </td>
+
+                                 <td class="tCenter">
+                                    <span t-field="ligne.montant"/>
+                                </td> 
+                            </tr>
+                            <tr class="total">
+                                <td colspan="5" class="bigBold">Total des dépenses chauffeurs</td>
+                                <td colspan="2" class="bigBold tRight"> <span t-esc="'{:,}'.format(int(total_montant)).replace(',', ' ')"/></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    
+                </div>
+            </div>
+        </t>
+    </t>
+</template>
+
+
 </odoo>

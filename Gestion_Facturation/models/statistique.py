@@ -437,3 +437,137 @@ class VoyageChauffeurDetailLine(models.TransientModel):
     trajet = fields.Char("Trajet")
     produit = fields.Char("Produit")
     capacite = fields.Float("Capacite")
+
+
+class EtatDepensesCamion(models.TransientModel):
+    _name = "etat.depenses.camions"
+
+    dte_deb = fields.Date("Date de début", required=True)
+    dte_fin = fields.Date("Date de fin", required=False)
+    camion_id = fields.Many2one("facture_camion")
+    depense_ids = fields.One2many("etat.depenses.camions.line", "depenses_camions_id")
+
+
+    def afficher(self):
+        for vals in self:
+            params = [self.dte_deb]
+            query = """
+                select d.objet_dep, d.x_num_facture as code, d.date_op, d.mt as montant, p.name as chauffeur, c.name as camion 
+                from gest_depense d
+                inner join facture_camion c on c.id=d.name 
+                inner join facture_conducteur_camion p on p.id=d.x_personnel_id
+                where d.date_op = %s
+            """
+
+            if self.dte_fin:
+                query = """
+                    select d.objet_dep, d.x_num_facture as code, d.date_op, d.mt as montant, p.name as chauffeur, c.name as camion 
+                    from gest_depense d
+                    inner join facture_camion c on c.id=d.name 
+                    inner join facture_conducteur_camion p on p.id=d.x_personnel_id
+                    where d.date_op between %s and %s
+                """
+                params.append(self.dte_fin)
+
+            if self.camion_id:
+                query += " and d.name = %s"
+                params.append(self.camion_id.id)
+
+            query += " order by d.date_op asc, c.name asc, p.name asc;"
+
+            vals.env.cr.execute(query, tuple(params))
+
+            rows = vals.env.cr.dictfetchall()
+            result = []
+            vals.depense_ids.unlink()
+            for line in rows:
+                result.append((0,0, {
+                    'date_op': line['date_op'], 
+                    'code': line['code'], 
+                    'chauffeur' : line['chauffeur'], 
+                    'camion': line['camion'], 
+                    'objet': line['objet_dep'], 
+                    'montant': line['montant'], 
+                    }))
+            self.depense_ids = result
+
+    def imprimer(self):
+        return self.env.ref('Gestion_Facturation.report_depenses_camions_etat').report_action(self)
+
+class EtatDepensesCamionLine(models.TransientModel):
+    _name = "etat.depenses.camions.line"
+
+    depenses_camions_id = fields.Many2one("etat.depenses.camions")
+    date_op = fields.Date("Date dép")
+    code = fields.Char("Numero dép")
+    chauffeur = fields.Char("Chauffeur")
+    camion = fields.Char("Camion")
+    objet = fields.Char("Objet")
+    montant = fields.Integer("Montant")
+
+
+class EtatDepensesChauffeur(models.TransientModel):
+    _name = "etat.depenses.chauffeurs"
+
+    dte_deb = fields.Date("Date de début", required=True)
+    dte_fin = fields.Date("Date de fin", required=False)
+    chauffeur_id = fields.Many2one("facture_conducteur_camion")
+    depense_ids = fields.One2many("etat.depenses.chauffeurs.line", "depenses_chauffeurs_id")
+
+
+    def afficher(self):
+        for vals in self:
+            params = [self.dte_deb]
+            query = """
+                select d.objet_dep, d.x_num_facture as code, d.date_op, d.mt as montant, p.name as chauffeur, c.name as camion 
+                from gest_depense d
+                inner join facture_camion c on c.id=d.name 
+                inner join facture_conducteur_camion p on p.id=d.x_personnel_id
+                where d.date_op = %s
+            """
+
+            if self.dte_fin:
+                query = """
+                    select d.objet_dep, d.x_num_facture as code, d.date_op, d.mt as montant, p.name as chauffeur, c.name as camion 
+                    from gest_depense d
+                    inner join facture_camion c on c.id=d.name 
+                    inner join facture_conducteur_camion p on p.id=d.x_personnel_id
+                    where d.date_op between %s and %s
+                """
+                params.append(self.dte_fin)
+
+            if self.chauffeur_id:
+                query += " and d.name = %s"
+                params.append(self.chauffeur_id.id)
+
+            query += " order by d.date_op asc, c.name asc, p.name asc;"
+
+            vals.env.cr.execute(query, tuple(params))
+
+            rows = vals.env.cr.dictfetchall()
+            result = []
+            vals.depense_ids.unlink()
+            for line in rows:
+                result.append((0,0, {
+                    'date_op': line['date_op'], 
+                    'code': line['code'], 
+                    'chauffeur' : line['chauffeur'], 
+                    'camion': line['camion'], 
+                    'objet': line['objet_dep'], 
+                    'montant': line['montant'], 
+                    }))
+            self.depense_ids = result
+
+    def imprimer(self):
+        return self.env.ref('Gestion_Facturation.report_depenses_chauffeurs_etat').report_action(self)
+
+class EtatDepensesChauffeurLine(models.TransientModel):
+    _name = "etat.depenses.chauffeurs.line"
+
+    depenses_chauffeurs_id = fields.Many2one("etat.depenses.chauffeurs")
+    date_op = fields.Date("Date dép")
+    code = fields.Char("Numero dép")
+    chauffeur = fields.Char("Chauffeur")
+    camion = fields.Char("Camion")
+    objet = fields.Char("Objet")
+    montant = fields.Integer("Montant")

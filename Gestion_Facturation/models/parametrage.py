@@ -17,6 +17,7 @@ class Facturation_Produit(models.Model):
     name = fields.Char(string = "Désignation" ,required = False)
     libelle = fields.Char(string = "Désignation" ,required = True)
     description = fields.Text(string = "Description" ,required = False)
+    taux_coulage = fields.Float(string='Taux coulage',required = True, default=111.0)
     x_struct_id = fields.Many2one('res.company' ,string = "Structure" ,default=lambda self: self.env.user.company_id.id, required = True)
     active = fields.Boolean(string = "Etat", default=True)
 
