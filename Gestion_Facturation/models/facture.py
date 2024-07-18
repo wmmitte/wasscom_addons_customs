@@ -181,7 +181,7 @@ class FactureFactureLine(models.Model):
     x_taux = fields.Float(string='Taux',required = True)
     x_mt_ligne = fields.Float(compute = '_mnt_ligne', store = True,string='Mnt réel payé', readonly=True)
     x_echeance_facture = fields.Date(string = 'Echéance')
-    x_manquant = fields.Integer(string = 'Capacité manquante',digits=(15,3),default = 0)
+    x_manquant = fields.Integer(string = 'Capacité manquante',digits=(15,3),default = 0, readonly=True)
     x_capacite_net = fields.Float(compute = '_calcul_cap_net', store = True,string = 'Capacité finale')
     x_mnt_perte = fields.Float(compute = '_mnt_ligne', store = True,string = 'Perte')
     x_mt_ligne_reel = fields.Float(compute = '_mnt_ligne', store = True,string='Mnt Ligne sans perte', readonly=True)
@@ -314,12 +314,13 @@ class FactureQuantite(models.Model):
     _name = 'facture.quantite'
     _rec_name = 'camion_id'
 
-    camion_id = fields.Many2one('facture_camion', 'Camion', required=True)
-    chauffeur = fields.Many2one('facture_conducteur_camion', string='Chauffeur', related='camion_id.x_conducteur_id')
-    date_operation = fields.Date(string='Date opération', default=fields.Date.context_today, required=True)
-    x_date_be = fields.Date(string = 'Date BE',required = True)
+    camion_id = fields.Many2one('facture_camion', 'Camion', required=False)
+    #chauffeur = fields.Many2one('facture_conducteur_camion', string='Chauffeur', related='camion_id.x_conducteur_id')
+    chauffeur = fields.Many2one('facture_conducteur_camion', string='Chauffeur')
+    date_operation = fields.Date(string='Date opération', default=fields.Date.context_today, required=False)
+    x_date_be = fields.Date(string = 'Date BE',required = False)
     x_num_be = fields.Char(string = 'N° BE',required = True)
-    x_date_bl = fields.Date(string = 'Date BL',required = True)
+    x_date_bl = fields.Date(string = 'Date BL',required = False)
     x_num_bl = fields.Char(string = 'N° BL',required = True)
     quantite = fields.Float(string='Quantité perdue',required = True)
     state = fields.Selection([('1', 'Nouveau'), ('2', 'Validé')], string='Etat', default='1')
@@ -328,14 +329,26 @@ class FactureQuantite(models.Model):
     def valider(self):
         self.state = '2'
         mnqt = self.quantite
-        lines_manquant = self.env['facture_facture_line'].search([('x_immatricul_id.id', '=', self.camion_id.id),
+        lines_facture = self.env['facture_facture_line'].search([
                                                       ('x_num_bl', '=', self.x_num_bl),
-                                                      ('x_date_bl', '=', self.x_date_bl), 
                                                       ('x_num_be', '=', self.x_num_be),
-                                                      ('x_date_bl', '=', self.x_date_bl),
                                                       ])
-        for val in lines_manquant:
-            val.update({'x_manquant': mnqt, 'x_mnt_perte': mnqt * lines_manquant.x_taux})
+        #vals.x_mnt_perte = round(vals.x_manquant * vals.x_taux_coulage)
+        #    vals.x_mt_ligne_reel = round(vals.x_capacite * vals.x_taux)
+        #    #vals.x_mt_ligne = round(vals.x_capacite_net * vals.x_taux)
+        #    vals.x_mt_ligne = round(vals.x_mt_ligne_reel - vals.x_mnt_perte) 
+        
+        for val in lines_facture:
+            self.camion_id = lines_facture.x_immatricul_id
+            self.chauffeur = lines_facture.x_chauffeur_id
+            self.x_date_be = lines_facture.x_date_be
+            self.x_date_bl = lines_facture.x_date_bl
+
+            val.update(
+                {'x_manquant': mnqt, 
+                 'x_mnt_perte': mnqt * lines_facture.x_taux_coulage,
+                 'x_mt_ligne': lines_facture.x_mt_ligne_reel - mnqt * lines_facture.x_taux_coulage
+                 })
 
 
 class FactureEtatQuantite(models.TransientModel):

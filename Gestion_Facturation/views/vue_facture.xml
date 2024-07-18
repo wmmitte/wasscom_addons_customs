@@ -1116,17 +1116,19 @@
 				<sheet>
 					<group col='2'>
 						<group>
-							<field name="camion_id" force_save="1"/>
+							<!-- <field name="camion_id" force_save="1"/>
 							<field name="chauffeur" force_save="1"/>
-							<field name="date_operation" force_save="1"/>
+							<field name="date_operation" force_save="1"/>-->
+							<field name="x_num_be" force_save="1"/>
+							<field name="x_num_bl" force_save="1"/>
 							<field name="quantite" force_save="1"/>
 						</group>
-						<group>
+						<!-- <group>
 							<field name="x_date_be" force_save="1"/>
 							<field name="x_num_be" force_save="1"/>
 							<field name="x_date_bl" force_save="1"/>
 							<field name="x_num_bl" force_save="1"/>
-						</group>
+						</group>-->
 					</group>
 					<group invisible='1'>
 						<field name="company_id" style="width:50%"/>
@@ -1144,9 +1146,11 @@
 		<field name="arch" type="xml">
 			<tree string="Stats">
 				<field name="date_operation"/>
-				<field name="camion_id"/>
-				<field name="chauffeur"/>
+				<field name="x_num_be"/>
+				<field name="x_num_bl"/>
 				<field name="quantite"/>
+				<field name="chauffeur"/>
+				<field name="camion_id"/>
 				<field name="state"/>
 				<field name="create_date" string="Date_enr" />
 				<field name="create_uid" string="User" />

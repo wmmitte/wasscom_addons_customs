@@ -2,9 +2,10 @@
 DEPLACEMENT DANS LES REPERTOIRES
 ================================
 cd /srv/backupdatas/docker-home/_datas/odoo14/
-docker-compose down
+docker-compose down && docker-compose up -d
 
 cd /srv/backupdatas/docker-home/_volumes/odoo14/datas00/
+cd wasscom_addons_customs
 git pull
 
 ================================
