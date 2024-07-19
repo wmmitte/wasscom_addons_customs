@@ -55,3 +55,6 @@ access_etat_depenses_camions_line,access.etat.depenses.camions.line,model_etat_d
 access_etat_depenses_chauffeurs,access.etat.depenses.chauffeurs,model_etat_depenses_chauffeurs,base.group_user,1,1,1,0
 access_etat_depenses_chauffeurs_line,access.etat.depenses.chauffeurs.line,model_etat_depenses_chauffeurs_line,base.group_user,1,1,1,1
 
+access_etat_manquants_chauffeurs,access.etat.manquants.chauffeurs,model_etat_manquants_chauffeurs,base.group_user,1,1,1,0
+access_etat_manquants_chauffeurs_line,access.etat.manquants.chauffeurs.line,model_etat_manquants_chauffeurs_line,base.group_user,1,1,1,1
+

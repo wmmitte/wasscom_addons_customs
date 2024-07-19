@@ -572,3 +572,98 @@ class EtatDepensesChauffeurLine(models.TransientModel):
     camion = fields.Char("Camion")
     objet = fields.Char("Objet")
     montant = fields.Integer("Montant")
+
+
+class EtatManquantsChauffeur(models.TransientModel):
+    _name = "etat.manquants.chauffeurs"
+
+    dte_deb = fields.Date("Date de début", required=True)
+    dte_fin = fields.Date("Date de fin", required=False)
+    chauffeur_id = fields.Many2one("facture_conducteur_camion")
+    manquants_ids = fields.One2many("etat.manquants.chauffeurs.line", "manquants_chauffeurs_id")
+
+
+    def afficher(self):
+        for vals in self:
+            params = [self.dte_deb]
+            query = """
+                select 
+                coalesce(c.name, 'LTL') as chauffeur,
+                to_char(fl.x_date_bl, 'DD/MM/YYYY') as date_bl,
+                to_char(fl.x_date_be, 'DD/MM/YYYY') as date_be,
+                fl.x_num_be as num_be,
+                fl.x_num_bl as num_bl,
+                f.name as facture, 
+                coalesce(p.libelle, 'LTL') as produit,
+                fl.x_capacite as capacite,
+                fl.x_manquant as qte_manquant,
+                fl.x_mnt_perte as montant_perte
+                from facture_facture_line fl
+                inner join facture_facture f on f.id = fl.x_fact_id
+                inner join facture_produit p on p.id = fl.x_produit_id
+                left join facture_conducteur_camion c on c.id= fl.x_chauffeur_id
+                where fl.x_manquant > 0 and fl.x_date_bl = %s 
+            """
+
+            if self.dte_fin:
+                query = """
+                    select 
+                    coalesce(c.name, 'LTL') as chauffeur,
+                    to_char(fl.x_date_bl, 'DD/MM/YYYY') as date_bl,
+                    to_char(fl.x_date_be, 'DD/MM/YYYY') as date_be,
+                    fl.x_num_be as num_be,
+                    fl.x_num_bl as num_bl,
+                    f.name as facture, 
+                    coalesce(p.libelle, 'LTL') as produit,
+                    fl.x_capacite as capacite,
+                    fl.x_manquant as qte_manquant,
+                    fl.x_mnt_perte as montant_perte
+                    from facture_facture_line fl
+                    inner join facture_facture f on f.id = fl.x_fact_id
+                    inner join facture_produit p on p.id = fl.x_produit_id
+                    left join facture_conducteur_camion c on c.id= fl.x_chauffeur_id
+                    where fl.x_manquant > 0 and fl.x_date_bl between %s and %s
+                """
+                params.append(self.dte_fin)
+
+            if self.chauffeur_id:
+                query += " and c.id = %s"
+                params.append(self.chauffeur_id.id)
+
+            query += " order by c.name asc, f.name asc, fl.x_date_bl asc;"
+
+            vals.env.cr.execute(query, tuple(params))
+
+            rows = vals.env.cr.dictfetchall()
+            result = []
+            vals.manquants_ids.unlink()
+            for line in rows:
+                result.append((0,0, {
+                    'chauffeur' : line['chauffeur'], 
+                    'date_bl': line['date_bl'], 
+                    'num_be': line['num_be'], 
+                    'num_bl': line['num_bl'], 
+                    'facture': line['facture'], 
+                    'produit': line['produit'], 
+                    'capacite': line['capacite'], 
+                    'qte_manquant': line['qte_manquant'], 
+                    'montant_perte': line['montant_perte'], 
+                    }))
+            self.manquants_ids = result
+
+    def imprimer(self):
+        return self.env.ref('Gestion_Facturation.report_manquants_chauffeurs_etat').report_action(self)
+
+class EtatDepensesChauffeurLine(models.TransientModel):
+    _name = "etat.manquants.chauffeurs.line"
+
+    manquants_chauffeurs_id = fields.Many2one("etat.manquants.chauffeurs")
+    chauffeur = fields.Char("Chauffeur")
+    date_bl = fields.Char("Date")
+    num_be = fields.Char("N° BE")
+    num_bl = fields.Char("N° BL")
+    facture = fields.Char("N° Facture")
+    produit = fields.Char("Produit")
+    capacite = fields.Float("Capacité")
+    qte_manquant = fields.Float("Qte Manquant")
+    montant_perte = fields.Float("montant_perte")

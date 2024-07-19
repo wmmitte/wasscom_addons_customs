@@ -541,6 +541,56 @@
         <field name="target">inline</field>
 	</record>
 
+
+	<!-- 
+	===========================
+	Manquants des chauffeurs 
+	===========================
+	-->
+   <!-- Vue  etat manquants des chauffeurs -->
+	<record model="ir.ui.view" id="view_etat_manquants_chauffeurs_form">
+		<field name="name">etat.manquants.chauffeurs.form</field>
+		<field name="model">etat.manquants.chauffeurs</field>
+		<field name="priority" eval="16"/>
+		<field name="arch" type="xml">
+			<form string="Liste des manquants des chauffeurs">
+				<sheet>
+                 <header>
+                        <button name="afficher" string="Afficher" type="object" class="btn-dark" icon="fa-search"/>
+						<![CDATA[&nbsp;]]>
+                        <button name="imprimer" string="Imprimer" type="object" class="btn-warning" icon="fa-print"/>
+                </header>
+					<group>
+						<field name="dte_deb" style="width:50%"/>
+						<field name="dte_fin" style="width:50%"/>
+						<field name="chauffeur_id" style="width:50%"/>
+					</group>
+					<field name="manquants_ids" nolabel = "1">
+						<tree string="Lignes des manquants chauffeurs" create ="false" delete="false">
+							<field name="chauffeur"/>
+							<field name="date_bl"/>
+							<field name="num_be"/> 
+							<field name="num_bl"/> 
+							<field name="facture"/> 
+							<field name="produit"/> 
+							<field name="capacite"/> 
+							<field name="qte_manquant"/> 
+							<field name="montant_perte"/> 
+						</tree>
+					</field>                  
+				</sheet>
+			</form>
+		</field>
+	</record>
+
+	<!-- Action  etat des manquants des chauffeurs -->
+	<record model="ir.actions.act_window" id="act_etat_manquants_chauffeurs">
+		<field name="name">manquants des chauffeurs </field>
+		<field name="res_model">etat.manquants.chauffeurs</field>
+		<field name="view_mode">form</field>
+        <field name="target">inline</field>
+	</record>
+
     	<menuitem id="menu_facture_etat_chiffre_affaire" parent="menu_stat_facture" name="CHIFFRE D'AFFAIRE" sequence = "406"/>
     	<menuitem id="menu_facture_etat_ca" parent="menu_facture_etat_chiffre_affaire" name="Chiffre d'affaire" sequence = "4061" action="act_chiffre_affaire"/>
 		<menuitem id="menu_facture_etat_qte" parent="menu_facture_etat_chiffre_affaire" name="Etat des manquants" sequence = "4062" action="act_etat_qte_perdue"/>
@@ -562,5 +612,7 @@
     	<menuitem id="menu_facture_etat_chdet" parent="menu_facture_etat_chauffeurs" name="Etat détaillé des chauffeurs" sequence = "4112" action="act_etat_chauffeur_det"/>
 		<menuitem id="menu_facture_etat_depenses" parent="menu_stat_facture" name="ETATS DEPENSES" sequence = "412"/>
 		<menuitem id="menu_facture_etat_depenses_camion" parent="menu_facture_etat_depenses" name="Dépenses des camions" sequence = "4121" action="act_etat_depenses_camions"/>
-		 <menuitem id="menu_facture_etat_depenses_chauffeur" parent="menu_facture_etat_depenses" name="Dépenses des chauffeurs" sequence = "4122" action="act_etat_depenses_chauffeurs"/>
+		<menuitem id="menu_facture_etat_depenses_chauffeur" parent="menu_facture_etat_depenses" name="Dépenses des chauffeurs" sequence = "4122" action="act_etat_depenses_chauffeurs"/>
+		<menuitem id="menu_facture_etat_manquants" parent="menu_stat_facture" name="ETATS MANQUANTS" sequence = "413"/>
+		<menuitem id="menu_facture_etat_manquants_camion" parent="menu_facture_etat_manquants" name="manquants détaillés des chauffeurs" sequence = "4131" action="act_etat_manquants_chauffeurs"/>
 </odoo>
